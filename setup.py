@@ -5,9 +5,13 @@ Created on Jan 15, 2011
 '''
 import os
 from setuptools import setup, find_packages
-from khayyam import __version__ as package_version
  
-__version__ = package_version
+
+
+
+# reading package version (same way sqlalchemy does)
+with open(os.path.join(os.path.dirname(__file__),'khayyam', '__init__.py')) as v_file:
+    package_version = re.compile(r".*__version__ = '(.*?)'",re.S).match(v_file.read()).group(1)
 
 
 setup(
