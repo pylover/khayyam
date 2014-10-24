@@ -1,1 +1,1 @@
-sphinx-apidoc --full -H Khayyam -A "Vahid Mardani" -V "0.9"   -o ./doc ./khayyam
+sphinx-apidoc --full -H Khayyam3 -A "Vahid Mardani" -V "1.0"   -o ./doc ./khayyam3

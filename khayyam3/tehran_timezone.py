@@ -1,6 +1,6 @@
 
 from datetime import tzinfo, timedelta
-from khayyam.jalali_datetime import JalaliDatetime
+from khayyam3.jalali_datetime import JalaliDatetime
 
 STDOFFSET = timedelta(minutes=210) # Minutes
 DSTOFFSET = timedelta(minutes=270) # Minutes

@@ -5,11 +5,11 @@ Created on Mar 7, 2011
 @author: vahid
 '''
 import unittest
-from khayyam import JalaliDatetime
+from khayyam3 import JalaliDatetime
 from datetime import datetime, timedelta
-from khayyam.tehran_timezone import TehTz
-from khayyam.jalali_date import JalaliDate
-from khayyam import teh_tz
+from khayyam3.tehran_timezone import TehTz
+from khayyam3.jalali_date import JalaliDate
+from khayyam3 import teh_tz
 
 class TestJalaliDateTime(unittest.TestCase):
     

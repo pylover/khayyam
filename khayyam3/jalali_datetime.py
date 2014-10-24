@@ -347,7 +347,7 @@ Directive    Meaning
 
 
     def __repr__(self):
-        return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s)' % \
+        return 'khayyam3.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s)' % \
             (self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond, \
              ', tzinfo=%s' % self.tzinfo if self.tzinfo else '')
 

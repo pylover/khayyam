@@ -214,7 +214,7 @@ class JalaliDate(object):
         return self.isoformat()
             
     def __repr__(self):
-        return 'khayyam.JalaliDate(%s, %s, %s)' % \
+        return 'khayyam3.JalaliDate(%s, %s, %s)' % \
             (self.year, self.month, self.day)
     
     def strftime(self, frmt):
