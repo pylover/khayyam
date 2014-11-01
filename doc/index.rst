@@ -1,12 +1,12 @@
-.. Khayyam documentation master file, created by
+.. Khayyam3 documentation master file, created by
    sphinx-quickstart on Sat Apr 14 00:07:03 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Khayyam's documentation!
+Welcome to Khayyam3's documentation!
 ===================================
 
-Khayyam is a python package that provided to support `Persian Calendar`_ (known as Jalali calendar).
+Khayyam3 is a python package that provided to support `Persian Calendar`_ (known as Jalali calendar).
 
 
 Contents

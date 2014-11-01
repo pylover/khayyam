@@ -4,8 +4,8 @@ Created on Mar 8, 2011
 @author: vahid
 '''
 import unittest
-from khayyam.tehran_timezone import TehTz
-from khayyam import JalaliDatetime
+from khayyam3.tehran_timezone import TehTz
+from khayyam3 import JalaliDatetime
 from datetime import datetime, timedelta
 
 class TestTehTz(unittest.TestCase):

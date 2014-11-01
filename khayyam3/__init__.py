@@ -5,7 +5,7 @@ from tehran_timezone import TehTz
 
 teh_tz = TehTz()
 
-__version__ = '0.9.2'
+__version__ = '1.0.0'
 
 
 __all__ = [

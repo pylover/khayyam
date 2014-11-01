@@ -5,7 +5,7 @@ Created on Mar 7, 2011
 @author: vahid
 '''
 import unittest
-from khayyam import JalaliDate, MAXYEAR
+from khayyam3 import JalaliDate, MAXYEAR
 from datetime import timedelta, date
 
 class TestJalaliDate(unittest.TestCase):

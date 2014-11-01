@@ -4,7 +4,7 @@ API Reference
 :mod:`jalali_date` Module
 -------------------------
 
-.. automodule:: khayyam.jalali_date
+.. automodule:: khayyam3.jalali_date
     :members:
     :undoc-members:
     :show-inheritance:
@@ -12,7 +12,7 @@ API Reference
 :mod:`jalali_datetime` Module
 -----------------------------
 
-.. automodule:: khayyam.jalali_datetime
+.. automodule:: khayyam3.jalali_datetime
     :members:
     :undoc-members:
     :show-inheritance:
@@ -20,7 +20,7 @@ API Reference
 :mod:`tehran_timezone` Module
 -----------------------------
 
-.. automodule:: khayyam.tehran_timezone
+.. automodule:: khayyam3.tehran_timezone
     :members:
     :undoc-members:
     :show-inheritance:
