@@ -79,7 +79,7 @@ def gregorian_date_from_julian_day(jd):
     m = 0
 
     if jd <= 0.0:
-        raise ValueError(), 'Invalid Date'
+        raise ValueError('Invalid Date')
 
     jdm = jd + 0.5
     z = floor(jdm)
@@ -151,7 +151,7 @@ def parse(cls, date_string, format, valid_codes):
         fields[field_start] = date_string
         
     values = {}
-    for field, value in fields.iteritems():
+    for field, value in fields.items():
         values[valid_codes[field][1]] = int(value) 
     
     result = cls(**values)

@@ -78,7 +78,7 @@ class TestJalaliDate(unittest.TestCase):
         jdate3 = JalaliDate(self.leap_year, 12, 24)
         
         self.assertTrue(jdate <= jdate2)
-        self.assertTrue(jdate <> jdate2)
+        self.assertTrue(jdate != jdate2)
         self.assertFalse(jdate > jdate2)
         self.assertTrue(jdate2 == jdate3)
     
@@ -98,7 +98,7 @@ class TestJalaliDate(unittest.TestCase):
         while True:
             dt = min + timedelta(days=days)
             jd = JalaliDate.from_date(dt)
-            print 'Processing day: %s' % jd
+            print('Processing day: %s' % jd)
             dt2 = jd.todate()
             self.assertEqual(dt, dt2)
             days += 1

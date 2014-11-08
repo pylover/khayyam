@@ -33,7 +33,7 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(jdt, JalaliDate.from_date(dt))
         
     def test_now(self):
-        self.assertTrue(JalaliDatetime.now() <> None)
+        self.assertTrue(JalaliDatetime.now() != None)
         
     def test_utcnow(self):
         jutcnow = JalaliDatetime.utcnow()
@@ -52,7 +52,7 @@ class TestJalaliDateTime(unittest.TestCase):
         while True:
             dt = min + timedelta(days=days)
             jd = JalaliDatetime.from_datetime(dt)
-            print 'Processing day: %s' % jd.year
+            print('Processing day: %s' % jd.year)
             dt2 = jd.to_datetime()
             self.assertEqual(dt, dt2)
             days += 1
@@ -90,7 +90,7 @@ class TestJalaliDateTime(unittest.TestCase):
         jdate3 = JalaliDate(self.leap_year, 12, 24)
         
         self.assertTrue(jdate <= jdate2)
-        self.assertTrue(jdate <> jdate2)
+        self.assertTrue(jdate != jdate2)
         self.assertFalse(jdate > jdate2)
         self.assertTrue(jdate2 == jdate3)
         

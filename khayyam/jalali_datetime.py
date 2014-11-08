@@ -4,12 +4,12 @@ __author__ = 'vahid'
 
 from datetime import timedelta, time, datetime
 from time import struct_time
-from algorithms import get_julian_day_from_gregorian, \
+from .algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
     gregorian_date_from_julian_day, \
     parse
 
-from jalali_date import JalaliDate, MINYEAR, MAXYEAR
+from .jalali_date import JalaliDate, MINYEAR, MAXYEAR
 from khayyam.helpers import replace_if_match
 
 AM_PM = {0: u'ق.ظ',
@@ -401,7 +401,7 @@ Directive    Meaning
         if not x:
             return True
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
-        return self.to_datetime() <> x.to_datetime()
+        return self.to_datetime() != x.to_datetime()
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
