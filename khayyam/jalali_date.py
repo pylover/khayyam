@@ -15,7 +15,10 @@ from khayyam.constants import MAXYEAR, \
     PERSIAN_MONTH_ABBRS, \
     PERSIAN_MONTH_NAMES, \
     PERSIAN_WEEKDAY_ABBRS, \
-    PERSIAN_WEEKDAY_NAMES
+    PERSIAN_WEEKDAY_NAMES, \
+    SUNDAY, \
+    MONDAY, \
+    SATURDAY
 
 
 class JalaliDate(object):
@@ -140,16 +143,26 @@ class JalaliDate(object):
         return (self - self.min).days + 1
 
     def timetuple(self):
-        raise NotImplementedError()
+        """
+        The same as: :func:`datetime.date.timetuple()`.
+        Return a :class:`time.struct_time` such as returned by :func:`time.localtime()`. The hours, minutes and seconds are 0, and the DST flag is -1. d.timetuple() is equivalent to `time.struct_time((d.year, d.month, d.day, 0, 0, 0, d.weekday(), yday, -1))`, where `yday = d.toordinal() - date(d.year, 1, 1).toordinal() + 1` is the day number within the current year starting with `1` for January 1st.
+        """
+        return self.todate().timetuple()
 
     def weekday(self):
-        return self.todate().weekday()
+        """
+        Return the day of the week as an integer, where Saturday is 0 and Friday is 6.
+        """
+        return (self.todate().weekday() + 2) % 7
 
     def isoweekday(self):
+        """
+        Return the day of the week as an integer, where Saturday is 1 and Friday is 7.
+        """
         return self.weekday() + 1
 
     def isocalendar(self):
-        return self.year, self.month, self.day
+        return self.year, self.weekofyear(SATURDAY), self.isoweekday()
 
     def isoformat(self):
         return '%s-%s-%s' % (self.year, self.month, self.day)
@@ -173,9 +186,8 @@ Directive    Meaning
 %d           Day of the month as a decimal number [01,31].     
 %j           Day of the year as a decimal number [001,366].     
 %m           Month as a decimal number [01,12].     
-%U           Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
-%w           Weekday as a decimal number [0(Sunday),6].     
-%W           Week number of the year (Monday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.    (4)
+%w           Weekday as a decimal number [0(Saturday),6(Friday)].
+%W           Week number of the year (Monday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.
 %x           Locale’s appropriate date representation.     
 %y           Year without century as a decimal number [00,99].     
 %Y           Year with century as a decimal number.     
@@ -199,14 +211,15 @@ Directive    Meaning
 
         result = replace_if_match(result, '%j', self.dayofyear)
 
-        result = replace_if_match(result, '%U', lambda: self.weekofyear(6))
-        result = replace_if_match(result, '%W', lambda: self.weekofyear(0))
+        result = replace_if_match(result, '%W', lambda: self.weekofyear(SATURDAY))
 
         result = replace_if_match(result, '%w', self.weekday)
 
         result = replace_if_match(result, '%%', '%')
 
         return result
+
+    __format__ = strftime
 
     def weekdayname(self):
         return PERSIAN_WEEKDAY_NAMES[self.weekday()]
@@ -223,12 +236,23 @@ Directive    Meaning
     def localformat(self):
         return '%s %s %s %s' % (self.weekdayname(), self.day, self.monthname(), self.year)
 
-    def dayofyear(self):
-        return (self - JalaliDate(self.year, 1, 1)).days + 1
+    def firstdayofyear(self):
+        return JalaliDate(self.year, 1, 1)
 
-    def weekofyear(self, first_day_of_week):
-        raise NotImplementedError()
-        #return (self - JalaliDate(self.year,1,1)).days / 7
+    def dayofyear(self):
+        return (self - self.firstdayofyear()).days + 1
+
+    def weekofyear(self, first_day_of_week=SATURDAY):
+        first_day_of_year = self.firstdayofyear()
+        days = (self - first_day_of_year).days
+        offset = first_day_of_week - first_day_of_year.weekday()
+        if offset < 0:
+            offset += 7
+
+        if days < offset:
+            return 0
+
+        return (days - offset) / 7 + 1
 
     #################
     ### Operators ###

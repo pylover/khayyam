@@ -43,7 +43,7 @@ class TestJalaliDate(unittest.TestCase):
 
     def test_iso_calendar(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        self.assertEqual(jdate.isocalendar(), (self.leap_year, 12, 23))
+        self.assertEqual(jdate.isocalendar(), (self.leap_year, 51, 6))
         
     def test_iso_format(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
@@ -55,7 +55,7 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
         
         ## "%U%W" not implemented
-        self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%'), u'پپنجشنبهاساسفند23359123پنجشنبه 23 اسفند 1375751375%')
+        self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%'), u'پپنجشنبهاساسفند23359125پنجشنبه 23 اسفند 1375751375%')
         
     def test_add(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
