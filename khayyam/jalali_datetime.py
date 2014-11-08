@@ -175,7 +175,7 @@ class JalaliDatetime(JalaliDate):
 
 
     def to_datetime(self):
-        arr = gregorian_date_from_julian_day(self.julianday())
+        arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime(int(arr[0]), int(arr[1]), int(arr[2]), self.hour, self.minute, self.second, self.microsecond,
                         self.tzinfo)
 

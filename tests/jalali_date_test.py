@@ -32,7 +32,7 @@ class TestJalaliDate(unittest.TestCase):
         
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_julian_days(jdate.julianday())
+        jdate2 = JalaliDate.from_julian_days(jdate.tojulianday())
         
         self.assertEqual(jdate, jdate2)
         

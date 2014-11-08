@@ -115,7 +115,7 @@ class JalaliDate(object):
     ### Instance Methods ###
     ########################
 
-    def julianday(self):
+    def tojulianday(self):
         return julian_day_from_jalali_date(self.year, self.month, self.day)
 
     def copy(self):
@@ -132,7 +132,7 @@ class JalaliDate(object):
         return result
 
     def todate(self):
-        arr = gregorian_date_from_julian_day(self.julianday())
+        arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime.date(int(arr[0]), int(arr[1]), int(arr[2]))
     to_date = todate
 
@@ -236,49 +236,49 @@ Directive    Meaning
 
     def __add__(self, x):
         if isinstance(x, datetime.timedelta):
-            days = self.julianday() + x.days
+            days = self.tojulianday() + x.days
             return JalaliDate.from_julian_days(days)
 
         raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, datetime.timedelta):
-            days = self.julianday() - x.days
+            days = self.tojulianday() - x.days
             return JalaliDate.from_julian_days(days)
         elif isinstance(x, JalaliDate):
-            days = self.julianday() - x.julianday()
+            days = self.tojulianday() - x.tojulianday()
             return datetime.timedelta(days=days)
 
         raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __lt__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() < x.julianday()
+        return self.tojulianday() < x.tojulianday()
 
     def __le__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() <= x.julianday()
+        return self.tojulianday() <= x.tojulianday()
 
     def __eq__(self, x):
         if not x:
             return False
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() == x.julianday()
+        return self.tojulianday() == x.tojulianday()
 
     def __ne__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() <> x.julianday()
+        return self.tojulianday() <> x.tojulianday()
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() > x.julianday()
+        return self.tojulianday() > x.tojulianday()
 
     def __ge__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.julianday() >= x.julianday()
+        return self.tojulianday() >= x.tojulianday()
 
 
-# # Class attributes
+# Class attributes
 JalaliDate.min = JalaliDate(MINYEAR, 1, 1)
 JalaliDate.max = JalaliDate(MAXYEAR, 12, 29)
 JalaliDate.resolution = datetime.timedelta(days=1)
