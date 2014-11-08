@@ -23,7 +23,7 @@ class TehTz(tzinfo):
             jdt = JalaliDatetime.from_datetime(dt)
         start_jdt = jdt.replace(month=1, day=1)
         end_jdt = jdt.replace(month=7, day=1)
-        if jdt > start_jdt and jdt < end_jdt:
+        if start_jdt < jdt < end_jdt:
             return True
         else:
             return False
