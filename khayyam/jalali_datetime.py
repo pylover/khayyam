@@ -225,39 +225,40 @@ class JalaliDatetime(JalaliDate):
         else:
             return None
 
-    def timetuple(self):
-        isdst = -1
-        if self.tzinfo:
-            if self.tzinfo.dst(self):
-                isdst = 1
-            else:
-                isdst = 2
-        return struct_time([
-            self.year,
-            self.month,
-            self.day,
-            self.hour,
-            self.minute,
-            self.second,
-            self.weekday(),
-            self.dayofyear(),
-            isdst])
-
-
-    def utctimetuple(self):
-        if not self.tzinfo:
-            return self.timetuple()
-        utc = self - self.utcoffset()
-        return struct_time([
-            utc.year,
-            utc.month,
-            utc.day,
-            utc.hour,
-            utc.minute,
-            utc.second,
-            utc.weekday(),
-            utc.dayofyear(),
-            0])
+    # Removed. By vahid
+    # def timetuple(self):
+    #     isdst = -1
+    #     if self.tzinfo:
+    #         if self.tzinfo.dst(self):
+    #             isdst = 1
+    #         else:
+    #             isdst = 2
+    #     return struct_time([
+    #         self.year,
+    #         self.month,
+    #         self.day,
+    #         self.hour,
+    #         self.minute,
+    #         self.second,
+    #         self.weekday(),
+    #         self.dayofyear(),
+    #         isdst])
+    #
+    #
+    # def utctimetuple(self):
+    #     if not self.tzinfo:
+    #         return self.timetuple()
+    #     utc = self - self.utcoffset()
+    #     return struct_time([
+    #         utc.year,
+    #         utc.month,
+    #         utc.day,
+    #         utc.hour,
+    #         utc.minute,
+    #         utc.second,
+    #         utc.weekday(),
+    #         utc.dayofyear(),
+    #         0])
 
 
     def toordinal(self):
@@ -287,7 +288,7 @@ Directive    Meaning
 %p            Locale’s equivalent of either AM or PM.    (2)
 %S            Second as a decimal number [00,61].    (3)
 %U            Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
-%w            Weekday as a decimal number [0(Sunday),6].     
+%w            Weekday as a decimal number [0(Saturday),6(Friday)].
 %W            Week number of the year (Monday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.    (4)
 %x            Locale’s appropriate date representation.     
 %X            Locale’s appropriate time representation.     
