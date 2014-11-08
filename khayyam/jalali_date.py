@@ -137,7 +137,7 @@ class JalaliDate(object):
     to_date = todate
 
     def toordinal(self):
-        raise NotImplementedError()
+        return (self - self.min).days + 1
 
     def timetuple(self):
         raise NotImplementedError()

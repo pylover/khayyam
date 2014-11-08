@@ -5,7 +5,7 @@ Created on Mar 7, 2011
 @author: vahid
 '''
 import unittest
-from khayyam import JalaliDate, MAXYEAR
+from khayyam import JalaliDate, MAXYEAR, MINYEAR
 from datetime import timedelta, date
 
 class TestJalaliDate(unittest.TestCase):
@@ -39,9 +39,7 @@ class TestJalaliDate(unittest.TestCase):
     def test_to_from_date(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
         jdate2 = JalaliDate.from_date(jdate.todate())
-        
         self.assertEqual(jdate, jdate2)
-
 
     def test_iso_calendar(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
@@ -51,7 +49,6 @@ class TestJalaliDate(unittest.TestCase):
         jdate = JalaliDate(self.leap_year, 12, 23)
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
 
-        
     def test_strftime(self):
         jdate = JalaliDate.strptime(JalaliDate(self.leap_year, 12, 23).isoformat(), '%Y-%m-%d')
         
@@ -86,6 +83,15 @@ class TestJalaliDate(unittest.TestCase):
         self.assertFalse(jdate > jdate2)
         self.assertTrue(jdate2 == jdate3)
     
+    def test_ordinal(self):
+        min = JalaliDate.fromordinal(1)
+        max = JalaliDate.fromordinal(JalaliDate.max.toordinal())
+        self.assertEqual(min.year, 1)
+        self.assertEqual(min.month, 1)
+        self.assertEqual(min.day, 1)
+        self.assertEqual(min, JalaliDate.min)
+        self.assertEqual(max, JalaliDate.max)
+
     def test_algorithm(self):
         min = date(623, 1, 1)
         max_days = 5000
@@ -99,8 +105,7 @@ class TestJalaliDate(unittest.TestCase):
             days += 1
             if days > max_days:
                 break;
-            
-         
-    
+
+
 if __name__ == '__main__':
     unittest.main()
