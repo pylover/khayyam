@@ -24,7 +24,7 @@ setup(
     description="Khayyam(Jalali Persian Datetime) library",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
-    long_description=open(os.path.join(os.path.dirname(__file__), 'README.txt')).read(),
+    long_description=open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
     license="GPLv3",
     classifiers=[
         "Programming Language :: Python",
