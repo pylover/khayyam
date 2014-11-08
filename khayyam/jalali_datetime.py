@@ -86,14 +86,6 @@ class JalaliDatetime(JalaliDate):
         return cls(arr[0], arr[1], arr[2], dt.hour, dt.minute, dt.second, dt.microsecond, tz)
 
     @classmethod
-    def today(cls):
-        """
-        Return the current local datetime, with tzinfo None. This is equivalent to datetime.fromtimestamp(_time._time()). See also now(), fromtimestamp().
-        """
-        return cls.from_datetime(datetime.today())
-
-
-    @classmethod
     def now(cls, tz=None):
         """
         Return the current local date and _time. If optional argument tz is None or not specified, this is like today(), but, if possible, supplies more precision than can be gotten from going through a _time._time() timestamp (for example, this may be possible on platforms supplying the C gettimeofday() function).
