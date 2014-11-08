@@ -261,9 +261,6 @@ class JalaliDatetime(JalaliDate):
     #         0])
 
 
-    def toordinal(self):
-        raise NotImplementedError('please use jalalidate.to_datetime.toordinal() instead')
-
     def isoformat(self, sep='T'):
         return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f')
 
