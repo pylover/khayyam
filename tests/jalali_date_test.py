@@ -32,13 +32,13 @@ class TestJalaliDate(unittest.TestCase):
         
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_julian_days(jdate.to_julianday())
+        jdate2 = JalaliDate.from_julian_days(jdate.julianday())
         
         self.assertEqual(jdate, jdate2)
         
     def test_to_from_date(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_date(jdate.to_date())
+        jdate2 = JalaliDate.from_date(jdate.todate())
         
         self.assertEqual(jdate, jdate2)
 
@@ -94,7 +94,7 @@ class TestJalaliDate(unittest.TestCase):
             dt = min + timedelta(days=days)
             jd = JalaliDate.from_date(dt)
             print 'Processing day: %s' % jd
-            dt2 = jd.to_date()
+            dt2 = jd.todate()
             self.assertEqual(dt, dt2)
             days += 1
             if days > max_days:

@@ -1,4 +1,5 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
+__author__ = 'vahid'
 
 from math import floor, ceil
 
@@ -21,23 +22,24 @@ def get_julian_day_from_gregorian(year, month, day):
     
     # Determine JD
     if m <= 2:
-        y = y - 1
-        m = m + 12
+        y -= 1
+        m += 12
 
     a = floor(y / 100)
     return floor(365.25 * (y + 4716)) + floor(30.6001 * (m + 1)) + d + (2 - a + floor(a / 4)) - 1524.5
+
 
 def is_leap_year(year):
     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682 
 
 
 def days_in_month(year, month):
-    if month >= 1 and month <= 6:
+    if 1 <= month <= 6:
         return 31
-    elif month >= 7 and month < 12:
+    elif 7 <= month < 12:
         return 30
 
-    assert month == 12, 'Month must  be between 1 and 12'
+    assert month == 12, 'Month must be between 1 and 12'
     
     ### Esfand(اسفند) ###
     if is_leap_year(year):
@@ -45,62 +47,66 @@ def days_in_month(year, month):
     else:
         return 29
 
-def julian_day_from_jalali(year, month, day):
-    epbase = year - ([473, 474][year >= 0])
-    epyear = 474 + (epbase % 2820)
-    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(((epyear * 682) - 110) / 2816) + (epyear - 1) * 365 + floor(epbase / 2820) * 1029983 + (1948320.5 - 1);
 
-def jalali_date_from_julian_days(jd):
-    jdmp = floor(jd) + 0.5
-    depoch = jdmp - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
-    cycle = floor(depoch / 1029983)
-    cyear = depoch % 1029983
-    if cyear == 1029982:
-        ycycle = 2820
+def julian_day_from_jalali_date(year, month, day):
+    base = year - ([473, 474][year >= 0])
+    julian_year = 474 + (base % 2820)
+    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(((julian_year * 682) - 110) / 2816) + (julian_year - 1) * 365 + floor(base / 2820) * 1029983 + (1948320.5 - 1);
+
+
+def jalali_date_from_julian_day(julian_day):
+    julian_day = floor(julian_day) + 0.5
+    offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
+    cycle = floor(offset / 1029983)
+    remaining = offset % 1029983
+    if remaining == 1029982:
+        year_cycle = 2820
     else:
-        a1 = floor(cyear / 366)
-        a2 = cyear % 366
-        ycycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1
-    y = ycycle + (2820 * cycle) + 474
+        a1 = floor(remaining / 366)
+        a2 = remaining % 366
+        year_cycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1
+    y = year_cycle + (2820 * cycle) + 474
     if y <= 0:
         y -= 1
-    yday = (jdmp - julian_day_from_jalali(y, 1, 1)) + 1
-    m = ceil([(yday - 6) / 30, yday / 31][yday <= 186])
-    day = (jdmp - julian_day_from_jalali(y, m, 1)) + 1
-    return [y, m, day]
-    
+    days_in_years = (julian_day - julian_day_from_jalali_date(y, 1, 1)) + 1
+    m = ceil([(days_in_years - 6) / 30, days_in_years / 31][days_in_years <= 186])
+    day = (julian_day - julian_day_from_jalali_date(y, m, 1)) + 1
+    return y, m, day
+
+
 def gregorian_date_from_julian_day(jd):
     y = 0
     m = 0
-    day = 0.0
-    
-    if jd > 0.0:
-        jdm = jd + 0.5
-        z = floor(jdm)
-        f = jdm - z
 
-        alpha = floor((z - 1867216.25) / 36524.25)
-        b = (z + 1 + alpha - floor(alpha / 4)) + 1524
-        c = floor((b - 122.1) / 365.25)
-        d = floor(365.25 * c)
-        e = floor((b - d) / 30.6001)
-        day = b - d - floor(30.6001 * e) + f
-        
-        if e < 14:
-            m = e - 1
-        elif e == 14 or e == 15:
-            m = e - 13
-        
-        if m > 2:
-            y = c - 4716
-        elif m == 1 or m == 2:
-            y = c - 4715
-    else:
+    if jd <= 0.0:
         raise ValueError(), 'Invalid Date'
-    return (y, m, day)
 
-def jalali_from_gregorian(year, month, day):
-    return jalali_date_from_julian_days(get_julian_day_from_gregorian(year, month, day))
+    jdm = jd + 0.5
+    z = floor(jdm)
+    f = jdm - z
+
+    alpha = floor((z - 1867216.25) / 36524.25)
+    b = (z + 1 + alpha - floor(alpha / 4)) + 1524
+    c = floor((b - 122.1) / 365.25)
+    d = floor(365.25 * c)
+    e = floor((b - d) / 30.6001)
+    day = b - d - floor(30.6001 * e) + f
+
+    if e < 14:
+        m = e - 1
+    elif e == 14 or e == 15:
+        m = e - 13
+
+    if m > 2:
+        y = c - 4716
+    elif m == 1 or m == 2:
+        y = c - 4715
+
+    return y, m, day
+
+
+def jalali_date_from_gregorian_date(year, month, day):
+    return jalali_date_from_julian_day(get_julian_day_from_gregorian(year, month, day))
 
 
 def parse(cls, date_string, format, valid_codes):
