@@ -1,18 +1,8 @@
 
-from jalali_date import JalaliDate, MAXYEAR, MINYEAR
-from jalali_datetime import JalaliDatetime
-from tehran_timezone import TehTz
-
+from .constants import *
+from .jalali_date import JalaliDate
+from .jalali_datetime import JalaliDatetime
+from .tehran_timezone import TehTz
 teh_tz = TehTz()
+__version__ = '1.0.0'
 
-__version__ = '0.9.2'
-
-
-__all__ = [
-    'JalaliDate',
-    'MAXYEAR',
-    'MINYEAR',
-    'JalaliDatetime',
-    'TehTz',
-    'teh_tz',
-    '__version__']

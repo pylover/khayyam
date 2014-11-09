@@ -5,7 +5,7 @@ Created on Mar 7, 2011
 @author: vahid
 '''
 import unittest
-from khayyam import JalaliDate, MAXYEAR
+from khayyam import JalaliDate, MAXYEAR, MINYEAR
 from datetime import timedelta, date
 
 class TestJalaliDate(unittest.TestCase):
@@ -32,33 +32,29 @@ class TestJalaliDate(unittest.TestCase):
         
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_julian_days(jdate.to_julianday())
+        jdate2 = JalaliDate.from_julian_days(jdate.tojulianday())
         
         self.assertEqual(jdate, jdate2)
         
     def test_to_from_date(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_date(jdate.to_date())
-        
+        jdate2 = JalaliDate.from_date(jdate.todate())
         self.assertEqual(jdate, jdate2)
-
 
     def test_iso_calendar(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        self.assertEqual(jdate.isocalendar(), (self.leap_year, 12, 23))
+        self.assertEqual(jdate.isocalendar(), (self.leap_year, 51, 6))
         
     def test_iso_format(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
 
-        
     def test_strftime(self):
         jdate = JalaliDate.strptime(JalaliDate(self.leap_year, 12, 23).isoformat(), '%Y-%m-%d')
         
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
         
-        ## "%U%W" not implemented
-        self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%'), u'پپنجشنبهاساسفند23359123پنجشنبه 23 اسفند 1375751375%')
+        self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%%W'), u'پپنجشنبهاساسفند23359125پنجشنبه 23 اسفند 1375751375%51')
         
     def test_add(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
@@ -82,10 +78,19 @@ class TestJalaliDate(unittest.TestCase):
         jdate3 = JalaliDate(self.leap_year, 12, 24)
         
         self.assertTrue(jdate <= jdate2)
-        self.assertTrue(jdate <> jdate2)
+        self.assertTrue(jdate != jdate2)
         self.assertFalse(jdate > jdate2)
         self.assertTrue(jdate2 == jdate3)
     
+    def test_ordinal(self):
+        min = JalaliDate.fromordinal(1)
+        max = JalaliDate.fromordinal(JalaliDate.max.toordinal())
+        self.assertEqual(min.year, 1)
+        self.assertEqual(min.month, 1)
+        self.assertEqual(min.day, 1)
+        self.assertEqual(min, JalaliDate.min)
+        self.assertEqual(max, JalaliDate.max)
+
     def test_algorithm(self):
         min = date(623, 1, 1)
         max_days = 5000
@@ -93,14 +98,13 @@ class TestJalaliDate(unittest.TestCase):
         while True:
             dt = min + timedelta(days=days)
             jd = JalaliDate.from_date(dt)
-            print 'Processing day: %s' % jd
-            dt2 = jd.to_date()
+            print('Processing day: %s' % jd)
+            dt2 = jd.todate()
             self.assertEqual(dt, dt2)
             days += 1
             if days > max_days:
                 break;
-            
-         
-    
+
+
 if __name__ == '__main__':
     unittest.main()
