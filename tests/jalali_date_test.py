@@ -105,6 +105,9 @@ class TestJalaliDate(unittest.TestCase):
             if days > max_days:
                 break;
 
+    def test_replace(self):
+        jd = JalaliDate(self.leap_year,12,30)
+        self.assertRaises(ValueError, jd.replace, self.leap_year + 1)
 
 if __name__ == '__main__':
     unittest.main()

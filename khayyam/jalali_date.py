@@ -26,18 +26,10 @@ class JalaliDate(object):
     """
 
     def __init__(self, year=1, month=1, day=1):
-        if year < MINYEAR or year > MAXYEAR:
-            raise ValueError('Year must be between %s and %s' % (MINYEAR, MAXYEAR))
         self.year = int(year)
-
-        if month < 1 or month > 12:
-            raise ValueError('Month must be between 1 and 12')
         self.month = int(month)
-
-        _days_in_month = days_in_month(year, month)
-        if day < 1 or day > _days_in_month:
-            raise ValueError('Day must be between 1 and %s' % _days_in_month)
         self.day = int(day)
+        self.validate()
 
 
     ##################
@@ -117,6 +109,17 @@ class JalaliDate(object):
     ### Instance Methods ###
     ########################
 
+
+    def validate(self):
+        if self.year < MINYEAR or self.year > MAXYEAR:
+            raise ValueError('Year must be between %s and %s' % (MINYEAR,
+                                                                 MAXYEAR))
+        if self.month < 1 or self.month > 12:
+            raise ValueError('Month must be between 1 and 12')
+        _days_in_month = days_in_month(self.year, self.month)
+        if self.day < 1 or self.day > _days_in_month:
+            raise ValueError('Day must be between 1 and %s' % _days_in_month)
+
     def tojulianday(self):
         return julian_day_from_jalali_date(self.year, self.month, self.day)
 
@@ -131,6 +134,7 @@ class JalaliDate(object):
             result.month = month
         if day:
             result.day = day
+        result.validate()
         return result
 
     def todate(self):
