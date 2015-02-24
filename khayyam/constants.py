@@ -63,11 +63,11 @@ PERSIAN_WEEKDAY_NAMES_ASCII = {
 }
 
 PERSIAN_WEEKDAY_ABBRS_ASCII= {
-            0: 'S',
+            0: 'Sh',
             1: 'Y',
             2: 'D',
-            3: 'S',
-            4: 'C',
+            3: 'Se',
+            4: 'Ch',
             5: 'P',
             6: 'J'
 }
