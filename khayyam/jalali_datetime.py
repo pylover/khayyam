@@ -15,6 +15,8 @@ from khayyam.helpers import replace_if_match
 AM_PM = {0: u'ق.ظ',
          1: u'ب.ظ'}
 
+AM_PM_ASCII = {0: 'AM',
+               1: 'PM'}
 
 class JalaliDatetime(JalaliDate):
     def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0, microsecond=0, tzinfo=None):
@@ -267,6 +269,8 @@ Directive    Meaning
 %B            Locale’s full month name.     
 %c            Locale’s appropriate short date and time representation.     
 %C            Locale’s appropriate date and time representation.
+%q            ASCII Locale’s appropriate short date and time representation.     
+%Q            ASCII Locale’s appropriate date and time representation.
 %d            Day of the month as a decimal number [01,31].     
 %f            Microsecond as a decimal number [0,999999], zero-padded on the left    (1)
 %H            Hour (24-hour clock) as a decimal number [00,23].     
@@ -304,7 +308,11 @@ Directive    Meaning
         result = replace_if_match(result, '%c', self.localshortformat)
         result = replace_if_match(result, '%C', self.localformat)
 
+        result = replace_if_match(result, '%q', self.localshortformat_ascii)
+        result = replace_if_match(result, '%Q', self.localformat_ascii)
+
         result = replace_if_match(result, '%p', self.ampm)
+        result = replace_if_match(result, '%t', self.ampm_ascii)
 
         result = replace_if_match(result, '%X', self.localtimeformat)
 
@@ -317,11 +325,17 @@ Directive    Meaning
     def localshortformat(self):
         return self.strftime('%a %d %b %y %H:%M')
 
+    def localshortformat_ascii(self):
+        return self.strftime('%f %d %g %y %H:%M')
+
     def localformat(self):
         return self.strftime('%A %d %B %Y %I:%M:%S %p')
 
     def localtimeformat(self):
         return self.strftime('%I:%M:%S %p')
+
+    def localformat_ascii(self):
+        return self.strftime('%F %d %G %Y %I:%M:%S %t')
 
     def hour12(self):
         if self.hour > 12:
@@ -332,6 +346,11 @@ Directive    Meaning
         if self.hour < 12:
             return AM_PM[0]
         return AM_PM[1]
+
+    def ampm_ascii(self):
+        if self.hour < 12:
+            return AM_PM_ASCII[0]
+        return AM_PM_ASCII[1]
 
     def utcoffsetformat(self):
         if self.tzinfo:
