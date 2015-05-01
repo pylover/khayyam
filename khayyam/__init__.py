@@ -4,5 +4,5 @@ from .jalali_date import JalaliDate
 from .jalali_datetime import JalaliDatetime
 from .tehran_timezone import TehTz
 teh_tz = TehTz()
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
