@@ -293,7 +293,7 @@ Directive    Meaning
 
         result = replace_if_match(result, '%H', '%.2d' % self.hour)
 
-        result = replace_if_match(result, '%I', '%.2d' % self.hour12)
+        result = replace_if_match(result, '%I', '%.2d' % self.hour12())
 
         result = replace_if_match(result, '%M', '%.2d' % self.minute)
 
