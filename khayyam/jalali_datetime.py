@@ -291,15 +291,15 @@ Directive    Meaning
 
         result = super(JalaliDatetime, self).strftime(format)
 
-        result = replace_if_match(result, '%H', self.hour)
+        result = replace_if_match(result, '%H', '%.2d' % self.hour)
 
-        result = replace_if_match(result, '%I', self.hour12)
+        result = replace_if_match(result, '%I', '%.2d' % self.hour12)
 
-        result = replace_if_match(result, '%M', self.minute)
+        result = replace_if_match(result, '%M', '%.2d' % self.minute)
 
-        result = replace_if_match(result, '%S', self.second)
+        result = replace_if_match(result, '%S', '%.2d' % self.second)
 
-        result = replace_if_match(result, '%f', self.microsecond)
+        result = replace_if_match(result, '%f', '%.6d' % self.microsecond)
 
         result = replace_if_match(result, '%c', self.localshortformat)
         result = replace_if_match(result, '%C', self.localformat)
