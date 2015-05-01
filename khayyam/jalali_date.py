@@ -197,7 +197,7 @@ Directive    Meaning
         result = replace_if_match(format, '%Y', self.year)
         result = replace_if_match(result, '%y', lambda: str(self.year)[-2:])
 
-        result = replace_if_match(result, '%m', self.month)
+        result = replace_if_match(result, '%m', '%.2d' % self.month)
         result = replace_if_match(result, '%d', self.day)
 
         result = replace_if_match(result, '%a', self.weekdayabbr)
