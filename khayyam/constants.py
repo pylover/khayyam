@@ -52,6 +52,55 @@ PERSIAN_MONTH_ABBRS = {
             11: u'به',
             12: u'اس'}
 
+PERSIAN_WEEKDAY_NAMES_ASCII = {
+            0: 'Shanbeh',
+            1: 'Yekshanbeh',
+            2: 'Doshanbeh',
+            3: 'Seshhanbeh',
+            4: 'Chaharshanbeh',
+            5: 'Panjshanbeh',
+            6: 'Jomeh',
+}
+
+PERSIAN_WEEKDAY_ABBRS_ASCII= {
+            0: 'Sh',
+            1: 'Y',
+            2: 'D',
+            3: 'Se',
+            4: 'Ch',
+            5: 'P',
+            6: 'J'
+}
+
+PERSIAN_MONTH_NAMES_ASCII = {
+            1:  'Farvardin',
+            2:  'Ordibehesht',
+            3:  'Khordad',
+            4:  'Tir',
+            5:  'Mordad',
+            6:  'Shahrivar',
+            7:  'Mehr',
+            8:  'Aban',
+            9:  'Azar',
+            10: 'Dey',
+            11: 'Bahman',
+            12: 'Esfand'
+}
+
+PERSIAN_MONTH_ABBRS_ASCII= {
+            1:  'F',
+            2:  'O',
+            3:  'Kh',
+            4:  'T',
+            5:  'Mo',
+            6:  'Sh',
+            7:  'M',
+            8:  'Ab',
+            9:  'Az',
+            10: 'D',
+            11: 'B',
+            12: 'E'}
+
 SATURDAY = 0
 SUNDAY = 1
 MONDAY = 2
