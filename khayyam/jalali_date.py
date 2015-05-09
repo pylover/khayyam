@@ -2,7 +2,6 @@
 __author__ = 'vahid'
 
 import datetime
-import math
 from khayyam.helpers import replace_if_match
 from khayyam.algorithms import days_in_month, \
     is_leap_year, \
@@ -26,18 +25,7 @@ class JalaliDate(object):
     """
 
     def __init__(self, year=1, month=1, day=1):
-        if year < MINYEAR or year > MAXYEAR:
-            raise ValueError('Year must be between %s and %s' % (MINYEAR, MAXYEAR))
-        self.year = int(year)
-
-        if month < 1 or month > 12:
-            raise ValueError('Month must be between 1 and 12')
-        self.month = int(month)
-
-        _days_in_month = days_in_month(year, month)
-        if day < 1 or day > _days_in_month:
-            raise ValueError('Day must be between 1 and %s' % _days_in_month)
-        self.day = int(day)
+        self.year, self.month, self.day = self._validate(year, month, day)
 
 
     ##################
@@ -112,6 +100,20 @@ class JalaliDate(object):
 
         return parse(cls, date_string, frmt, valid_codes)
 
+    @staticmethod
+    def _validate(year, month, day):
+        year = year if isinstance(year, int) else int(year)
+        month = month if isinstance(month, int) else int(month)
+        day = day if isinstance(day, int) else int(day)
+
+        if year < MINYEAR or year > MAXYEAR:
+            raise ValueError('Year must be between %s and %s' % (MINYEAR, MAXYEAR))
+        if month < 1 or month > 12:
+            raise ValueError('Month must be between 1 and 12')
+        _days_in_month = days_in_month(year, month)
+        if day < 1 or day > _days_in_month:
+            raise ValueError('Day must be between 1 and %s' % _days_in_month)
+        return year, month, day
 
     ########################
     ### Instance Methods ###
@@ -124,14 +126,13 @@ class JalaliDate(object):
         return JalaliDate(self.year, self.month, self.day)
 
     def replace(self, year=None, month=None, day=None):
-        result = self.copy()
-        if year:
-            result.year = year
-        if month:
-            result.month = month
-        if day:
-            result.day = day
-        return result
+        year, month, day = self._validate(
+            year if year else self.year,
+            month if month else self.month,
+            day if day else self.day)
+
+        return JalaliDate(year, month, day)
+
 
     def todate(self):
         arr = gregorian_date_from_julian_day(self.tojulianday())

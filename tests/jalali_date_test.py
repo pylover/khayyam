@@ -103,7 +103,14 @@ class TestJalaliDate(unittest.TestCase):
             self.assertEqual(dt, dt2)
             days += 1
             if days > max_days:
-                break;
+                break
+
+    def test_replace(self):
+        d1 = JalaliDate(1391, 12, 30)
+        self.assertEqual(d1.replace(year=1395), JalaliDate(1395, 12, 30))
+        self.assertEqual(d1.replace(month=1),   JalaliDate(1391, 1, 30))
+        self.assertEqual(d1.replace(day=1),     JalaliDate(1391, 12, 1))
+        self.assertRaises(ValueError, d1.replace, year=1392)
 
 
 if __name__ == '__main__':

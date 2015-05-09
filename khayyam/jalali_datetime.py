@@ -182,10 +182,13 @@ class JalaliDatetime(JalaliDate):
 
     def replace(self, year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None,
                 tzinfo=None):
-        result = JalaliDatetime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond)
-        if year: result.year = year
-        if month: result.month = month
-        if day: result.day = day
+        year, month, day = self._validate(
+            year if year else self.year,
+            month if month else self.month,
+            day if day else self.day)
+
+        result = JalaliDatetime(year, month, day, self.hour, self.minute, self.second, self.microsecond)
+
         if hour: result.hour = hour
         if minute: result.minute = minute
         if second: result.second = second
