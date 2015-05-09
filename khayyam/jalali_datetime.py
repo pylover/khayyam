@@ -291,7 +291,12 @@ Directive    Meaning
 %y            Year without century as a decimal number [00,99].     
 %Y            Year with century as a decimal number.     
 %z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
-%Z            Time zone name (empty string if the object is naive).     
+%Z            Time zone name (empty string if the object is naive).
+%e           ASCII Locale’s abbreviated weekday name.
+%E           ASCII Locale’s full weekday name.
+%g           ASCII Locale’s abbreviated month name.
+%G           ASCII Locale’s full month name.
+
 %%            A literal '%' character.
 =========    =======
 """
@@ -329,7 +334,7 @@ Directive    Meaning
         return self.strftime('%a %d %b %y %H:%M')
 
     def localshortformat_ascii(self):
-        return self.strftime('%f %d %g %y %H:%M')
+        return self.strftime('%e %d %g %y %H:%M')
 
     def localformat(self):
         return self.strftime('%A %d %B %Y %I:%M:%S %p')
@@ -338,7 +343,7 @@ Directive    Meaning
         return self.strftime('%I:%M:%S %p')
 
     def localformat_ascii(self):
-        return self.strftime('%F %d %G %Y %I:%M:%S %t')
+        return self.strftime('%E %d %G %Y %I:%M:%S %t')
 
     def hour12(self):
         if self.hour > 12:

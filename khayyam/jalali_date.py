@@ -195,11 +195,11 @@ Directive    Meaning
 %x           Locale’s appropriate date representation.     
 %y           Year without century as a decimal number [00,99].     
 %Y           Year with century as a decimal number.     
+%e           ASCII Locale’s abbreviated weekday name.
+%E           ASCII Locale’s full weekday name.
+%g           ASCII Locale’s abbreviated month name.
+%G           ASCII Locale’s full month name.
 %%           A literal '%' character.
-%f           ASCII Locale’s abbreviated weekday name.     
-%F           ASCII Locale’s full weekday name.     
-%g           ASCII Locale’s abbreviated month name.     
-%G           ASCII Locale’s full month name.     
 =========    =======
         """
 
@@ -211,8 +211,8 @@ Directive    Meaning
 
         result = replace_if_match(result, '%a', self.weekdayabbr)
         result = replace_if_match(result, '%A', self.weekdayname)
-        result = replace_if_match(result, '%f', self.weekdayabbr_ascii)
-        result = replace_if_match(result, '%F', self.weekdayname_ascii)
+        result = replace_if_match(result, '%e', self.weekdayabbr_ascii)
+        result = replace_if_match(result, '%E', self.weekdayname_ascii)
 
         result = replace_if_match(result, '%b', self.monthabbr)
         result = replace_if_match(result, '%B', self.monthname)

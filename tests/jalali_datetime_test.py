@@ -43,7 +43,7 @@ class TestJalaliDateTime(unittest.TestCase):
     def test_strftime(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
         self.assertEqual(jdate.isoformat(), '%s-12-23T12:03:45.034567' % self.leap_year)
-        self.assertEqual(jdate.strftime(u'%a%A%b%B%c%C%d%f%H%I%j%m%M%p%S%w%x%X%y%Y%z%Z%%%W'), u'پپنجشنبهاساسفندپ 23 اس 75 12:03پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ2303456712123591203ب.ظ455پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ12:03:45 ب.ظ751375%51')
+        self.assertEqual(jdate.strftime(u'%a%A%b%B%c%C%d%f%H%I%j%m%M%p%S%w%x%X%y%Y%z%Z%%%W%e%E%g%G'), u'پپنجشنبهاساسفندپ 23 اس 75 12:03پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ2303456712123591203ب.ظ455پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ12:03:45 ب.ظ751375%51PPanjshanbehEEsfand')
 
     def test_algorithm(self):
         min = datetime(1900, 1, 1, 1, 1, 1)
