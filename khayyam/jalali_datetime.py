@@ -3,7 +3,6 @@ __author__ = 'vahid'
 
 
 from datetime import timedelta, time, datetime
-from time import struct_time
 from .algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
     gregorian_date_from_julian_day, \
@@ -221,42 +220,6 @@ class JalaliDatetime(JalaliDate):
             return self.tzinfo.tzname()
         else:
             return None
-
-    # Removed. By vahid
-    # def timetuple(self):
-    #     isdst = -1
-    #     if self.tzinfo:
-    #         if self.tzinfo.dst(self):
-    #             isdst = 1
-    #         else:
-    #             isdst = 2
-    #     return struct_time([
-    #         self.year,
-    #         self.month,
-    #         self.day,
-    #         self.hour,
-    #         self.minute,
-    #         self.second,
-    #         self.weekday(),
-    #         self.dayofyear(),
-    #         isdst])
-    #
-    #
-    # def utctimetuple(self):
-    #     if not self.tzinfo:
-    #         return self.timetuple()
-    #     utc = self - self.utcoffset()
-    #     return struct_time([
-    #         utc.year,
-    #         utc.month,
-    #         utc.day,
-    #         utc.hour,
-    #         utc.minute,
-    #         utc.second,
-    #         utc.weekday(),
-    #         utc.dayofyear(),
-    #         0])
-
 
     def isoformat(self, sep='T'):
         return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f')
