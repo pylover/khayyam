@@ -94,6 +94,10 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertFalse(jdate > jdate2)
         self.assertTrue(jdate2 == jdate3)
         
-    
+    def test_replace(self):
+        self.assertRaises(ValueError, self.naive_jdt.replace,
+                          self.leap_year + 1)
+
+
 if __name__ == '__main__':
     unittest.main()
