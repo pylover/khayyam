@@ -1,8 +1,8 @@
-'''
+"""
 Created on Jan 15, 2011
 
 @author: vahid
-'''
+"""
 import os
 from setuptools import setup, find_packages
  
