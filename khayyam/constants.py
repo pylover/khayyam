@@ -56,7 +56,7 @@ PERSIAN_WEEKDAY_NAMES_ASCII = {
             0: 'Shanbeh',
             1: 'Yekshanbeh',
             2: 'Doshanbeh',
-            3: 'Seshhanbeh',
+            3: 'Seshanbeh',
             4: 'Chaharshanbeh',
             5: 'Panjshanbeh',
             6: 'Jomeh',
