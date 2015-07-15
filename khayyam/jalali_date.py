@@ -111,12 +111,12 @@ class JalaliDate(object):
         day = day if isinstance(day, int) else int(day)
 
         if year < MINYEAR or year > MAXYEAR:
-            raise ValueError('Year must be between %s and %s' % (MINYEAR, MAXYEAR))
+            raise ValueError('Year must be between %s and %s, but it is: %s' % (MINYEAR, MAXYEAR, year))
         if month < 1 or month > 12:
-            raise ValueError('Month must be between 1 and 12')
+            raise ValueError('Month must be between 1 and 12, but it is: %s' % month)
         _days_in_month = days_in_month(year, month)
         if day < 1 or day > _days_in_month:
-            raise ValueError('Day must be between 1 and %s' % _days_in_month)
+            raise ValueError('Day must be between 1 and %s, but it is: %s' % (_days_in_month, day))
         return year, month, day
 
     ########################

@@ -5,7 +5,7 @@ Created on Mar 7, 2011
 @author: vahid
 '''
 import unittest
-from khayyam import JalaliDate, MAXYEAR, MINYEAR
+from khayyam import JalaliDate, MAXYEAR
 from datetime import timedelta, date
 
 class TestJalaliDate(unittest.TestCase):
@@ -51,9 +51,7 @@ class TestJalaliDate(unittest.TestCase):
 
     def test_strftime(self):
         jdate = JalaliDate.strptime(JalaliDate(self.leap_year, 12, 23).isoformat(), '%Y-%m-%d')
-        
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
-        
         self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%%W'), u'پپنجشنبهاساسفند23359125پنجشنبه 23 اسفند 1375751375%51')
         
     def test_add(self):
@@ -111,6 +109,23 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(d1.replace(month=1),   JalaliDate(1391, 1, 30))
         self.assertEqual(d1.replace(day=1),     JalaliDate(1391, 12, 1))
         self.assertRaises(ValueError, d1.replace, year=1392)
+
+    def test_strptime(self):
+        """
+        %Z not working at all
+        """
+        formatter = Formatter()
+        def check_format(f):
+            d1 = JalaliDate.today().strftime(f)
+            d2 = JalaliDate.strptime(d1, f).strftime(f)
+            print(d1)
+            #print(d2)
+            #self.assertEqual(d1, d2)
+
+        "%a%A%b%B%d%j%m%w%x%y%Y%%%W"
+
+        check_format("%Y%m%d")
+
 
 
 if __name__ == '__main__':

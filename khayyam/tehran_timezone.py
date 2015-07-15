@@ -1,6 +1,7 @@
 
 from datetime import tzinfo, timedelta
 from khayyam.jalali_datetime import JalaliDatetime
+from math import floor
 
 STDOFFSET = timedelta(minutes=210) # Minutes
 DSTOFFSET = timedelta(minutes=270) # Minutes
@@ -40,5 +41,5 @@ class TehTz(tzinfo):
     
     def format_offset(self, dt):
         offset = self.utcoffset(dt)
-        return '+%s:%s' % (offset.seconds / 3600, (offset.seconds % 3600) / 60)
+        return '+%s:%s' % (floor(offset.seconds / 3600), floor((offset.seconds % 3600) / 60))
         

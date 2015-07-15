@@ -16,17 +16,17 @@ def get_julian_day_from_gregorian(year, month, day):
             if month == 2:
                 assert day <= 29, 'Invalid date'
             
-    y = year + 0.0
-    m = month + 0.0
-    d = day + 0.0
+    year = float(year)
+    month = float(month)
+    day = float(day)
     
     # Determine JD
-    if m <= 2:
-        y -= 1
-        m += 12
+    if month <= 2:
+        year -= 1
+        month += 12
 
-    a = floor(y / 100)
-    return floor(365.25 * (y + 4716)) + floor(30.6001 * (m + 1)) + d + (2 - a + floor(a / 4)) - 1524.5
+    century = floor(year / 100)
+    return floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + day + (2 - century + floor(century / 4)) - 1524.5
 
 
 def is_leap_year(year):
