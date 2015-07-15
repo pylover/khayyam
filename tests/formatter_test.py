@@ -30,12 +30,10 @@ class TestJalaliDateFormatter(unittest.TestCase):
         self.assertEqual(f.format(d1, '%G'), 'Shahrivar')
         self.assertEqual(f.format(d1, '%%'), '%')
 
-
-        # formatter = JalaliDateFormatter('%a%A%b%B%j%Y%m%d')
-        # self.assertEqual(f.format(d1, ), 'ددوشنبهشهشهریور13610615')
-
-        # formatter.update_format('%Y-%m-%d')
-        # self.assertEqual(formatter.format(d1), '1361-06-15')
+        self.assertEqual(
+            f.format(d1, '%a%A%b%B%d%j%m%w%W%x%y%Y%e%E%g%G%%'),
+            'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
+        self.assertEqual(f.format(d1, '%Y-%m-%d'), '1361-06-15')
 
 
     # def test_strptime(self):

@@ -25,38 +25,28 @@ class JalaliDateFormatter(object):
     %E           ASCII Locale’s full weekday name.
     %g           ASCII Locale’s abbreviated month name.
     %G           ASCII Locale’s full month name.
-    -%%           A literal '%' character.
+    %%           A literal '%' character.
     =========    =======
-
     """
 
     # TODO: _first_day_of_week = SATURDAY
     _directives = {
         '%a': ('', lambda d: d.weekdayabbr()),
         '%A': ('', lambda d: d.weekdayname()),
-
         '%b': ('', lambda d: d.monthabbr()),
         '%B': ('', lambda d: d.monthname()),
-
         '%j': ('', lambda d: '%.3d' % d.dayofyear()),
-
         '%w': ('', lambda d: '%d' % d.weekday()),
         '%W': ('', lambda d: '%.2d' % d.weekofyear(SATURDAY)),
-
         '%x': ('', lambda d: d.localformat()),
-
         '%y': ('', lambda d: '%.2d' % (d.year % 100)),
         '%Y': ('\d{4}', lambda d: '%.4d' % d.year),
-
         '%e': ('', lambda d: d.weekdayabbr_ascii()),
         '%E': ('', lambda d: d.weekdayname_ascii()),
-
         '%g': ('', lambda d: d.monthabbr_ascii()),
         '%G': ('', lambda d: d.monthname_ascii()),
-
         '%m': ('', lambda d: '%.2d' % d.month),
         '%d': ('', lambda d: '%.2d' % d.day),
-
         '%%': ('', lambda d: '%'),
     }
 
