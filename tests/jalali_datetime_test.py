@@ -66,7 +66,7 @@ class TestJalaliDateTime(unittest.TestCase):
         
     def test_iso_format(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23)
-        self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
+        self.assertEqual(jdate.isoformat(), '%s-12-23T00:00:00.000000' % self.leap_year)
 
     def test_add(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23)
