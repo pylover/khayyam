@@ -65,29 +65,29 @@ class TestJalaliDateTime(unittest.TestCase):
     #     self.assertEqual(jdate.utctimetuple().__repr__(), 'time.struct_time(tm_year=1375, tm_mon=12, tm_mday=23, tm_hour=8, tm_min=33, tm_sec=45, tm_wday=3, tm_yday=359, tm_isdst=0)')
         
     def test_iso_format(self):
-        jdate = JalaliDate(self.leap_year, 12, 23)
+        jdate = JalaliDatetime(self.leap_year, 12, 23)
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
 
     def test_add(self):
-        jdate = JalaliDate(self.leap_year, 12, 23)
+        jdate = JalaliDatetime(self.leap_year, 12, 23)
         jdate2 = jdate + timedelta(10)
         
-        self.assertEqual(jdate2, JalaliDate(self.leap_year + 1, 1, 3))
+        self.assertEqual(jdate2, JalaliDatetime(self.leap_year + 1, 1, 3))
         
     def test_sub(self):
-        jdate = JalaliDate(self.leap_year, 12, 23)
+        jdate = JalaliDatetime(self.leap_year, 12, 23)
         jdate2 = jdate - timedelta(10)
         
-        self.assertEqual(jdate2, JalaliDate(self.leap_year, 12, 13))
+        self.assertEqual(jdate2, JalaliDatetime(self.leap_year, 12, 13))
         
-        jtimedelta = jdate - JalaliDate(self.leap_year - 1, 12, 1)
+        jtimedelta = jdate - JalaliDatetime(self.leap_year - 1, 12, 1)
         
         self.assertEqual(jtimedelta, timedelta(387))
         
     def test_lt_gt_le_ge_ne_eg(self):
-        jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate(self.leap_year, 12, 24)
-        jdate3 = JalaliDate(self.leap_year, 12, 24)
+        jdate = JalaliDatetime(self.leap_year, 12, 23)
+        jdate2 = JalaliDatetime(self.leap_year, 12, 24)
+        jdate3 = JalaliDatetime(self.leap_year, 12, 24)
         
         self.assertTrue(jdate <= jdate2)
         self.assertTrue(jdate != jdate2)
