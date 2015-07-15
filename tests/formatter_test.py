@@ -36,19 +36,27 @@ class TestJalaliDateFormatter(unittest.TestCase):
         self.assertEqual(f.format(d1, '%Y-%m-%d'), '1361-06-15')
 
 
-    # def test_strptime(self):
-    #     """
-    #     %Z not working at all
-    #     """
-    #     def check_format(f):
-    #         formatter = JalaliDateFormatter()
-    #         d1 = JalaliDate.today()
-    #         d1_str = formatter.format(d1)
-    #         d2 = formatter.parse(d1_str)
-    #         self.assertEqual(d1, d2)
-    #
-    #
-    #     check_format("%Y")
+    def test_strptime(self):
+        """
+        %Z not working at all
+        """
+
+        f = JalaliDateFormatter
+
+        self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
+        self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
+
+        #self.assertEqual(f.parse('د', '%a'), JalaliDate(1, 1, 1))
+
+        # def check_format(f):
+        #     formatter = JalaliDateFormatter()
+        #     d1 = JalaliDate.today()
+        #     d1_str = formatter.format(d1)
+        #     d2 = formatter.parse(d1_str)
+        #     self.assertEqual(d1, d2)
+        #
+        #
+        # check_format("%Y")
 
 
 

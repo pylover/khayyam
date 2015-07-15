@@ -30,6 +30,7 @@ class JalaliDateFormatter(object):
     """
 
     # TODO: _first_day_of_week = SATURDAY
+    _directive_regex = '%[a-zA-Z%]'
     _directives = {
         '%a': ('', lambda d: d.weekdayabbr()),
         '%A': ('', lambda d: d.weekdayname()),
@@ -56,14 +57,17 @@ class JalaliDateFormatter(object):
     def update_format(self, format):
         self._format = format
 
-    def format(self, jalali_date):
-        return self.__class__.format(jalali_date, self._format)
+    def get_string(self, jalali_date):
+        return self.format(jalali_date, self._format)
+
+    def get_jalali_date(self, date_string):
+        return self.parse(date_string, self._format)
 
     @classmethod
     def format(cls, jalali_date, fmt):
         result = ''
         index = 0
-        for m in re.finditer('%[a-zA-Z%]', fmt):
+        for m in re.finditer(cls._directive_regex, fmt):
             directive = m.group()
             if directive in cls._directives:
                 if index < m.start():
@@ -72,6 +76,29 @@ class JalaliDateFormatter(object):
                 index = m.end()
         return result
 
+    @classmethod
+    def parse(cls, date_string, fmt):
+        regex = '^'
+        index = 0
+        for m in re.finditer(cls._directive_regex, fmt):
+            directive = m.group()
+            if index < m.start():
+                regex += fmt[index:m.start()]
+            regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
+                group_name=directive[1:],
+                regexp=cls._directives[directive][0]
+            )
 
-    def parse(self, date_string):
-        pass
+        regex += '$'
+        print(regex)
+        m = re.match(regex, date_string)
+        if not m:
+            raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
+                date_string, fmt, regex))
+
+        for k, v in m.groupdict().items():
+            print(k, v)
+
+
+
+
