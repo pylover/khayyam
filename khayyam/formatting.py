@@ -32,23 +32,23 @@ class JalaliDateFormatter(object):
     # TODO: _first_day_of_week = SATURDAY
     _directive_regex = '%[a-zA-Z%]'
     _directives = {
-        '%a': ('', lambda d: d.weekdayabbr()),
-        '%A': ('', lambda d: d.weekdayname()),
-        '%b': ('', lambda d: d.monthabbr()),
-        '%B': ('', lambda d: d.monthname()),
-        '%j': ('', lambda d: '%.3d' % d.dayofyear()),
-        '%w': ('', lambda d: '%d' % d.weekday()),
-        '%W': ('', lambda d: '%.2d' % d.weekofyear(SATURDAY)),
-        '%x': ('', lambda d: d.localformat()),
-        '%y': ('', lambda d: '%.2d' % (d.year % 100)),
-        '%Y': ('\d{4}', lambda d: '%.4d' % d.year),
-        '%e': ('', lambda d: d.weekdayabbr_ascii()),
-        '%E': ('', lambda d: d.weekdayname_ascii()),
-        '%g': ('', lambda d: d.monthabbr_ascii()),
-        '%G': ('', lambda d: d.monthname_ascii()),
-        '%m': ('', lambda d: '%.2d' % d.month),
-        '%d': ('', lambda d: '%.2d' % d.day),
-        '%%': ('', lambda d: '%'),
+        '%a': ('weekdayabbr',       '', lambda d: d.weekdayabbr(), None),
+        '%A': ('weekdayname',       '', lambda d: d.weekdayname(), None),
+        '%b': ('monthabbr',         '', lambda d: d.monthabbr(), None),
+        '%B': ('monthname',         '', lambda d: d.monthname(), None),
+        '%j': ('dayofyear',         '', lambda d: '%.3d' % d.dayofyear(), None),
+        '%w': ('weekday',           '', lambda d: '%d' % d.weekday(), None),
+        '%W': ('weekofyear',        '', lambda d: '%.2d' % d.weekofyear(SATURDAY), None),
+        '%x': ('localformat',       '', lambda d: d.localformat(), None),
+        '%y': ('short_year',        '\d{2}', lambda d: '%.2d' % (d.year % 100), lambda v: int(v)),
+        '%Y': ('year',              '\d{4}', lambda d: '%.4d' % d.year, lambda v: int(v)),
+        '%e': ('weekdayabbr_ascii', '', lambda d: d.weekdayabbr_ascii(), None),
+        '%E': ('weekdayname_ascii', '', lambda d: d.weekdayname_ascii(), None),
+        '%g': ('monthabbr_ascii',   '', lambda d: d.monthabbr_ascii(), None),
+        '%G': ('monthname_ascii',   '', lambda d: d.monthname_ascii(), None),
+        '%m': ('month',             '', lambda d: '%.2d' % d.month, None),
+        '%d': ('day',               '', lambda d: '%.2d' % d.day, None),
+        '%%': ('percent',           '', lambda d: '%', None),
     }
 
     def __init__(self, format):
@@ -72,32 +72,46 @@ class JalaliDateFormatter(object):
             if directive in cls._directives:
                 if index < m.start():
                     result += fmt[index:m.start()]
-                result += cls._directives[directive][1](jalali_date)
+                result += cls._directives[directive][2](jalali_date)
                 index = m.end()
         return result
 
     @classmethod
-    def parse(cls, date_string, fmt):
+    def parse(cls, date_string, fmt, factory=dict):
         regex = '^'
         index = 0
         for m in re.finditer(cls._directive_regex, fmt):
             directive = m.group()
+            group_name = directive[1:]
             if index < m.start():
                 regex += fmt[index:m.start()]
             regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
-                group_name=directive[1:],
-                regexp=cls._directives[directive][0]
+                group_name=group_name,
+                regexp=cls._directives[directive][1]
             )
+            index = m.end()
+        regex += fmt[index:]
 
         regex += '$'
-        print(regex)
+        print(regex) # FIXME: remove this line
         m = re.match(regex, date_string)
         if not m:
             raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
                 date_string, fmt, regex))
 
+        result = {}
         for k, v in m.groupdict().items():
-            print(k, v)
+            directive_key = '%%%s' % k
+            if directive_key not in cls._directives:
+                raise ValueError('directive key: %s was not exists' % directive_key)
+            directive = cls._directives[directive_key]
+            name = directive[0]
+            validator = directive[3]
+            if not validator:
+                continue
+            result[name] = validator(v)
+
+        return factory(**result)
 
 
 

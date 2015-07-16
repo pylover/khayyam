@@ -42,9 +42,10 @@ class TestJalaliDateFormatter(unittest.TestCase):
         """
 
         f = JalaliDateFormatter
-
-        self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
-        self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
+        self.assertEqual(f.parse('1361', '%Y'), dict(year=1361))
+        self.assertEqual(f.parse('اریا1361گلگشت', 'اریا%Yگلگشت'), dict(year=1361))
+        # self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
+        # self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
 
         #self.assertEqual(f.parse('د', '%a'), JalaliDate(1, 1, 1))
 

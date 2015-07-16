@@ -22,6 +22,7 @@ from khayyam.constants import MAXYEAR, \
     PERSIAN_WEEKDAY_NAMES_ASCII, \
     SATURDAY
 
+# TODO: replace(*) method for this class
 
 class JalaliDate(object):
     """

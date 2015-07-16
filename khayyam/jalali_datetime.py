@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'vahid'
 
-
 from datetime import timedelta, time, datetime
 from .algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
@@ -16,6 +15,7 @@ AM_PM = {0: u'ق.ظ',
 
 AM_PM_ASCII = {0: 'AM',
                1: 'PM'}
+
 
 class JalaliDatetime(JalaliDate):
     def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0, microsecond=0, tzinfo=None):
@@ -141,7 +141,6 @@ class JalaliDatetime(JalaliDate):
             date = date.to_datetime()
         return cls.from_datetime(datetime.combine(date, _time))
 
-
     @classmethod
     def strptime(cls, date_string, frmt):
         """
@@ -157,10 +156,9 @@ class JalaliDatetime(JalaliDate):
                        '%M': (2, 'minute'),
                        '%S': (2, 'second'),
                        '%f': (6, 'microsecond')
-        }
+                       }
 
         return parse(cls, date_string, frmt, valid_codes)
-
 
     ########################
     ### Instance Methods ###
@@ -181,12 +179,14 @@ class JalaliDatetime(JalaliDate):
     def timetz(self):
         return time(self.hour, self.minute, self.second, self.microsecond, self.tzinfo)
 
-    def replace(self, year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None,
-                tzinfo=None):
+    def replace(self, year=None, month=None, day=None, hour=None,
+                minute=None, second=None, microsecond=None, tzinfo=None):
+
         year, month, day = self._validate(
             year if year else self.year,
             month if month else self.month,
-            day if day else self.day)
+            day if day else self.day
+        )
 
         result = JalaliDatetime(year, month, day, self.hour, self.minute, self.second, self.microsecond)
 
@@ -338,12 +338,10 @@ Directive    Meaning
     def dayofyear(self):
         return (self.date() - JalaliDate(self.year, 1, 1)).days + 1
 
-
     def __repr__(self):
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s)' % \
                (self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond, \
                 ', tzinfo=%s' % self.tzinfo if self.tzinfo else '')
-
 
     #################
     ### Operators ###
@@ -393,8 +391,8 @@ Directive    Meaning
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDate'
         return self.to_datetime() >= x.to_datetime()
 
+
 # # Class attributes
 JalaliDatetime.min = JalaliDatetime(MINYEAR, 1, 1)
 JalaliDatetime.max = JalaliDatetime(MAXYEAR, 12, 29, 23, 59, 59, 999999)
 JalaliDatetime.resolution = timedelta(microseconds=1)
-
