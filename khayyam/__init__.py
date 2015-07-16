@@ -1,6 +1,5 @@
 
 from .constants import *
-from .formatting import JalaliDateFormatter
 from .jalali_date import JalaliDate
 from .jalali_datetime import JalaliDatetime
 from .tehran_timezone import TehTz
