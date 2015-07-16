@@ -13,6 +13,7 @@ PERSIAN_WEEKDAY_NAMES = {
             5: u'پنجشنبه',
             6: u'جمعه'
 }
+PERSIAN_WEEKDAY_NAMES_REGEX = u'(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES.values())
 
 PERSIAN_WEEKDAY_ABBRS = {
             0: u'ش',
@@ -23,6 +24,7 @@ PERSIAN_WEEKDAY_ABBRS = {
             5: u'پ',
             6: u'ج'
 }
+PERSIAN_WEEKDAY_ABBRS_REGEX = u'[%s]' % ''.join(PERSIAN_WEEKDAY_ABBRS.values())
 
 PERSIAN_MONTH_NAMES = {
             1:  u'فروردین',
@@ -37,6 +39,7 @@ PERSIAN_MONTH_NAMES = {
             10: u'دی',
             11: u'بهمن',
             12: u'اسفند'}
+PERSIAN_MONTH_NAMES_REGEX = u'(%s)' % '|'.join(PERSIAN_MONTH_NAMES.values())
 
 PERSIAN_MONTH_ABBRS = {
             1:  u'فر',
@@ -51,6 +54,8 @@ PERSIAN_MONTH_ABBRS = {
             10: u'دی',
             11: u'به',
             12: u'اس'}
+PERSIAN_MONTH_ABBRS_REGEX = u'(%s)' % '|'.join(PERSIAN_MONTH_ABBRS.values())
+
 
 PERSIAN_WEEKDAY_NAMES_ASCII = {
             0: 'Shanbeh',
@@ -61,6 +66,8 @@ PERSIAN_WEEKDAY_NAMES_ASCII = {
             5: 'Panjshanbeh',
             6: 'Jomeh',
 }
+PERSIAN_WEEKDAY_NAMES_ASCII_REGEX = u'(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES_ASCII.values())
+
 
 PERSIAN_WEEKDAY_ABBRS_ASCII= {
             0: 'Sh',
@@ -71,6 +78,8 @@ PERSIAN_WEEKDAY_ABBRS_ASCII= {
             5: 'P',
             6: 'J'
 }
+PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX = u'(%s)' % '|'.join(PERSIAN_WEEKDAY_ABBRS_ASCII.values())
+
 
 PERSIAN_MONTH_NAMES_ASCII = {
             1:  'Farvardin',
@@ -86,6 +95,8 @@ PERSIAN_MONTH_NAMES_ASCII = {
             11: 'Bahman',
             12: 'Esfand'
 }
+PERSIAN_MONTH_NAMES_ASCII_REGEX = u'(%s)' % '|'.join(PERSIAN_MONTH_NAMES_ASCII.values())
+
 
 PERSIAN_MONTH_ABBRS_ASCII= {
             1:  'F',
@@ -100,6 +111,8 @@ PERSIAN_MONTH_ABBRS_ASCII= {
             10: 'D',
             11: 'B',
             12: 'E'}
+PERSIAN_MONTH_ABBRS_ASCII_REGEX = u'(%s)' % '|'.join(PERSIAN_MONTH_ABBRS_ASCII.values())
+
 
 SATURDAY = 0
 SUNDAY = 1

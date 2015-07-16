@@ -34,6 +34,7 @@ class TestJalaliDateFormatter(unittest.TestCase):
             f.format(d1, '%a%A%b%B%d%j%m%w%W%x%y%Y%e%E%g%G%%'),
             'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
         self.assertEqual(f.format(d1, '%Y-%m-%d'), '1361-06-15')
+        self.assertEqual(f.format(d1, 'اول%Y-%m-%dآخر'), 'اول1361-06-15آخر')
 
 
     def test_strptime(self):
@@ -42,22 +43,43 @@ class TestJalaliDateFormatter(unittest.TestCase):
         """
 
         f = JalaliDateFormatter
+
+        # Test Year
         self.assertEqual(f.parse('1361', '%Y'), dict(year=1361))
+        self.assertEqual(f.parse('1361%C', '%Y%C'), dict(year=1361))
         self.assertEqual(f.parse('اریا1361گلگشت', 'اریا%Yگلگشت'), dict(year=1361))
-        # self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
-        # self.assertEqual(f.parse('1361', '%Y'), JalaliDate(1361, 1, 1))
 
-        #self.assertEqual(f.parse('د', '%a'), JalaliDate(1, 1, 1))
+        # Test All months
+        for i in range(1, 13):
+            self.assertEqual(f.parse(str(i), '%m'), dict(month=i))
+        self.assertRaises(ValueError, f.parse, '13', '%m')
+        self.assertRaises(ValueError, f.parse, '0', '%m')
 
-        # def check_format(f):
-        #     formatter = JalaliDateFormatter()
-        #     d1 = JalaliDate.today()
-        #     d1_str = formatter.format(d1)
-        #     d2 = formatter.parse(d1_str)
-        #     self.assertEqual(d1, d2)
-        #
-        #
-        # check_format("%Y")
+        # Test All days
+        for i in range(1, 32):
+            self.assertEqual(f.parse(str(i), '%d'), dict(day=i))
+        self.assertRaises(ValueError, f.parse, '32', '%d')
+        self.assertRaises(ValueError, f.parse, '0', '%d')
+
+        # Test day of year
+        for i in range(1, 366):
+            self.assertEqual(f.parse(str(i), '%j'), dict(year=1, month=1, day=i))
+        self.assertRaises(ValueError, f.parse, '366', '%j')
+        self.assertRaises(ValueError, f.parse, '0', '%j')
+        self.assertEqual(f.parse('1345 5', '%Y %j'), dict(year=1345, month=1, day=5))
+
+
+        def check_format(d ,fmt):
+            formatter = JalaliDateFormatter(fmt)
+            d_str = formatter.get_string(d)
+            d2 = formatter.parse_(d_str, JalaliDate)
+            self.assertEqual(d, d2)
+
+        i = 0
+        while i < 100: # * 365:
+            i += 1
+            d = JalaliDate.fromordinal(i)
+            check_format(d ,"%Y-%m-%d %a%A%b%B%j") # "%j%m%w%W%x%y%Y%e%E%g%G%%")
 
 
 
