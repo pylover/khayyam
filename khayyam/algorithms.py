@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from math import floor, ceil
+from khayyam.helpers import deprecated
 __author__ = 'vahid'
 
-from math import floor, ceil
 
 def get_julian_day_from_gregorian(year, month, day):
     # Checking #
@@ -31,6 +32,10 @@ def get_julian_day_from_gregorian(year, month, day):
 
 def is_leap_year(year):
     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682 
+
+
+def days_in_year(year):
+    return 366if is_leap_year(year) else 365
 
 
 def days_in_month(year, month):
@@ -109,6 +114,7 @@ def jalali_date_from_gregorian_date(year, month, day):
     return jalali_date_from_julian_day(get_julian_day_from_gregorian(year, month, day))
 
 
+@deprecated
 def parse(cls, date_string, format, valid_codes):
     available_codes = {}
     for code in valid_codes:

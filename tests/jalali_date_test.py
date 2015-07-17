@@ -1,12 +1,9 @@
 # coding=UTF-8
-'''
-Created on Mar 7, 2011
-
-@author: vahid
-'''
+from builtins import range
 import unittest
-from khayyam import JalaliDate, MAXYEAR
+from khayyam import JalaliDate, MAXYEAR, constants, algorithms
 from datetime import timedelta, date
+__author__ = 'vahid'
 
 class TestJalaliDate(unittest.TestCase):
     
@@ -141,16 +138,55 @@ class TestJalaliDate(unittest.TestCase):
         %Z not working at all
         """
 
+        def check_format(jdate ,fmt):
+            jdate_str = jdate.strftime(fmt)
+            d2 = JalaliDate.strptime(jdate_str, fmt)
+            self.assertEqual(jdate, d2)
+
         # Test Year
         self.assertEqual(JalaliDate.strptime('1361', '%Y'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime('1361%C', '%Y%C'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime('اریا1361گلگشت', 'اریا%Yگلگشت'), JalaliDate(1361))
 
+        current_century = int(JalaliDate.today().year / 100) * 100
+        self.assertEqual(JalaliDate.strptime('61', '%y'), JalaliDate(current_century + 61))
+        self.assertEqual(JalaliDate.strptime('61%C', '%y%C'), JalaliDate(current_century + 61))
+        self.assertEqual(JalaliDate.strptime('اریا61گلگشت', 'اریا%yگلگشت'), JalaliDate(current_century+61))
+
         # Test months
         for i in range(1, 13):
             self.assertEqual(JalaliDate.strptime(str(i), '%m'), JalaliDate(month=i))
+            self.assertEqual(JalaliDate.strptime('1345 %s' % constants.PERSIAN_MONTH_ABBRS[i], '%Y %b'),
+                             JalaliDate(year=1345, month=i, day=1))
+            self.assertEqual(JalaliDate.strptime('1345 %s' % constants.PERSIAN_MONTH_NAMES[i], '%Y %B'),
+                             JalaliDate(year=1345, month=i, day=1))
+            self.assertEqual(JalaliDate.strptime('1345 %s' % constants.PERSIAN_MONTH_ABBRS_ASCII[i], '%Y %g'),
+                             JalaliDate(year=1345, month=i, day=1))
+            self.assertEqual(JalaliDate.strptime('1345 %s' % constants.PERSIAN_MONTH_NAMES_ASCII[i], '%Y %G'),
+                             JalaliDate(year=1345, month=i, day=1))
+
         self.assertRaises(ValueError, JalaliDate.strptime, '13', '%m')
         self.assertRaises(ValueError, JalaliDate.strptime, '0', '%m')
+        self.assertRaises(ValueError, JalaliDate.strptime, '1345 مت', '%Y %b')
+        self.assertRaises(ValueError, JalaliDate.strptime, '1345 شتران', '%Y %B')
+        self.assertRaises(ValueError, JalaliDate.strptime, '1345 مت', '%Y %g')
+        self.assertRaises(ValueError, JalaliDate.strptime, '1345 شتران', '%Y %G')
+
+        # Test Weekdays
+        for i in range(7):
+            check_format(JalaliDate.min + timedelta(i), '%d %w %W')
+            self.assertEqual(
+                JalaliDate.strptime('1345 10 10 %s' % constants.PERSIAN_WEEKDAY_ABBRS[i], '%Y %m %d %a'),
+                JalaliDate(year=1345, month=10, day=10))
+            self.assertEqual(
+                JalaliDate.strptime('1345 10 10 %s' % constants.PERSIAN_WEEKDAY_ABBRS_ASCII[i], '%Y %m %d %e'),
+                JalaliDate(year=1345, month=10, day=10))
+            self.assertEqual(
+                JalaliDate.strptime('1345 10 10 %s' % constants.PERSIAN_WEEKDAY_NAMES[i], '%Y %m %d %A'),
+                JalaliDate(year=1345, month=10, day=10))
+            self.assertEqual(
+                JalaliDate.strptime('1345 10 10 %s' % constants.PERSIAN_WEEKDAY_NAMES_ASCII[i], '%Y %m %d %E'),
+                JalaliDate(year=1345, month=10, day=10))
 
         # Test days
         for i in range(1, 32):
@@ -163,23 +199,36 @@ class TestJalaliDate(unittest.TestCase):
             self.assertEqual(JalaliDate.strptime(str(i), '%j'), JalaliDate.fromordinal(i))
         self.assertRaises(ValueError, JalaliDate.strptime, '366', '%j')
         self.assertRaises(ValueError, JalaliDate.strptime, '0', '%j')
-        self.assertEqual(JalaliDate.strptime('1345 5', '%Y %j'), JalaliDate(year=1345, month=1, day=5))
+        self.assertEqual(JalaliDate.strptime('1345 5', '%Y %j'),
+                         JalaliDate(year=1345, month=1, day=5))
 
-        self.assertEqual(JalaliDate.strptime('1302 123 3 4', '%Y %j %m %d'), JalaliDate(year=1302, month=4, day=30))
-        self.assertEqual(JalaliDate.strptime('1302 3 4', '%Y %m %d'), JalaliDate(year=1302, month=3, day=4))
+        self.assertEqual(JalaliDate.strptime('1302 123 3 4', '%Y %j %m %d'),
+                         JalaliDate(year=1302, month=4, day=30))
 
+        self.assertEqual(JalaliDate.strptime('1302 3 4', '%Y %m %d'),
+                         JalaliDate(year=1302, month=3, day=4))
 
-        def check_format(jdate ,fmt):
-            d_str = jdate.strftime(fmt)
-            d2 = JalaliDate.strptime(d_str, fmt)
-            self.assertEqual(jdate, d2)
+        self.assertEqual(JalaliDate.strptime('جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
+                         JalaliDate(month=2, day=1))
 
-        i = 0
-        while i < 100: # * 365:
-            i += 1
-            d = JalaliDate.fromordinal(i)
-            check_format(d ,"%Y-%m-%d %a%A%b%B%j") # "%j%m%w%W%x%y%Y%e%E%g%G%%")
+        self.assertEqual(JalaliDate.strptime('جمعه 01 فروردین 0001', '%x'),
+                         JalaliDate.min)
 
+        self.assertEqual(JalaliDate.strptime('جمعه 31 فروردین 1375%', '%x%%'),
+                         JalaliDate(1375, 1, 31))
+
+        check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
+        check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
+
+        # i = 0
+        # while i < 400:
+        #     i += 1
+        for i in range(1, 400):
+            check_format(JalaliDate.fromordinal(i), "%Y-%m-%d ") #%a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
+
+        d = JalaliDate.today().replace(month=1, day=1)
+        for i in range(1, algorithms.days_in_year(d.year)):
+            check_format(d + timedelta(i), "%y-%m-%d")
 
 
 if __name__ == '__main__':

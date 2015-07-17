@@ -2,15 +2,12 @@
 __author__ = 'vahid'
 
 import datetime
-import re
-from khayyam.helpers import replace_if_match
 from khayyam.algorithms import days_in_month, \
     is_leap_year, \
     get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
     julian_day_from_jalali_date, \
-    gregorian_date_from_julian_day, \
-    parse
+    gregorian_date_from_julian_day
 from khayyam.constants import MAXYEAR, \
     MINYEAR, \
     PERSIAN_MONTH_ABBRS, \
@@ -22,7 +19,8 @@ from khayyam.constants import MAXYEAR, \
     PERSIAN_WEEKDAY_ABBRS_ASCII, \
     PERSIAN_WEEKDAY_NAMES_ASCII, \
     SATURDAY
-from khayyam.formatting import FORMAT_DIRECTIVE_REGEX, FORMAT_DIRECTIVES
+
+from khayyam.formatting import parse, format
 
 
 # TODO: replace(*) method for this class
@@ -99,64 +97,13 @@ class JalaliDate(object):
     def strptime(cls, date_string, fmt):
         """
         Return a datetime corresponding to date_string, parsed according to format. This is equivalent to datetime(*(time.strptime(date_string, format)[0:6])). ValueError is raised if the date_string and format can't be parsed by time.strptime() or if it returns a value which isn't a time tuple. See section strftime() and strptime() Behavior.
+        Weekdays are not supported at all.
         '1387/4/12'
         '%Y/%m/%d'
         """
-        regex = '^'
-        index = 0
-        for m in re.finditer(FORMAT_DIRECTIVE_REGEX, fmt):
-            directive = m.group()
-            if directive not in FORMAT_DIRECTIVES or directive == '%%':
-                continue
-            group_name = directive[1:]
-            if index < m.start():
-                regex += fmt[index:m.start()]
-            regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
-                group_name=group_name,
-                regexp=FORMAT_DIRECTIVES[directive][1]
-            )
-            index = m.end()
-        regex += fmt[index:]
-
-        regex += '$'
-        # print(regex) # FIXME: remove this line
-        m = re.match(regex, date_string)
-
-        if not m:
-            raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
-                date_string, fmt, regex))
-
-        result = {}
-        for k, v in m.groupdict().items():
-            directive_key = '%%%s' % k
-            if directive_key not in FORMAT_DIRECTIVES:
-                raise ValueError('directive key: %s was not exists.' % directive_key)
-            directive = FORMAT_DIRECTIVES[directive_key]
-            name = directive[0]
-            validator = directive[3]
-            if not validator:
-                continue
-            result[name] = validator(v)
-
-
-        if 'dayofyear' in result:
-            _dayofyear = result['dayofyear']
-            if 'year' not in result:
-                result['year'] = 1
-            if 'month' in result:
-                del result['month']
-            if 'day' in result:
-                del result['day']
-            res = JalaliDate(result['year'])
-            max_days = 366 if res.is_leap else 365
-            if _dayofyear > max_days:
-                raise ValueError(
-                    'Invalid dayofyear: %.3d for year %.4d. Valid values are: 1-%s' \
-                     % (_dayofyear, res.year, max_days))
-
-            return res + datetime.timedelta(days=_dayofyear-1)
-        else:
-            return cls(**result)
+        result = parse(date_string, fmt)
+        result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
+        return cls(**result)
 
     @staticmethod
     def _validate(year, month, day):
@@ -256,20 +203,9 @@ Directive    Meaning
 %%           A literal '%' character.
 =========    =======
         """
-        result = ''
-        index = 0
-        for m in re.finditer(FORMAT_DIRECTIVE_REGEX, fmt):
-            directive = m.group()
-            if directive in FORMAT_DIRECTIVES:
-                if index < m.start():
-                    result += fmt[index:m.start()]
-                result += FORMAT_DIRECTIVES[directive][2](self)
-                index = m.end()
-        result += fmt[index:]
-        return result
+        return format(self, fmt)
 
-
-    __format__ = strftime
+    __format__ = strftime # TODO: Check this in JalaliDatetime
 
     def weekdayname(self):
         return PERSIAN_WEEKDAY_NAMES[self.weekday()]
@@ -277,11 +213,17 @@ Directive    Meaning
     def weekdayabbr(self):
         return PERSIAN_WEEKDAY_ABBRS[self.weekday()]
 
+    def monthabbr(self):
+        return PERSIAN_MONTH_ABBRS[self.month]
+
     def monthname(self):
         return PERSIAN_MONTH_NAMES[self.month]
 
-    def monthabbr(self):
-        return PERSIAN_MONTH_ABBRS[self.month]
+    def monthabbr_ascii(self):
+        return PERSIAN_MONTH_ABBRS_ASCII[self.month]
+
+    def monthname_ascii(self):
+        return PERSIAN_MONTH_NAMES_ASCII[self.month]
 
     def weekdayname_ascii(self):
         return PERSIAN_WEEKDAY_NAMES_ASCII[self.weekday()]
@@ -289,14 +231,8 @@ Directive    Meaning
     def weekdayabbr_ascii(self):
         return PERSIAN_WEEKDAY_ABBRS_ASCII[self.weekday()]
 
-    def monthname_ascii(self):
-        return PERSIAN_MONTH_NAMES_ASCII[self.month]
-
-    def monthabbr_ascii(self):
-        return PERSIAN_MONTH_ABBRS_ASCII[self.month]
-
     def localformat(self):
-        return '%s %s %s %s' % (self.weekdayname(), self.day, self.monthname(), self.year)
+        return self.strftime('%A %d %B %Y')
 
     def firstdayofyear(self):
         return JalaliDate(self.year, 1, 1)
