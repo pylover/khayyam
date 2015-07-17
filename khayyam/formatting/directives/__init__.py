@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+from .date import DATE_FORMAT_DIRECTIVES
+from .time import TIME_FORMAT_DIRECTIVES
+DATETIME_FORMAT_DIRECTIVES = DATE_FORMAT_DIRECTIVES + TIME_FORMAT_DIRECTIVES
+__author__ = 'vahid'
+

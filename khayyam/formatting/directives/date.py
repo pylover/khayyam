@@ -1,29 +1,11 @@
 # -*- coding: utf-8 -*-
+import re
+from .directive import Directive
 from datetime import timedelta
 import khayyam.constants as consts
 from khayyam.compat import get_unicode
 from khayyam.algorithms import days_in_year
 __author__ = 'vahid'
-
-class Directive(object):
-    def __init__(self, key, name, regex, type_, formatter=None, post_parser=None):
-        self.key = key
-        self.name = name
-        self.regex = regex
-        self.type_ = type_
-        if formatter:
-            self.format = formatter
-        if post_parser:
-            self.post_parser = post_parser
-
-    def __repr__(self):
-        return '%' + self.key
-
-    def post_parser(self, ctx):
-        return ctx
-
-    def format(self, d):
-        return d
 
 
 class ShortYearDirective(Directive):
@@ -34,9 +16,9 @@ class ShortYearDirective(Directive):
     def format(self, d):
         return '%.2d' % (d.year % 100)
 
-    def post_parser(self, ctx):
+    def post_parser(self, ctx, formatter):
         from khayyam import JalaliDate
-        return dict(year=int(JalaliDate.today().year / 100) * 100 + ctx['shortyear'])
+        ctx['year'] = int(JalaliDate.today().year / 100) * 100 + ctx['shortyear']
 
 
 class DayOfYearDirective(Directive):
@@ -47,7 +29,7 @@ class DayOfYearDirective(Directive):
     def format(self, d):
         return '%.3d' % d.dayofyear()
 
-    def post_parser(self, ctx):
+    def post_parser(self, ctx, formatter):
         # TODO: Add this behavior to the documents
         _dayofyear = ctx['dayofyear']
         if 'year' not in ctx:
@@ -64,15 +46,43 @@ class DayOfYearDirective(Directive):
                  % (_dayofyear, ctx['year'], max_days))
         from khayyam import JalaliDate
         d = JalaliDate(year=ctx['year']) + timedelta(days=_dayofyear-1)
-        return dict(
+        ctx.update(dict(
             month=d.month,
             day=d.day
-        )
+        ))
 
 
+class LocalFormatDirective(Directive):
+    def __init__(self):
+        super(LocalFormatDirective, self).__init__(
+            'x', 'localformat', consts.LOCAL_FORMAT_REGEX, get_unicode)
+
+    def format(self, d):
+        return d.localformat()
+
+    def post_parser(self, ctx, formatter):
+        # TODO: Add this behavior to the documents
+        regex = ' '.join([
+            '(?P<weekdayname>%s)' % consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+            '(?P<day>%s)' % consts.DAY_REGEX,
+            '(?P<monthname>%s)' % consts.PERSIAN_MONTH_NAMES_REGEX,
+            '(?P<year>%s)' % consts.YEAR_REGEX
+        ])
+
+        match = re.match(regex, ctx['localformat'])
+        d = match.groupdict()
+        ctx.update(dict(
+            weekdayname = formatter.directives_by_key['A'].type_(d['weekdayname']),
+            day = formatter.directives_by_key['d'].type_(d['day']),
+            monthname = formatter.directives_by_key['B'].type_(d['monthname']),
+            year = formatter.directives_by_key['Y'].type_(d['year'])
+        ))
 
 # TODO: _first_day_of_week = SATURDAY
 DATE_FORMAT_DIRECTIVES = [
+    ShortYearDirective(),
+    DayOfYearDirective(),
+    LocalFormatDirective(),
     Directive(
         'Y',
         'year',
@@ -80,7 +90,6 @@ DATE_FORMAT_DIRECTIVES = [
         int,
         lambda d: '%.4d' % d.year,
     ),
-    ShortYearDirective(),
     Directive(
         'm',
         'month',
@@ -94,7 +103,7 @@ DATE_FORMAT_DIRECTIVES = [
         consts.PERSIAN_MONTH_ABBRS_REGEX,
         get_unicode,
         lambda d: d.monthabbr(),
-        lambda ctx: {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS.items() if v == ctx['monthabbr']][0][0]}
+        lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS.items() if v == ctx['monthabbr']][0][0]})
     ),
     Directive(
         'B',
@@ -102,7 +111,7 @@ DATE_FORMAT_DIRECTIVES = [
         consts.PERSIAN_MONTH_NAMES_REGEX,
         get_unicode,
         lambda d: d.monthname(),
-        lambda ctx: {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES.items() if v == ctx['monthname']][0][0]}
+        lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES.items() if v == ctx['monthname']][0][0]})
     ),
     Directive(
         'g',
@@ -110,7 +119,7 @@ DATE_FORMAT_DIRECTIVES = [
         consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX,
         get_unicode,
         lambda d: d.monthabbr_ascii(),
-        lambda ctx: {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if v == ctx['monthabbr_ascii']][0][0]}
+        lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if v == ctx['monthabbr_ascii']][0][0]})
     ),
     Directive(
         'G',
@@ -118,7 +127,7 @@ DATE_FORMAT_DIRECTIVES = [
         consts.PERSIAN_MONTH_NAMES_ASCII_REGEX,
         get_unicode,
         lambda d: d.monthname_ascii(),
-        lambda ctx: {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if v == ctx['monthname_ascii']][0][0]}
+        lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if v == ctx['monthname_ascii']][0][0]})
     ),
     Directive(
         'w',
@@ -133,6 +142,13 @@ DATE_FORMAT_DIRECTIVES = [
         consts.WEEK_OF_YEAR_REGEX,
         int,
         lambda d: '%.2d' % d.weekofyear(consts.SATURDAY),
+    ),
+    Directive(
+        'U',
+        'weekofyear',
+        consts.WEEK_OF_YEAR_REGEX,
+        int,
+        lambda d: '%.2d' % d.weekofyear(consts.MONDAY),
     ),
     Directive(
         'a',
@@ -169,14 +185,13 @@ DATE_FORMAT_DIRECTIVES = [
         int,
         lambda d: '%.2d' % d.day,
     ),
-    DayOfYearDirective(),
-    Directive(
-        'x',
-        'localformat',
-        consts.LOCAL_FORMAT_REGEX,
-        get_unicode,
-        lambda d: d.localformat(),
-    ),
+    # Directive(
+    #     'x',
+    #     'localformat',
+    #     consts.LOCAL_FORMAT_REGEX,
+    #     get_unicode,
+    #     lambda d: d.localformat(),
+    # ),
     Directive(
         '%',
         'percent',
@@ -184,5 +199,4 @@ DATE_FORMAT_DIRECTIVES = [
         None,
         lambda d: '%',
     ),
-    # --------SUPPORTED--------
 ]

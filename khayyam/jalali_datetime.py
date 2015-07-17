@@ -2,19 +2,11 @@
 __author__ = 'vahid'
 
 from datetime import timedelta, time, datetime
-from .algorithms import get_julian_day_from_gregorian, \
+from khayyam.algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
-    gregorian_date_from_julian_day, \
-    parse
-
-from .jalali_date import JalaliDate, MINYEAR, MAXYEAR
-from khayyam.helpers import replace_if_match
-
-AM_PM = {0: u'ق.ظ',
-         1: u'ب.ظ'}
-
-AM_PM_ASCII = {0: 'AM',
-               1: 'PM'}
+    gregorian_date_from_julian_day
+from khayyam.constants import MINYEAR, MAXYEAR, AM_PM, AM_PM_ASCII
+from khayyam import JalaliDate, JalaliDatetimeFormatter
 
 
 class JalaliDatetime(JalaliDate):
@@ -31,7 +23,6 @@ class JalaliDatetime(JalaliDate):
     # #################
     ### Properties ###
     ##################
-
 
     def get_hour(self):
         return self._time.hour
@@ -73,6 +64,13 @@ class JalaliDatetime(JalaliDate):
 
     tzinfo = property(get_tzinfo, set_tzinfo)
 
+    ######################
+    ### Static Methods ###
+    ######################
+
+    @staticmethod
+    def create_formatter(fmt):
+        return JalaliDatetimeFormatter(fmt)
 
     #####################
     ### Class Methods ###
@@ -142,23 +140,31 @@ class JalaliDatetime(JalaliDate):
         return cls.from_datetime(datetime.combine(date, _time))
 
     @classmethod
-    def strptime(cls, date_string, frmt):
-        """
-        Return a datetime corresponding to date_string, parsed according to format. This is equivalent to datetime(*(_time.strptime(date_string, format)[0:6])). ValueError is raised if the date_string and format can't be parsed by _time.strptime() or if it returns a value which isn't a _time tuple. See section strftime() and strptime() Behavior.
-        '1387/4/12'
-        '%Y/%m/%d'
-        """
-        # TODO: Implement full features of python, see: http://docs.python.org/library/datetime.html
-        valid_codes = {'%Y': (4, 'year'),
-                       '%m': (2, 'month'),
-                       '%d': (2, 'day'),
-                       '%H': (2, 'hour'),
-                       '%M': (2, 'minute'),
-                       '%S': (2, 'second'),
-                       '%f': (6, 'microsecond')
-                       }
+    def strptime(cls, date_string, fmt):
+        result = cls.create_formatter(fmt).parse(date_string)
+        result = {k:v for k, v in result.items() if k in (
+            'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond')}
+        return cls(**result)
 
-        return parse(cls, date_string, frmt, valid_codes)
+
+    # @classmethod
+    # def strptime(cls, date_string, frmt):
+    #     """
+    #     Return a datetime corresponding to date_string, parsed according to format. This is equivalent to datetime(*(_time.strptime(date_string, format)[0:6])). ValueError is raised if the date_string and format can't be parsed by _time.strptime() or if it returns a value which isn't a _time tuple. See section strftime() and strptime() Behavior.
+    #     '1387/4/12'
+    #     '%Y/%m/%d'
+    #     """
+    #     # TODO: Implement full features of python, see: http://docs.python.org/library/datetime.html
+    #     valid_codes = {'%Y': (4, 'year'),
+    #                    '%m': (2, 'month'),
+    #                    '%d': (2, 'day'),
+    #                    '%H': (2, 'hour'),
+    #                    '%M': (2, 'minute'),
+    #                    '%S': (2, 'second'),
+    #                    '%f': (6, 'microsecond')
+    #                    }
+    #
+    #     return parse(cls, date_string, frmt, valid_codes)
 
     ########################
     ### Instance Methods ###
@@ -230,75 +236,6 @@ class JalaliDatetime(JalaliDate):
 
     def isoformat(self, sep='T'):
         return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f')
-
-    def strftime(self, format):
-        """
-=========    =======
-Directive    Meaning
-=========    =======
-%a            Locale’s abbreviated weekday name.     
-%A            Locale’s full weekday name.     
-%b            Locale’s abbreviated month name.     
-%B            Locale’s full month name.     
-%c            Locale’s appropriate short date and time representation.     
-%C            Locale’s appropriate date and time representation.
-%q            ASCII Locale’s appropriate short date and time representation.     
-%Q            ASCII Locale’s appropriate date and time representation.
-%d            Day of the month as a decimal number [01,31].     
-%f            Microsecond as a decimal number [0,999999], zero-padded on the left    (1)
-%H            Hour (24-hour clock) as a decimal number [00,23].     
-%I            Hour (12-hour clock) as a decimal number [01,12].     
-%j            Day of the year as a decimal number [001,366].     
-%m            Month as a decimal number [01,12].     
-%M            Minute as a decimal number [00,59].     
-%p            Locale’s equivalent of either AM or PM.    (2)
-%S            Second as a decimal number [00,61].    (3)
-%U            Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
-%w            Weekday as a decimal number [0(Saturday),6(Friday)].
-%W            Week number of the year (Monday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.    (4)
-%x            Locale’s appropriate date representation.     
-%X            Locale’s appropriate time representation.     
-%y            Year without century as a decimal number [00,99].     
-%Y            Year with century as a decimal number.     
-%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
-%Z            Time zone name (empty string if the object is naive).
-%e           ASCII Locale’s abbreviated weekday name.
-%E           ASCII Locale’s full weekday name.
-%g           ASCII Locale’s abbreviated month name.
-%G           ASCII Locale’s full month name.
-
-%%            A literal '%' character.
-=========    =======
-"""
-
-        result = super(JalaliDatetime, self).strftime(format)
-
-        result = replace_if_match(result, '%H', '%.2d' % self.hour)
-
-        result = replace_if_match(result, '%I', '%.2d' % self.hour12())
-
-        result = replace_if_match(result, '%M', '%.2d' % self.minute)
-
-        result = replace_if_match(result, '%S', '%.2d' % self.second)
-
-        result = replace_if_match(result, '%f', '%.6d' % self.microsecond)
-
-        result = replace_if_match(result, '%c', self.localshortformat)
-        result = replace_if_match(result, '%C', self.localformat)
-
-        result = replace_if_match(result, '%q', self.localshortformat_ascii)
-        result = replace_if_match(result, '%Q', self.localformat_ascii)
-
-        result = replace_if_match(result, '%p', self.ampm)
-        result = replace_if_match(result, '%t', self.ampm_ascii)
-
-        result = replace_if_match(result, '%X', self.localtimeformat)
-
-        result = replace_if_match(result, '%z', self.utcoffsetformat)
-
-        result = replace_if_match(result, '%Z', self.tznameformat)
-
-        return result
 
     def localshortformat(self):
         return self.strftime('%a %d %b %y %H:%M')

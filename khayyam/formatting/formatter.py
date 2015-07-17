@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from .directives import DATE_FORMAT_DIRECTIVES
+from .directives import DATE_FORMAT_DIRECTIVES, DATETIME_FORMAT_DIRECTIVES
 import khayyam.constants as consts
 __author__ = 'vahid'
 
@@ -74,38 +74,26 @@ class JalaliDateFormatter(object):
         return result
 
     def _parse_post_processor(self, parse_result):
-        if 'localformat' in parse_result:
-            # TODO: Add this behavior to the documents
-            regex = ' '.join([
-                '(?P<weekdayname>%s)' % consts.PERSIAN_WEEKDAY_NAMES_REGEX,
-                '(?P<day>%s)' % consts.DAY_REGEX,
-                '(?P<monthname>%s)' % consts.PERSIAN_MONTH_NAMES_REGEX,
-                '(?P<year>%s)' % consts.YEAR_REGEX
-            ])
-
-            match = re.match(regex, parse_result['localformat'])
-            d = match.groupdict()
-            parse_result.update(dict(
-                weekdayname = self.directives_by_key['A'].type_(d['weekdayname']),
-                day = self.directives_by_key['d'].type_(d['day']),
-                monthname = self.directives_by_key['B'].type_(d['monthname']),
-                year = self.directives_by_key['Y'].type_(d['year'])
-            ))
-
         # TODO: Add this behavior to the documents
         for directive_name in (
+            'localformat',
             'monthabbr',
             'monthabbr_ascii',
             'monthname',
             'monthname_ascii',
             'shortyear',
-            'dayofyear'):
+            'dayofyear',
+            'ampm'):
             if directive_name in parse_result:
-                parse_result.update(self.directives_by_name[directive_name].post_parser(parse_result))
-        return parse_result
+                self.directives_by_name[directive_name].post_parser(parse_result, self)
+
 
     def parse(self, date_string):
         result = self._parse(date_string)
         self._parse_post_processor(result)
         return result
 
+
+class JalaliDatetimeFormatter(JalaliDateFormatter):
+    def __init__(self, format_string):
+        super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=DATETIME_FORMAT_DIRECTIVES)

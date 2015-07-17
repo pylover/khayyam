@@ -123,13 +123,20 @@ THURSDAY = 5
 FRIDAY = 6
 
 
-YEAR_REGEX = '\d{4}'
+YEAR_REGEX = '\d{1,4}'
 SHORT_YEAR_REGEX = '\d{2}'
 MONTH_REGEX = '([0]?[1-9]|1[0-2])'
 DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])'
-DAY_OF_YEAR_REGEX = '\d{1,3}'
-WEEK_OF_YEAR_REGEX = '\d{1,2}'
+DAY_OF_YEAR_REGEX = '\d{1,3}' # TODO: Precisest pattern
+WEEK_OF_YEAR_REGEX = '\d{1,2}' # TODO: Precisest pattern
 WEEKDAY_REGEX = '[0-6]'
+
+
+HOUR12_REGEX = '\d{1,2}' # TODO: Precisest pattern
+HOUR24_REGEX = '\d{1,2}' # TODO: Precisest pattern
+MINUTE_REGEX = '\d{1,2}' # TODO: Precisest pattern
+SECOND_REGEX = '\d{1,2}' # TODO: Precisest pattern
+MICROSECOND_REGEX = '\d{1,6}'
 
 LOCAL_FORMAT_REGEX = '%s %s %s %s' % (
     PERSIAN_WEEKDAY_NAMES_REGEX,
@@ -139,3 +146,11 @@ LOCAL_FORMAT_REGEX = '%s %s %s %s' % (
 )
 
 FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
+
+AM_PM = {0: u'ق.ظ',
+         1: u'ب.ظ'}
+AM_PM_REGEX = u'(%s)' % u'|'.join(AM_PM.values())
+
+AM_PM_ASCII = {0: 'AM',
+               1: 'PM'}
+AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'

@@ -30,7 +30,6 @@ class TestJalaliDate(unittest.TestCase):
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
         jdate2 = JalaliDate.from_julian_days(jdate.tojulianday())
-        
         self.assertEqual(jdate, jdate2)
         
     def test_to_from_date(self):
@@ -119,7 +118,7 @@ class TestJalaliDate(unittest.TestCase):
         while True:
             dt = min + timedelta(days=days)
             jd = JalaliDate.from_date(dt)
-            print('Processing day: %s' % jd)
+            # print('Processing day: %s' % jd)
             dt2 = jd.todate()
             self.assertEqual(dt, dt2)
             days += 1
@@ -172,9 +171,9 @@ class TestJalaliDate(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDate.strptime, '1345 مت', '%Y %g')
         self.assertRaises(ValueError, JalaliDate.strptime, '1345 شتران', '%Y %G')
 
-        # Test Weekdays
+        # Test Week and Weekdays
         for i in range(7):
-            check_format(JalaliDate.min + timedelta(i), '%d %w %W')
+            check_format(JalaliDate.min + timedelta(i), '%d %w %W %U')
             self.assertEqual(
                 JalaliDate.strptime('1345 10 10 %s' % constants.PERSIAN_WEEKDAY_ABBRS[i], '%Y %m %d %a'),
                 JalaliDate(year=1345, month=10, day=10))
