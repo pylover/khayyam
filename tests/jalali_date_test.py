@@ -220,11 +220,8 @@ class TestJalaliDate(unittest.TestCase):
         check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
         check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
 
-        # i = 0
-        # while i < 400:
-        #     i += 1
         for i in range(1, 400):
-            check_format(JalaliDate.fromordinal(i), "%Y-%m-%d ") #%a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
+            check_format(JalaliDate.fromordinal(i), "%Y-%m-%d %a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
 
         d = JalaliDate.today().replace(month=1, day=1)
         for i in range(1, algorithms.days_in_year(d.year)):
