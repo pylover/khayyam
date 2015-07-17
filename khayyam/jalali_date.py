@@ -19,8 +19,7 @@ from khayyam.constants import MAXYEAR, \
     PERSIAN_WEEKDAY_ABBRS_ASCII, \
     PERSIAN_WEEKDAY_NAMES_ASCII, \
     SATURDAY
-
-from khayyam.formatting import parse, format
+from khayyam.formatting import JalaliDateFormatter
 
 
 # TODO: replace(*) method for this class
@@ -101,7 +100,8 @@ class JalaliDate(object):
         '1387/4/12'
         '%Y/%m/%d'
         """
-        result = parse(date_string, fmt)
+
+        result = JalaliDateFormatter(fmt).parse(date_string)
         result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
 
@@ -203,7 +203,7 @@ Directive    Meaning
 %%           A literal '%' character.
 =========    =======
         """
-        return format(self, fmt)
+        return JalaliDateFormatter(fmt).format(self)
 
     __format__ = strftime # TODO: Check this in JalaliDatetime
 

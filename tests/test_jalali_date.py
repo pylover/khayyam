@@ -1,8 +1,8 @@
-# coding=UTF-8
-from builtins import range
+# -*- coding: utf-8 -*-
 import unittest
 from khayyam import JalaliDate, MAXYEAR, constants, algorithms
 from datetime import timedelta, date
+from khayyam.compat import xrange
 __author__ = 'vahid'
 
 class TestJalaliDate(unittest.TestCase):
@@ -52,27 +52,27 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%%W'), u'پپنجشنبهاساسفند23359125پنجشنبه 23 اسفند 1375751375%51')
 
         d1 = JalaliDate(1361, 6, 15)
-        self.assertEqual(d1.strftime('%a'), 'د')
-        self.assertEqual(d1.strftime('%A'), 'دوشنبه')
-        self.assertEqual(d1.strftime('%b'), 'شه')
-        self.assertEqual(d1.strftime('%B'), 'شهریور')
-        self.assertEqual(d1.strftime('%d'), '15')
-        self.assertEqual(d1.strftime('%j'), '170')
-        self.assertEqual(d1.strftime('%m'), '06')
-        self.assertEqual(d1.strftime('%w'), '2')
-        self.assertEqual(d1.strftime('%W'), '24')
-        self.assertEqual(d1.strftime('%x'), 'دوشنبه 15 شهریور 1361')
-        self.assertEqual(d1.strftime('%y'), '61')
-        self.assertEqual(d1.strftime('%Y'), '1361')
-        self.assertEqual(d1.strftime('%e'), 'D')
-        self.assertEqual(d1.strftime('%E'), 'Doshanbeh')
-        self.assertEqual(d1.strftime('%g'), 'Sh')
-        self.assertEqual(d1.strftime('%G'), 'Shahrivar')
-        self.assertEqual(d1.strftime('%%'), '%')
+        self.assertEqual(d1.strftime('%a'), u'د')
+        self.assertEqual(d1.strftime('%A'), u'دوشنبه')
+        self.assertEqual(d1.strftime('%b'), u'شه')
+        self.assertEqual(d1.strftime('%B'), u'شهریور')
+        self.assertEqual(d1.strftime('%d'), u'15')
+        self.assertEqual(d1.strftime('%j'), u'170')
+        self.assertEqual(d1.strftime('%m'), u'06')
+        self.assertEqual(d1.strftime('%w'), u'2')
+        self.assertEqual(d1.strftime('%W'), u'24')
+        self.assertEqual(d1.strftime('%x'), u'دوشنبه 15 شهریور 1361')
+        self.assertEqual(d1.strftime('%y'), u'61')
+        self.assertEqual(d1.strftime('%Y'), u'1361')
+        self.assertEqual(d1.strftime('%e'), u'D')
+        self.assertEqual(d1.strftime('%E'), u'Doshanbeh')
+        self.assertEqual(d1.strftime('%g'), u'Sh')
+        self.assertEqual(d1.strftime('%G'), u'Shahrivar')
+        self.assertEqual(d1.strftime('%%'), u'%')
 
         self.assertEqual(
             d1.strftime('%a%A%b%B%d%j%m%w%W%x%y%Y%e%E%g%G%%'),
-            'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
+            u'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
         self.assertEqual(d1.strftime('%Y-%m-%d'), '1361-06-15')
         self.assertEqual(d1.strftime('اول%Y-%m-%dآخر'), 'اول1361-06-15آخر')
 
@@ -208,23 +208,23 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime('1302 3 4', '%Y %m %d'),
                          JalaliDate(year=1302, month=3, day=4))
 
-        self.assertEqual(JalaliDate.strptime('جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
+        self.assertEqual(JalaliDate.strptime(u'جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
                          JalaliDate(month=2, day=1))
 
-        self.assertEqual(JalaliDate.strptime('جمعه 01 فروردین 0001', '%x'),
+        self.assertEqual(JalaliDate.strptime(u'جمعه 01 فروردین 0001', '%x'),
                          JalaliDate.min)
 
-        self.assertEqual(JalaliDate.strptime('جمعه 31 فروردین 1375%', '%x%%'),
+        self.assertEqual(JalaliDate.strptime(u'جمعه 31 فروردین 1375%', '%x%%'),
                          JalaliDate(1375, 1, 31))
 
         check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
         check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
 
-        for i in range(1, 400):
+        for i in xrange(1, 400):
             check_format(JalaliDate.fromordinal(i), "%Y-%m-%d %a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
 
         d = JalaliDate.today().replace(month=1, day=1)
-        for i in range(1, algorithms.days_in_year(d.year)):
+        for i in xrange(1, algorithms.days_in_year(d.year)):
             check_format(d + timedelta(i), "%y-%m-%d")
 
 

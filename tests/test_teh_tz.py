@@ -1,8 +1,4 @@
-'''
-Created on Mar 8, 2011
-
-@author: vahid
-'''
+# -*- coding: utf-8 -*-
 import unittest
 from khayyam.tehran_timezone import TehTz
 from khayyam import JalaliDatetime
@@ -23,12 +19,10 @@ class TestTehTz(unittest.TestCase):
         naive_time = JalaliDatetime(1390, 12, 29, 1, 1, 1, 1)
         nodst_time = JalaliDatetime(1390, 12, 29, 1, 1, 1, 1, tzinfo=self.tz)
         dst_time = nodst_time + timedelta(5)
-        self.assert_(dst_time.dst() != None, "invalid dst")
-        self.assert_(nodst_time.dst() == timedelta(0), "invalid dst")
-        self.assert_(naive_time.dst() == None, "invalid dst")
+        self.assertIsNotNone(dst_time.dst(), "invalid dst")
+        self.assertEqual(nodst_time.dst(), timedelta(0), "invalid dst")
+        self.assertIsNone(naive_time.dst(), "invalid dst")
 
-        
-        
         
     
 if __name__ == '__main__':

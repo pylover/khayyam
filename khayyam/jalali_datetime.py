@@ -188,13 +188,20 @@ class JalaliDatetime(JalaliDate):
             day if day else self.day
         )
 
-        result = JalaliDatetime(year, month, day, self.hour, self.minute, self.second, self.microsecond)
-
-        if hour: result.hour = hour
-        if minute: result.minute = minute
-        if second: result.second = second
-        if microsecond: result.microsecond
-        if tzinfo: result.tzinfo
+        result = JalaliDatetime(year,
+                                month,
+                                day,
+                                self.hour if hour is None else hour,
+                                self.minute if minute is None else minute,
+                                self.second if second is None else second,
+                                self.microsecond if microsecond is None else microsecond,
+                                self.tzinfo if tzinfo is None else tzinfo)
+        # TODO: Test Case required
+        # if hour: result.hour = hour
+        # if minute: result.minute = minute
+        # if second: result.second = second
+        # if microsecond: result.microsecond = microsecond
+        # if tzinfo: result.tzinfo = tzinfo
         return result
 
     def astimezone(self, tz):

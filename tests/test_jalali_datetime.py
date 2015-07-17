@@ -1,15 +1,10 @@
-# coding=UTF-8
-'''
-Created on Mar 7, 2011
-
-@author: vahid
-'''
+# -*- coding: utf-8 -*-
 import unittest
 from khayyam import JalaliDatetime
 from datetime import datetime, timedelta
 from khayyam.tehran_timezone import TehTz
 from khayyam.jalali_date import JalaliDate
-from khayyam import teh_tz
+
 
 class TestJalaliDateTime(unittest.TestCase):
     
@@ -33,7 +28,7 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(jdt, JalaliDate.from_date(dt))
         
     def test_now(self):
-        self.assertTrue(JalaliDatetime.now() != None)
+        self.assertIsNotNone(JalaliDatetime.now())
         
     def test_utcnow(self):
         jutcnow = JalaliDatetime.utcnow()
