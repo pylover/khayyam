@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
-from datetime import timedelta
 from .directives import DATE_FORMAT_DIRECTIVES
 import khayyam.constants as consts
-from khayyam.algorithms import days_in_year
 __author__ = 'vahid'
 
 
@@ -53,7 +51,7 @@ class JalaliDateFormatter(object):
         for match, directive in self.iter_format_directives():
             if index < match.start():
                 result += self.format_string[index:match.start()]
-            result += directive.formatter(jalali_date)
+            result += directive.format(jalali_date)
             index = match.end()
         result += self.format_string[index:]
         return result
@@ -94,62 +92,16 @@ class JalaliDateFormatter(object):
                 year = self.directives_by_key['Y'].type_(d['year'])
             ))
 
-        if 'monthabbr' in parse_result:
-            # TODO: Add this behavior to the documents
-            # TODO: Smarter search, ا == آ and etc..
-            # abbr = parse_result['monthabbr']
-            # m = [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS.items() if v == abbr]
-            # parse_result['month'] = m[0][0]
-            directive = self.directives_by_name['monthabbr']
-            parse_result.update(directive.post_parser(parse_result))
-
-        if 'monthabbr_ascii' in parse_result:
-            # TODO: Add this behavior to the documents
-            abbr = parse_result['monthabbr_ascii']
-            m = [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if v == abbr]
-            parse_result['month'] = m[0][0]
-
-        if 'monthname' in parse_result:
-            # TODO: Add this behavior to the documents
-            # TODO: Smarter search, ا == آ and etc..
-            month_name = parse_result['monthname']
-            m = [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES.items() if v == month_name]
-            parse_result['month'] = m[0][0]
-
-        if 'monthname_ascii' in parse_result:
-            # TODO: Add this behavior to the documents
-            month_name = parse_result['monthname_ascii']
-            m = [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if v == month_name]
-            parse_result['month'] = m[0][0]
-
-        if 'shortyear' in parse_result:
-            # TODO: Add this behavior to the documents
-            # TODO: Smarter search, ا == آ and etc..
-            from khayyam import JalaliDate
-            parse_result['year'] = int(JalaliDate.today().year / 100) * 100 + parse_result['shortyear']
-
-        if 'dayofyear' in parse_result:
-            # TODO: Add this behavior to the documents
-            _dayofyear = parse_result['dayofyear']
-            if 'year' not in parse_result:
-                parse_result['year'] = 1
-            if 'month' in parse_result:
-                del parse_result['month']
-            if 'day' in parse_result:
-                del parse_result['day']
-
-            max_days = days_in_year(parse_result['year'])
-            if _dayofyear > max_days:
-                raise ValueError(
-                    'Invalid dayofyear: %.3d for year %.4d. Valid values are: 1-%s' \
-                     % (_dayofyear, parse_result['year'], max_days))
-            from khayyam import JalaliDate
-            d = JalaliDate(year=parse_result['year']) + timedelta(days=_dayofyear-1)
-            parse_result.update(dict(
-                month=d.month,
-                day=d.day
-            ))
-
+        # TODO: Add this behavior to the documents
+        for directive_name in (
+            'monthabbr',
+            'monthabbr_ascii',
+            'monthname',
+            'monthname_ascii',
+            'shortyear',
+            'dayofyear'):
+            if directive_name in parse_result:
+                parse_result.update(self.directives_by_name[directive_name].post_parser(parse_result))
         return parse_result
 
     def parse(self, date_string):
