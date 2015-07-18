@@ -52,13 +52,13 @@ class DayOfYearDirective(Directive):
         ))
 
 
-class LocalFormatDirective(Directive):
+class LocalDateFormatDirective(Directive):
     def __init__(self):
-        super(LocalFormatDirective, self).__init__(
-            'x', 'localformat', consts.LOCAL_FORMAT_REGEX, get_unicode)
+        super(LocalDateFormatDirective, self).__init__(
+            'x', 'localdateformat', consts.LOCAL_DATE_FORMAT_REGEX, get_unicode)
 
     def format(self, d):
-        return d.localformat()
+        return d.localdateformat()
 
     def post_parser(self, ctx, formatter):
         # TODO: Add this behavior to the documents
@@ -69,7 +69,7 @@ class LocalFormatDirective(Directive):
             '(?P<year>%s)' % consts.YEAR_REGEX
         ])
 
-        match = re.match(regex, ctx['localformat'])
+        match = re.match(regex, ctx['localdateformat'])
         d = match.groupdict()
         ctx.update(dict(
             weekdayname = formatter.directives_by_key['A'].type_(d['weekdayname']),
@@ -82,7 +82,7 @@ class LocalFormatDirective(Directive):
 DATE_FORMAT_DIRECTIVES = [
     ShortYearDirective(),
     DayOfYearDirective(),
-    LocalFormatDirective(),
+    LocalDateFormatDirective(),
     Directive(
         'Y',
         'year',
@@ -185,13 +185,6 @@ DATE_FORMAT_DIRECTIVES = [
         int,
         lambda d: '%.2d' % d.day,
     ),
-    # Directive(
-    #     'x',
-    #     'localformat',
-    #     consts.LOCAL_FORMAT_REGEX,
-    #     get_unicode,
-    #     lambda d: d.localformat(),
-    # ),
     Directive(
         '%',
         'percent',

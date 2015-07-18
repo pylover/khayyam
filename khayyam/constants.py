@@ -138,7 +138,7 @@ MINUTE_REGEX = '\d{1,2}' # TODO: Precisest pattern
 SECOND_REGEX = '\d{1,2}' # TODO: Precisest pattern
 MICROSECOND_REGEX = '\d{1,6}'
 
-LOCAL_FORMAT_REGEX = '%s %s %s %s' % (
+LOCAL_DATE_FORMAT_REGEX = '%s %s %s %s' % (
     PERSIAN_WEEKDAY_NAMES_REGEX,
     DAY_REGEX,
     PERSIAN_MONTH_NAMES_REGEX,

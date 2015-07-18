@@ -61,6 +61,7 @@ class TestJalaliDateTime(unittest.TestCase):
 
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
 
+
         # Test HOUR
         self.assertEqual(d1.strftime('%H'), u'12')
         self.assertEqual(JalaliDatetime.strptime('8', '%H'), JalaliDatetime(hour=8))
@@ -70,6 +71,7 @@ class TestJalaliDateTime(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in xrange(100):
             check_format(d2 + timedelta(hours=i), '%Y-%m-%d %p %I:%M:%S.%f')
+            check_format(d2 + timedelta(hours=i), '%x %H')
             # check_format(d2 + timedelta(hours=i), '%c')
 
         self.assertEqual(d1.isoformat(), '%s-12-23T12:03:45.034567' % self.leap_year)

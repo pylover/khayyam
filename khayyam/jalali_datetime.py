@@ -243,14 +243,15 @@ class JalaliDatetime(JalaliDate):
     def localshortformat_ascii(self):
         return self.strftime('%e %d %g %y %H:%M')
 
-    def localformat(self):
+    def localdatetimeformat(self):
         return self.strftime('%A %d %B %Y %I:%M:%S %p')
+
+    def localdatetimeformat_ascii(self):
+        return self.strftime('%E %d %G %Y %I:%M:%S %t')
 
     def localtimeformat(self):
         return self.strftime('%I:%M:%S %p')
 
-    def localformat_ascii(self):
-        return self.strftime('%E %d %G %Y %I:%M:%S %t')
 
     def hour12(self):
         if self.hour > 12:

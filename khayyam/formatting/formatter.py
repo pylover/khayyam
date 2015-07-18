@@ -76,7 +76,7 @@ class JalaliDateFormatter(object):
     def _parse_post_processor(self, parse_result):
         # TODO: Add this behavior to the documents
         for directive_name in (
-            'localformat',
+            'localdateformat',
             'monthabbr',
             'monthabbr_ascii',
             'monthname',
