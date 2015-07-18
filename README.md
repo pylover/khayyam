@@ -7,7 +7,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 Change Log
 ----------
 
-  * 2.0.0 (2015-07-18) Incompatible with < 2.0.0
+  * 2.0.0-alpha (2015-07-18) Incompatible with < 2.0.0
     * JalaliDate: method `localformat` renamed to `localdateformat`.
     * JalaliDatetime: method `localformat` renamed to `localdatetimeformat`.
     * JalaliDatetime: method `localshortformat_ascii` renamed to `localshortformatascii`.
