@@ -77,13 +77,18 @@ class JalaliDateFormatter(object):
         # TODO: Add this behavior to the documents
         for directive_name in (
             'localdateformat',
+            'localshortdatetimeformat',
+            'localshortdatetimeformatascii',
+            'localdatetimeformat',
+            'localdatetimeformatascii',
             'monthabbr',
             'monthabbr_ascii',
             'monthname',
             'monthname_ascii',
+            'ampm',
+            'ampm_ascii',
             'shortyear',
-            'dayofyear',
-            'ampm'):
+            'dayofyear'):
             if directive_name in parse_result:
                 self.directives_by_name[directive_name].post_parser(parse_result, self)
 
@@ -97,3 +102,5 @@ class JalaliDateFormatter(object):
 class JalaliDatetimeFormatter(JalaliDateFormatter):
     def __init__(self, format_string):
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=DATETIME_FORMAT_DIRECTIVES)
+
+    # TODO: Override postparser directives

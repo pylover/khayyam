@@ -263,7 +263,7 @@ class JalaliDatetime(JalaliDate):
             return AM_PM[0]
         return AM_PM[1]
 
-    def ampm_ascii(self):
+    def ampmascii(self):
         if self.hour < 12:
             return AM_PM_ASCII[0]
         return AM_PM_ASCII[1]

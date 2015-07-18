@@ -12,6 +12,7 @@ Change Log
     * JalaliDatetime: method `localformat` renamed to `localdatetimeformat`.
     * JalaliDatetime: method `localshortformat_ascii` renamed to `localshortformatascii`.
     * JalaliDatetime: method `localdatetimeformat_ascii` renamed to `localdatetimeformatascii`.
+    * JalaliDatetime: method `ampm_ascii` renamed to `ampmascii`.
     * JalaliDatetime: Migrating to New Formatter/Parser Engine
     
   * 1.1.0 (2015-07-17)
