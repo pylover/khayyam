@@ -261,7 +261,7 @@ Directive    Meaning
     def weekdayabbr_ascii(self):
         return PERSIAN_WEEKDAY_ABBRS_ASCII[self.weekday()]
 
-    def localdateformat(self): # TODO: rename it
+    def localdateformat(self):
         return self.strftime('%A %d %B %Y')
 
     def firstdayofyear(self):

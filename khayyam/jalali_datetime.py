@@ -89,7 +89,7 @@ class JalaliDatetime(JalaliDate):
         """
         Return the current local date and _time. If optional argument tz is None or not specified, this is like today(), but, if possible, supplies more precision than can be gotten from going through a _time._time() timestamp (for example, this may be possible on platforms supplying the C gettimeofday() function).
         
-        Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().        
+        Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().
         """
         return cls.from_datetime(datetime.now(tz))
 
@@ -240,13 +240,13 @@ class JalaliDatetime(JalaliDate):
     def localshortformat(self):
         return self.strftime('%a %d %b %y %H:%M')
 
-    def localshortformat_ascii(self):
+    def localshortformatascii(self):
         return self.strftime('%e %d %g %y %H:%M')
 
     def localdatetimeformat(self):
         return self.strftime('%A %d %B %Y %I:%M:%S %p')
 
-    def localdatetimeformat_ascii(self):
+    def localdatetimeformatascii(self):
         return self.strftime('%E %d %G %Y %I:%M:%S %t')
 
     def localtimeformat(self):
