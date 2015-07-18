@@ -1,12 +1,13 @@
 
 from datetime import tzinfo, timedelta
 from khayyam.jalali_datetime import JalaliDatetime
+from khayyam.constants import ZERO_DELTA
 from math import floor
 
 STDOFFSET = timedelta(minutes=210) # Minutes
 DSTOFFSET = timedelta(minutes=270) # Minutes
 DSTDIFF = DSTOFFSET - STDOFFSET
-ZERO = timedelta(0)
+
 
 class TehTz(tzinfo):
     
@@ -33,7 +34,7 @@ class TehTz(tzinfo):
         if self._isdst(dt):
             return DSTDIFF
         else:
-            return ZERO
+            return ZERO_DELTA
                      
     def tzname(self, dt):
         #return 'Iran/Tehran'

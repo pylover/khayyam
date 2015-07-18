@@ -5,43 +5,31 @@ import khayyam.constants as consts
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
 
-
-class AmPmDirective(Directive):
+class LocalDateFormatDirective(Directive):
     def __init__(self):
-        super(AmPmDirective, self).__init__(
-            'p',
-            'ampm',
-            consts.AM_PM_REGEX,
-            get_unicode)
+        super(LocalDateFormatDirective, self).__init__(
+            'x', 'localdateformat', consts.LOCAL_DATE_FORMAT_REGEX, get_unicode)
 
     def format(self, d):
-        return '%s' % d.ampm()
+        return d.localdateformat()
 
     def post_parser(self, ctx, formatter):
-        hour12 = ctx['hour12']
-        if hour12 < 12:
-            ctx['hour'] = hour12 + (12 if ctx['ampm'] == consts.AM_PM[1] else 0)
-        else:
-            ctx['hour'] = hour12
+        # TODO: Add this behavior to the documents
+        regex = ' '.join([
+            '(?P<weekdayname>%s)' % consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+            '(?P<day>%s)' % consts.DAY_REGEX,
+            '(?P<monthname>%s)' % consts.PERSIAN_MONTH_NAMES_REGEX,
+            '(?P<year>%s)' % consts.YEAR_REGEX
+        ])
 
-
-class AmPmASCIIDirective(Directive):
-    def __init__(self):
-        super(AmPmASCIIDirective, self).__init__(
-            't',
-            'ampm_ascii',
-            consts.AM_PM_ASCII_REGEX,
-            get_unicode)
-
-    def format(self, d):
-        return '%s' % d.ampmascii()
-
-    def post_parser(self, ctx, formatter):
-        hour12 = ctx['hour12']
-        if hour12 < 12:
-            ctx['hour'] = hour12 + (12 if ctx['ampm_ascii'] == consts.AM_PM_ASCII[1] else 0)
-        else:
-            ctx['hour'] = hour12
+        match = re.match(regex, ctx['localdateformat'])
+        d = match.groupdict()
+        ctx.update(dict(
+            weekdayname = formatter.directives_by_key['A'].type_(d['weekdayname']),
+            day = formatter.directives_by_key['d'].type_(d['day']),
+            monthname = formatter.directives_by_key['B'].type_(d['monthname']),
+            year = formatter.directives_by_key['Y'].type_(d['year'])
+        ))
 
 
 class LocalShortDatetimeFormatDirective(Directive):
@@ -184,55 +172,31 @@ class LocalASCIIDatetimeFormatDirective(Directive):
         ))
 
 
-"""
-%X            Locale’s appropriate time representation.
-%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
-%Z            Time zone name (empty string if the object is naive).
-"""
+class LocalTimeFormatDirective(Directive):
+    def __init__(self):
+        super(LocalTimeFormatDirective, self).__init__(
+            'X', 'localtimeformat', consts.LOCAL_TIME_FORMAT_REGEX, get_unicode)
 
-# TODO: AM PM ASCII
+    def format(self, d):
+        return d.localtimeformat()
 
-TIME_FORMAT_DIRECTIVES = [
-    AmPmDirective(),
-    AmPmASCIIDirective(),
-    LocalShortDatetimeFormatDirective(),
-    LocalDatetimeFormatDirective(),
-    LocalASCIIShortDatetimeFormatDirective(),
-    LocalASCIIDatetimeFormatDirective(),
-    Directive(
-        'H',
-        'hour',
-        consts.HOUR24_REGEX,
-        int,
-        lambda d: '%.2d' % d.hour,
-    ),
-    Directive(
-        'I',
-        'hour12',
-        consts.HOUR12_REGEX,
-        int,
-        lambda d: '%.2d' % d.hour12()
-    ),
-    Directive(
-        'M',
-        'minute',
-        consts.MINUTE_REGEX,
-        int,
-        lambda d: '%.2d' % d.minute,
-    ),
-    Directive(
-        'S',
-        'second',
-        consts.SECOND_REGEX,
-        int,
-        lambda d: '%.2d' % d.second,
-    ),
-    Directive(
-        'f',
-        'microsecond',
-        consts.MICROSECOND_REGEX,
-        int,
-        lambda d: '%.6d' % d.microsecond
-    ),
-    # --------SUPPORTED--------
-]
+    def post_parser(self, ctx, formatter):
+        # TODO: Add this behavior to the documents
+        """
+        '%I:%M:%S %p'
+        """
+        regex = ' '.join([
+            '(?P<hour12>%s):(?P<minute>%s):(?P<second>%s)' % (
+                consts.HOUR12_REGEX, consts.MINUTE_REGEX, consts.SECOND_REGEX),
+            '(?P<ampm>%s)' % consts.AM_PM_REGEX
+        ])
+
+        match = re.match(regex, ctx[self.name])
+        d = match.groupdict()
+        ctx.update(dict(
+            hour12 = formatter.directives_by_key['I'].type_(d['hour12']),
+            minute = formatter.directives_by_key['M'].type_(d['minute']),
+            second = formatter.directives_by_key['S'].type_(d['second']),
+            ampm = formatter.directives_by_key['p'].type_(d['ampm']),
+        ))
+

@@ -81,6 +81,7 @@ class JalaliDateFormatter(object):
             'localshortdatetimeformatascii',
             'localdatetimeformat',
             'localdatetimeformatascii',
+            'localtimeformat',
             'monthabbr',
             'monthabbr_ascii',
             'monthname',
@@ -88,7 +89,8 @@ class JalaliDateFormatter(object):
             'ampm',
             'ampm_ascii',
             'shortyear',
-            'dayofyear'):
+            'dayofyear',
+            'utcoffset'):
             if directive_name in parse_result:
                 self.directives_by_name[directive_name].post_parser(parse_result, self)
 

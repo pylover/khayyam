@@ -71,6 +71,7 @@ class TestJalaliDateTime(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in xrange(100):
             check_format(d2 + timedelta(hours=i), '%Y-%m-%d %p %I:%M:%S.%f')
+            check_format(d2 + timedelta(hours=i), '%Y-%m-%d %X')
             check_format(d2 + timedelta(hours=i), '%x %H')
             check_format(d2 + timedelta(hours=i), '%c')
             check_format(d2 + timedelta(hours=i), '%C')
@@ -78,6 +79,7 @@ class TestJalaliDateTime(unittest.TestCase):
             check_format(d2 + timedelta(hours=i), '%Q')
 
         self.assertEqual(d1.isoformat(), '%s-12-23T12:03:45.034567' % self.leap_year)
+        self.assertEqual(JalaliDatetime.strptime('+0430', '%z').utcoffset(), timedelta(hours=4.50))
 
 
         # self.assertEqual(jdate.strftime(u'%a%A%b%B%c%C%d%f%H%I%j%m%M%p%S%w%x%X%y%Y%z%Z%%%W%e%E%g%G'), u'پپنجشنبهاساسفندپ 23 اس 75 12:03پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ2303456712123591203ب.ظ455پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ12:03:45 ب.ظ751375%51PPanjshanbehEEsfand')

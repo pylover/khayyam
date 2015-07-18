@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
 __author__ = 'vahid'
 
 MINYEAR = 1
@@ -144,7 +145,7 @@ HOUR24_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 MINUTE_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 SECOND_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 MICROSECOND_REGEX = '\d{1,6}'
-
+UTC_OFFSET_FORMAT_REGEX = '[-+]?\d{2}\d{2}'
 
 LOCAL_DATE_FORMAT_REGEX = '%s %s %s %s' % (
     PERSIAN_WEEKDAY_NAMES_REGEX,
@@ -198,3 +199,11 @@ LOCAL_DATE_TIME_FORMAT_ASCII_REGEX = '%s %s %s %s %s:%s:%s %s' % (
 )
 
 
+LOCAL_TIME_FORMAT_REGEX = '%s:%s:%s %s' % (
+    HOUR12_REGEX,
+    MINUTE_REGEX,
+    SECOND_REGEX,
+    AM_PM_REGEX
+)
+
+ZERO_DELTA = timedelta(0)

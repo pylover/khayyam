@@ -143,7 +143,7 @@ class JalaliDatetime(JalaliDate):
     def strptime(cls, date_string, fmt):
         result = cls.create_formatter(fmt).parse(date_string)
         result = {k:v for k, v in result.items() if k in (
-            'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond')}
+            'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
         return cls(**result)
 
 
