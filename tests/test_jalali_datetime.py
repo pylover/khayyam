@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from khayyam.timezones import TehranTimezone, Timezone
 from khayyam.jalali_date import JalaliDate
 from khayyam.compat import xrange
+__author__ = 'vahid'
 
 
 class TestJalaliDateTime(unittest.TestCase):

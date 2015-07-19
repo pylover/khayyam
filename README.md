@@ -11,6 +11,10 @@ To Do
   * Show weekday in __repr__
   * API-Doc
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
+  * Alphabetical number format
+  * Naming conventions
+  * setup.py pure python fallback switch
+  * Use compiled regex if matters in performance
   * Readme:
     * Installation: (PYPI, Development version)
     * Testing
@@ -19,6 +23,7 @@ To Do
     * Conversions
     * Operators
     * Compatibility
+    * Contribution
   
 
 Change Log

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'vahid'
-
 from datetime import timedelta, time, datetime
 from khayyam.algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
@@ -8,6 +6,7 @@ from khayyam.algorithms import get_julian_day_from_gregorian, \
 from khayyam.constants import MINYEAR, MAXYEAR, AM_PM, AM_PM_ASCII
 from khayyam import JalaliDate
 from khayyam.formatting import JalaliDatetimeFormatter
+__author__ = 'vahid'
 
 
 class JalaliDatetime(JalaliDate):

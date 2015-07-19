@@ -1,13 +1,8 @@
-"""
-Created on Jan 15, 2011
-
-@author: vahid
-"""
+# -*- coding: utf-8 -*-
 import os
-from setuptools import setup, find_packages
- 
-
 import re
+from setuptools import setup, find_packages
+__author__ = 'vahid'
 
 # reading package version (same way sqlalchemy does)
 with open(os.path.join(os.path.dirname(__file__),'khayyam', '__init__.py')) as v_file:

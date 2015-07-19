@@ -8,8 +8,6 @@ from khayyam.timezones import Timezone
 __author__ = 'vahid'
 
 
-
-
 class UTCOffsetDirective(Directive):
     def __init__(self):
         super(UTCOffsetDirective, self).__init__(

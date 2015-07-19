@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import sys
 __author__ = 'vahid'
 
-import sys
 
 if sys.version_info.major == 3:
 

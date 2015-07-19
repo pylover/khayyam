@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'vahid'
-
 import datetime
 from khayyam.algorithms import days_in_month, \
     is_leap_year, \
@@ -20,6 +18,7 @@ from khayyam.constants import MAXYEAR, \
     PERSIAN_WEEKDAY_NAMES_ASCII, \
     SATURDAY
 from khayyam.formatting import JalaliDateFormatter
+__author__ = 'vahid'
 
 
 # TODO: replace(*) method for this class

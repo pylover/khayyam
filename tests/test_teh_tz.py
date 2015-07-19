@@ -3,6 +3,8 @@ import unittest
 from khayyam.timezones import TehranTimezone
 from khayyam import JalaliDatetime
 from datetime import datetime, timedelta
+__author__ = 'vahid'
+
 
 class TestTehTz(unittest.TestCase):
     
