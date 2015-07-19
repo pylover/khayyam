@@ -14,6 +14,7 @@ Change Log
     * JalaliDatetime: method `localdatetimeformat_ascii` renamed to `localdatetimeformatascii`.
     * JalaliDatetime: method `ampm_ascii` renamed to `ampmascii`.
     * JalaliDatetime: Migrating to New Formatter/Parser Engine
+    * TehTz: renamed to TehranTimezone
     
   * 1.1.0 (2015-07-17)
     * JalaliDate: New Formatter/Parser & full unittests.

@@ -6,7 +6,8 @@ from khayyam.algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
     gregorian_date_from_julian_day
 from khayyam.constants import MINYEAR, MAXYEAR, AM_PM, AM_PM_ASCII
-from khayyam import JalaliDate, JalaliDatetimeFormatter
+from khayyam import JalaliDate
+from khayyam.formatting import JalaliDatetimeFormatter
 
 
 class JalaliDatetime(JalaliDate):
@@ -187,7 +188,9 @@ class JalaliDatetime(JalaliDate):
 
     def replace(self, year=None, month=None, day=None, hour=None,
                 minute=None, second=None, microsecond=None, tzinfo=None):
-
+        """
+        Without adjusting the the and time based tzinfo
+        """
         year, month, day = self._validate(
             year if year else self.year,
             month if month else self.month,
@@ -213,8 +216,11 @@ class JalaliDatetime(JalaliDate):
     def astimezone(self, tz):
         if self.tzinfo is tz:
             return self
-        utc = (self - self.utcoffset()).replace(tzinfo=tz)
-        return tz.fromutc(utc)
+        if self.tzinfo:
+            utc = self - self.utcoffset()
+        else:
+            utc = self
+        return tz.fromutc(utc.replace(tzinfo=tz))
 
     def utcoffset(self):
         if self.tzinfo:

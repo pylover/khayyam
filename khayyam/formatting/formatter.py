@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import re
-from .directives import DATE_FORMAT_DIRECTIVES, DATETIME_FORMAT_DIRECTIVES
+
 import khayyam.constants as consts
 __author__ = 'vahid'
 
 
 class JalaliDateFormatter(object):
-    def __init__(self, format_string, directive_db=DATE_FORMAT_DIRECTIVES):
+    def __init__(self, format_string, directive_db=None):
+        if not directive_db:
+            from .directives import DATE_FORMAT_DIRECTIVES
+            directive_db = DATE_FORMAT_DIRECTIVES
         self.format_string = format_string
         self.directives = directive_db
         self.directives_by_key = {d.key:d for d in self.directives}
@@ -102,7 +105,10 @@ class JalaliDateFormatter(object):
 
 
 class JalaliDatetimeFormatter(JalaliDateFormatter):
-    def __init__(self, format_string):
-        super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=DATETIME_FORMAT_DIRECTIVES)
+    def __init__(self, format_string, directive_db=None):
+        if not directive_db:
+            from .directives import DATETIME_FORMAT_DIRECTIVES
+            directive_db = DATETIME_FORMAT_DIRECTIVES
+        super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
 
     # TODO: Override postparser directives

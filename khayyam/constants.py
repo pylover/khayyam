@@ -146,6 +146,7 @@ MINUTE_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 SECOND_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 MICROSECOND_REGEX = '\d{1,6}'
 UTC_OFFSET_FORMAT_REGEX = '[-+]?\d{2}\d{2}'
+TZ_NAME_FORMAT_REGEX='.+'
 
 LOCAL_DATE_FORMAT_REGEX = '%s %s %s %s' % (
     PERSIAN_WEEKDAY_NAMES_REGEX,

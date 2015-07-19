@@ -23,7 +23,6 @@ from khayyam.formatting import JalaliDateFormatter
 
 
 # TODO: replace(*) method for this class
-
 class JalaliDate(object):
     """
     Representing the Jalali Date, without the time data.

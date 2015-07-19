@@ -10,7 +10,7 @@ from .local import LocalShortDatetimeFormatDirective, \
     LocalASCIIDatetimeFormatDirective, \
     LocalDateFormatDirective, \
     LocalTimeFormatDirective
-from .tz import UTCOffsetDirective
+from .tz import UTCOffsetDirective, TimezoneNameDirective
 __author__ = 'vahid'
 
 
@@ -130,10 +130,6 @@ DATE_FORMAT_DIRECTIVES = [
     ),
 ]
 
-"""
-%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
-%Z            Time zone name (empty string if the object is naive).
-"""
 
 TIME_FORMAT_DIRECTIVES = [
     AmPmDirective(),
@@ -144,6 +140,7 @@ TIME_FORMAT_DIRECTIVES = [
     LocalASCIIDatetimeFormatDirective(),
     LocalTimeFormatDirective(),
     UTCOffsetDirective(),
+    TimezoneNameDirective(),
     Directive(
         'H',
         'hour',

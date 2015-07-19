@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDatetime
+from khayyam import JalaliDatetime, teh_tz
 from datetime import datetime, timedelta
-from khayyam.tehran_timezone import TehTz
+from khayyam.timezones import TehranTimezone
 from khayyam.jalali_date import JalaliDate
 from khayyam.compat import xrange
 
@@ -12,7 +12,7 @@ class TestJalaliDateTime(unittest.TestCase):
     def setUp(self):
         self.leap_year = 1375
         self.naive_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3)
-        self.aware_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3, TehTz())
+        self.aware_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3, TehranTimezone())
         
     def test_to_from_datetime(self):
         # Naive
@@ -80,6 +80,8 @@ class TestJalaliDateTime(unittest.TestCase):
 
         self.assertEqual(d1.isoformat(), '%s-12-23T12:03:45.034567' % self.leap_year)
         self.assertEqual(JalaliDatetime.strptime('+0430', '%z').utcoffset(), timedelta(hours=4.50))
+
+        # self.assertEqual(d1.astimezone(teh_tz).strftime('%Z'), '')
 
 
         # self.assertEqual(jdate.strftime(u'%a%A%b%B%c%C%d%f%H%I%j%m%M%p%S%w%x%X%y%Y%z%Z%%%W%e%E%g%G'), u'پپنجشنبهاساسفندپ 23 اس 75 12:03پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ2303456712123591203ب.ظ455پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ12:03:45 ب.ظ751375%51PPanjshanbehEEsfand')

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam.tehran_timezone import TehTz
+from khayyam.timezones import TehranTimezone
 from khayyam import JalaliDatetime
 from datetime import datetime, timedelta
 
 class TestTehTz(unittest.TestCase):
     
     def setUp(self):
-        self.tz = TehTz()
+        self.tz = TehranTimezone()
         self.dt = datetime(2000, 1, 1)
         self.dtz = datetime(2000, 1, 1, tzinfo=self.tz)
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDate, MAXYEAR, constants, algorithms
+from khayyam import JalaliDate, constants, algorithms
+from khayyam.constants import MAXYEAR
 from datetime import timedelta, date
 from khayyam.compat import xrange
 __author__ = 'vahid'
