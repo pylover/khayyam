@@ -5,6 +5,17 @@ __author__ = 'vahid'
 
 
 class JalaliDateFormatter(object):
+
+    _post_parsers = [
+            'localdateformat',
+            'monthabbr',
+            'monthabbr_ascii',
+            'monthname',
+            'monthname_ascii',
+            'shortyear',
+            'dayofyear',
+        ]
+
     def __init__(self, format_string, directive_db=None):
         if not directive_db:
             from .directives import DATE_FORMAT_DIRECTIVES
@@ -75,9 +86,24 @@ class JalaliDateFormatter(object):
             result[directive.name] = directive.type_(v)
         return result
 
+    @property
+    def post_parsers(self):
+        return self._post_parsers
+
     def _parse_post_processor(self, parse_result):
         # TODO: Add this behavior to the documents
-        for directive_name in (
+        for directive_name in self.post_parsers:
+            if directive_name in parse_result:
+                self.directives_by_name[directive_name].post_parser(parse_result, self)
+
+    def parse(self, date_string):
+        result = self._parse(date_string)
+        self._parse_post_processor(result)
+        return result
+
+
+class JalaliDatetimeFormatter(JalaliDateFormatter):
+    _post_parsers = [
             'localdateformat',
             'localshortdatetimeformat',
             'localshortdatetimeformatascii',
@@ -89,24 +115,15 @@ class JalaliDateFormatter(object):
             'monthname',
             'monthname_ascii',
             'ampm',
-            'ampm_ascii',
+            'ampmascii',
             'shortyear',
             'dayofyear',
-            'utcoffset'):
-            if directive_name in parse_result:
-                self.directives_by_name[directive_name].post_parser(parse_result, self)
+            'utcoffset'
+        ]
 
-    def parse(self, date_string):
-        result = self._parse(date_string)
-        self._parse_post_processor(result)
-        return result
-
-
-class JalaliDatetimeFormatter(JalaliDateFormatter):
     def __init__(self, format_string, directive_db=None):
         if not directive_db:
             from .directives import DATETIME_FORMAT_DIRECTIVES
             directive_db = DATETIME_FORMAT_DIRECTIVES
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
 
-        # TODO: Override postparser directives

@@ -132,15 +132,17 @@ FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
 YEAR_REGEX = '\d{1,4}'
 SHORT_YEAR_REGEX = '\d{2}'
 MONTH_REGEX = '([0]?[1-9]|1[0-2])'
+
 DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])'
-DAY_OF_YEAR_REGEX = '\d{1,3}'  # TODO: Precisest pattern
-WEEK_OF_YEAR_REGEX = '\d{1,2}'  # TODO: Precisest pattern
+
+DAY_OF_YEAR_REGEX = '([0]{0,2}[1-9]|[0]?[1-9]\d|[12]\d{2}|3[0-5]\d|36[0-6])' # 1-366
+WEEK_OF_YEAR_REGEX = '([0]?\d|[1-4]\d|5[0-3])'  # 0-53
 WEEKDAY_REGEX = '[0-6]'
 AM_PM_REGEX = u'(%s)' % u'|'.join(AM_PM.values())
 AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
 
 
-HOUR12_REGEX = '\d{1,2}'  # TODO: Precisest pattern
+HOUR12_REGEX = '([0]?[1-9]|1[0-2])'  # TODO: Precisest pattern
 HOUR24_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 MINUTE_REGEX = '\d{1,2}'  # TODO: Precisest pattern
 SECOND_REGEX = '\d{1,2}'  # TODO: Precisest pattern

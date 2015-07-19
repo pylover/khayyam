@@ -28,7 +28,6 @@ class DayOfYearDirective(Directive):
         return '%.3d' % d.dayofyear()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         _dayofyear = ctx['dayofyear']
         if 'year' not in ctx:
             ctx['year'] = 1

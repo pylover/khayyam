@@ -4,40 +4,42 @@ import khayyam.constants as consts
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
 
-class AmPmDirective(Directive):
+class BaseAmPmDirective(Directive):
+    def __init__(self, key, name, regex):
+        super(BaseAmPmDirective, self).__init__(key, name, regex, get_unicode)
+
+    def format(self, d):
+        return getattr(d, self.name)()
+
+    def post_parser(self, ctx, formatter):
+        hour12 = ctx['hour12']
+
+        if self.is_am(ctx): # AM
+            hour = 0 if hour12 == 12 else hour12
+        else: # PM
+            hour = hour12 + (12 if hour12 < 12 else 0)
+
+        ctx['hour'] = hour
+
+
+class AmPmDirective(BaseAmPmDirective):
     def __init__(self):
         super(AmPmDirective, self).__init__(
             'p',
             'ampm',
-            consts.AM_PM_REGEX,
-            get_unicode)
+            consts.AM_PM_REGEX)
 
-    def format(self, d):
-        return '%s' % d.ampm()
-
-    def post_parser(self, ctx, formatter):
-        hour12 = ctx['hour12']
-        if hour12 < 12:
-            ctx['hour'] = hour12 + (12 if ctx['ampm'] == consts.AM_PM[1] else 0)
-        else:
-            ctx['hour'] = hour12
+    def is_am(self, ctx):
+        return ctx['ampm'] == consts.AM_PM[0]
 
 
-class AmPmASCIIDirective(Directive):
+class AmPmASCIIDirective(BaseAmPmDirective):
     def __init__(self):
         super(AmPmASCIIDirective, self).__init__(
             't',
-            'ampm_ascii',
-            consts.AM_PM_ASCII_REGEX,
-            get_unicode)
+            'ampmascii',
+            consts.AM_PM_ASCII_REGEX)
 
-    def format(self, d):
-        return '%s' % d.ampmascii()
-
-    def post_parser(self, ctx, formatter):
-        hour12 = ctx['hour12']
-        if hour12 < 12:
-            ctx['hour'] = hour12 + (12 if ctx['ampm_ascii'] == consts.AM_PM_ASCII[1] else 0)
-        else:
-            ctx['hour'] = hour12
+    def is_am(self, ctx):
+        return ctx[self.name] == consts.AM_PM_ASCII[0]
 

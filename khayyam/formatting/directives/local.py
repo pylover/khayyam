@@ -14,7 +14,6 @@ class LocalDateFormatDirective(Directive):
         return d.localdateformat()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         regex = ' '.join([
             '(?P<weekdayname>%s)' % consts.PERSIAN_WEEKDAY_NAMES_REGEX,
             '(?P<day>%s)' % consts.DAY_REGEX,
@@ -41,7 +40,6 @@ class LocalShortDatetimeFormatDirective(Directive):
         return d.localshortformat()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         regex = ' '.join([
             '(?P<weekdayabbr>%s)' % consts.PERSIAN_WEEKDAY_ABBRS_REGEX,
             '(?P<day>%s)' % consts.DAY_REGEX,
@@ -74,7 +72,6 @@ class LocalASCIIShortDatetimeFormatDirective(Directive):
         """
         %e %d %g %y %H:%M
         """
-        # TODO: Add this behavior to the documents
         regex = ' '.join([
             '(?P<weekdayabbr>%s)' % consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX,
             '(?P<day>%s)' % consts.DAY_REGEX,
@@ -106,7 +103,6 @@ class LocalDatetimeFormatDirective(Directive):
         return d.localdatetimeformat()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         """
         %A %d %B %Y %I:%M:%S %p
         """
@@ -143,7 +139,6 @@ class LocalASCIIDatetimeFormatDirective(Directive):
         return d.localdatetimeformatascii()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         """
         %E %d %G %Y %I:%M:%S %t
         """
@@ -168,7 +163,7 @@ class LocalASCIIDatetimeFormatDirective(Directive):
             hour12 = formatter.directives_by_key['I'].type_(d['hour12']),
             minute = formatter.directives_by_key['M'].type_(d['minute']),
             second = formatter.directives_by_key['S'].type_(d['second']),
-            ampm_ascii = formatter.directives_by_key['t'].type_(d['ampm']),
+            ampmascii = formatter.directives_by_key['t'].type_(d['ampm']),
         ))
 
 
@@ -181,7 +176,6 @@ class LocalTimeFormatDirective(Directive):
         return d.localtimeformat()
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         """
         '%I:%M:%S %p'
         """

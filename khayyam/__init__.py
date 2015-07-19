@@ -7,4 +7,3 @@ from .jalali_datetime import JalaliDatetime
 from .timezones import TehranTimezone
 teh_tz = TehranTimezone()
 __author__ = 'vahid'
-# TODO: add persian numbers(digits)

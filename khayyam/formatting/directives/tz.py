@@ -24,7 +24,6 @@ class UTCOffsetDirective(Directive):
         )
 
     def post_parser(self, ctx, formatter):
-        # TODO: Add this behavior to the documents
         exp = ctx[self.name]
         if exp.strip() == '':
             return

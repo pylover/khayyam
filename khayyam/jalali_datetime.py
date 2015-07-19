@@ -267,9 +267,12 @@ class JalaliDatetime(JalaliDate):
 
 
     def hour12(self):
-        if self.hour > 12:
-            return self.hour - 12
-        return self.hour
+        res = self.hour
+        if res > 12:
+            res -= 12
+        elif res == 0:
+            res = 12
+        return res
 
     def ampm(self):
         if self.hour < 12:

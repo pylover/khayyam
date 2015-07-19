@@ -38,36 +38,38 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(jutcnow.time(), utcnow.time())
     
     def test_strftime_strptime(self):
-        """
-%H            Hour (24-hour clock) as a decimal number [00,23].
-%I            Hour (12-hour clock) as a decimal number [01,12].
-%M            Minute as a decimal number [00,59].
-%S            Second as a decimal number [00,61].    (3)
-%f            Microsecond as a decimal number [0,999999], zero-padded on the left    (1)
-%p            Locale’s equivalent of either AM or PM.    (2)
-%c            Locale’s appropriate short date and time representation.
-%C            Locale’s appropriate date and time representation.
-%q            ASCII Locale’s appropriate short date and time representation.
-%Q            ASCII Locale’s appropriate date and time representation.
-%U            Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
-%X            Locale’s appropriate time representation.
-%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
-%Z            Time zone name (empty string if the object is naive).
-        """
 
         def check_format(jdate ,fmt):
             jdate_str = jdate.strftime(fmt)
             d2 = JalaliDatetime.strptime(jdate_str, fmt)
             if jdate != d2:
                 print(repr(jdate))
+                print(jdate_str)
                 print(repr(d2))
             self.assertEqual(jdate, d2)
 
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
 
+        self.assertEqual(d1.strftime('%Q'), 'Panjshanbeh 23 Esfand 1375 12:03:45 PM')
 
         # Test HOUR
-        self.assertEqual(d1.strftime('%H'), u'12')
+        self.assertEqual(JalaliDatetime(1386, 12, 23).strftime('%H'), u'00')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 1).strftime('%H'), u'01')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 12).strftime('%H'), u'12')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 13).strftime('%H'), u'13')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 23).strftime('%H'), u'23')
+        self.assertEqual(
+            (JalaliDatetime(1386, 12, 23, 23, 59, 59) + timedelta(seconds=1)).strftime('%H'), u'00')
+
+        self.assertEqual(JalaliDatetime(1386, 12, 23).strftime('%I'), u'12')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 1).strftime('%I'), u'01')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 12).strftime('%I'), u'12')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 13).strftime('%I'), u'01')
+        self.assertEqual(JalaliDatetime(1386, 12, 23, 23).strftime('%I'), u'11')
+        self.assertEqual(
+            (JalaliDatetime(1386, 12, 23, 23, 59, 59) + timedelta(seconds=1)).strftime('%I'), u'12')
+
+        self.assertEqual(d1.strftime('%I'), u'12')
         self.assertEqual(JalaliDatetime.strptime('8', '%H'), JalaliDatetime(hour=8))
 
         # Test Timezone

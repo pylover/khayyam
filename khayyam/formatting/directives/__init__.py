@@ -14,7 +14,6 @@ from .tz import UTCOffsetDirective, TimezoneNameDirective
 __author__ = 'vahid'
 
 
-# TODO: _first_day_of_week = SATURDAY
 DATE_FORMAT_DIRECTIVES = [
     ShortYearDirective(),
     DayOfYearDirective(),
