@@ -3,8 +3,8 @@ import re
 __author__ = 'vahid'
 
 
-for i in range(0, 14):
-    p = '^([0]?[1-9]|1[0-2])$'
+for i in range(0, 61):
+    p = '^([0]?\d|[1-5]\d)$'
 
     try:
         if int(re.match(p, '%d' % i).group()) != i: print(i)

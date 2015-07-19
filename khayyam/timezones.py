@@ -76,7 +76,6 @@ class Timezone(tzinfo):
 class TehranTimezone(Timezone):
     dst_start = (1, 1)
     dst_end = (7, 1)
-    # TODO: TEST Required
 
     def __init__(self):
         super(TehranTimezone, self).__init__(

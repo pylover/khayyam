@@ -21,7 +21,6 @@ from khayyam.formatting import JalaliDateFormatter
 __author__ = 'vahid'
 
 
-# TODO: replace(*) method for this class
 class JalaliDate(object):
     """
     Representing the Jalali Date, without the time data.
@@ -137,6 +136,7 @@ class JalaliDate(object):
         return JalaliDate(self.year, self.month, self.day)
 
     def replace(self, year=None, month=None, day=None):
+
         year, month, day = self._validate(
             year if year else self.year,
             month if month else self.month,

@@ -147,25 +147,6 @@ class JalaliDatetime(JalaliDate):
         return cls(**result)
 
 
-    # @classmethod
-    # def strptime(cls, date_string, frmt):
-    #     """
-    #     Return a datetime corresponding to date_string, parsed according to format. This is equivalent to datetime(*(_time.strptime(date_string, format)[0:6])). ValueError is raised if the date_string and format can't be parsed by _time.strptime() or if it returns a value which isn't a _time tuple. See section strftime() and strptime() Behavior.
-    #     '1387/4/12'
-    #     '%Y/%m/%d'
-    #     """
-    #     # TODO: Implement full features of python, see: http://docs.python.org/library/datetime.html
-    #     valid_codes = {'%Y': (4, 'year'),
-    #                    '%m': (2, 'month'),
-    #                    '%d': (2, 'day'),
-    #                    '%H': (2, 'hour'),
-    #                    '%M': (2, 'minute'),
-    #                    '%S': (2, 'second'),
-    #                    '%f': (6, 'microsecond')
-    #                    }
-    #
-    #     return parse(cls, date_string, frmt, valid_codes)
-
     ########################
     ### Instance Methods ###
     ########################
@@ -204,12 +185,6 @@ class JalaliDatetime(JalaliDate):
                                 self.second if second is None else second,
                                 self.microsecond if microsecond is None else microsecond,
                                 self.tzinfo if tzinfo is None else tzinfo)
-        # TODO: Test Case required
-        # if hour: result.hour = hour
-        # if minute: result.minute = minute
-        # if second: result.second = second
-        # if microsecond: result.microsecond = microsecond
-        # if tzinfo: result.tzinfo = tzinfo
         return result
 
     def astimezone(self, tz):

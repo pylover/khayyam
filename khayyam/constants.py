@@ -142,10 +142,10 @@ AM_PM_REGEX = u'(%s)' % u'|'.join(AM_PM.values())
 AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
 
 
-HOUR12_REGEX = '([0]?[1-9]|1[0-2])'  # TODO: Precisest pattern
-HOUR24_REGEX = '\d{1,2}'  # TODO: Precisest pattern
-MINUTE_REGEX = '\d{1,2}'  # TODO: Precisest pattern
-SECOND_REGEX = '\d{1,2}'  # TODO: Precisest pattern
+HOUR12_REGEX = '([0]?[1-9]|1[0-2])'
+HOUR24_REGEX = '([0]?\d|1\d|2[0-3])'
+MINUTE_REGEX = '([0]?\d|[1-5]\d)'
+SECOND_REGEX = '([0]?\d|[1-5]\d)'
 MICROSECOND_REGEX = '\d{1,6}'
 UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'
 TZ_NAME_FORMAT_REGEX='.+'
