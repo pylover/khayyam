@@ -1,17 +1,15 @@
-
+# -*- coding: utf-8 -*-
 from datetime import tzinfo, timedelta
-from khayyam import JalaliDatetime
 from khayyam.constants import ZERO_DELTA
 
-STDOFFSET = timedelta(minutes=210) # Minutes
-DSTOFFSET = timedelta(minutes=270) # Minutes
+STDOFFSET = timedelta(minutes=210)  # Minutes
+DSTOFFSET = timedelta(minutes=270)  # Minutes
 DSTDIFF = DSTOFFSET - STDOFFSET
 
 
 class Timezone(tzinfo):
-
     def __init__(self, offset, dst_offset=None, dst_checker=None, name=None):
-        assert(isinstance(offset, timedelta))
+        assert (isinstance(offset, timedelta))
         self._offset = offset
         self._dst_offset = dst_offset
         self._dst_checker = dst_checker
@@ -29,7 +27,7 @@ class Timezone(tzinfo):
             raise ValueError('Invalid DST timedelta: %s' % dst_offset)
         delta = utc_offset - dst_offset  # this is self's standard offset
         if delta:
-            dt += delta   # convert to standard local time
+            dt += delta  # convert to standard local time
             dst_offset = dt.dst()
             if dst_offset is None:
                 raise ValueError('Invalid DST timedelta: %s' % dst_offset)
@@ -73,6 +71,7 @@ class Timezone(tzinfo):
     def __hash__(self):
         return hash(self._offset) ^ hash(self._dst_offset)
 
+
 class TehranTimezone(Timezone):
     dst_start = (1, 1)
     dst_end = (7, 1)
@@ -87,4 +86,3 @@ class TehranTimezone(Timezone):
                        (self.dst_end[0] == dt.month and self.dst_end[1] > dt.day),
             'Iran/Tehran'
         )
-

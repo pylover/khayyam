@@ -98,6 +98,11 @@ class TestJalaliDateTime(unittest.TestCase):
         check_format(d1, '%Y-%m-%d %H:%M:%S.%f')
         check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
 
+        self.assertEqual(
+            JalaliDatetime.strptime('1394-تیر-29 دوشنبه 00:05:14.113389 +04:30', '%Y-%B-%d %A %H:%M:%S.%f %z'),
+            JalaliDatetime(1394, 4, 29, 0, 5, 14, 113389, Timezone(timedelta(hours=4, minutes=30)))
+        )
+
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in xrange(100):
             d_test = d2 + timedelta(hours=i)

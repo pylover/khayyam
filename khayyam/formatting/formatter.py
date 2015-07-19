@@ -2,6 +2,7 @@
 import re
 
 import khayyam.constants as consts
+
 __author__ = 'vahid'
 
 
@@ -12,8 +13,8 @@ class JalaliDateFormatter(object):
             directive_db = DATE_FORMAT_DIRECTIVES
         self.format_string = format_string
         self.directives = directive_db
-        self.directives_by_key = {d.key:d for d in self.directives}
-        self.directives_by_name = {d.name:d for d in self.directives}
+        self.directives_by_key = {d.key: d for d in self.directives}
+        self.directives_by_name = {d.name: d for d in self.directives}
         self._parser_regex = self._create_parser_regex()
 
     def _create_parser_regex(self):
@@ -62,7 +63,7 @@ class JalaliDateFormatter(object):
     def _parse(self, date_string):
         m = re.match(self.parser_regex, date_string)
         if not m:
-            raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
+            raise ValueError(u"time data '%s' does not match format '%s' with generated regex: '%s'" % (
                 date_string, self.format_string, self.parser_regex))
         result = {}
         for directive_key, v in m.groupdict().items():
@@ -97,7 +98,6 @@ class JalaliDateFormatter(object):
             if directive_name in parse_result:
                 self.directives_by_name[directive_name].post_parser(parse_result, self)
 
-
     def parse(self, date_string):
         result = self._parse(date_string)
         self._parse_post_processor(result)
@@ -111,4 +111,4 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
             directive_db = DATETIME_FORMAT_DIRECTIVES
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
 
-    # TODO: Override postparser directives
+        # TODO: Override postparser directives

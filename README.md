@@ -7,12 +7,24 @@ To Do
 ----------
 
   * Constructors act as converter: `JalaliDate(date)`
+  * Create TehranDatetime object
+  * Show weekday in __repr__
+  * API-Doc
+  * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
+  * Readme:
+    * Installation: (PYPI, Development version)
+    * Testing
+    * Parsing
+    * Formatting
+    * Conversions
+    * Operators
+    * Compatibility
   
 
 Change Log
 ----------
 
-  * 2.0.0-alpha (2015-07-18) Incompatible with < 2.0.0
+  * 2.0.0-alpha (2015-07-19) Incompatible with < 2.0.0
     * JalaliDate: method `localformat` renamed to `localdateformat`.
     * JalaliDatetime: method `localformat` renamed to `localdatetimeformat`.
     * JalaliDatetime: method `localshortformat_ascii` renamed to `localshortformatascii`.
