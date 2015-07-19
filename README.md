@@ -3,6 +3,11 @@ khayyam
 
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
+To Do
+----------
+
+  * Constructors act as converter: `JalaliDate(date)`
+  
 
 Change Log
 ----------

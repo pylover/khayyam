@@ -229,6 +229,9 @@ class JalaliDatetime(JalaliDate):
             return None
 
     def dst(self):
+        """
+        If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one day.
+        """
         if self.tzinfo:
             return self.tzinfo.dst(self)
         else:
@@ -236,7 +239,7 @@ class JalaliDatetime(JalaliDate):
 
     def tzname(self):
         if self.tzinfo:
-            return self.tzinfo.tzname()
+            return self.tzinfo.tzname(self)
         else:
             return None
 

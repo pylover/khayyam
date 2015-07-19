@@ -8,54 +8,71 @@ DSTOFFSET = timedelta(minutes=270) # Minutes
 DSTDIFF = DSTOFFSET - STDOFFSET
 
 
-class TehranTimezone(tzinfo):
-    
-    def utcoffset(self, dt):
-        if self._is_dst(dt):
-            return DSTOFFSET
-        else:
-            return STDOFFSET
-    
-    def _is_dst(self, dt):
-        # TODO: reimplement, just test year and month
-        dt = dt.replace(tzinfo=None)
-        if isinstance(dt, JalaliDatetime):
-            jdt = dt
-        else:
-            jdt = JalaliDatetime.from_datetime(dt)
-        start_jdt = jdt.replace(month=1, day=1)
-        end_jdt = jdt.replace(month=7, day=1)
-        if start_jdt < jdt < end_jdt:
-            return True
-        else:
-            return False
-    
-    def dst(self, dt):
-        if self._is_dst(dt):
-            return DSTDIFF
-        else:
-            return ZERO_DELTA
-                     
-    def tzname(self, dt):
-        return 'Iran/Tehran'
-        # return self.format_offset(dt)
-    
+class Timezone(tzinfo):
 
-class FixedOffsetTimezone(tzinfo):
-
-    def __init__(self, offset, name=None):
+    def __init__(self, offset, dst_offset=None, dst_checker=None, name=None):
         assert(isinstance(offset, timedelta))
         self._offset = offset
+        self._dst_offset = dst_offset
+        self._dst_checker = dst_checker
         self._name = name
 
+    def fromutc(self, dt):
+        if dt.tzinfo != self:
+            raise ValueError('Datetime timezone mismatch: %s != %s' % (dt.tzinfo, self))
+
+        utc_offset = dt.utcoffset()
+        dst_offset = dt.dst()
+        if utc_offset is None:
+            raise ValueError('The object: %s is naive.' % dt)
+        if dst_offset is None:
+            raise ValueError('Invalid DST timedelta: %s' % dst_offset)
+        delta = utc_offset - dst_offset  # this is self's standard offset
+        if delta:
+            dt += delta   # convert to standard local time
+            dst_offset = dt.dst()
+            if dst_offset is None:
+                raise ValueError('Invalid DST timedelta: %s' % dst_offset)
+        if dst_offset:
+            return dt + dst_offset
+        else:
+            return dt
+
     def utcoffset(self, dt):
-        return self._offset
+        if self._is_dst(dt):
+            return self._offset + self._dst_offset
+        else:
+            return self._offset
 
     def dst(self, dt):
-        return ZERO_DELTA
+        if self._dst_offset and self._is_dst(dt):
+            return self._dst_offset
+        else:
+            return ZERO_DELTA
 
     def tzname(self, dt):
         if self._name:
             return self._name
         else:
             return '%s:%s' % (int(self._offset.seconds / 3600), int((self._offset.seconds % 3600) / 60))
+
+    def _is_dst(self, dt):
+        if self._dst_checker:
+            return self._dst_checker(dt)
+        return False
+
+class TehranTimezone(Timezone):
+    dst_start = (1, 1)
+    dst_end = (7, 1)
+    # TODO: TEST Required
+
+    def __init__(self):
+        super(TehranTimezone, self).__init__(
+            timedelta(minutes=210),
+            timedelta(minutes=60),
+            lambda dt: (self.dst_start[0] < dt.month < self.dst_end[0]) or \
+                       (self.dst_start[0] == dt.month and self.dst_start[1] <= dt.day) or \
+                       (self.dst_end[0] == dt.month and self.dst_end[1] > dt.day),
+            'Iran/Tehran'
+        )
+

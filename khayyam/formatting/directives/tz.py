@@ -4,7 +4,7 @@ from .directive import Directive
 import khayyam.constants as consts
 from khayyam.compat import get_unicode
 from datetime import timedelta
-from khayyam.timezones import FixedOffsetTimezone
+from khayyam.timezones import Timezone
 __author__ = 'vahid'
 
 
@@ -28,7 +28,7 @@ class UTCOffsetDirective(Directive):
         match = re.match(regex, ctx[self.name])
         d = match.groupdict()
         posneg = lambda i: 0 - i if d['posneg'] == '-' else i
-        ctx.update(dict(tzinfo=FixedOffsetTimezone(timedelta(
+        ctx.update(dict(tzinfo=Timezone(timedelta(
             hours = posneg(int(d['hour'])),
             minutes = posneg(int(d['minute']))
         ))))
