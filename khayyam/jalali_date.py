@@ -200,9 +200,9 @@ Directive    Meaning
 %w           Weekday as a decimal number [0(Saturday),6(Friday)].
 %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.
 %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
-%x           Locale’s appropriate date representation.     
-%y           Year without century as a decimal number [00,99].     
-%Y           Year with century as a decimal number.     
+%x           Locale’s appropriate date representation.
+%y           Year without century as a decimal number [00,99].
+%Y           Year with century as a decimal number.
 %e           ASCII Locale’s abbreviated weekday name.
 %E           ASCII Locale’s full weekday name.
 %g           ASCII Locale’s abbreviated month name.
@@ -225,7 +225,6 @@ Directive    Meaning
 %M            Minute as a decimal number [00,59].
 %p            Locale’s equivalent of either AM or PM.    (2)
 %S            Second as a decimal number [00,61].    (3)
-%U            Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
 %X            Locale’s appropriate time representation.
 %z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
 %Z            Time zone name (empty string if the object is naive).
