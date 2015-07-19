@@ -21,7 +21,8 @@ Change Log
     * JalaliDatetime: Migrating to New Formatter/Parser Engine
     * TehTz: renamed to TehranTimezone
     * Comparison and Timezones
-    * -Comparison with `datetime.date` & `datetime.datetime`
+    * Comparison with `datetime.date` & `datetime.datetime`
+    * Fixing timezone bug
     
   * 1.1.0 (2015-07-17)
     * JalaliDate: New Formatter/Parser & full unittests.
