@@ -2,7 +2,7 @@
 import unittest
 from khayyam import JalaliDatetime, teh_tz
 from datetime import datetime, timedelta
-from khayyam.timezones import TehranTimezone
+from khayyam.timezones import TehranTimezone, Timezone
 from khayyam.jalali_date import JalaliDate
 from khayyam.compat import xrange
 
@@ -57,6 +57,9 @@ class TestJalaliDateTime(unittest.TestCase):
         def check_format(jdate ,fmt):
             jdate_str = jdate.strftime(fmt)
             d2 = JalaliDatetime.strptime(jdate_str, fmt)
+            if jdate != d2:
+                print(repr(jdate))
+                print(repr(d2))
             self.assertEqual(jdate, d2)
 
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
@@ -65,30 +68,58 @@ class TestJalaliDateTime(unittest.TestCase):
         # Test HOUR
         self.assertEqual(d1.strftime('%H'), u'12')
         self.assertEqual(JalaliDatetime.strptime('8', '%H'), JalaliDatetime(hour=8))
+
+        # Test Timezone
+        tz_dt = JalaliDatetime(tzinfo=Timezone(timedelta(minutes=10)))
+        self.assertEqual(JalaliDatetime.strptime('00:10', '%z'), tz_dt)
+        self.assertEqual(tz_dt.strftime('%z'), '+00:10')
+        tz_dt = JalaliDatetime(tzinfo=Timezone(timedelta(minutes=-30)))
+        self.assertEqual(tz_dt.strftime('%z'), '-00:30')
+        self.assertEqual(JalaliDatetime.strptime('', '%z'), JalaliDatetime())
+        self.assertEqual(JalaliDatetime.strptime('00:00', '%z'), JalaliDatetime())
+        self.assertEqual(JalaliDatetime.strptime('00:01', '%z'),
+                         JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
+        self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'), JalaliDatetime.strptime('04:31', '%z'))
+        self.assertEqual(JalaliDatetime.strptime('04:30', '%z'), JalaliDatetime.strptime('04:30', '%z'))
+        self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'),
+                         JalaliDatetime(tzinfo=teh_tz))
+        self.assertEqual(JalaliDatetime.strptime('+04:30', '%z').utcoffset(), timedelta(hours=4.50))
+        self.assertEqual(tz_dt.strftime('%z'), tz_dt.strftime('%Z'))
+
+        self.assertEqual(
+            JalaliDatetime(1394, 4, 28, 18, 14, 35, 962659, Timezone(timedelta(.3))).strftime('%Y-%m-%d %H:%M:%S.%f %z'),
+            '1394-04-28 18:14:35.962659 +07:12')
+
+        self.assertEqual(
+            JalaliDatetime.strptime('1394-04-28 18:14:35.962659 +07:12', '%Y-%m-%d %H:%M:%S.%f %z'),
+            JalaliDatetime(1394, 4, 28, 18, 14, 35, 962659, Timezone(timedelta(.3)))
+            )
+
         check_format(d1, '%Y-%m-%d %H:%M:%S.%f')
         check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in xrange(100):
-            check_format(d2 + timedelta(hours=i), '%Y-%m-%d %p %I:%M:%S.%f')
-            check_format(d2 + timedelta(hours=i), '%Y-%m-%d %X')
-            check_format(d2 + timedelta(hours=i), '%x %H')
-            check_format(d2 + timedelta(hours=i), '%c')
-            check_format(d2 + timedelta(hours=i), '%C')
-            check_format(d2 + timedelta(hours=i), '%q')
-            check_format(d2 + timedelta(hours=i), '%Q')
+            d_test = d2 + timedelta(hours=i)
+            check_format(d_test, '%Y%m%d%H%a%A%b%B%c%C%f%I%j%M%p%S%w%x%X%y%g%G%e%E%W%%')
+            check_format(d_test, '%Y-%m-%d %p %I:%M:%S.%f')
+            check_format(d_test, '%Y-%m-%d %X')
+            check_format(d_test, '%x %H')
+            check_format(d_test, '%c')
+            check_format(d_test, '%C')
+            check_format(d_test, '%q')
+            check_format(d_test, '%Q')
 
         self.assertEqual(d1.isoformat(), '%s-12-23T12:03:45.034567' % self.leap_year)
-        self.assertEqual(JalaliDatetime.strptime('+0430', '%z').utcoffset(), timedelta(hours=4.50))
-
-        self.assertEqual(d1.astimezone(teh_tz).strftime('%Z'), 'Iran/Tehran')
 
 
-        # self.assertEqual(jdate.strftime(u'%a%A%b%B%c%C%d%f%H%I%j%m%M%p%S%w%x%X%y%Y%z%Z%%%W%e%E%g%G'), u'پپنجشنبهاساسفندپ 23 اس 75 12:03پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ2303456712123591203ب.ظ455پنجشنبه 23 اسفند 1375 12:03:45 ب.ظ12:03:45 ب.ظ751375%51PPanjshanbehEEsfand')
+        tz_datetime = d1.astimezone(teh_tz)
+        self.assertEqual(tz_datetime.strftime('%Z'), 'Iran/Tehran')
 
-    # def test_iso_format(self):
-    #     jdate = JalaliDatetime(self.leap_year, 12, 23)
-    #     self.assertEqual(jdate.isoformat(), '%s-12-23T00:00:00.000000' % self.leap_year)
+
+    def test_iso_format(self):
+        jdate = JalaliDatetime(self.leap_year, 12, 23)
+        self.assertEqual(jdate.isoformat(), '%s-12-23T00:00:00.000000' % self.leap_year)
 
     def test_algorithm(self):
         min = datetime(1900, 1, 1, 1, 1, 1)

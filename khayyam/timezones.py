@@ -50,16 +50,28 @@ class Timezone(tzinfo):
         else:
             return ZERO_DELTA
 
+    def __repr__(self):
+        off = self._offset
+        return '%s%.2d:%.2d%s' % (
+            '+' if off.total_seconds() >= 0 else '-',
+            int(off.total_seconds() / 3600),
+            int((off.total_seconds() % 3600) / 60),
+            ('±%d' % (self._dst_offset.total_seconds() / 60)) if self._dst_offset else ''
+        )
+
     def tzname(self, dt):
         if self._name:
             return self._name
         else:
-            return '%s:%s' % (int(self._offset.seconds / 3600), int((self._offset.seconds % 3600) / 60))
+            return repr(self)
 
     def _is_dst(self, dt):
         if self._dst_checker:
             return self._dst_checker(dt)
         return False
+
+    def __hash__(self):
+        return hash(self._offset) ^ hash(self._dst_offset)
 
 class TehranTimezone(Timezone):
     dst_start = (1, 1)

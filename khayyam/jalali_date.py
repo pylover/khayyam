@@ -310,15 +310,22 @@ Directive    Meaning
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
         return self.tojulianday() <= x.tojulianday()
 
+    def __hash__(self):
+        return hash(self.year) ^ hash(self.month) ^ hash(self.day)
+
     def __eq__(self, x):
         if not x:
             return False
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.tojulianday() == x.tojulianday()
+        if isinstance(x, datetime.date):
+            return self.to_date().__eq__(x)
+        elif isinstance(x, JalaliDate):
+            return hash(self) == hash(x)
+        else:
+            raise ValueError('Comparison only allowed with JalaliDate and datetime.date objects.')
+
 
     def __ne__(self, x):
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
-        return self.tojulianday() != x.tojulianday()
+        return not self.__eq__(x)
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'

@@ -244,7 +244,12 @@ class JalaliDatetime(JalaliDate):
             return None
 
     def isoformat(self, sep='T'):
-        return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f')
+        """
+        Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if microsecond is 0, YYYY-MM-DDTHH:MM:SS
+
+        If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM
+        """
+        return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f%z')
 
     def localshortformat(self):
         return self.strftime('%a %d %b %y %H:%M')
@@ -325,17 +330,24 @@ class JalaliDatetime(JalaliDate):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
         return self.to_datetime() <= x.to_datetime()
 
+    def __hash__(self):
+        return super(JalaliDatetime, self).__hash__() ^ \
+            hash(self.hour) ^ \
+            hash(self.minute) ^ \
+            hash(self.second) ^ \
+            hash(self.microsecond) ^ \
+            hash(self.tzinfo)
+
     def __eq__(self, x):
         if not x:
             return False
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
-        return self.to_datetime() == x.to_datetime()
+        if isinstance(x, datetime):
+            return self.to_datetime().__eq__(x)
+        elif isinstance(x, JalaliDatetime):
+            return hash(self) == hash(x)
+        else:
+            raise ValueError('Comparison only allowed with JalaliDatetime and datetime.datetime objects.')
 
-    def __ne__(self, x):
-        if not x:
-            return True
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
-        return self.to_datetime() != x.to_datetime()
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
