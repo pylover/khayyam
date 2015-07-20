@@ -1,9 +1,10 @@
 ---
 layout: page
-title: Persian(Jalali) Calendar
+title: About
 permalink: /about/
 ---
 
+## Persian(Jalali) Calendar
 
 Before the Yazdgerdi calendar was completed, Muslim Arabs overthrew the dynasty in the 7th century and established the Islamic calendar, a lunar calendar. Number of months and name of two months (Ramadan and Dhu al-Hijjah) in Islamic calendar was outlined in the Qur'an, and in the last sermon of Muhammad during his farewell pilgrimage to Mecca. Umar, the second caliph of Islam, began numbering years in AH 17 (638 CE), regarding the first year as the year of Muhammad's Hijra (emigration) from Mecca to Medina, in 622 CE. The first day of the year continued to be the first day of Muharram. Years of the Islamic calendar are designated AH from the Latin Anno Hegirae (in the year of the Hijra).
 
