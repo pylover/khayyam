@@ -5,11 +5,9 @@ permalink: /
 ---
 
 
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
+{% highlight ruby linenos %}
+
+from khayyam import JalaliDatetime
+print(JalaliDatetime.now())
+
+{% endhighlight %}
