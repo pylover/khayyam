@@ -4,7 +4,7 @@ email: vahid@dobisel.com
 description: > #
   The purpose of creating this project, is to encapsulate the Persian-Solar-Calendar(Jalali)
   into a python object, with an API as same as the python's native `datetime.datetime` &| `datetime.date` objects.
-baseurl: "khayyam" # the subpath of your site, e.g. /blog/
+baseurl: "/khayyam/" # the subpath of your site, e.g. /blog/
 url: "http://vahid.dobisel.com" # the base hostname & protocol for your site
 twitter_username: pylover
 github_username:  pylover
