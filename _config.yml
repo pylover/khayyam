@@ -11,3 +11,9 @@ github_username:  pylover
 
 # Build settings
 markdown: kramdown
+
+#exclude:
+#  - api-doc/index.html
+#
+#include:
+#  - api-doc/index.html
