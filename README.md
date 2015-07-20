@@ -6,10 +6,10 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 To Do
 ----------
 
+  * API-Doc
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
   * Show weekday in __repr__
-  * API-Doc
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Alphabetical number format
   * Naming conventions

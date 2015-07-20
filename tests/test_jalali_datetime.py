@@ -31,6 +31,8 @@ class TestJalaliDateTime(unittest.TestCase):
         
     def test_now(self):
         self.assertIsNotNone(JalaliDatetime.now())
+        self.assertIsNone(JalaliDatetime.now().tzinfo)
+        self.assertIsNotNone(JalaliDatetime.now(TehranTimezone()).tzinfo)
         
     def test_utcnow(self):
         jutcnow = JalaliDatetime.utcnow()
@@ -128,6 +130,8 @@ class TestJalaliDateTime(unittest.TestCase):
     def test_iso_format(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23)
         self.assertEqual(jdate.isoformat(), '%s-12-23T00:00:00.000000' % self.leap_year)
+        jdate = JalaliDatetime(self.leap_year, 12, 23, tzinfo=teh_tz)
+        self.assertEqual(jdate.isoformat(), '%s-12-23T00:00:00.000000+03:30' % self.leap_year)
 
     def test_algorithm(self):
         min = datetime(1900, 1, 1, 1, 1, 1)
