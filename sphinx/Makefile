@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
-JEKYLL_OUT_DIR = $(BUILDDIR)/../../../khayyam.io/
+GITHUB_OUT_DIR = $(BUILDDIR)/../../../khayyam.io/
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -25,7 +25,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
-	@echo "  jekyll     to make amd deploy standalone HTML files into the jekyll project."
+	@echo "  github.io     to make amd deploy HTML files into the jekyll project."
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
 	@echo "  pickle     to make pickle files"
@@ -53,15 +53,15 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-jekyll:
-	rm -rf $(JEKYLL_OUT_DIR)/*;
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(JEKYLL_OUT_DIR)
-	mv $(JEKYLL_OUT_DIR)/_static $(JEKYLL_OUT_DIR)/static
-	mv $(JEKYLL_OUT_DIR)/_sources $(JEKYLL_OUT_DIR)/sources
-	sed -i 's/_static\//static\//g' $(JEKYLL_OUT_DIR)/*.html
-	sed -i 's/_sources\//source\//g' $(JEKYLL_OUT_DIR)/*.html
+github.io:
+	rm -rf $(GITHUB_OUT_DIR)/*;
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
+	mv $(GITHUB_OUT_DIR)/_static $(GITHUB_OUT_DIR)/static
+	mv $(GITHUB_OUT_DIR)/_sources $(GITHUB_OUT_DIR)/sources
+	sed -i 's/_static\//static\//g' $(GITHUB_OUT_DIR)/*.html
+	sed -i 's/_sources\//source\//g' $(GITHUB_OUT_DIR)/*.html
 	@echo
-	@echo "Build finished. The HTML pages are in $(JEKYLL_OUT_DIR)."
+	@echo "Build finished. The HTML pages are in $(GITHUB_OUT_DIR)."
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
