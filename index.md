@@ -1,5 +1,4 @@
 ---
-title: Khayyam
 layout: default
 permalink: /
 ---
