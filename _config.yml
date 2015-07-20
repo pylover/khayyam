@@ -1,7 +1,8 @@
 # Site settings
 title: Khayyam
 email: vahid@dobisel.com
-description: > # The purpose of creating this project, is to encapsulate the Persian-Solar-Calendar(Jalali)
+description: > #
+  The purpose of creating this project, is to encapsulate the Persian-Solar-Calendar(Jalali)
   into a python object, with an API as same as the python's native `datetime.datetime` &| `datetime.date` objects.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://khayyam.dobisel.com" # the base hostname & protocol for your site
