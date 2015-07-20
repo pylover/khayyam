@@ -10,6 +10,10 @@ __author__ = 'vahid'
 
 
 class JalaliDatetime(JalaliDate):
+    min = (MINYEAR, 1, 1)
+    max = (MAXYEAR, 12, 29, 23, 59, 59, 999999)
+    resolution = timedelta(microseconds=1)
+
     def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0, microsecond=0, tzinfo=None):
         if isinstance(year, JalaliDate):
             jd = year
@@ -275,9 +279,17 @@ class JalaliDatetime(JalaliDate):
         return (self.date() - JalaliDate(self.year, 1, 1)).days + 1
 
     def __repr__(self):
-        return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s)' % \
-               (self.year, self.month, self.day, self.hour, self.minute, self.second, self.microsecond, \
-                ', tzinfo=%s' % self.tzinfo if self.tzinfo else '')
+        return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
+            self.year,
+            self.month,
+            self.day,
+            self.hour,
+            self.minute,
+            self.second,
+            self.microsecond,
+            ', tzinfo=%s' % self.tzinfo if self.tzinfo else '',
+            self.weekdayname_ascii()
+        )
 
     #################
     ### Operators ###
@@ -294,7 +306,7 @@ class JalaliDatetime(JalaliDate):
             return JalaliDatetime.from_datetime(self.to_datetime() - x)
         elif isinstance(x, JalaliDatetime):
             return self.to_datetime() - x.to_datetime()
-        elif isinstance(x, JalaliDate):
+        elif isinstance(x, JalaliDate): # TODO: Cover it by Test
             return self.to_datetime() - JalaliDatetime(x).to_datetime()
 
         raise ValueError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')
@@ -336,6 +348,5 @@ class JalaliDatetime(JalaliDate):
 
 
 # # Class attributes
-JalaliDatetime.min = JalaliDatetime(MINYEAR, 1, 1)
-JalaliDatetime.max = JalaliDatetime(MAXYEAR, 12, 29, 23, 59, 59, 999999)
-JalaliDatetime.resolution = timedelta(microseconds=1)
+JalaliDatetime.min = JalaliDatetime(*JalaliDatetime.min)
+JalaliDatetime.max = JalaliDatetime(*JalaliDatetime.max)

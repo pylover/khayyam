@@ -6,28 +6,32 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 To Do
 ----------
 
-  * API-Doc
+  * Naming conventions
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
-  * Show weekday in __repr__
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
-  * Alphabetical number format
-  * Naming conventions
-  * setup.py pure python fallback switch
   * Use compiled regex if matters in performance
   * Readme:
     * Installation: (PYPI, Development version)
     * Testing
-    * Parsing
+    * Parsing, post processors priority
     * Formatting
     * Conversions
     * Operators
     * Compatibility
     * Contribution
-  
+  * API-Doc
+    * Fetch version automatically from khayyam/__init__.py
+    * Add custom page into doc-site 
+  * Cython  
+  * setup.py pure python fallback switch
+  * Alphabetical number format
 
 Change Log
 ----------
+
+  * 2.1.0-alpha (2015-07-20)
+    * Adding ascii weekdayname in `JalaliDatetime` and `JalaliDate` representation(__repr__). 
 
   * 2.0.0-alpha (2015-07-19) Incompatible with < 2.0.0
     * JalaliDate: method `localformat` renamed to `localdateformat`.

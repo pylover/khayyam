@@ -11,6 +11,9 @@ class BaseAmPmDirective(Directive):
     def format(self, d):
         return getattr(d, self.name)()
 
+    def is_am(self, ctx):
+        raise NotImplementedError()
+
     def post_parser(self, ctx, formatter):
         hour12 = ctx['hour12']
 

@@ -19,7 +19,11 @@ class TestJalaliDate(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDate, MAXYEAR + 1, 5, 23)
         self.assertRaises(ValueError, JalaliDate, MAXYEAR, 13, 23)
         self.assertRaises(ValueError, JalaliDate, MAXYEAR, 12, 30)
-        
+
+    def test_repr(self):
+        jdate = JalaliDate(1376, 5, 23)
+        self.assertEqual(repr(jdate), 'khayyam.JalaliDate(1376, 5, 23, Panjshanbeh)')
+
     def test_is_leap(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
         self.assertTrue(jdate.is_leap)

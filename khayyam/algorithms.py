@@ -56,7 +56,7 @@ def days_in_month(year, month):
 def julian_day_from_jalali_date(year, month, day):
     base = year - ([473, 474][year >= 0])
     julian_year = 474 + (base % 2820)
-    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(((julian_year * 682) - 110) / 2816) + (julian_year - 1) * 365 + floor(base / 2820) * 1029983 + (1948320.5 - 1);
+    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(((julian_year * 682) - 110) / 2816) + (julian_year - 1) * 365 + floor(base / 2820) * 1029983 + (1948320.5 - 1)
 
 
 def jalali_date_from_julian_day(julian_day):

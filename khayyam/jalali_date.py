@@ -22,6 +22,10 @@ __author__ = 'vahid'
 
 
 class JalaliDate(object):
+    min = (MINYEAR, 1, 1) # To be converted to JalaliDate at the bottom of this module
+    max = (MAXYEAR, 12, 29)
+    resolution = datetime.timedelta(days=1)
+
     """
     Representing the Jalali Date, without the time data.
     """
@@ -182,8 +186,8 @@ class JalaliDate(object):
         return self.isoformat()
 
     def __repr__(self):
-        return 'khayyam.JalaliDate(%s, %s, %s)' % \
-               (self.year, self.month, self.day)
+        return 'khayyam.JalaliDate(%s, %s, %s, %s)' % \
+               (self.year, self.month, self.day, self.weekdayname_ascii())
 
     def strftime(self, fmt):
         """
@@ -335,6 +339,6 @@ Directive    Meaning
 
 
 # Class attributes
-JalaliDate.min = JalaliDate(MINYEAR, 1, 1)
-JalaliDate.max = JalaliDate(MAXYEAR, 12, 29)
-JalaliDate.resolution = datetime.timedelta(days=1)
+JalaliDate.min = JalaliDate(*JalaliDate.min)
+JalaliDate.max = JalaliDate(*JalaliDate.max)
+

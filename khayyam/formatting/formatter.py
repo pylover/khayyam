@@ -91,7 +91,6 @@ class JalaliDateFormatter(object):
         return self._post_parsers
 
     def _parse_post_processor(self, parse_result):
-        # TODO: Add this behavior to the documents
         for directive_name in self.post_parsers:
             if directive_name in parse_result:
                 self.directives_by_name[directive_name].post_parser(parse_result, self)

@@ -14,7 +14,7 @@ class TestJalaliDateTime(unittest.TestCase):
         self.leap_year = 1375
         self.naive_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3)
         self.aware_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3, TehranTimezone())
-        
+
     def test_to_from_datetime(self):
         # Naive
         jdate1 = JalaliDatetime.from_datetime(self.naive_jdt.to_datetime())
@@ -43,12 +43,12 @@ class TestJalaliDateTime(unittest.TestCase):
 
         def check_format(jdate ,fmt):
             jdate_str = jdate.strftime(fmt)
-            d2 = JalaliDatetime.strptime(jdate_str, fmt)
-            if jdate != d2:
+            parsed_dt = JalaliDatetime.strptime(jdate_str, fmt)
+            if jdate != parsed_dt:
                 print(repr(jdate))
                 print(jdate_str)
-                print(repr(d2))
-            self.assertEqual(jdate, d2)
+                print(repr(parsed_dt))
+            self.assertEqual(jdate, parsed_dt)
 
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
 
@@ -104,7 +104,7 @@ class TestJalaliDateTime(unittest.TestCase):
         check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
 
         self.assertEqual(
-            JalaliDatetime.strptime('1394-تیر-29 دوشنبه 00:05:14.113389 +04:30', '%Y-%B-%d %A %H:%M:%S.%f %z'),
+            JalaliDatetime.strptime(u'1394-تیر-29 دوشنبه 00:05:14.113389 +04:30', '%Y-%B-%d %A %H:%M:%S.%f %z'),
             JalaliDatetime(1394, 4, 29, 0, 5, 14, 113389, Timezone(timedelta(hours=4, minutes=30)))
         )
 
@@ -145,7 +145,7 @@ class TestJalaliDateTime(unittest.TestCase):
             self.assertEqual(dt, dt2)
             days += 1
             if days > max_days:
-                break;
+                break
 
     def test_add(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23)
@@ -179,6 +179,10 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(d1.replace(month=1),   JalaliDatetime(1391, 1, 30))
         self.assertEqual(d1.replace(day=1),     JalaliDatetime(1391, 12, 1))
         self.assertRaises(ValueError, d1.replace, year=1392)
-    
+
+    def test_repr(self):
+        d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
+        self.assertEqual(repr(d1), 'khayyam.JalaliDatetime(1375, 12, 23, 12, 3, 45, 34567, Panjshanbeh)')
+
 if __name__ == '__main__':
     unittest.main()

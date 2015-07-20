@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = '2.0.0-alpha'
+__version__ = '2.1.0-alpha'
 from .constants import MINYEAR, MAXYEAR, \
     SATURDAY, SUNDAY, MONDAY, THURSDAY, WEDNESDAY, TUESDAY, FRIDAY
 from .jalali_date import JalaliDate
