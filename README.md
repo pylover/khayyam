@@ -3,8 +3,9 @@ khayyam
 
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
-To Do
-----------
+
+
+### To Do
 
   * Naming conventions
   * Constructors act as converter: `JalaliDate(date)`
@@ -23,12 +24,12 @@ To Do
   * API-Doc
     * Fetch version automatically from khayyam/__init__.py
     * Add custom page into doc-site 
-  * Cython  
-  * setup.py pure python fallback switch
+  * Cython
+    * setup.py pure python fallback switch
+    * Distribute pre compiled binaries from some platforms
   * Alphabetical number format
 
-Change Log
-----------
+### Change Log
 
   * 2.1.0-alpha (2015-07-20)
     * Adding ascii weekdayname in `JalaliDatetime` and `JalaliDate` representation(__repr__). 
