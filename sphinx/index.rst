@@ -28,7 +28,7 @@ to understand and to work with, at the cost of ignoring some aspects of reality.
 
 For applications requiring aware objects, :py:class:`khayyam.JalaliDate` and
 :py:class:`khayyam.JalaliDatetime` objects have an optional time zone information
-attribute, tzinfo, that can be set to an instance of a subclass of the abstract tzinfo class.
+attribute, tzinfo, that can be set to an instance of a subclass of the abstract :py:class:`datetime.tzinfo` class, such as :py:class:`khayyam.Timezone` and or :py:class:`khayyam.TehranTimezone`.
 
 
 The package's API is considered to be exactly the same as the :py:mod:`datetime`, so if you are familiar with the :py:class:`datetime`, you can read the migration guide.
@@ -43,6 +43,8 @@ Contents:
    overview
    migration
    installation
+   pypi
+   sourcecode
    development
    persiancalendar
    api
