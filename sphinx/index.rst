@@ -45,7 +45,6 @@ Contents:
    overview
    migration
    installation
-   sourcecode
    development
    persiancalendar
    api
