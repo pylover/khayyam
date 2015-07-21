@@ -373,8 +373,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 </div>
 <div class="section" id="jalalidatetime-class">
 <h2><code class="xref py py-class docutils literal"><span class="pre">JalaliDatetime</span></code> class<a class="headerlink" href="#jalalidatetime-class" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><dl class="class">
+<dl class="class">
 <dt id="khayyam.JalaliDatetime">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.jalali_date.JalaliDate</span></code></p>
@@ -638,12 +637,10 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 
 </dd></dl>
 
-</div></blockquote>
 </div>
-<div class="section" id="formatting-module">
-<h2><code class="xref py py-mod docutils literal"><span class="pre">formatting</span></code> module<a class="headerlink" href="#formatting-module" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><span class="target" id="module-khayyam.formatting.formatter"></span><dl class="class">
+<div class="section" id="module-khayyam.formatting.formatter">
+<span id="formatting-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">formatting</span></code> module<a class="headerlink" href="#module-khayyam.formatting.formatter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="khayyam.formatting.formatter.JalaliDateFormatter">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.formatter.</code><code class="descname">JalaliDateFormatter</code><span class="sig-paren">(</span><em>format_string</em>, <em>directive_db=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
@@ -855,54 +852,51 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 
 </dd></dl>
 
-</div></blockquote>
 </div>
 <div class="section" id="timezones-module">
 <h2><code class="xref py py-mod docutils literal"><span class="pre">timezones</span></code> module<a class="headerlink" href="#timezones-module" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><span class="target" id="module-khayyam.timezones"></span><dl class="class">
-<dt id="khayyam.timezones.TehranTimezone">
-<em class="property">class </em><code class="descclassname">khayyam.timezones.</code><code class="descname">TehranTimezone</code><a class="reference internal" href="modules/khayyam/timezones.html#TehranTimezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.TehranTimezone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.timezones.Timezone" title="khayyam.timezones.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.timezones.Timezone</span></code></a></p>
-<dl class="attribute">
-<dt id="khayyam.timezones.TehranTimezone.dst_end">
-<code class="descname">dst_end</code><em class="property"> = (7, 1)</em><a class="headerlink" href="#khayyam.timezones.TehranTimezone.dst_end" title="Permalink to this definition">¶</a></dt>
+<dl class="class">
+<dt id="khayyam.Timezone">
+<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">Timezone</code><span class="sig-paren">(</span><em>offset</em>, <em>dst_offset=None</em>, <em>dst_checker=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></p>
+<dl class="method">
+<dt id="khayyam.Timezone.dst">
+<code class="descname">dst</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone.dst" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="khayyam.timezones.TehranTimezone.dst_start">
-<code class="descname">dst_start</code><em class="property"> = (1, 1)</em><a class="headerlink" href="#khayyam.timezones.TehranTimezone.dst_start" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="khayyam.Timezone.fromutc">
+<code class="descname">fromutc</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.fromutc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone.fromutc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.Timezone.tzname">
+<code class="descname">tzname</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.tzname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone.tzname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.Timezone.utcoffset">
+<code class="descname">utcoffset</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.utcoffset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone.utcoffset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.timezones.Timezone">
-<em class="property">class </em><code class="descclassname">khayyam.timezones.</code><code class="descname">Timezone</code><span class="sig-paren">(</span><em>offset</em>, <em>dst_offset=None</em>, <em>dst_checker=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.Timezone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.timezones.Timezone.dst">
-<code class="descname">dst</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.Timezone.dst" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.TehranTimezone">
+<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">TehranTimezone</code><a class="reference internal" href="modules/khayyam/timezones.html#TehranTimezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.TehranTimezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.timezones.Timezone</span></code></p>
+<dl class="attribute">
+<dt id="khayyam.TehranTimezone.dst_end">
+<code class="descname">dst_end</code><em class="property"> = (7, 1)</em><a class="headerlink" href="#khayyam.TehranTimezone.dst_end" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="khayyam.timezones.Timezone.fromutc">
-<code class="descname">fromutc</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.fromutc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.Timezone.fromutc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.timezones.Timezone.tzname">
-<code class="descname">tzname</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.tzname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.Timezone.tzname" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.timezones.Timezone.utcoffset">
-<code class="descname">utcoffset</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.utcoffset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.timezones.Timezone.utcoffset" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="khayyam.TehranTimezone.dst_start">
+<code class="descname">dst_start</code><em class="property"> = (1, 1)</em><a class="headerlink" href="#khayyam.TehranTimezone.dst_start" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div></blockquote>
 </div>
 </div>
 
@@ -917,7 +911,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <li><a class="reference internal" href="#">API Reference</a><ul>
 <li><a class="reference internal" href="#jalalidate-class"><code class="docutils literal"><span class="pre">JalaliDate</span></code> class</a></li>
 <li><a class="reference internal" href="#jalalidatetime-class"><code class="docutils literal"><span class="pre">JalaliDatetime</span></code> class</a></li>
-<li><a class="reference internal" href="#formatting-module"><code class="docutils literal"><span class="pre">formatting</span></code> module</a></li>
+<li><a class="reference internal" href="#module-khayyam.formatting.formatter"><code class="docutils literal"><span class="pre">formatting</span></code> module</a></li>
 <li><a class="reference internal" href="#timezones-module"><code class="docutils literal"><span class="pre">timezones</span></code> module</a></li>
 </ul>
 </li>
