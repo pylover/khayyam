@@ -103,12 +103,6 @@ class JalaliDate(object):
 
     @classmethod
     def strptime(cls, date_string, fmt):
-        """
-        Return a datetime corresponding to date_string, parsed according to format. This is equivalent to datetime(*(time.strptime(date_string, format)[0:6])). ValueError is raised if the date_string and format can't be parsed by time.strptime() or if it returns a value which isn't a time tuple. See section strftime() and strptime() Behavior.
-        Weekdays are not supported at all.
-        '1387/4/12'
-        '%Y/%m/%d'
-        """
 
         result = cls.create_formatter(fmt).parse(date_string)
         result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
