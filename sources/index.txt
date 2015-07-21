@@ -42,7 +42,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   overview
+   intro
    migration
    installation
    development

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Khayyam &mdash; Khayyam 2.1.0-alpha documentation</title>
+    <title>Khayyam &mdash; Khayyam 2.2.0-alpha documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0-alpha',
+        VERSION:     '2.2.0-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.1.0-alpha documentation" href="#" />
-    <link rel="next" title="Overview" href="overview.html" /> 
+    <link rel="top" title="Khayyam 2.2.0-alpha documentation" href="#" />
+    <link rel="next" title="Introduction" href="intro.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -37,9 +37,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="overview.html" title="Overview"
+          <a href="intro.html" title="Introduction"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Khayyam 2.1.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -75,7 +75,11 @@ so if you are familiar with the <a class="reference external" href="https://docs
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#overview">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migration.html">Migration from python&#8217;s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#from-pypi">From PyPI</a></li>
@@ -84,15 +88,17 @@ so if you are familiar with the <a class="reference external" href="https://docs
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development &amp; Contribution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development.html#document-authoring">Document authoring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="persiancalendar.html">Persian(Jalali) Calendar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#jalalidate-class"><code class="docutils literal"><span class="pre">JalaliDate</span></code> class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#jalalidatetime-class"><code class="docutils literal"><span class="pre">JalaliDatetime</span></code> class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-khayyam.formatting.formatter"><code class="docutils literal"><span class="pre">formatting</span></code> module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#timezones-module"><code class="docutils literal"><span class="pre">timezones</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#date-objects">Date objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#date-time-objects">Date &amp; Time objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-khayyam.formatting.formatter">Formatting &amp; Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#timezone-objects">Timezone objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-khayyam.constants">Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -133,8 +139,8 @@ so if you are familiar with the <a class="reference external" href="https://docs
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="overview.html"
-                        title="next chapter">Overview</a></p>
+  <p class="topless"><a href="intro.html"
+                        title="next chapter">Introduction</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -169,9 +175,9 @@ so if you are familiar with the <a class="reference external" href="https://docs
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="overview.html" title="Overview"
+          <a href="intro.html" title="Introduction"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Khayyam 2.1.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

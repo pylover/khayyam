@@ -18,12 +18,29 @@ Making development environment::
 
 Do some changes and make a pull request.
 
+Testing
+^^^^^^^
+
+Install nose::
+
+  $ pip install nose
+  $ cd path/to/khayyam
+  $ nosetests
+
+Without nose::
+
+  $ cd path/to/khayyam
+  $ python tests/test_jalali_date.py
+  $ python tests/test_jalali_datetime.py
+  $ python tests/test_teh_tz.py
+
+
 Document authoring
 ^^^^^^^^^^^^^^^^^^
 
 Clone/checkout the `gh-pages` branch from Github alongside the master branch working copy directory ::
 
-  $ cd /patch/to/khayyam
+  $ cd path/to/khayyam
   $ cd ..
   $ git clone -b gh-pages <Your fork url>
 
