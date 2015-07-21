@@ -25,6 +25,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
+	@echo "  github.io.auto       to make amd deploy HTML files into the jekyll project, and watch for changes."
 	@echo "  github.io     to make amd deploy HTML files into the jekyll project."
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
@@ -52,6 +53,16 @@ help:
 
 clean:
 	rm -rf $(BUILDDIR)/*
+
+github.io.auto:
+	rm -rf $(GITHUB_OUT_DIR)/*;
+	sphinx-autobuild -b html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
+	mv $(GITHUB_OUT_DIR)/_static $(GITHUB_OUT_DIR)/static
+	mv $(GITHUB_OUT_DIR)/_sources $(GITHUB_OUT_DIR)/sources
+	sed -i 's/_static\//static\//g' $(GITHUB_OUT_DIR)/*.html
+	sed -i 's/_sources\//source\//g' $(GITHUB_OUT_DIR)/*.html
+	@echo
+	@echo "Live build to $(GITHUB_OUT_DIR)."
 
 github.io:
 	rm -rf $(GITHUB_OUT_DIR)/*;

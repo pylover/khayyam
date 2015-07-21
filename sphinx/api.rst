@@ -1,26 +1,27 @@
 API Reference
 =============
 
-:mod:`jalali_date` Module
+:class:`JalaliDate` Class
 -------------------------
 
-.. automodule:: khayyam.jalali_date
+.. autoclass:: khayyam.JalaliDate
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`jalali_datetime` Module
+
+:class:`JalaliDatetime` Class
 -----------------------------
 
-.. automodule:: khayyam.jalali_datetime
+.. autoclass:: khayyam.JalaliDatetime
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`tehran_timezone` Module
+:mod:`timezones` Module
 -----------------------------
 
-.. automodule:: khayyam.tehran_timezone
+.. automodule:: khayyam.timezones
     :members:
     :undoc-members:
     :show-inheritance:
