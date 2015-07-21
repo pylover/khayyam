@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Khayyam’s documentation! &mdash; Khayyam 2.1.0-alpha documentation</title>
+    <title>Khayyam &mdash; Khayyam 2.1.0-alpha documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -48,11 +48,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-khayyam-s-documentation">
-<h1>Welcome to Khayyam&#8217;s documentation!<a class="headerlink" href="#welcome-to-khayyam-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="khayyam">
+<h1>Khayyam<a class="headerlink" href="#khayyam" title="Permalink to this headline">¶</a></h1>
 <p>The khayyam module supplies classes for manipulating persian dates and times in both
 simple and complex ways. While date and time arithmetic is supported, the focus of the
 implementation is on efficient attribute extraction for output formatting and manipulation.</p>
+<p>Currently both versions of python(2.x &amp; 3.x) are supported.</p>
 <p>As of the python&#8217;s official documentation: There are two kinds of date and time objects:
 “naive” and “aware”.</p>
 <p>An aware object has sufficient knowledge of applicable algorithmic and political time
@@ -68,15 +69,20 @@ to understand and to work with, at the cost of ignoring some aspects of reality.
 <p>For applications requiring aware objects, <a class="reference internal" href="api.html#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a> and
 <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> objects have an optional time zone information
 attribute, tzinfo, that can be set to an instance of a subclass of the abstract <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> class, such as <a class="reference internal" href="api.html#khayyam.Timezone" title="khayyam.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.Timezone</span></code></a> and or <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a>.</p>
-<p>The package&#8217;s API is considered to be exactly the same as the <a class="reference external" href="https://docs.python.org/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, so if you are familiar with the <a class="reference external" href="https://docs.python.org/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, you can read the migration guide.</p>
+<p>The package&#8217;s API is considered to be exactly the same as the <a class="reference external" href="https://docs.python.org/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a> module,
+so if you are familiar with the <a class="reference external" href="https://docs.python.org/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, you can read the <a class="reference internal" href="migration.html#migration"><span>Migration from python&#8217;s builtin datetime</span></a>.</p>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migration.html">Migration from python&#8217;s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pypi.html">Python package Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-source">From Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-github">From Github</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="sourcecode.html">Source Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development &amp; Contribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persiancalendar.html">Persian(Jalali) Calendar</a></li>
@@ -90,14 +96,22 @@ attribute, tzinfo, that can be set to an instance of a subclass of the abstract 
 </ul>
 </div>
 </div>
+<div class="section" id="links">
+<h2>Links:<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Python package index: <a class="reference external" href="https://pypi.python.org/pypi/Khayyam">https://pypi.python.org/pypi/Khayyam</a></li>
+<li>Source code on Github: <a class="reference external" href="https://github.com/pylover/khayyam">https://github.com/pylover/khayyam</a></li>
+<li>Main Page: <a class="reference external" href="http://vahid.dobisel.com/khayyam/">http://vahid.dobisel.com/khayyam/</a></li>
+</ul>
 </div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
 </ul>
+</div>
 </div>
 
 
@@ -108,11 +122,12 @@ attribute, tzinfo, that can be set to an instance of a subclass of the abstract 
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to Khayyam&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">Khayyam</a><ul>
 <li><a class="reference internal" href="#contents">Contents:</a></li>
+<li><a class="reference internal" href="#links">Links:</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
