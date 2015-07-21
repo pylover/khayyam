@@ -291,6 +291,9 @@ class JalaliDatetime(JalaliDate):
             self.weekdayname_ascii()
         )
 
+    def __str__(self):
+        return self.isoformat(sep=' ')
+
     #################
     ### Operators ###
     #################

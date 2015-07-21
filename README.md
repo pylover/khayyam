@@ -13,17 +13,16 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
   * Readme:
-    * Installation: (PYPI, Development version)
-    * Testing
+    * Formatting & parsing
+    * Conversions
+    * Operators
+  * Doc
     * Parsing, post processors priority
-    * Formatting
+    * Formatting & parsing
     * Conversions
     * Operators
     * Compatibility
-    * Contribution
-  * API-Doc
-    * Fetch version automatically from khayyam/__init__.py
-    * Add custom page into doc-site 
+    
   * Cython
     * setup.py pure python fallback switch
     * Distribute pre compiled binaries from some platforms
@@ -31,8 +30,14 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 
 ### Change Log
 
+  * 2.2.1-alpha (2015-07-21)
+    * Doc: Reading package's version automatically from khayyam/__init__.py in `sphinx/conf.py`
+    * Doc: Installation: (PYPI, Development version)
+    * Doc: Testing
+    * Doc: Contribution
+
   * 2.2.0-alpha (2015-07-21)
-    * Generating Document, ShowSource 
+    * Generating API Documentation  
 
   * 2.1.0-alpha (2015-07-20)
     * Adding ascii weekdayname in `JalaliDatetime` and `JalaliDate` representation(__repr__). 

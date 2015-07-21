@@ -35,3 +35,4 @@ nosetests.xml
 .pydevproject
 .idea/*
 sphinx/_build
+sphinx/_inv-cache

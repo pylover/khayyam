@@ -1,26 +1,25 @@
 API Reference
 =============
 
-
-
-:class:`JalaliDate` class
--------------------------
+Date objects
+------------
 
 .. autoclass:: khayyam.JalaliDate
     :members:
     :undoc-members:
     :show-inheritance:
 
-:class:`JalaliDatetime` class
------------------------------
+Date & Time objects
+-------------------
 
 .. autoclass:: khayyam.JalaliDatetime
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`formatting` module
--------------------------
+
+Formatting & Parsing
+--------------------
 
 .. automodule:: khayyam.formatting.formatter
     :members:
@@ -47,8 +46,8 @@ API Reference
     :undoc-members:
     :show-inheritance:
 
-:mod:`timezones` module
------------------------------
+Timezone objects
+----------------
 
 .. autoclass:: khayyam.Timezone
     :members:
@@ -59,3 +58,12 @@ API Reference
     :members:
     :undoc-members:
     :show-inheritance:
+
+Constants
+---------
+
+.. automodule:: khayyam.constants
+    :members: MINYEAR, MAXYEAR, SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
+
+
+
