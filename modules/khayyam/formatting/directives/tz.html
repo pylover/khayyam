@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>khayyam.formatting.directives.tz &mdash; Khayyam 2.1.0-alpha documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.0-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Khayyam 2.1.0-alpha documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.1.0-alpha documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for khayyam.formatting.directives.tz</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">.directive</span> <span class="kn">import</span> <span class="n">Directive</span>
+<span class="kn">import</span> <span class="nn">khayyam.constants</span> <span class="kn">as</span> <span class="nn">consts</span>
+<span class="kn">from</span> <span class="nn">khayyam.compat</span> <span class="kn">import</span> <span class="n">get_unicode</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">khayyam.timezones</span> <span class="kn">import</span> <span class="n">Timezone</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
+
+
+<div class="viewcode-block" id="UTCOffsetDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective">[docs]</a><span class="k">class</span> <span class="nc">UTCOffsetDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UTCOffsetDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;utcoffset&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">UTC_OFFSET_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UTCOffsetDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">d</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s%.2d</span><span class="s">:</span><span class="si">%.2d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="s">&#39;+&#39;</span> <span class="k">if</span> <span class="n">seconds</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">&#39;-&#39;</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">),</span>
+            <span class="nb">int</span><span class="p">((</span><span class="n">seconds</span> <span class="o">%</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span><span class="p">),</span>
+        <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="UTCOffsetDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">exp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="s">&#39;(?P&lt;posneg&gt;[-+]?)(?P&lt;hour&gt;\d{2}):(?P&lt;minute&gt;\d{2})&#39;</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+        <span class="n">posneg</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">i</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;posneg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;-&#39;</span> <span class="k">else</span> <span class="n">i</span>
+        <span class="n">hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;hour&#39;</span><span class="p">])</span>
+        <span class="n">minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;minute&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hours</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">minutes</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">Timezone</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span>
+            <span class="n">hours</span> <span class="o">=</span> <span class="n">posneg</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span>
+            <span class="n">minutes</span> <span class="o">=</span> <span class="n">posneg</span><span class="p">(</span><span class="n">minutes</span><span class="p">)</span>
+        <span class="p">))))</span>
+
+</div></div>
+<div class="viewcode-block" id="TimezoneNameDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.TimezoneNameDirective">[docs]</a><span class="k">class</span> <span class="nc">TimezoneNameDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TimezoneNameDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="s">&#39;Z&#39;</span><span class="p">,</span> <span class="s">&#39;tzname&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">TZ_NAME_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TimezoneNameDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.TimezoneNameDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">tzname</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.1.0-alpha documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Vahid Mardani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
