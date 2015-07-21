@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="Khayyam 2.1.0-alpha documentation" href="index.html" />
     <link rel="next" title="Persian(Jalali) Calendar" href="persiancalendar.html" />
-    <link rel="prev" title="Source Code" href="sourcecode.html" /> 
+    <link rel="prev" title="Installation" href="installation.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,7 +41,7 @@
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sourcecode.html" title="Source Code"
+          <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.1.0-alpha documentation</a> &raquo;</li> 
       </ul>
@@ -54,23 +54,43 @@
             
   <div class="section" id="development-contribution">
 <h1>Development &amp; Contribution<a class="headerlink" href="#development-contribution" title="Permalink to this headline">¶</a></h1>
-<p>Install from Github:</p>
-<blockquote>
-<div>$ cd workspace
-$ git clone &lt;Your fork Url&gt;</div></blockquote>
+<p>At first, any contribution is appreciated.</p>
+<p>Please provide the full black-box &amp; white-box test cases, and pass all tests in the <cite>khayyam/test</cite> directory
+for both versions of python before supplying any pull-request.</p>
+<p>Making development environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd workspace
+$ git clone &lt;Your fork Url&gt;
+$ cd khayyam
+$ pip install -e .
+</pre></div>
+</div>
+<p>Do some changes and make a pull request.</p>
+<div class="section" id="document-authoring">
+<h2>Document authoring<a class="headerlink" href="#document-authoring" title="Permalink to this headline">¶</a></h2>
+<p>Clone/checkout the <cite>gh-pages</cite> branch from Github alongside the master branch working copy directory</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd /patch/to/khayyam
+$ cd ..
+$ git clone -b gh-pages &lt;Your fork url&gt;
+</pre></div>
+</div>
 <p>Build Documents:</p>
-<blockquote>
-<div>$ cd path/to/the/project
-$ cd sphinx
-$ make html</div></blockquote>
-<p>or</p>
-<blockquote>
-<div>$ ./watch</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre>$ cd path/to/khayyam/sphinx
+$ make html
+</pre></div>
+</div>
+<p>Or watch for changes:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ apt-get install inotify-tools
+$ ./watch
+</pre></div>
+</div>
 <p>Start the document http server locally:</p>
-<blockquote>
-<div>$ gem install jekyll
-$ cd path/to/the/project.io
-$ jekyll serve -w</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre>$ gem install jekyll
+$ cd path/to/khayyam.io
+$ jekyll serve -w
+</pre></div>
+</div>
+<p>And then browse the <a class="reference external" href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a>.</p>
+</div>
 </div>
 
 
@@ -79,9 +99,17 @@ $ jekyll serve -w</div></blockquote>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development &amp; Contribution</a><ul>
+<li><a class="reference internal" href="#document-authoring">Document authoring</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="sourcecode.html"
-                        title="previous chapter">Source Code</a></p>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="persiancalendar.html"
                         title="next chapter">Persian(Jalali) Calendar</a></p>
@@ -122,7 +150,7 @@ $ jekyll serve -w</div></blockquote>
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >next</a> |</li>
         <li class="right" >
-          <a href="sourcecode.html" title="Source Code"
+          <a href="installation.html" title="Installation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.1.0-alpha documentation</a> &raquo;</li> 
       </ul>
