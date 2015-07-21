@@ -11,8 +11,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   tutorial
    persiancalendar
    api
+
 
 Indices and tables
 ==================

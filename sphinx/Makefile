@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
-GITHUB_OUT_DIR = $(BUILDDIR)/../../../khayyam.io/
+GITHUB_OUT_DIR = $(BUILDDIR)/../../../khayyam.io
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -54,23 +54,15 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-github.io.auto:
-	rm -rf $(GITHUB_OUT_DIR)/*;
-	sphinx-autobuild -b html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
-	mv $(GITHUB_OUT_DIR)/_static $(GITHUB_OUT_DIR)/static
-	mv $(GITHUB_OUT_DIR)/_sources $(GITHUB_OUT_DIR)/sources
-	sed -i 's/_static\//static\//g' $(GITHUB_OUT_DIR)/*.html
-	sed -i 's/_sources\//source\//g' $(GITHUB_OUT_DIR)/*.html
-	@echo
-	@echo "Live build to $(GITHUB_OUT_DIR)."
-
 github.io:
 	rm -rf $(GITHUB_OUT_DIR)/*;
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
 	mv $(GITHUB_OUT_DIR)/_static $(GITHUB_OUT_DIR)/static
 	mv $(GITHUB_OUT_DIR)/_sources $(GITHUB_OUT_DIR)/sources
+	mv $(GITHUB_OUT_DIR)/_modules $(GITHUB_OUT_DIR)/modules
 	sed -i 's/_static\//static\//g' $(GITHUB_OUT_DIR)/*.html
 	sed -i 's/_sources\//source\//g' $(GITHUB_OUT_DIR)/*.html
+	sed -i 's/_modules\//modules\//g' $(GITHUB_OUT_DIR)/*.html
 	@echo
 	@echo "Build finished. The HTML pages are in $(GITHUB_OUT_DIR)."
 

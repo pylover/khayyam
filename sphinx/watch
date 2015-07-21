@@ -1,0 +1,9 @@
+#!/bin/bash
+while true
+do
+  inotifywait -r -e modify -e move -e create -e delete . | while read line
+    do
+     make github.io
+    done
+done
+
