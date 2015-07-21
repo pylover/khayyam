@@ -16,3 +16,10 @@ Build Documents:
 or
 
     $ ./watch
+
+
+Start the document http server locally:
+
+    $ gem install jekyll
+    $ cd path/to/the/project.io
+    $ jekyll serve -w

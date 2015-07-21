@@ -31,7 +31,7 @@ For applications requiring aware objects, :py:class:`khayyam.JalaliDate` and
 attribute, tzinfo, that can be set to an instance of a subclass of the abstract :py:class:`datetime.tzinfo` class, such as :py:class:`khayyam.Timezone` and or :py:class:`khayyam.TehranTimezone`.
 
 
-The package's API is considered to be exactly the same as the :py:mod:`datetime`, so if you are familiar with the :py:class:`datetime`, you can read the migration guide.
+The package's API is considered to be exactly the same as the :py:mod:`datetime`, so if you are familiar with the :py:mod:`datetime`, you can read the migration guide.
 
 
 Contents:
