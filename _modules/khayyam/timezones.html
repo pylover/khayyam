@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>khayyam.timezones &mdash; Khayyam 2.1.0-alpha documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.0-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Khayyam 2.1.0-alpha documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for khayyam.timezones</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">khayyam.constants</span> <span class="kn">import</span> <span class="n">ZERO_DELTA</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
+
+<span class="n">STDOFFSET</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">210</span><span class="p">)</span>  <span class="c"># Minutes</span>
+<span class="n">DSTOFFSET</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">270</span><span class="p">)</span>  <span class="c"># Minutes</span>
+<span class="n">DSTDIFF</span> <span class="o">=</span> <span class="n">DSTOFFSET</span> <span class="o">-</span> <span class="n">STDOFFSET</span>
+
+
+<div class="viewcode-block" id="Timezone"><a class="viewcode-back" href="../../api.html#khayyam.timezones.Timezone">[docs]</a><span class="k">class</span> <span class="nc">Timezone</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">dst_offset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dst_checker</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span> <span class="o">=</span> <span class="n">dst_offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dst_checker</span> <span class="o">=</span> <span class="n">dst_checker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+<div class="viewcode-block" id="Timezone.fromutc"><a class="viewcode-back" href="../../api.html#khayyam.timezones.Timezone.fromutc">[docs]</a>    <span class="k">def</span> <span class="nf">fromutc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Datetime timezone mismatch: </span><span class="si">%s</span><span class="s"> != </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+
+        <span class="n">utc_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
+        <span class="n">dst_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">utc_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The object: </span><span class="si">%s</span><span class="s"> is naive.&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid DST timedelta: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dst_offset</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">utc_offset</span> <span class="o">-</span> <span class="n">dst_offset</span>  <span class="c"># this is self&#39;s standard offset</span>
+        <span class="k">if</span> <span class="n">delta</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">+=</span> <span class="n">delta</span>  <span class="c"># convert to standard local time</span>
+            <span class="n">dst_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid DST timedelta: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dst_offset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dst_offset</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">dst_offset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dt</span>
+</div>
+<div class="viewcode-block" id="Timezone.utcoffset"><a class="viewcode-back" href="../../api.html#khayyam.timezones.Timezone.utcoffset">[docs]</a>    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_dst</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
+</div>
+<div class="viewcode-block" id="Timezone.dst"><a class="viewcode-back" href="../../api.html#khayyam.timezones.Timezone.dst">[docs]</a>    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_dst</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ZERO_DELTA</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">off</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s%.2d</span><span class="s">:</span><span class="si">%.2d%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="s">&#39;+&#39;</span> <span class="k">if</span> <span class="n">off</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">&#39;-&#39;</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">off</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">),</span>
+            <span class="nb">int</span><span class="p">((</span><span class="n">off</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">%</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">&#39;±</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Timezone.tzname"><a class="viewcode-back" href="../../api.html#khayyam.timezones.Timezone.tzname">[docs]</a>    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_is_dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_checker</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_checker</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_offset</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="TehranTimezone"><a class="viewcode-back" href="../../api.html#khayyam.timezones.TehranTimezone">[docs]</a><span class="k">class</span> <span class="nc">TehranTimezone</span><span class="p">(</span><span class="n">Timezone</span><span class="p">):</span>
+    <span class="n">dst_start</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dst_end</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">210</span><span class="p">),</span>
+            <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">dt</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dst_start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst_end</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> \
+                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dst_start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst_start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="ow">or</span> \
+                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dst_end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst_end</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="p">),</span>
+            <span class="s">&#39;Iran/Tehran&#39;</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Vahid Mardani.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
