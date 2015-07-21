@@ -3,13 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Khayyam's documentation!
-===================================
+Khayyam
+=======
 
 The khayyam module supplies classes for manipulating persian dates and times in both
 simple and complex ways. While date and time arithmetic is supported, the focus of the
 implementation is on efficient attribute extraction for output formatting and manipulation.
 
+Currently both versions of python(2.x & 3.x) are supported.
 
 As of the python's official documentation: There are two kinds of date and time objects:
 “naive” and “aware”.
@@ -31,7 +32,8 @@ For applications requiring aware objects, :py:class:`khayyam.JalaliDate` and
 attribute, tzinfo, that can be set to an instance of a subclass of the abstract :py:class:`datetime.tzinfo` class, such as :py:class:`khayyam.Timezone` and or :py:class:`khayyam.TehranTimezone`.
 
 
-The package's API is considered to be exactly the same as the :py:mod:`datetime`, so if you are familiar with the :py:mod:`datetime`, you can read the migration guide.
+The package's API is considered to be exactly the same as the :py:mod:`datetime` module,
+so if you are familiar with the :py:mod:`datetime`, you can read the :ref:`migration`.
 
 
 Contents:
@@ -43,15 +45,22 @@ Contents:
    overview
    migration
    installation
-   pypi
    sourcecode
    development
    persiancalendar
    api
 
 
+Links:
+------
+
+* Python package index: `https://pypi.python.org/pypi/Khayyam <https://pypi.python.org/pypi/Khayyam>`_
+* Source code on Github: `https://github.com/pylover/khayyam <https://github.com/pylover/khayyam>`_
+* Main Page: `http://vahid.dobisel.com/khayyam/ <http://vahid.dobisel.com/khayyam/>`_
+
+
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
