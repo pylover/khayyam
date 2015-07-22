@@ -54,15 +54,15 @@
 <span class="kn">from</span> <span class="nn">khayyam.compat</span> <span class="kn">import</span> <span class="n">get_unicode</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
-<div class="viewcode-block" id="LocalDateFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDateFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalDateFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDateFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDateFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalDateFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalDateFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_DATE_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalDateFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDateFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDateFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDateFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localdateformat</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalDateFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDateFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDateFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDateFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="n">regex</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="s">&#39;(?P&lt;weekdayname&gt;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_WEEKDAY_NAMES_REGEX</span><span class="p">,</span>
             <span class="s">&#39;(?P&lt;day&gt;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">consts</span><span class="o">.</span><span class="n">DAY_REGEX</span><span class="p">,</span>
@@ -80,15 +80,15 @@
         <span class="p">))</span>
 
 </div></div>
-<div class="viewcode-block" id="LocalShortDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalShortDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalShortDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalShortDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalShortDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalShortDatetimeFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;localshortdatetimeformat&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_SHORT_DATE_TIME_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalShortDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalShortDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalShortDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localshortformat</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalShortDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalShortDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalShortDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="n">regex</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="s">&#39;(?P&lt;weekdayabbr&gt;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_WEEKDAY_ABBRS_REGEX</span><span class="p">,</span>
             <span class="s">&#39;(?P&lt;day&gt;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">consts</span><span class="o">.</span><span class="n">DAY_REGEX</span><span class="p">,</span>
@@ -109,15 +109,15 @@
         <span class="p">))</span>
 
 </div></div>
-<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalASCIIShortDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalASCIIShortDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalASCIIShortDatetimeFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;q&#39;</span><span class="p">,</span> <span class="s">&#39;localshortdatetimeformatascii&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_SHORT_DATE_TIME_FORMAT_ASCII_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localshortformatascii</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIShortDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        %e %d %g %y %H:%M</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -143,15 +143,15 @@
 
 
 </div></div>
-<div class="viewcode-block" id="LocalDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalDatetimeFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;localdatetimeformat&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localdatetimeformat</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        %A %d %B %Y %I:%M:%S %p</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -179,15 +179,15 @@
         <span class="p">))</span>
 
 </div></div>
-<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalASCIIDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalASCIIDatetimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalASCIIDatetimeFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;Q&#39;</span><span class="p">,</span> <span class="s">&#39;localdatetimeformatascii&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME_FORMAT_ASCII_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localdatetimeformatascii</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalASCIIDatetimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        %E %d %G %Y %I:%M:%S %t</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -216,15 +216,15 @@
         <span class="p">))</span>
 
 </div></div>
-<div class="viewcode-block" id="LocalTimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalTimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalTimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalTimeFormatDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalTimeFormatDirective">[docs]</a><span class="k">class</span> <span class="nc">LocalTimeFormatDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LocalTimeFormatDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;X&#39;</span><span class="p">,</span> <span class="s">&#39;localtimeformat&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">LOCAL_TIME_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalTimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalTimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalTimeFormatDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalTimeFormatDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">localtimeformat</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="LocalTimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.local.LocalTimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="LocalTimeFormatDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.LocalTimeFormatDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;%I:%M:%S %p&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>

@@ -57,12 +57,12 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
 
-<div class="viewcode-block" id="UTCOffsetDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective">[docs]</a><span class="k">class</span> <span class="nc">UTCOffsetDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="UTCOffsetDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.UTCOffsetDirective">[docs]</a><span class="k">class</span> <span class="nc">UTCOffsetDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">UTCOffsetDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;utcoffset&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">UTC_OFFSET_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="UTCOffsetDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="UTCOffsetDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.UTCOffsetDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">d</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="s">&#39;&#39;</span>
         <span class="n">seconds</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
@@ -72,7 +72,7 @@
             <span class="nb">int</span><span class="p">((</span><span class="n">seconds</span> <span class="o">%</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span><span class="p">),</span>
         <span class="p">)</span>
 </div>
-<div class="viewcode-block" id="UTCOffsetDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.UTCOffsetDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="UTCOffsetDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.UTCOffsetDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="n">exp</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">exp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
             <span class="k">return</span>
@@ -90,12 +90,12 @@
         <span class="p">))))</span>
 
 </div></div>
-<div class="viewcode-block" id="TimezoneNameDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.TimezoneNameDirective">[docs]</a><span class="k">class</span> <span class="nc">TimezoneNameDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+<div class="viewcode-block" id="TimezoneNameDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.TimezoneNameDirective">[docs]</a><span class="k">class</span> <span class="nc">TimezoneNameDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TimezoneNameDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="s">&#39;Z&#39;</span><span class="p">,</span> <span class="s">&#39;tzname&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">TZ_NAME_FORMAT_REGEX</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">)</span>
 
-<div class="viewcode-block" id="TimezoneNameDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.tz.TimezoneNameDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="TimezoneNameDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.TimezoneNameDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">tzname</span><span class="p">()</span>
         <span class="k">return</span> <span class="s">&#39;&#39;</span></div></div>

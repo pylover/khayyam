@@ -8,6 +8,9 @@ Date objects
     :members:
     :undoc-members:
     :show-inheritance:
+    :private-members:
+    :special-members:
+    :exclude-members: __dict__
 
 Date & Time objects
 -------------------
@@ -16,6 +19,9 @@ Date & Time objects
     :members:
     :undoc-members:
     :show-inheritance:
+    :private-members:
+    :special-members:
+    :exclude-members: __dict__
 
 
 Formatting & Parsing

@@ -57,6 +57,210 @@
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDate</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
+<dt id="khayyam.JalaliDate.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__add__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check equality
+:param x: datetime.date or JalaliDate
+:return: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#khayyam.JalaliDate.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directive</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%a</td>
+<td>Locale’s abbreviated weekday name.</td>
+</tr>
+<tr class="row-odd"><td>%A</td>
+<td>Locale’s full weekday name.</td>
+</tr>
+<tr class="row-even"><td>%b</td>
+<td>Locale’s abbreviated month name.</td>
+</tr>
+<tr class="row-odd"><td>%B</td>
+<td>Locale’s full month name.</td>
+</tr>
+<tr class="row-even"><td>%d</td>
+<td>Day of the month as a decimal number [01,31].</td>
+</tr>
+<tr class="row-odd"><td>%j</td>
+<td>Day of the year as a decimal number [001,366].</td>
+</tr>
+<tr class="row-even"><td>%m</td>
+<td>Month as a decimal number [01,12].</td>
+</tr>
+<tr class="row-odd"><td>%w</td>
+<td>Weekday as a decimal number [0(Saturday),6(Friday)].</td>
+</tr>
+<tr class="row-even"><td>%W</td>
+<td>Week number of the year (SATURDAY as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.</td>
+</tr>
+<tr class="row-odd"><td>%U</td>
+<td>Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)</td>
+</tr>
+<tr class="row-even"><td>%x</td>
+<td>Locale’s appropriate date representation.</td>
+</tr>
+<tr class="row-odd"><td>%y</td>
+<td>Year without century as a decimal number [00,99].</td>
+</tr>
+<tr class="row-even"><td>%Y</td>
+<td>Year with century as a decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%e</td>
+<td>ASCII Locale’s abbreviated weekday name.</td>
+</tr>
+<tr class="row-even"><td>%E</td>
+<td>ASCII Locale’s full weekday name.</td>
+</tr>
+<tr class="row-odd"><td>%g</td>
+<td>ASCII Locale’s abbreviated month name.</td>
+</tr>
+<tr class="row-even"><td>%G</td>
+<td>ASCII Locale’s full month name.</td>
+</tr>
+<tr class="row-odd"><td>%%</td>
+<td>A literal &#8216;%&#8217; character.</td>
+</tr>
+</tbody>
+</table>
+<p>Datetime specific Directives:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directive</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%c</td>
+<td>Locale’s appropriate short date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%C</td>
+<td>Locale’s appropriate date and time representation.</td>
+</tr>
+<tr class="row-even"><td>%q</td>
+<td>ASCII Locale’s appropriate short date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%Q</td>
+<td>ASCII Locale’s appropriate date and time representation.</td>
+</tr>
+<tr class="row-even"><td>%f</td>
+<td>Microsecond as a decimal number [0,999999], zero-padded on the left    (1)</td>
+</tr>
+<tr class="row-odd"><td>%H</td>
+<td>Hour (24-hour clock) as a decimal number [00,23].</td>
+</tr>
+<tr class="row-even"><td>%I</td>
+<td>Hour (12-hour clock) as a decimal number [01,12].</td>
+</tr>
+<tr class="row-odd"><td>%M</td>
+<td>Minute as a decimal number [00,59].</td>
+</tr>
+<tr class="row-even"><td>%p</td>
+<td>Locale’s equivalent of either AM or PM.    (2)</td>
+</tr>
+<tr class="row-odd"><td>%S</td>
+<td>Second as a decimal number [00,61].    (3)</td>
+</tr>
+<tr class="row-even"><td>%X</td>
+<td>Locale’s appropriate time representation.</td>
+</tr>
+<tr class="row-odd"><td>%z</td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)</td>
+</tr>
+<tr class="row-even"><td>%Z</td>
+<td>Time zone name (empty string if the object is naive).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__ge__">
+<code class="descname">__ge__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__gt__">
+<code class="descname">__gt__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__hash__">
+<code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__le__">
+<code class="descname">__le__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__le__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__lt__">
+<code class="descname">__lt__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDate.__module__">
+<code class="descname">__module__</code><em class="property"> = 'khayyam.jalali_date'</em><a class="headerlink" href="#khayyam.JalaliDate.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__ne__">
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__ne__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDate.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#khayyam.JalaliDate.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="khayyam.JalaliDate._validate">
+<em class="property">static </em><code class="descname">_validate</code><span class="sig-paren">(</span><em>year</em>, <em>month</em>, <em>day</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate._validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate._validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="khayyam.JalaliDate.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -83,12 +287,6 @@
 <dd></dd></dl>
 
 <dl class="classmethod">
-<dt id="khayyam.JalaliDate.from_date">
-<em class="property">classmethod </em><code class="descname">from_date</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#khayyam.JalaliDate.from_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create JalaliDate from python&#8217;s datetime.date</p>
-</dd></dl>
-
-<dl class="classmethod">
 <dt id="khayyam.JalaliDate.from_julian_days">
 <em class="property">classmethod </em><code class="descname">from_julian_days</code><span class="sig-paren">(</span><em>julian_day</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.from_julian_days"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.from_julian_days" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create JalaliDate from julian day</p>
@@ -109,7 +307,7 @@
 <dl class="classmethod">
 <dt id="khayyam.JalaliDate.fromtimestamp">
 <em class="property">classmethod </em><code class="descname">fromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the local date corresponding to the POSIX timestamp. such as is returned by <a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>. This may raise <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.4)"><code class="xref py py-class docutils literal"><span class="pre">ValueError</span></code></a>, if the timestamp is out of the range of values supported by the platform C localtime() function. It’s common for this to be restricted to years from 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp().</p>
+<dd><p>Return the local date corresponding to the POSIX timestamp. such as is returned by <a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>. This may raise <code class="xref py py-class docutils literal"><span class="pre">ValueError</span></code>, if the timestamp is out of the range of values supported by the platform C localtime() function. It’s common for this to be restricted to years from 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp().</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -318,11 +516,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 </dd></dl>
 
 <dl class="method">
-<dt id="khayyam.JalaliDate.to_date">
-<code class="descname">to_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#khayyam.JalaliDate.to_date" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="khayyam.JalaliDate.todate">
 <code class="descname">todate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.todate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.todate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -384,6 +577,66 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.jalali_date.JalaliDate</span></code></p>
 <dl class="method">
+<dt id="khayyam.JalaliDatetime.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__add__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__ge__">
+<code class="descname">__ge__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__gt__">
+<code class="descname">__gt__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__hash__">
+<code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__le__">
+<code class="descname">__le__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__le__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__lt__">
+<code class="descname">__lt__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.__module__">
+<code class="descname">__module__</code><em class="property"> = 'khayyam.jalali_datetime'</em><a class="headerlink" href="#khayyam.JalaliDatetime.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDatetime.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="khayyam.JalaliDatetime.ampm">
 <code class="descname">ampm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.ampm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.ampm" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -428,11 +681,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.dstnow">
 <em class="property">classmethod </em><code class="descname">dstnow</code><span class="sig-paren">(</span><em>tz</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.dstnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.dstnow" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="khayyam.JalaliDatetime.from_datetime">
-<em class="property">classmethod </em><code class="descname">from_datetime</code><span class="sig-paren">(</span><em>dt</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="headerlink" href="#khayyam.JalaliDatetime.from_datetime" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -602,11 +850,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.timetz">
 <code class="descname">timetz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.timetz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.timetz" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.to_datetime">
-<code class="descname">to_datetime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#khayyam.JalaliDatetime.to_datetime" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
