@@ -47,7 +47,7 @@ class TestJalaliDate(unittest.TestCase):
         
     def test_to_from_date(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_date(jdate.todate())
+        jdate2 = JalaliDate.fromdate(jdate.todate())
         self.assertEqual(jdate, jdate2)
 
     def test_iso_calendar(self):
@@ -130,7 +130,7 @@ class TestJalaliDate(unittest.TestCase):
         days = 0
         while True:
             dt = min + timedelta(days=days)
-            jd = JalaliDate.from_date(dt)
+            jd = JalaliDate.fromdate(dt)
             # print('Processing day: %s' % jd)
             dt2 = jd.todate()
             self.assertEqual(dt, dt2)

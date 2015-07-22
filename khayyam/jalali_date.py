@@ -79,21 +79,21 @@ class JalaliDate(object):
         """
         julian_days = get_julian_day_from_gregorian(d.year, d.month, d.day)
         return cls.from_julian_days(julian_days)
-    from_date = fromdate
+
 
     @classmethod
     def today(cls):
         """
         Return the current local date. 
         """
-        return cls.from_date(datetime.date.today())
+        return cls.fromdate(datetime.date.today())
 
     @classmethod
     def fromtimestamp(cls, timestamp):
         """
         Return the local date corresponding to the POSIX timestamp. such as is returned by :func:`time.time()`. This may raise :class:`ValueError`, if the timestamp is out of the range of values supported by the platform C localtime() function. It’s common for this to be restricted to years from 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp().
         """
-        return cls.from_date(datetime.date.fromtimestamp(timestamp))
+        return cls.fromdate(datetime.date.fromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
@@ -147,7 +147,6 @@ class JalaliDate(object):
     def todate(self):
         arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime.date(int(arr[0]), int(arr[1]), int(arr[2]))
-    to_date = todate
 
     def toordinal(self):
         return (self - self.min).days + 1
@@ -311,10 +310,15 @@ Directive    Meaning
         return hash(self.year) ^ hash(self.month) ^ hash(self.day)
 
     def __eq__(self, x):
+        """
+        Check equality
+        :param x: datetime.date or JalaliDate
+        :return: bool
+        """
         if not x:
             return False
         if isinstance(x, datetime.date):
-            return self.to_date().__eq__(x)
+            return self.todate().__eq__(x)
         elif isinstance(x, JalaliDate):
             return hash(self) == hash(x)
         else:

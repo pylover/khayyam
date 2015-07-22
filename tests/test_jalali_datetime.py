@@ -17,17 +17,17 @@ class TestJalaliDateTime(unittest.TestCase):
 
     def test_to_from_datetime(self):
         # Naive
-        jdate1 = JalaliDatetime.from_datetime(self.naive_jdt.to_datetime())
+        jdate1 = JalaliDatetime.fromdatetime(self.naive_jdt.todatetime())
         self.assertEqual(self.naive_jdt, jdate1)
         
         # Aware
-        jdate2 = JalaliDatetime.from_datetime(self.aware_jdt.to_datetime())
+        jdate2 = JalaliDatetime.fromdatetime(self.aware_jdt.todatetime())
         self.assertEqual(self.aware_jdt, jdate2)
         
     def test_today(self):
         dt = datetime.now().date()
         jdt = JalaliDatetime.today().date()
-        self.assertEqual(jdt, JalaliDate.from_date(dt))
+        self.assertEqual(jdt, JalaliDate.fromdate(dt))
         
     def test_now(self):
         self.assertIsNotNone(JalaliDatetime.now())
@@ -36,7 +36,7 @@ class TestJalaliDateTime(unittest.TestCase):
         
     def test_utcnow(self):
         jutcnow = JalaliDatetime.utcnow()
-        utcnow = jutcnow.to_datetime()
+        utcnow = jutcnow.todatetime()
         self.assertEqual(jutcnow.time(), utcnow.time())
     
     def test_strftime_strptime(self):
@@ -139,9 +139,9 @@ class TestJalaliDateTime(unittest.TestCase):
         days = 0
         while True:
             dt = min + timedelta(days=days)
-            jd = JalaliDatetime.from_datetime(dt)
+            jd = JalaliDatetime.fromdatetime(dt)
             # print('Processing day: %s' % jd.year)
-            dt2 = jd.to_datetime()
+            dt2 = jd.todatetime()
             self.assertEqual(dt, dt2)
             days += 1
             if days > max_days:

@@ -87,7 +87,6 @@ class JalaliDatetime(JalaliDate):
         if not tz:
             tz = dt.tzinfo
         return cls(arr[0], arr[1], arr[2], dt.hour, dt.minute, dt.second, dt.microsecond, tz)
-    from_datetime = fromdatetime
 
 
     @classmethod
@@ -97,14 +96,14 @@ class JalaliDatetime(JalaliDate):
         
         Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().
         """
-        return cls.from_datetime(datetime.now(tz))
+        return cls.fromdatetime(datetime.now(tz))
 
     @classmethod
     def utcnow(cls):
         """
         Return the current UTC date and _time, with tzinfo None. This is like now(), but returns the current UTC date and _time, as a naive datetime object. See also now().
         """
-        return cls.from_datetime(datetime.utcnow())
+        return cls.fromdatetime(datetime.utcnow())
 
     @classmethod
     def dstnow(cls, tz):
@@ -120,21 +119,21 @@ class JalaliDatetime(JalaliDate):
         
         fromtimestamp() may raise ValueError, if the timestamp is out of the range of values supported by the platform C localtime() or gmtime() functions. It's common for this to be restricted to years in 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then it's possible to have two timestamps differing by a second that yield identical datetime objects. See also utcfromtimestamp().
         """
-        return cls.from_datetime(datetime.fromtimestamp(timestamp, tz=tz))
+        return cls.fromdatetime(datetime.fromtimestamp(timestamp, tz=tz))
 
     @classmethod
     def utcfromtimestamp(cls, timestamp):
         """
         Return the UTC datetime corresponding to the POSIX timestamp, with tzinfo None. This may raise ValueError, if the timestamp is out of the range of values supported by the platform C gmtime() function. It's common for this to be restricted to years in 1970 through 2038. See also fromtimestamp().
         """
-        return cls.from_datetime(datetime.utcfromtimestamp(timestamp))
+        return cls.fromdatetime(datetime.utcfromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
         """
         Return the jalali datetime corresponding to the proleptic Gregorian ordinal, where January 1 of year 1 has ordinal 1. ValueError is raised unless 1 <= ordinal <= datetime.max.toordinal(). The hour, minute, second and microsecond of the result are all 0, and tzinfo is None.
         """
-        return cls.from_datetime(datetime.fromordinal(ordinal))
+        return cls.fromdatetime(datetime.fromordinal(ordinal))
 
     @classmethod
     def combine(cls, date, _time):
@@ -142,8 +141,8 @@ class JalaliDatetime(JalaliDate):
         Return a new jalali datetime object whose date members are equal to the given date object's, and whose _time and tzinfo members are equal to the given _time object's. For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time and tzinfo members are ignored.
         """
         if isinstance(date, (JalaliDatetime, JalaliDate)):
-            date = date.to_datetime()
-        return cls.from_datetime(datetime.combine(date, _time))
+            date = date.todatetime()
+        return cls.fromdatetime(datetime.combine(date, _time))
 
     @classmethod
     def strptime(cls, date_string, fmt):
@@ -162,7 +161,6 @@ class JalaliDatetime(JalaliDate):
         arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime(int(arr[0]), int(arr[1]), int(arr[2]), self.hour, self.minute, self.second, self.microsecond,
                         self.tzinfo)
-    to_datetime = todatetime
 
     def date(self):
         return JalaliDate(self.year, self.month, self.day)
@@ -303,27 +301,27 @@ class JalaliDatetime(JalaliDate):
 
     def __add__(self, x):
         if isinstance(x, timedelta):
-            return JalaliDatetime.from_datetime(self.to_datetime() + x)
+            return JalaliDatetime.fromdatetime(self.todatetime() + x)
 
         raise ValueError('JalaliDatetime object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, timedelta):
-            return JalaliDatetime.from_datetime(self.to_datetime() - x)
+            return JalaliDatetime.fromdatetime(self.todatetime() - x)
         elif isinstance(x, JalaliDatetime):
-            return self.to_datetime() - x.to_datetime()
+            return self.todatetime() - x.todatetime()
         elif isinstance(x, JalaliDate): # TODO: Cover it by Test
-            return self.to_datetime() - JalaliDatetime(x).to_datetime()
+            return self.todatetime() - JalaliDatetime(x).todatetime()
 
         raise ValueError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')
 
     def __lt__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDate'
-        return self.to_datetime() < x.to_datetime()
+        return self.todatetime() < x.todatetime()
 
     def __le__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
-        return self.to_datetime() <= x.to_datetime()
+        return self.todatetime() <= x.todatetime()
 
     def __hash__(self):
         return super(JalaliDatetime, self).__hash__() ^ \
@@ -337,7 +335,7 @@ class JalaliDatetime(JalaliDate):
         if not x:
             return False
         if isinstance(x, datetime):
-            return self.to_datetime().__eq__(x)
+            return self.todatetime().__eq__(x)
         elif isinstance(x, JalaliDatetime):
             return hash(self) == hash(x)
         else:
@@ -346,11 +344,11 @@ class JalaliDatetime(JalaliDate):
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
-        return self.to_datetime() > x.to_datetime()
+        return self.todatetime() > x.todatetime()
 
     def __ge__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDate'
-        return self.to_datetime() >= x.to_datetime()
+        return self.todatetime() >= x.todatetime()
 
 
 # # Class attributes

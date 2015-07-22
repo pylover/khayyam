@@ -25,6 +25,10 @@ This will imports
 :py:obj:`khayyam.TUESDAY`,
 :py:obj:`khayyam.FRIDAY`
 
+Or::
+
+  >>> from khayyam import JalaliDatetime, TehranTimezone
+
 Instantiating
 ^^^^^^^^^^^^^
 
@@ -204,9 +208,71 @@ And vise-versa::
   >>> JalaliDatetime.fromdatetime(datetime.now())
   khayyam.JalaliDatetime(1394, 4, 31, 15, 44, 11, 934253, Chaharshanbeh)
 
-  >>> JalaliDatetime.from_datetime(datetime.now(TehranTimezone()))
+  >>> JalaliDatetime.fromdatetime(datetime.now(TehranTimezone()))
   khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)
 
-  >>> JalaliDate.from_date(date.today())
+  >>> JalaliDate.fromdate(date.today())
   khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)
 
+
+Arithmetics & Operators
+-----------------------
+
+Addition and subtraction::
+
+  >>> from datetime import timedelta
+  >>> from khayyam import JalaliDate, JalaliDatetime
+  >>> now = JalaliDatetime.now()
+  >>> print(now)
+  khayyam.JalaliDatetime(1394, 4, 31, 16, 17, 31, 374398, Chaharshanbeh)
+
+  >>> now + timedelta(days=1)
+  khayyam.JalaliDatetime(1394, 5, 1, 16, 17, 31, 374398, Panjshanbeh)
+
+  >>> now + timedelta(seconds=3600)
+  khayyam.JalaliDatetime(1394, 4, 31, 17, 17, 31, 374398, Chaharshanbeh)
+
+  >>> now - timedelta(seconds=3600)
+  khayyam.JalaliDatetime(1394, 4, 31, 15, 17, 31, 374398, Chaharshanbeh)
+
+  >>> yesterday = now - timedelta(1)
+  >>> print(yesterday)
+  khayyam.JalaliDatetime(1394, 4, 30, 16, 17, 31, 374398, Seshanbeh)
+
+  >>> now - yesterday
+  datetime.timedelta(1)
+
+  >>> JalaliDatetime.now() - now
+  datetime.timedelta(0, 478, 328833) # 478 seconds taken to writing this section
+
+
+Supported operators:
+
+* :py:meth:`khayyam.JalaliDate.__add__`
+* :py:meth:`khayyam.JalaliDate.__sub__`
+
+
+
+Comparison
+----------
+
+Just like the :py:mod:`datetime`, all comparison operators are overridden:
+
+* :py:meth:`khayyam.JalaliDate.__lt__`
+* :py:meth:`khayyam.JalaliDate.__le__`
+* :py:meth:`khayyam.JalaliDate.__hash__`
+* :py:meth:`khayyam.JalaliDate.__eq__`
+* :py:meth:`khayyam.JalaliDate.__ne__`
+* :py:meth:`khayyam.JalaliDate.__gt__`
+* :py:meth:`khayyam.JalaliDate.__ge__`
+
+So::
+
+  >>> now > yesterday
+  True
+
+  >>> now != yesterday
+  True
+
+  >>> now.todate() == yesterday.todate()
+  False

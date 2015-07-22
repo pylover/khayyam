@@ -17,7 +17,6 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * Conversions
     * Operators
   * Doc
-    * Operators
     * Review all object's documentation
     * Parsing, post processors priority
     * Compatibility
@@ -35,6 +34,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * Doc: Introduction -> Formatting & parsing
     * Doc: Introduction -> Converting
     * New methods `jalaliDate.todate`, `jalaliDate.fromdate`, `jalaliDatetime.todatetime` and `jalaliDatetimefromdatetime`
+    * Removed methods `jalaliDate.to_date`, `jalaliDate.from_date`, `jalaliDatetime.to_datetime` and `jalaliDatetime.fromdate_time`
     
 
   * 2.2.1-alpha (2015-07-21)
