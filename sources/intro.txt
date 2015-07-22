@@ -59,11 +59,10 @@ Today::
 Formatting
 ^^^^^^^^^^
 
-All format directives which supported by python's native :ref:`strftime-strptime-behavior` are supported by this library, plus:
+All format directives that supported by python's native :ref:`strftime-strptime-behavior` are supported by this library, plus:
 
 * `%g`
 * `%G`
-
 
 
 

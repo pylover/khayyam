@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; Khayyam 2.2.0-alpha documentation</title>
+    <title>Introduction &mdash; Khayyam 2.3.0-alpha documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.2.0-alpha',
+        VERSION:     '2.3.0-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.2.0-alpha documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.3.0-alpha documentation" href="index.html" />
     <link rel="next" title="Migration from python’s builtin datetime" href="migration.html" />
     <link rel="prev" title="Khayyam" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Khayyam"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -66,15 +66,15 @@
 <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>,
 <a class="reference internal" href="api.html#khayyam.Timezone" title="khayyam.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.Timezone</span></code></a>,
 <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.MINYEAR" title="khayyam.constants.MINYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MINYEAR</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.MAXYEAR" title="khayyam.constants.MAXYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MAXYEAR</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.SATURDAY" title="khayyam.constants.SATURDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SATURDAY</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.SUNDAY" title="khayyam.constants.SUNDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SUNDAY</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.MONDAY" title="khayyam.constants.MONDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MONDAY</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.THURSDAY" title="khayyam.constants.THURSDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.THURSDAY</span></code></a>,
-<a class="reference internal" href="api.html#khayyam.constants.WEDNESDAY" title="khayyam.constants.WEDNESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.WEDNESDAY</span></code></a>
-<a class="reference internal" href="api.html#khayyam.constants.TUESDAY" title="khayyam.constants.TUESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.TUESDAY</span></code></a>
-<a class="reference internal" href="api.html#khayyam.constants.FRIDAY" title="khayyam.constants.FRIDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.FRIDAY</span></code></a></p>
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MINYEAR</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MAXYEAR</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SATURDAY</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SUNDAY</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MONDAY</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.THURSDAY</span></code>,
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.WEDNESDAY</span></code>
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.TUESDAY</span></code>
+<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.FRIDAY</span></code></p>
 </div>
 <div class="section" id="current-date-and-time">
 <h3>Current date and time<a class="headerlink" href="#current-date-and-time" title="Permalink to this headline">¶</a></h3>
@@ -106,7 +106,7 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 </div>
 <div class="section" id="formatting">
 <h3>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h3>
-<p>All format directives which supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are supported by this library, plus:</p>
+<p>All format directives that supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are supported by this library, plus:</p>
 <ul class="simple">
 <li><cite>%g</cite></li>
 <li><cite>%G</cite></li>
@@ -234,7 +234,7 @@ Out[5]: &lt;khayyam.tehran_timezone.TehTz object at 0x8a6812c&gt;
         <li class="right" >
           <a href="index.html" title="Khayyam"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

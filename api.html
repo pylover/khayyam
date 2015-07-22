@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &mdash; Khayyam 2.2.0-alpha documentation</title>
+    <title>API Reference &mdash; Khayyam 2.3.0-alpha documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.2.0-alpha',
+        VERSION:     '2.3.0-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.2.0-alpha documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.3.0-alpha documentation" href="index.html" />
     <link rel="prev" title="Persian(Jalali) Calendar" href="persiancalendar.html" /> 
   </head>
   <body role="document">
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -638,220 +638,262 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 </dd></dl>
 
 </div>
-<div class="section" id="module-khayyam.formatting.formatter">
-<span id="formatting-parsing"></span><h2>Formatting &amp; Parsing<a class="headerlink" href="#module-khayyam.formatting.formatter" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="formatting-parsing">
+<h2>Formatting &amp; Parsing<a class="headerlink" href="#formatting-parsing" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.formatter.</code><code class="descname">JalaliDateFormatter</code><span class="sig-paren">(</span><em>format_string</em>, <em>directive_db=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.</code><code class="descname">JalaliDateFormatter</code><span class="sig-paren">(</span><em>format_string</em>, <em>directive_db=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>jalali_date</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter.format" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>jalali_date</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter.format" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter.iter_format_directives">
-<code class="descname">iter_format_directives</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.iter_format_directives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter.iter_format_directives" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter.iter_format_directives">
+<code class="descname">iter_format_directives</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.iter_format_directives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter.iter_format_directives" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter.parse">
-<code class="descname">parse</code><span class="sig-paren">(</span><em>date_string</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter.parse" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>date_string</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDateFormatter.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter.parse" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter.parser_regex">
-<code class="descname">parser_regex</code><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter.parser_regex" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter.parser_regex">
+<code class="descname">parser_regex</code><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter.parser_regex" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="khayyam.formatting.formatter.JalaliDateFormatter.post_parsers">
-<code class="descname">post_parsers</code><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDateFormatter.post_parsers" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.JalaliDateFormatter.post_parsers">
+<code class="descname">post_parsers</code><a class="headerlink" href="#khayyam.formatting.JalaliDateFormatter.post_parsers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.formatting.formatter.JalaliDatetimeFormatter">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.formatter.</code><code class="descname">JalaliDatetimeFormatter</code><span class="sig-paren">(</span><em>format_string</em>, <em>directive_db=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDatetimeFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.formatter.JalaliDatetimeFormatter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.formatter.JalaliDateFormatter" title="khayyam.formatting.formatter.JalaliDateFormatter"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.formatter.JalaliDateFormatter</span></code></a></p>
+<dt id="khayyam.formatting.JalaliDatetimeFormatter">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.</code><code class="descname">JalaliDatetimeFormatter</code><span class="sig-paren">(</span><em>format_string</em>, <em>directive_db=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/formatter.html#JalaliDatetimeFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.JalaliDatetimeFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.formatter.JalaliDateFormatter</span></code></p>
 </dd></dl>
 
-<span class="target" id="module-khayyam.formatting.directives.directive"></span><dl class="class">
-<dt id="khayyam.formatting.directives.directive.Directive">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.directive.</code><code class="descname">Directive</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em>, <em>type_</em>, <em>formatter=None</em>, <em>post_parser=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.directive.Directive" title="Permalink to this definition">¶</a></dt>
+<div class="section" id="module-khayyam.formatting.directives">
+<span id="directives"></span><h3>Directives<a class="headerlink" href="#module-khayyam.formatting.directives" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="khayyam.formatting.directives.Directive">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">Directive</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em>, <em>type_</em>, <em>formatter=None</em>, <em>post_parser=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.Directive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.directive.Directive.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.directive.Directive.format" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.Directive.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.Directive.format" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="khayyam.formatting.directives.directive.Directive.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.directive.Directive.post_parser" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-khayyam.formatting.directives.local"></span><dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalASCIIDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
-<dd><p>%E %d %G %Y %I:%M:%S %t</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalASCIIShortDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalASCIIShortDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
-<dd><p>%e %d %g %y %H:%M</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalDateFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalDateFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDateFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalDateFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDateFormatDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalDateFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDateFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.Directive.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.Directive.post_parser" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalDatetimeFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
+<dt id="khayyam.formatting.directives.LocalDatetimeFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalDatetimeFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.LocalDatetimeFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalDatetimeFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.LocalDatetimeFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
 <dd><p>%A %d %B %Y %I:%M:%S %p</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalShortDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
+<dt id="khayyam.formatting.directives.AmPmDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">AmPmDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/ampm.html#AmPmDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.AmPmDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.ampm.BaseAmPmDirective</span></code></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalShortDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.AmPmDirective.is_am">
+<code class="descname">is_am</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/ampm.html#AmPmDirective.is_am"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.AmPmDirective.is_am" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.formatting.directives.local.LocalTimeFormatDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.local.</code><code class="descname">LocalTimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalTimeFormatDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
+<dt id="khayyam.formatting.directives.AmPmASCIIDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">AmPmASCIIDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/ampm.html#AmPmASCIIDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.AmPmASCIIDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.ampm.BaseAmPmDirective</span></code></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalTimeFormatDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalTimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.AmPmASCIIDirective.is_am">
+<code class="descname">is_am</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/ampm.html#AmPmASCIIDirective.is_am"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.AmPmASCIIDirective.is_am" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.ShortYearDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">ShortYearDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ShortYearDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.ShortYearDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ShortYearDirective.format" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="khayyam.formatting.directives.local.LocalTimeFormatDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.local.LocalTimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.ShortYearDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ShortYearDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.DayOfYearDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">DayOfYearDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.DayOfYearDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.DayOfYearDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.DayOfYearDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.DayOfYearDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.DayOfYearDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.LocalShortDatetimeFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalShortDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalShortDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalShortDatetimeFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalShortDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalShortDatetimeFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalShortDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalShortDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt>
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>%A %d %B %Y %I:%M:%S %p</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalASCIIShortDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIShortDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIShortDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>%e %d %g %y %H:%M</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalASCIIDatetimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalASCIIDatetimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalASCIIDatetimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>%E %d %G %Y %I:%M:%S %t</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.LocalDateFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalDateFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDateFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalDateFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDateFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalDateFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalDateFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalDateFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="khayyam.formatting.directives.LocalTimeFormatDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">LocalTimeFormatDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalTimeFormatDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalTimeFormatDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalTimeFormatDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.LocalTimeFormatDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/local.html#LocalTimeFormatDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.LocalTimeFormatDirective.post_parser" title="Permalink to this definition">¶</a></dt>
 <dd><p>&#8216;%I:%M:%S %p&#8217;</p>
 </dd></dl>
 
 </dd></dl>
 
-<span class="target" id="module-khayyam.formatting.directives.tz"></span><dl class="class">
-<dt id="khayyam.formatting.directives.tz.TimezoneNameDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.tz.</code><code class="descname">TimezoneNameDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#TimezoneNameDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.tz.TimezoneNameDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
+<dl class="class">
+<dt id="khayyam.formatting.directives.UTCOffsetDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">UTCOffsetDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.UTCOffsetDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.tz.TimezoneNameDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#TimezoneNameDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.tz.TimezoneNameDirective.format" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.UTCOffsetDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.UTCOffsetDirective.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="khayyam.formatting.directives.UTCOffsetDirective.post_parser">
+<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.UTCOffsetDirective.post_parser" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="khayyam.formatting.directives.tz.UTCOffsetDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.tz.</code><code class="descname">UTCOffsetDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.tz.UTCOffsetDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
+<dt id="khayyam.formatting.directives.TimezoneNameDirective">
+<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">TimezoneNameDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#TimezoneNameDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.TimezoneNameDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></p>
 <dl class="method">
-<dt id="khayyam.formatting.directives.tz.UTCOffsetDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.tz.UTCOffsetDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.tz.UTCOffsetDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#UTCOffsetDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.tz.UTCOffsetDirective.post_parser" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.formatting.directives.TimezoneNameDirective.format">
+<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/tz.html#TimezoneNameDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.TimezoneNameDirective.format" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<span class="target" id="module-khayyam.formatting.directives.year"></span><dl class="class">
-<dt id="khayyam.formatting.directives.year.DayOfYearDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.year.</code><code class="descname">DayOfYearDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.DayOfYearDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.formatting.directives.year.DayOfYearDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.DayOfYearDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.year.DayOfYearDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#DayOfYearDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.DayOfYearDirective.post_parser" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="khayyam.formatting.directives.year.ShortYearDirective">
-<em class="property">class </em><code class="descclassname">khayyam.formatting.directives.year.</code><code class="descname">ShortYearDirective</code><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.ShortYearDirective" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.directive.Directive" title="khayyam.formatting.directives.directive.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.directive.Directive</span></code></a></p>
-<dl class="method">
-<dt id="khayyam.formatting.directives.year.ShortYearDirective.format">
-<code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.ShortYearDirective.format" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.formatting.directives.year.ShortYearDirective.post_parser">
-<code class="descname">post_parser</code><span class="sig-paren">(</span><em>ctx</em>, <em>formatter</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/year.html#ShortYearDirective.post_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.year.ShortYearDirective.post_parser" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+</div>
 </div>
 <div class="section" id="timezone-objects">
 <h2>Timezone objects<a class="headerlink" href="#timezone-objects" title="Permalink to this headline">¶</a></h2>
@@ -898,59 +940,60 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 </dd></dl>
 
 </div>
-<div class="section" id="module-khayyam.constants">
-<span id="constants"></span><h2>Constants<a class="headerlink" href="#module-khayyam.constants" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-khayyam">
+<span id="constants"></span><h2>Constants<a class="headerlink" href="#module-khayyam" title="Permalink to this headline">¶</a></h2>
+<p>Khayyam Package</p>
 <dl class="data">
-<dt id="khayyam.constants.MINYEAR">
-<code class="descclassname">khayyam.constants.</code><code class="descname">MINYEAR</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.constants.MINYEAR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Minimum year</p>
+<dt id="khayyam.MINYEAR">
+<code class="descclassname">khayyam.</code><code class="descname">MINYEAR</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.MINYEAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum year supported by the library.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.MAXYEAR">
-<code class="descclassname">khayyam.constants.</code><code class="descname">MAXYEAR</code><em class="property"> = 3178</em><a class="headerlink" href="#khayyam.constants.MAXYEAR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum year</p>
+<dt id="khayyam.MAXYEAR">
+<code class="descclassname">khayyam.</code><code class="descname">MAXYEAR</code><em class="property"> = 3178</em><a class="headerlink" href="#khayyam.MAXYEAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum year supported by the library.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.SATURDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">SATURDAY</code><em class="property"> = 0</em><a class="headerlink" href="#khayyam.constants.SATURDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.SATURDAY">
+<code class="descclassname">khayyam.</code><code class="descname">SATURDAY</code><em class="property"> = 0</em><a class="headerlink" href="#khayyam.SATURDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Saturday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.SUNDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">SUNDAY</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.constants.SUNDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.SUNDAY">
+<code class="descclassname">khayyam.</code><code class="descname">SUNDAY</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.SUNDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Sunday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.MONDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">MONDAY</code><em class="property"> = 2</em><a class="headerlink" href="#khayyam.constants.MONDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.MONDAY">
+<code class="descclassname">khayyam.</code><code class="descname">MONDAY</code><em class="property"> = 2</em><a class="headerlink" href="#khayyam.MONDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Monday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.TUESDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">TUESDAY</code><em class="property"> = 3</em><a class="headerlink" href="#khayyam.constants.TUESDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.TUESDAY">
+<code class="descclassname">khayyam.</code><code class="descname">TUESDAY</code><em class="property"> = 3</em><a class="headerlink" href="#khayyam.TUESDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Tuesday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.WEDNESDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">WEDNESDAY</code><em class="property"> = 4</em><a class="headerlink" href="#khayyam.constants.WEDNESDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.WEDNESDAY">
+<code class="descclassname">khayyam.</code><code class="descname">WEDNESDAY</code><em class="property"> = 4</em><a class="headerlink" href="#khayyam.WEDNESDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Wednesday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.THURSDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">THURSDAY</code><em class="property"> = 5</em><a class="headerlink" href="#khayyam.constants.THURSDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.THURSDAY">
+<code class="descclassname">khayyam.</code><code class="descname">THURSDAY</code><em class="property"> = 5</em><a class="headerlink" href="#khayyam.THURSDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Thursday weekday.</p>
 </dd></dl>
 
 <dl class="data">
-<dt id="khayyam.constants.FRIDAY">
-<code class="descclassname">khayyam.constants.</code><code class="descname">FRIDAY</code><em class="property"> = 6</em><a class="headerlink" href="#khayyam.constants.FRIDAY" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.FRIDAY">
+<code class="descclassname">khayyam.</code><code class="descname">FRIDAY</code><em class="property"> = 6</em><a class="headerlink" href="#khayyam.FRIDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representing the Friday weekday.</p>
 </dd></dl>
 
@@ -968,9 +1011,12 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <li><a class="reference internal" href="#">API Reference</a><ul>
 <li><a class="reference internal" href="#date-objects">Date objects</a></li>
 <li><a class="reference internal" href="#date-time-objects">Date &amp; Time objects</a></li>
-<li><a class="reference internal" href="#module-khayyam.formatting.formatter">Formatting &amp; Parsing</a></li>
+<li><a class="reference internal" href="#formatting-parsing">Formatting &amp; Parsing</a><ul>
+<li><a class="reference internal" href="#module-khayyam.formatting.directives">Directives</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#timezone-objects">Timezone objects</a></li>
-<li><a class="reference internal" href="#module-khayyam.constants">Constants</a></li>
+<li><a class="reference internal" href="#module-khayyam">Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -1014,7 +1060,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.2.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
