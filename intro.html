@@ -76,6 +76,30 @@
 <a class="reference internal" href="api.html#khayyam.TUESDAY" title="khayyam.TUESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.TUESDAY</span></code></a>,
 <a class="reference internal" href="api.html#khayyam.FRIDAY" title="khayyam.FRIDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.FRIDAY</span></code></a></p>
 </div>
+<div class="section" id="instantiating">
+<h3>Instantiating<a class="headerlink" href="#instantiating" title="Permalink to this headline">¶</a></h3>
+<p>Simply you can instantiate <a class="reference internal" href="api.html#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>
+and <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> classes just like the other regular python classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1345</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDate(1345, 1, 1, Doshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">427</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="c"># Khayyam&#39;s birthday</span>
+<span class="go">khayyam.JalaliDate(427, 2, 28, Panjshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1345</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="go">ValueError: .... # So, it&#39;s not a leap year!</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1346</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c"># A leap year.</span>
+<span class="go">khayyam.JalaliDate(1346, 12, 30, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">()</span>
+<span class="go">khayyam.JalaliDatetime(1, 1, 1, 0, 0, 0, 0, Jomeh) # Interesting! the calendar starting by friday.</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">989</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">345453</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(989, 3, 25, 10, 43, 23, 345453, Seshanbeh)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="current-date-and-time">
 <h3>Current date and time<a class="headerlink" href="#current-date-and-time" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
@@ -262,6 +286,7 @@ directive alongside time and date directives in your pattern. for example:</p>
 <li><a class="reference internal" href="#">Introduction</a><ul>
 <li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
 <li><a class="reference internal" href="#importing">Importing</a></li>
+<li><a class="reference internal" href="#instantiating">Instantiating</a></li>
 <li><a class="reference internal" href="#current-date-and-time">Current date and time</a></li>
 <li><a class="reference internal" href="#right-to-left">Right-to-left</a></li>
 <li><a class="reference internal" href="#rprint-function">rprint() function</a></li>
