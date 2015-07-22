@@ -122,13 +122,14 @@
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="JalaliDate.from_date"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.from_date">[docs]</a>    <span class="k">def</span> <span class="nf">from_date</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDate.fromdate"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.fromdate">[docs]</a>    <span class="k">def</span> <span class="nf">fromdate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create JalaliDate from python&#39;s datetime.date</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">julian_days</span> <span class="o">=</span> <span class="n">get_julian_day_from_gregorian</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_julian_days</span><span class="p">(</span><span class="n">julian_days</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_julian_days</span><span class="p">(</span><span class="n">julian_days</span><span class="p">)</span></div>
+    <span class="n">from_date</span> <span class="o">=</span> <span class="n">fromdate</span>
+
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDate.today"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.today">[docs]</a>    <span class="k">def</span> <span class="nf">today</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -257,7 +258,7 @@
 <span class="sd">%%           A literal &#39;%&#39; character.</span>
 <span class="sd">=========    =======</span>
 
-<span class="sd">Datetime specific:</span>
+<span class="sd">Datetime specific Directives:</span>
 
 <span class="sd">=========    =======</span>
 <span class="sd">Directive    Meaning</span>

@@ -101,12 +101,45 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
 <span class="go">1394-4-30</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %B %Y&#39;</span><span class="p">)</span>
+<span class="go">چهارشنبه 31 تیر 1394</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="formatting">
-<h3>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h3>
-<p>All format directives that supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are supported by this library, plus:</p>
+<div class="section" id="right-to-left">
+<h3>Right-to-left<a class="headerlink" href="#right-to-left" title="Permalink to this headline">¶</a></h3>
+<p>Additionally, if right to left text rendering is not supported by your terminal
+emulator, you can install the rtl package:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install rtl
+</pre></div>
+</div>
+<p>And then use it to reshape and change direction of the text:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="n">rtl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rtl</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">)))</span>
+<span class="go">&#39;چهارشنبه 31 تیر 1394 02:10:30 ب.ظ&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rprint-function">
+<h3>rprint() function<a class="headerlink" href="#rprint-function" title="Permalink to this headline">¶</a></h3>
+<p>If you are using python2 its good to import new print function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="go">&gt;&gt;&gt;from __future__ import print_function</span>
+</pre></div>
+</div>
+<p>Extending your practice environment by defining a handy print function for RTL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rprint</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">rtl</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rprint</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">))</span>
+<span class="go">چهارشنبه 31 تیر 1394 02:10:30 ب.ظ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="formatting-parsing">
+<h2>Formatting &amp; Parsing<a class="headerlink" href="#formatting-parsing" title="Permalink to this headline">¶</a></h2>
+<p>All format directives supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are covered by this library, plus:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="12%" />
@@ -141,6 +174,79 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 </tr>
 </tbody>
 </table>
+<p>All format directives are documented in <a class="reference internal" href="api.html#khayyam.JalaliDate.strftime" title="khayyam.JalaliDate.strftime"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.strftime()</span></code></a></p>
+<p>To format locale&#8217;s date &amp; time:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDatetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_string</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">time_string</span><span class="p">)</span>
+<span class="go">&#39;چهارشنبه 31 تیر 1394 02:10:30 ب.ظ&#39;</span>
+</pre></div>
+</div>
+<p>And parsing it again to a <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time_string</span><span class="p">,</span> <span class="s">&#39;%C&#39;</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 10, 30, 0, Chaharshanbeh)</span>
+</pre></div>
+</div>
+<p>You may use <cite>%f</cite> and or <cite>%z</cite> formatting directives to represent
+microseconds and timezone info in your formatting or parsing pattern.</p>
+<p>So, to reach accurate serialization, you could include those two
+directive alongside time and date directives in your pattern. for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">Timezone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tz</span> <span class="o">=</span> <span class="n">Timezone</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="o">*</span><span class="mi">210</span><span class="p">))</span> <span class="c"># +3:30 Tehran</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now_string</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s"> %z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">now_string</span><span class="p">)</span>
+<span class="go">1394-04-31 14:10:21.452958 +03:30</span>
+</pre></div>
+</div>
+<p>Parse it back to the <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">now_string</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s"> %z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 10, 21, 452958, tzinfo=+03:30, Chaharshanbeh)</span>
+</pre></div>
+</div>
+<p>Try some formatting and parsing directives:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rprint</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%a </span><span class="si">%d</span><span class="s"> %B %y&#39;</span><span class="p">))</span>
+<span class="go">چ 31 تیر 94</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rprint</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %b %Y&#39;</span><span class="p">))</span>
+<span class="go">چهارشنبه 31 تی 1394</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">TehranTimezone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rprint</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %B %Y %Z&#39;</span><span class="p">))</span>
+<span class="go">چهارشنبه 31 تیر 1394 Iran/Tehran</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting">
+<h2>Converting<a class="headerlink" href="#converting" title="Permalink to this headline">¶</a></h2>
+<p>Converting to gregorian calendar, python&#8217;s native
+<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> and <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDate</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">,</span> <span class="n">TehranTimezone</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
+<span class="go">datetime.date(2015, 7, 22)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
+<span class="go">datetime.date(2015, 7, 22)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span>
+<span class="go">datetime.datetime(2015, 7, 22, 15, 38, 6, 37269)</span>
+</pre></div>
+</div>
+<p>And vise-versa:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromdatetime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 15, 44, 11, 934253, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">from_datetime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">()))</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">from_date</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+<span class="go">khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -157,9 +263,12 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 <li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
 <li><a class="reference internal" href="#importing">Importing</a></li>
 <li><a class="reference internal" href="#current-date-and-time">Current date and time</a></li>
-<li><a class="reference internal" href="#formatting">Formatting</a></li>
+<li><a class="reference internal" href="#right-to-left">Right-to-left</a></li>
+<li><a class="reference internal" href="#rprint-function">rprint() function</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#formatting-parsing">Formatting &amp; Parsing</a></li>
+<li><a class="reference internal" href="#converting">Converting</a></li>
 </ul>
 </li>
 </ul>
