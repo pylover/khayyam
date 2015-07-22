@@ -81,12 +81,14 @@ class JalaliDatetime(JalaliDate):
     #####################
 
     @classmethod
-    def from_datetime(cls, dt, tz=None):
+    def fromdatetime(cls, dt, tz=None):
         julian_days = get_julian_day_from_gregorian(dt.year, dt.month, dt.day)
         arr = jalali_date_from_julian_day(julian_days)
         if not tz:
             tz = dt.tzinfo
         return cls(arr[0], arr[1], arr[2], dt.hour, dt.minute, dt.second, dt.microsecond, tz)
+    from_datetime = fromdatetime
+
 
     @classmethod
     def now(cls, tz=None):
@@ -156,10 +158,11 @@ class JalaliDatetime(JalaliDate):
     ########################
 
 
-    def to_datetime(self):
+    def todatetime(self):
         arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime(int(arr[0]), int(arr[1]), int(arr[2]), self.hour, self.minute, self.second, self.microsecond,
                         self.tzinfo)
+    to_datetime = todatetime
 
     def date(self):
         return JalaliDate(self.year, self.month, self.day)

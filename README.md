@@ -6,6 +6,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 
 ### To Do
 
+  * Persian numbers
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
@@ -15,10 +16,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * Conversions
     * Operators
   * Doc
-    * Introduction
-      * Formatting & parsing
-      * Operators
-      * Conversions
+    * Operators
     * Review all object's documentation
     * Parsing, post processors priority
     * Compatibility
@@ -32,7 +30,9 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 ### Change Log
 
   * 2.3.0-alpha (2015-07-22)
-    * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays. 
+    * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays.
+    * Doc: Introduction -> Formatting & parsing
+    * Doc: Introduction -> Converting
     
 
   * 2.2.1-alpha (2015-07-21)

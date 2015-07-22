@@ -73,12 +73,13 @@ class JalaliDate(object):
         return cls(arr[0], arr[1], arr[2])
 
     @classmethod
-    def from_date(cls, d):
+    def fromdate(cls, d):
         """
         Create JalaliDate from python's datetime.date
         """
         julian_days = get_julian_day_from_gregorian(d.year, d.month, d.day)
         return cls.from_julian_days(julian_days)
+    from_date = fromdate
 
     @classmethod
     def today(cls):
@@ -208,7 +209,7 @@ Directive    Meaning
 %%           A literal '%' character.
 =========    =======
 
-Datetime specific:
+Datetime specific Directives:
 
 =========    =======
 Directive    Meaning
