@@ -4,10 +4,8 @@ khayyam
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
 
-
 ### To Do
 
-  * Naming conventions
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
@@ -17,11 +15,14 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * Conversions
     * Operators
   * Doc
+    * Introduction
+      * Formatting & parsing
+      * Operators
+      * Conversions
+    * Review all object's documentation
     * Parsing, post processors priority
-    * Formatting & parsing
-    * Conversions
-    * Operators
     * Compatibility
+    * Naming conventions
     
   * Cython
     * setup.py pure python fallback switch
