@@ -6,9 +6,9 @@
 Khayyam
 =======
 
-The khayyam module supplies classes for manipulating persian dates and times in both
+The khayyam module supplies classes for manipulating persian date and time in both
 simple and complex ways. While date and time arithmetic is supported, the focus of the
-implementation is on efficient attribute extraction for output formatting and manipulation.
+implementation is on the efficient attribute extraction for output formatting and manipulation.
 
 Currently both versions of python(2.x & 3.x) are supported.
 
@@ -18,7 +18,7 @@ As of the python's official documentation: There are two kinds of date and time 
 An aware object has sufficient knowledge of applicable algorithmic and political time
 adjustments, such as time zone and daylight saving time information, to locate itself
 relative to other aware objects. An aware object is used to represent a specific
-moment in time that is not open to interpretation.
+moment in time that is not open for additional interpretation such as local timezone and DST tracking.
 
 A naive object does not contain enough information to unambiguously locate itself
 relative to other date/time objects. Whether a naive object represents
