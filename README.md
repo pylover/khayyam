@@ -30,6 +30,10 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 
 ### Change Log
 
+  * 2.3.0-alpha (2015-07-22)
+    * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays. 
+    
+
   * 2.2.1-alpha (2015-07-21)
     * Doc: Reading package's version automatically from khayyam/__init__.py in `sphinx/conf.py`
     * Doc: Installation: (PYPI, Development version)

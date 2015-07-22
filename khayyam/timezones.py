@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import tzinfo, timedelta
-from khayyam.constants import ZERO_DELTA
 __author__ = 'vahid'
 
+ZERO_DELTA = timedelta(0)
 STDOFFSET = timedelta(minutes=210)  # Minutes
 DSTOFFSET = timedelta(minutes=270)  # Minutes
 DSTDIFF = DSTOFFSET - STDOFFSET

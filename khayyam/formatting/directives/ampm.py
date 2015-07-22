@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
-import khayyam.constants as consts
+from khayyam.formatting import constants as consts
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
 

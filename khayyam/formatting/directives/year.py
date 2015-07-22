@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
-import khayyam.constants as consts
+from khayyam.formatting import constants as consts
 from khayyam.algorithms import days_in_year
 from datetime import timedelta
 __author__ = 'vahid'

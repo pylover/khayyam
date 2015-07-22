@@ -3,9 +3,9 @@ from datetime import timedelta, time, datetime
 from khayyam.algorithms import get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \
     gregorian_date_from_julian_day
-from khayyam.constants import MINYEAR, MAXYEAR, AM_PM, AM_PM_ASCII
+from khayyam import MINYEAR, MAXYEAR
 from khayyam import JalaliDate
-from khayyam.formatting import JalaliDatetimeFormatter
+from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 __author__ = 'vahid'
 
 

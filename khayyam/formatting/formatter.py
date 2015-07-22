@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-import khayyam.constants as consts
+from khayyam.formatting import constants as consts
 __author__ = 'vahid'
 
 

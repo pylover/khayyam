@@ -1,55 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta
-__author__ = 'vahid'
 
 
-MINYEAR = 1
-"""
-Minimum year
-"""
-
-MAXYEAR = 3178
-"""
-Maximum year
-"""
-
-SATURDAY = 0
-"""
-Representing the Saturday weekday.
-"""
-
-SUNDAY = 1
-"""
-Representing the Sunday weekday.
-"""
-
-MONDAY = 2
-"""
-Representing the Monday weekday.
-"""
-
-TUESDAY = 3
-"""
-Representing the Tuesday weekday.
-"""
-
-WEDNESDAY = 4
-"""
-Representing the Wednesday weekday.
-"""
-
-THURSDAY = 5
-"""
-Representing the Thursday weekday.
-"""
-
-FRIDAY = 6
-"""
-Representing the Friday weekday.
-"""
-
-
-ZERO_DELTA = timedelta(0)
 
 ######################
 # Parsing & Formatting

@@ -21,30 +21,24 @@ Date & Time objects
 Formatting & Parsing
 --------------------
 
-.. automodule:: khayyam.formatting.formatter
+.. autoclass:: khayyam.formatting.JalaliDateFormatter
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: khayyam.formatting.directives.directive
+.. autoclass:: khayyam.formatting.JalaliDatetimeFormatter
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: khayyam.formatting.directives.local
+Directives
+^^^^^^^^^^
+
+.. automodule:: khayyam.formatting.directives
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: khayyam.formatting.directives.tz
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-.. automodule:: khayyam.formatting.directives.year
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 Timezone objects
 ----------------
@@ -62,8 +56,9 @@ Timezone objects
 Constants
 ---------
 
-.. automodule:: khayyam.constants
+.. automodule:: khayyam
     :members: MINYEAR, MAXYEAR, SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
-
+    :undoc-members:
+    :show-inheritance:
 
 
