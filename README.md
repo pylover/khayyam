@@ -11,6 +11,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
+  * Error messages
   * Readme:
     * Formatting & parsing
     * Conversions
