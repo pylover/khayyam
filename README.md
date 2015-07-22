@@ -3,31 +3,13 @@ khayyam
 
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
+Jump To:
 
-### To Do
+ * [Documentation](http://vahid.dobisel.com/khayyam)
+ * [Python package index](https://pypi.python.org/pypi/khayyam)
 
-  * Persian numbers
-  * Constructors act as converter: `JalaliDate(date)`
-  * Create TehranDatetime object
-  * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
-  * Use compiled regex if matters in performance
-  * Error messages
-  * Readme:
-    * Formatting & parsing
-    * Conversions
-    * Operators
-  * Doc
-    * Review all object's documentation
-    * Parsing, post processors priority
-    * Compatibility
-    * Naming conventions
-    
-  * Cython
-    * setup.py pure python fallback switch
-    * Distribute pre compiled binaries from some platforms
-  * Alphabetical number format
 
-### Change Log
+#### Change Log
 
   * 2.3.0-alpha (2015-07-22)
     * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays.
