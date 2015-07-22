@@ -33,6 +33,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays.
     * Doc: Introduction -> Formatting & parsing
     * Doc: Introduction -> Converting
+    * New methods `jalaliDate.todate`, `jalaliDate.fromdate`, `jalaliDatetime.todatetime` and `jalaliDatetimefromdatetime`
     
 
   * 2.2.1-alpha (2015-07-21)
