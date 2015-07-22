@@ -66,15 +66,15 @@
 <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>,
 <a class="reference internal" href="api.html#khayyam.Timezone" title="khayyam.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.Timezone</span></code></a>,
 <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MINYEAR</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MAXYEAR</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SATURDAY</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.SUNDAY</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.MONDAY</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.THURSDAY</span></code>,
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.WEDNESDAY</span></code>
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.TUESDAY</span></code>
-<code class="xref py py-obj docutils literal"><span class="pre">khayyam.constants.FRIDAY</span></code></p>
+<a class="reference internal" href="api.html#khayyam.MINYEAR" title="khayyam.MINYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MINYEAR</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.MAXYEAR" title="khayyam.MAXYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MAXYEAR</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.SATURDAY" title="khayyam.SATURDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.SATURDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.SUNDAY" title="khayyam.SUNDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.SUNDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.MONDAY" title="khayyam.MONDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MONDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.THURSDAY" title="khayyam.THURSDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.THURSDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.WEDNESDAY" title="khayyam.WEDNESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.WEDNESDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.TUESDAY" title="khayyam.TUESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.TUESDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.FRIDAY" title="khayyam.FRIDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.FRIDAY</span></code></a></p>
 </div>
 <div class="section" id="current-date-and-time">
 <h3>Current date and time<a class="headerlink" href="#current-date-and-time" title="Permalink to this headline">¶</a></h3>
@@ -107,65 +107,41 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 <div class="section" id="formatting">
 <h3>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h3>
 <p>All format directives that supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are supported by this library, plus:</p>
-<ul class="simple">
-<li><cite>%g</cite></li>
-<li><cite>%G</cite></li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directive</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%e</td>
+<td>ASCII Locale’s abbreviated weekday name.</td>
+</tr>
+<tr class="row-odd"><td>%E</td>
+<td>ASCII Locale’s full weekday name.</td>
+</tr>
+<tr class="row-even"><td>%g</td>
+<td>ASCII Locale’s abbreviated month name.</td>
+</tr>
+<tr class="row-odd"><td>%G</td>
+<td>ASCII Locale’s full month name.</td>
+</tr>
+<tr class="row-even"><td>%C</td>
+<td>Locale’s appropriate date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%q</td>
+<td>ASCII Locale’s appropriate short date and time representation.</td>
+</tr>
+<tr class="row-even"><td>%Q</td>
+<td>ASCII Locale’s appropriate date and time representation.</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div>
-<div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>To convert a jalali datetime to python&#8217;s standard datetime:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: import khayyam
-
-In [2]: khayyam.JalaliDatetime.now().to_datetime()
-Out[2]: datetime.datetime(2012, 4, 14, 1, 21, 8, 842241)
-
-In [3]: khayyam.JalaliDate.today().to_date()
-Out[3]: datetime.date(2012, 4, 14)
-</pre></div>
-</div>
-<p>To create jalali datetime from python&#8217;s standard datetime:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: import khayyam,datetime
-
-In [2]: now = datetime.datetime.now()
-
-In [3]: jalali_now = khayyam.JalaliDatetime.from_datetime(now)
-
-In [4]: print jalali_now
-1391-1-26T1:31:10.34972
-</pre></div>
-</div>
-<p>To format you can use the native python&#8217;s <a class="reference external" href="http://docs.python.org/library/datetime.html#strftime-and-strptime-behavior">datetime.strftime</a> function:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: import khayyam
-
-In [2]: now = khayyam.JalaliDatetime.now()
-
-In [3]: print now.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)
-1391-1-26 1:26:28
-
-In [4]: print now.strftime(&quot;%C&quot;)
-شنبه 26 فروردین 1391 1:26:28 ق.ظ
-
-In [5]: print now.strftime(&quot;%c&quot;)
-ش 26 فر 91 1:26
-</pre></div>
-</div>
-<p>Using timezone:</p>
-<div class="highlight-python"><div class="highlight"><pre>In [1]: import khayyam
-
-In [2]: now = khayyam.JalaliDatetime.now(khayyam.teh_tz)
-
-In [3]: now
-Out[3]: khayyam.JalaliDatetime(1391, 1, 26, 1, 32, 49, 108209, tzinfo=&lt;khayyam.tehran_timezone.TehTz object at 0x8a6812c&gt;)
-
-In [4]: now.dst()
-Out[4]: datetime.timedelta(0, 3600)
-
-In [5]: now.tzinfo
-Out[5]: &lt;khayyam.tehran_timezone.TehTz object at 0x8a6812c&gt;
-</pre></div>
 </div>
 </div>
 
@@ -186,7 +162,6 @@ Out[5]: &lt;khayyam.tehran_timezone.TehTz object at 0x8a6812c&gt;
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#overview">Overview</a></li>
 </ul>
 
   <h4>Previous topic</h4>

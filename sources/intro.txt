@@ -15,15 +15,15 @@ This will imports
 :py:class:`khayyam.JalaliDatetime`,
 :py:class:`khayyam.Timezone`,
 :py:class:`khayyam.TehranTimezone`,
-:py:obj:`khayyam.constants.MINYEAR`,
-:py:obj:`khayyam.constants.MAXYEAR`,
-:py:obj:`khayyam.constants.SATURDAY`,
-:py:obj:`khayyam.constants.SUNDAY`,
-:py:obj:`khayyam.constants.MONDAY`,
-:py:obj:`khayyam.constants.THURSDAY`,
-:py:obj:`khayyam.constants.WEDNESDAY`
-:py:obj:`khayyam.constants.TUESDAY`
-:py:obj:`khayyam.constants.FRIDAY`
+:py:obj:`khayyam.MINYEAR`,
+:py:obj:`khayyam.MAXYEAR`,
+:py:obj:`khayyam.SATURDAY`,
+:py:obj:`khayyam.SUNDAY`,
+:py:obj:`khayyam.MONDAY`,
+:py:obj:`khayyam.THURSDAY`,
+:py:obj:`khayyam.WEDNESDAY`,
+:py:obj:`khayyam.TUESDAY`,
+:py:obj:`khayyam.FRIDAY`
 
 
 Current date and time
@@ -61,65 +61,74 @@ Formatting
 
 All format directives that supported by python's native :ref:`strftime-strptime-behavior` are supported by this library, plus:
 
-* `%g`
-* `%G`
+=========     =======
+Directive     Meaning
+=========     =======
+%e	          ASCII Locale’s abbreviated weekday name.
+%E	          ASCII Locale’s full weekday name.
+%g	          ASCII Locale’s abbreviated month name.
+%G	          ASCII Locale’s full month name.
+%C	          Locale’s appropriate date and time representation.
+%q	          ASCII Locale’s appropriate short date and time representation.
+%Q	          ASCII Locale’s appropriate date and time representation.
+=========     =======
 
 
-
-Overview
-========
-
-
-To convert a jalali datetime to python's standard datetime::
-
-   In [1]: import khayyam
-
-   In [2]: khayyam.JalaliDatetime.now().to_datetime()
-   Out[2]: datetime.datetime(2012, 4, 14, 1, 21, 8, 842241)
-
-   In [3]: khayyam.JalaliDate.today().to_date()
-   Out[3]: datetime.date(2012, 4, 14)
-
-To create jalali datetime from python's standard datetime::
-
-   In [1]: import khayyam,datetime
-
-   In [2]: now = datetime.datetime.now()
-
-   In [3]: jalali_now = khayyam.JalaliDatetime.from_datetime(now)
-
-   In [4]: print jalali_now
-   1391-1-26T1:31:10.34972
-
-To format you can use the native python's `datetime.strftime`_ function::
-
-   In [1]: import khayyam
-
-   In [2]: now = khayyam.JalaliDatetime.now()
-
-   In [3]: print now.strftime("%Y-%m-%d %H:%M:%S")
-   1391-1-26 1:26:28
-
-   In [4]: print now.strftime("%C")
-   شنبه 26 فروردین 1391 1:26:28 ق.ظ
-
-   In [5]: print now.strftime("%c")
-   ش 26 فر 91 1:26
-
-Using timezone::
-
-   In [1]: import khayyam
-
-   In [2]: now = khayyam.JalaliDatetime.now(khayyam.teh_tz)
-
-   In [3]: now
-   Out[3]: khayyam.JalaliDatetime(1391, 1, 26, 1, 32, 49, 108209, tzinfo=<khayyam.tehran_timezone.TehTz object at 0x8a6812c>)
-
-   In [4]: now.dst()
-   Out[4]: datetime.timedelta(0, 3600)
-
-   In [5]: now.tzinfo
-   Out[5]: <khayyam.tehran_timezone.TehTz object at 0x8a6812c>
+..
+  Overview
+  ========
 
 
-.. _datetime.strftime: http://docs.python.org/library/datetime.html#strftime-and-strptime-behavior
+  To convert a jalali datetime to python's standard datetime::
+
+     In [1]: import khayyam
+
+     In [2]: khayyam.JalaliDatetime.now().to_datetime()
+     Out[2]: datetime.datetime(2012, 4, 14, 1, 21, 8, 842241)
+
+     In [3]: khayyam.JalaliDate.today().to_date()
+     Out[3]: datetime.date(2012, 4, 14)
+
+  To create jalali datetime from python's standard datetime::
+
+     In [1]: import khayyam,datetime
+
+     In [2]: now = datetime.datetime.now()
+
+     In [3]: jalali_now = khayyam.JalaliDatetime.from_datetime(now)
+
+     In [4]: print jalali_now
+     1391-1-26T1:31:10.34972
+
+  To format you can use the native python's `datetime.strftime`_ function::
+
+     In [1]: import khayyam
+
+     In [2]: now = khayyam.JalaliDatetime.now()
+
+     In [3]: print now.strftime("%Y-%m-%d %H:%M:%S")
+     1391-1-26 1:26:28
+
+     In [4]: print now.strftime("%C")
+     شنبه 26 فروردین 1391 1:26:28 ق.ظ
+
+     In [5]: print now.strftime("%c")
+     ش 26 فر 91 1:26
+
+  Using timezone::
+
+     In [1]: import khayyam
+
+     In [2]: now = khayyam.JalaliDatetime.now(khayyam.teh_tz)
+
+     In [3]: now
+     Out[3]: khayyam.JalaliDatetime(1391, 1, 26, 1, 32, 49, 108209, tzinfo=<khayyam.tehran_timezone.TehTz object at 0x8a6812c>)
+
+     In [4]: now.dst()
+     Out[4]: datetime.timedelta(0, 3600)
+
+     In [5]: now.tzinfo
+     Out[5]: <khayyam.tehran_timezone.TehTz object at 0x8a6812c>
+
+
+  .. _datetime.strftime: http://docs.python.org/library/datetime.html#strftime-and-strptime-behavior
