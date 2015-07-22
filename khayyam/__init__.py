@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Khayyam Package
-"""
+
+__version__ = '2.4.0-beta'
 
 #: Minimum year supported by the library.
 MINYEAR = 1
@@ -39,7 +38,7 @@ from .jalali_datetime import JalaliDatetime
 from .timezones import TehranTimezone, Timezone
 teh_tz = TehranTimezone()
 __author__ = 'vahid'
-__version__ = '2.3.0-alpha'
+
 __all__ = [
     'MINYEAR',
     'MAXYEAR',

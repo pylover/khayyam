@@ -104,7 +104,6 @@ class JalaliDate(object):
 
     @classmethod
     def strptime(cls, date_string, fmt):
-
         result = cls.create_formatter(fmt).parse(date_string)
         result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
@@ -188,19 +187,24 @@ class JalaliDate(object):
 =========    =======
 Directive    Meaning
 =========    =======
-%a           Locale’s abbreviated weekday name.     
-%A           Locale’s full weekday name.     
-%b           Locale’s abbreviated month name.     
-%B           Locale’s full month name.     
-%d           Day of the month as a decimal number [01,31].     
-%j           Day of the year as a decimal number [001,366].     
-%m           Month as a decimal number [01,12].     
-%w           Weekday as a decimal number [0(Saturday),6(Friday)].
-%W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Monday are considered to be in week 0.
-%U           Week number of the year (Sunday as the first day of the week) as a decimal number [00,53]. All days in a new year preceding the first Sunday are considered to be in week 0.    (4)
+%a           Locale’s abbreviated weekday name.
+%A           Locale’s full weekday name.
+%b           Locale’s abbreviated month name.
+%B           Locale’s full month name.
+%d           Day of the month as a decimal number [01, 31].
+%D           Day of the month as a decimal number in persian form [۰۱, ۳۱].
+%j           Day of the year as a decimal number [001, 366].
+%J           Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].
+%m           Month as a decimal number [01, 12].
+%R           Month as a decimal number in persian form [۰۱, ۱۲].
+%w           Weekday as a decimal number [0(Saturday), 6(Friday)].
+%W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.
+%U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.
 %x           Locale’s appropriate date representation.
-%y           Year without century as a decimal number [00,99].
-%Y           Year with century as a decimal number.
+%y           Year without century as a decimal number [00, 99].
+%Y           Year with century as a decimal number [1-3178].
+%n           Year without century as a decimal number in persian form [۰۰, ۹۹].
+%N           Year with century as a decimal number in persian form [۱-۳۱۷۸].
 %e           ASCII Locale’s abbreviated weekday name.
 %E           ASCII Locale’s full weekday name.
 %g           ASCII Locale’s abbreviated month name.
@@ -217,18 +221,26 @@ Directive    Meaning
 %C            Locale’s appropriate date and time representation.
 %q            ASCII Locale’s appropriate short date and time representation.
 %Q            ASCII Locale’s appropriate date and time representation.
-%f            Microsecond as a decimal number [0,999999], zero-padded on the left    (1)
-%H            Hour (24-hour clock) as a decimal number [00,23].
-%I            Hour (12-hour clock) as a decimal number [01,12].
-%M            Minute as a decimal number [00,59].
-%p            Locale’s equivalent of either AM or PM.    (2)
-%S            Second as a decimal number [00,61].    (3)
+%f            Microsecond as a decimal number [0, 999999], zero-padded on the left
+%F            Microsecond as a decimal number in persian from[۰, ۹۹۹۹۹۹], zero-padded on the left
+%H            Hour (24-hour clock) as a decimal number [00, 23].
+%h            Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].
+%I            Hour (12-hour clock) as a decimal number [01, 12].
+%i            Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].
+%M            Minute as a decimal number [00, 59].
+%r            Minute as a decimal number in persian form [۰۰, ۵۹].
+%p            Locale’s equivalent of either AM or PM in persian format [ق.ظ, ب.ظ].
+%t            Locale’s equivalent of either AM or PM in ASCII format.
+%S            Second as a decimal number [00, 59].
+%s            Second as a decimal number in persian form [۰۰, ۵۹].
 %X            Locale’s appropriate time representation.
-%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).    (5)
+%z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).
+%o            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.
 %Z            Time zone name (empty string if the object is naive).
 =========    =======
 
         """
+
         return self.create_formatter(fmt).format(self)
     __format__ = strftime
 

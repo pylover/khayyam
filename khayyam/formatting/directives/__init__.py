@@ -3,15 +3,29 @@ from khayyam import SATURDAY, MONDAY
 from khayyam.compat import get_unicode
 from khayyam.formatting import constants as consts
 from .directive import Directive
+from .day import PersianDayDirective
+from .month import PersianMonthDirective
 from .ampm import AmPmDirective, AmPmASCIIDirective
-from .year import ShortYearDirective, DayOfYearDirective
-from .local import LocalShortDatetimeFormatDirective, \
+from .time import \
+    PersianMicrosecondDirective, \
+    PersianHour12Directive, \
+    PersianHour24Directive, \
+    PersianSecondDirective, \
+    PersianMinuteDirective
+from .year import \
+    ShortYearDirective, \
+    DayOfYearDirective, \
+    PersianDayOfYearDirective, \
+    PersianYearDirective, \
+    PersianShortYearDirective
+from .local import \
+    LocalShortDatetimeFormatDirective, \
     LocalDatetimeFormatDirective, \
     LocalASCIIShortDatetimeFormatDirective, \
     LocalASCIIDatetimeFormatDirective, \
     LocalDateFormatDirective, \
     LocalTimeFormatDirective
-from .tz import UTCOffsetDirective, TimezoneNameDirective
+from .tz import UTCOffsetDirective, TimezoneNameDirective, PersianUTCOffsetDirective
 __author__ = 'vahid'
 
 
@@ -19,6 +33,14 @@ DATE_FORMAT_DIRECTIVES = [
     ShortYearDirective(),
     DayOfYearDirective(),
     LocalDateFormatDirective(),
+    PersianDayDirective(),
+    PersianDayOfYearDirective(),
+    PersianMonthDirective(),
+    PersianYearDirective(),
+    PersianShortYearDirective(),
+    PersianSecondDirective(),
+    PersianMinuteDirective(),
+    PersianUTCOffsetDirective(),
     Directive(
         'Y',
         'year',
@@ -141,6 +163,9 @@ TIME_FORMAT_DIRECTIVES = [
     LocalTimeFormatDirective(),
     UTCOffsetDirective(),
     TimezoneNameDirective(),
+    PersianMicrosecondDirective(),
+    PersianHour12Directive(),
+    PersianHour24Directive(),
     Directive(
         'H',
         'hour',
@@ -198,3 +223,6 @@ __all__ = [
     'TimezoneNameDirective',
 ]
 
+"""
+Available directives: k l u v K L O P R T V
+"""

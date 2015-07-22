@@ -80,7 +80,8 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(tz_dt.strftime('%z'), '+00:10')
         tz_dt = JalaliDatetime(tzinfo=Timezone(timedelta(minutes=-30)))
         self.assertEqual(tz_dt.strftime('%z'), '-00:30')
-        self.assertEqual(JalaliDatetime.strptime('', '%z'), JalaliDatetime())
+        self.assertEqual(tz_dt.strftime('%o'), u'-۰۰:۳۰')
+        self.assertEqual(JalaliDatetime.strptime('', '%o'), JalaliDatetime())
         self.assertEqual(JalaliDatetime.strptime('00:00', '%z'), JalaliDatetime())
         self.assertEqual(JalaliDatetime.strptime('00:01', '%z'),
                          JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
@@ -89,6 +90,17 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'),
                          JalaliDatetime(tzinfo=teh_tz))
         self.assertEqual(JalaliDatetime.strptime('+04:30', '%z').utcoffset(), timedelta(hours=4.50))
+
+        self.assertEqual(JalaliDatetime.strptime(u'۰۰:۰۰', '%o'), JalaliDatetime())
+        self.assertEqual(JalaliDatetime.strptime(u'۰۰:۰۱', '%o'),
+                         JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
+        self.assertNotEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'), JalaliDatetime.strptime('04:31', '%z'))
+        self.assertEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'), JalaliDatetime.strptime('04:30', '%z'))
+        self.assertNotEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'),
+                         JalaliDatetime(tzinfo=teh_tz))
+        self.assertEqual(JalaliDatetime.strptime(u'+۰۴:۳۰', '%o').utcoffset(), timedelta(hours=4.50))
+
+
         self.assertEqual(tz_dt.strftime('%z'), tz_dt.strftime('%Z'))
 
         self.assertEqual(
@@ -113,6 +125,8 @@ class TestJalaliDateTime(unittest.TestCase):
             d_test = d2 + timedelta(hours=i)
             check_format(d_test, '%Y%m%d%H%a%A%b%B%c%C%f%I%j%M%p%S%w%x%X%y%g%G%e%E%W%%')
             check_format(d_test, '%Y-%m-%d %p %I:%M:%S.%f')
+            check_format(d_test, '%N-%R-%D %p %i:%r:%s.%F')
+            check_format(d_test, '%N-%R-%D %h:%r:%s.%F %o')
             check_format(d_test, '%Y-%m-%d %X')
             check_format(d_test, '%x %H')
             check_format(d_test, '%c')

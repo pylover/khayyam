@@ -3,6 +3,7 @@ from .directive import Directive
 from khayyam.formatting import constants as consts
 from khayyam.algorithms import days_in_year
 from datetime import timedelta
+from .persian import PersianNumberDirective
 __author__ = 'vahid'
 
 
@@ -48,3 +49,45 @@ class DayOfYearDirective(Directive):
             day=d.day
         ))
 
+
+class PersianDayOfYearDirective(PersianNumberDirective):
+    def __init__(self):
+        super(PersianDayOfYearDirective, self).__init__(
+            'J', 'persiandayofyear', consts.PERSIAN_DAY_OF_YEAR_REGEX)
+
+    def format(self, d):
+        return super(PersianDayOfYearDirective, self).format('%.3d' % d.dayofyear())
+
+    def post_parser(self, ctx, formatter):
+        super(PersianDayOfYearDirective, self).post_parser(ctx, formatter)
+        if self.name in ctx and ctx[self.name]:
+            ctx['dayofyear'] = ctx[self.name]
+
+
+
+class PersianYearDirective(PersianNumberDirective):
+    def __init__(self):
+        super(PersianYearDirective, self).__init__(
+            'N', 'persianyear', consts.PERSIAN_YEAR_REGEX)
+
+    def format(self, d):
+        return super(PersianYearDirective, self).format('%.4d' % d.year)
+
+    def post_parser(self, ctx, formatter):
+        super(PersianYearDirective, self).post_parser(ctx, formatter)
+        if self.name in ctx and ctx[self.name]:
+            ctx['year'] = ctx[self.name]
+
+
+class PersianShortYearDirective(PersianNumberDirective):
+    def __init__(self):
+        super(PersianShortYearDirective, self).__init__(
+            'n', 'persianshortyear', consts.PERSIAN_SHORT_YEAR_REGEX)
+
+    def format(self, d):
+        return super(PersianShortYearDirective, self).format('%.2d' % (d.year % 100))
+
+    def post_parser(self, ctx, formatter):
+        super(PersianShortYearDirective, self).post_parser(ctx, formatter)
+        if self.name in ctx and ctx[self.name]:
+            ctx['shortyear'] = ctx[self.name]

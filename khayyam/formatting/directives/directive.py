@@ -16,7 +16,7 @@ class Directive(object):
         return '%' + self.key
 
     def post_parser(self, ctx, formatter):
-        return ctx
+        pass
 
     def format(self, d):
         return d

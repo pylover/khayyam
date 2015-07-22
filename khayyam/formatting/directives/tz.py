@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from .directive import Directive
+from .persian import PersianNumberDirective, persian_to_eng
 from khayyam.formatting import constants as consts
 from khayyam.compat import get_unicode
 from datetime import timedelta
@@ -39,6 +40,28 @@ class UTCOffsetDirective(Directive):
             hours = posneg(hours),
             minutes = posneg(minutes)
         ))))
+
+
+
+class PersianUTCOffsetDirective(PersianNumberDirective):
+    def __init__(self):
+        super(PersianUTCOffsetDirective, self).__init__(
+            'o', 'persianutcoffset', consts.PERSIAN_UTC_OFFSET_FORMAT_REGEX)
+
+    def format(self, d):
+        if not d.tzinfo:
+            return ''
+        seconds = d.utcoffset().total_seconds()
+        return super(PersianUTCOffsetDirective, self).format('%s%.2d:%.2d' % (
+            '+' if seconds >= 0 else '-',
+            int(seconds / 3600),
+            int((seconds % 3600) / 60),
+        ))
+
+    def post_parser(self, ctx, formatter):
+        exp = ctx[self.name]
+        if exp.strip() != '':
+            ctx['utcoffset'] = persian_to_eng(exp)
 
 
 class TimezoneNameDirective(Directive):

@@ -11,6 +11,9 @@ Jump To:
 
 #### Change Log
 
+  * 2.4.0-beta (2015-07-22)
+    * %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o directives has been added.
+
   * 2.3.0-alpha (2015-07-22)
     * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays.
     * Doc: Introduction -> Formatting & parsing

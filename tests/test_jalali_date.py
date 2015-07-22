@@ -80,13 +80,14 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(d1.strftime('%E'), u'Doshanbeh')
         self.assertEqual(d1.strftime('%g'), u'Sh')
         self.assertEqual(d1.strftime('%G'), u'Shahrivar')
+        self.assertEqual(d1.strftime('%D'), u'۱۵')
         self.assertEqual(d1.strftime('%%'), u'%')
 
         self.assertEqual(
             d1.strftime('%a%A%b%B%d%j%m%w%W%x%y%Y%e%E%g%G%%'),
             u'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
         self.assertEqual(d1.strftime('%Y-%m-%d'), '1361-06-15')
-        self.assertEqual(d1.strftime('اول%Y-%m-%dآخر'), 'اول1361-06-15آخر')
+        self.assertEqual(d1.strftime(u'اول%Y-%m-%dآخر'), u'اول1361-06-15آخر')
 
 
     def test_add(self):
@@ -158,12 +159,12 @@ class TestJalaliDate(unittest.TestCase):
         # Test Year
         self.assertEqual(JalaliDate.strptime('1361', '%Y'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime('1361%C', '%Y%C'), JalaliDate(1361))
-        self.assertEqual(JalaliDate.strptime('اریا1361گلگشت', 'اریا%Yگلگشت'), JalaliDate(1361))
+        self.assertEqual(JalaliDate.strptime(u'اریا1361گلگشت', u'اریا%Yگلگشت'), JalaliDate(1361))
 
         current_century = int(JalaliDate.today().year / 100) * 100
         self.assertEqual(JalaliDate.strptime('61', '%y'), JalaliDate(current_century + 61))
         self.assertEqual(JalaliDate.strptime('61%C', '%y%C'), JalaliDate(current_century + 61))
-        self.assertEqual(JalaliDate.strptime('اریا61گلگشت', 'اریا%yگلگشت'), JalaliDate(current_century+61))
+        self.assertEqual(JalaliDate.strptime(u'اریا61گلگشت', u'اریا%yگلگشت'), JalaliDate(current_century+61))
 
         # Test months
         for i in range(1, 13):
@@ -179,10 +180,10 @@ class TestJalaliDate(unittest.TestCase):
 
         self.assertRaises(ValueError, JalaliDate.strptime, '13', '%m')
         self.assertRaises(ValueError, JalaliDate.strptime, '0', '%m')
-        self.assertRaises(ValueError, JalaliDate.strptime, '1345 مت', '%Y %b')
-        self.assertRaises(ValueError, JalaliDate.strptime, '1345 شتران', '%Y %B')
-        self.assertRaises(ValueError, JalaliDate.strptime, '1345 مت', '%Y %g')
-        self.assertRaises(ValueError, JalaliDate.strptime, '1345 شتران', '%Y %G')
+        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %b')
+        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 شتران', '%Y %B')
+        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %g')
+        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 شتران', '%Y %G')
 
         # Test Week and Weekdays
         for i in range(7):
@@ -203,6 +204,7 @@ class TestJalaliDate(unittest.TestCase):
         # Test days
         for i in range(1, 32):
             self.assertEqual(JalaliDate.strptime(str(i), '%d'), JalaliDate(day=i))
+
         self.assertRaises(ValueError, JalaliDate.strptime, '32', '%d')
         self.assertRaises(ValueError, JalaliDate.strptime, '0', '%d')
 
@@ -234,11 +236,16 @@ class TestJalaliDate(unittest.TestCase):
 
         for i in xrange(1, 400):
             check_format(JalaliDate.fromordinal(i), "%Y-%m-%d %a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
+            check_format(JalaliDate.fromordinal(i), "%N-%R-%D")
+            check_format(JalaliDate.fromordinal(i), "%Y-%J")
+
 
         d = JalaliDate.today().replace(month=1, day=1)
         for i in xrange(1, algorithms.days_in_year(d.year)):
             check_format(d + timedelta(i), "%y-%m-%d")
+            check_format(d + timedelta(i), "%n-%m-%d")
 
 
 if __name__ == '__main__':
     unittest.main()
+

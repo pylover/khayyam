@@ -4,7 +4,7 @@ make github.io
 
 while true
 do
-  inotifywait -r -e modify -e move -e create -e delete . | while read line
+  inotifywait -r -e modify -e move -e create -e delete . ../khayyam | while read line
     do
      make github.io
     done

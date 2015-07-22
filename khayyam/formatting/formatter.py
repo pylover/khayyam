@@ -7,14 +7,19 @@ __author__ = 'vahid'
 class JalaliDateFormatter(object):
 
     _post_parsers = [
-            'localdateformat',
-            'monthabbr',
-            'monthabbr_ascii',
-            'monthname',
-            'monthname_ascii',
-            'shortyear',
-            'dayofyear',
-        ]
+        'persianday',
+        'persiandayofyear',
+        'persianmonth',
+        'persianyear',
+        'persianshortyear',
+        'localdateformat',
+        'monthabbr',
+        'monthabbr_ascii',
+        'monthname',
+        'monthname_ascii',
+        'shortyear',
+        'dayofyear',
+    ]
 
     def __init__(self, format_string, directive_db=None):
         if not directive_db:
@@ -27,7 +32,7 @@ class JalaliDateFormatter(object):
         self._parser_regex = self._create_parser_regex()
 
     def _create_parser_regex(self):
-        regex = '^'
+        regex = u'^'
         index = 0
         for m in re.finditer(consts.FORMAT_DIRECTIVE_REGEX, self.format_string):
             directive_key = m.group()[1:]
@@ -40,7 +45,7 @@ class JalaliDateFormatter(object):
             if directive.key == '%':
                 regex += '%'
                 continue
-            regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
+            regex += u'(?P<%(group_name)s>%(regexp)s)' % dict(
                 group_name=directive.key,
                 regexp=directive.regex
             )
@@ -59,7 +64,7 @@ class JalaliDateFormatter(object):
                 yield m, self.directives_by_key[key]
 
     def format(self, jalali_date):
-        result = ''
+        result = u''
         index = 0
         for match, directive in self.iter_format_directives():
             if index < match.start():
@@ -103,22 +108,33 @@ class JalaliDateFormatter(object):
 
 class JalaliDatetimeFormatter(JalaliDateFormatter):
     _post_parsers = [
-            'localdateformat',
-            'localshortdatetimeformat',
-            'localshortdatetimeformatascii',
-            'localdatetimeformat',
-            'localdatetimeformatascii',
-            'localtimeformat',
-            'monthabbr',
-            'monthabbr_ascii',
-            'monthname',
-            'monthname_ascii',
-            'ampm',
-            'ampmascii',
-            'shortyear',
-            'dayofyear',
-            'utcoffset'
-        ]
+        'persianday',
+        'persiandayofyear',
+        'persianmonth',
+        'persianyear',
+        'persianshortyear',
+        'persianmicrosecond',
+        'persianhour12',
+        'persianhour24',
+        'persianminute',
+        'persiansecond',
+        'persianutcoffset',
+        'localdateformat',
+        'localshortdatetimeformat',
+        'localshortdatetimeformatascii',
+        'localdatetimeformat',
+        'localdatetimeformatascii',
+        'localtimeformat',
+        'monthabbr',
+        'monthabbr_ascii',
+        'monthname',
+        'monthname_ascii',
+        'ampm',
+        'ampmascii',
+        'shortyear',
+        'dayofyear',
+        'utcoffset'
+    ]
 
     def __init__(self, format_string, directive_db=None):
         if not directive_db:

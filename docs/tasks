@@ -2,7 +2,7 @@
 
 ### To Do
 
-  * Persian numbers
+  * examples for %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)

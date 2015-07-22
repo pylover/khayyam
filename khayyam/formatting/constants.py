@@ -117,11 +117,12 @@ AM_PM_ASCII = {
 }
 
 
+
 FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
 YEAR_REGEX = '\d{1,4}'
 SHORT_YEAR_REGEX = '\d{2}'
 MONTH_REGEX = '([0]?[1-9]|1[0-2])'
-DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])'
+DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])' # 1-31
 DAY_OF_YEAR_REGEX = '([0]{0,2}[1-9]|[0]?[1-9]\d|[12]\d{2}|3[0-5]\d|36[0-6])' # 1-366
 WEEK_OF_YEAR_REGEX = '([0]?\d|[1-4]\d|5[0-3])'  # 0-53
 WEEKDAY_REGEX = '[0-6]'
@@ -135,6 +136,17 @@ MICROSECOND_REGEX = '\d{1,6}'
 UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'
 TZ_NAME_FORMAT_REGEX='.+'
 
+PERSIAN_YEAR_REGEX = u'[۰۱۲۳۴۵۶۷۸۹]{1,4}'
+PERSIAN_SHORT_YEAR_REGEX = u'[۰۱۲۳۴۵۶۷۸۹]{2}'
+PERSIAN_MONTH_REGEX = u'([۰]?[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
+PERSIAN_DAY_REGEX = u'([۰]?[۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]|۳[۰۱])' # ۱-۳۱
+PERSIAN_DAY_OF_YEAR_REGEX = u'([۰]{0,2}[۱۲۳۴۵۶۷۸۹]|[۰]?[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]{2}|۳[۰۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹]|۳۶[۰۱۲۳۴۵۶])' # ۱-۳۶۶
+PERSIAN_HOUR12_REGEX = u'([۰]?[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
+PERSIAN_HOUR24_REGEX = u'([۰]?[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
+PERSIAN_MINUTE_REGEX = u'([۰]?[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_SECOND_REGEX = u'([۰]?[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_MICROSECOND_REGEX = u'[۰۱۲۳۴۵۶۷۸۹]{1,6}'
+PERSIAN_UTC_OFFSET_FORMAT_REGEX = u'([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
 PERSIAN_WEEKDAY_NAMES_REGEX = u'(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES.values())
 PERSIAN_WEEKDAY_ABBRS_REGEX = u'[%s]' % ''.join(PERSIAN_WEEKDAY_ABBRS.values())
 PERSIAN_MONTH_NAMES_REGEX = u'(%s)' % '|'.join(PERSIAN_MONTH_NAMES.values())
