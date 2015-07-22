@@ -108,7 +108,7 @@ rprint() function
 
 If you are using python2 its good to import new print function::
 
-  >>>from __future__ import print_function
+  >>> from __future__ import print_function
 
 
 Extending your practice environment by defining a handy print function for RTL::
