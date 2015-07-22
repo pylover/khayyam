@@ -134,6 +134,17 @@ Directive     Meaning
 %C	          Locale’s appropriate date and time representation.
 %q	          ASCII Locale’s appropriate short date and time representation.
 %Q	          ASCII Locale’s appropriate date and time representation.
+%D            Day of the month as a decimal number in persian form [۰۱, ۳۱].
+%J            Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].
+%R            Month as a decimal number in persian form [۰۱, ۱۲].
+%N            Year with century as a decimal number in persian form.
+%n            Year without century as a decimal number in persian form [۰۰, ۹۹].
+%F            Microsecond as a decimal number in persian from [۰, ۹۹۹۹۹۹], zero-padded on the left
+%h            Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].
+%i            Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].
+%r            Minute as a decimal number in persian form [۰۰, ۵۹].
+%s            Second as a decimal number in persian form [۰۰, ۵۹].
+%o            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.
 =========     =======
 
 All format directives are documented in :py:meth:`khayyam.JalaliDate.strftime`

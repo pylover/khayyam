@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.formatting.formatter &mdash; Khayyam 2.3.0-alpha documentation</title>
+    <title>khayyam.formatting.formatter &mdash; Khayyam 2.4.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.3.0-alpha',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.3.0-alpha documentation" href="../../../index.html" />
+    <link rel="top" title="Khayyam 2.4.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -56,14 +56,19 @@
 <div class="viewcode-block" id="JalaliDateFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDateFormatter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
-            <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
-        <span class="p">]</span>
+        <span class="s">&#39;persianday&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonth&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_string</span><span class="p">,</span> <span class="n">directive_db</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">directive_db</span><span class="p">:</span>
@@ -76,7 +81,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parser_regex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_parser_regex</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_create_parser_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">regex</span> <span class="o">=</span> <span class="s">&#39;^&#39;</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="s">u&#39;^&#39;</span>
         <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">consts</span><span class="o">.</span><span class="n">FORMAT_DIRECTIVE_REGEX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">):</span>
             <span class="n">directive_key</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
@@ -89,7 +94,7 @@
             <span class="k">if</span> <span class="n">directive</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s">&#39;%&#39;</span><span class="p">:</span>
                 <span class="n">regex</span> <span class="o">+=</span> <span class="s">&#39;%&#39;</span>
                 <span class="k">continue</span>
-            <span class="n">regex</span> <span class="o">+=</span> <span class="s">&#39;(?P&lt;</span><span class="si">%(group_name)s</span><span class="s">&gt;</span><span class="si">%(regexp)s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">regex</span> <span class="o">+=</span> <span class="s">u&#39;(?P&lt;</span><span class="si">%(group_name)s</span><span class="s">&gt;</span><span class="si">%(regexp)s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span>
                 <span class="n">group_name</span><span class="o">=</span><span class="n">directive</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
                 <span class="n">regexp</span><span class="o">=</span><span class="n">directive</span><span class="o">.</span><span class="n">regex</span>
             <span class="p">)</span>
@@ -108,7 +113,7 @@
                 <span class="k">yield</span> <span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="JalaliDateFormatter.format"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jalali_date</span><span class="p">):</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
         <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">match</span><span class="p">,</span> <span class="n">directive</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_format_directives</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span>
@@ -152,22 +157,33 @@
 </div></div>
 <div class="viewcode-block" id="JalaliDatetimeFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDatetimeFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">JalaliDateFormatter</span><span class="p">):</span>
     <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
-            <span class="s">&#39;localshortdatetimeformat&#39;</span><span class="p">,</span>
-            <span class="s">&#39;localshortdatetimeformatascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;localdatetimeformat&#39;</span><span class="p">,</span>
-            <span class="s">&#39;localdatetimeformatascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;localtimeformat&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
-            <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;ampm&#39;</span><span class="p">,</span>
-            <span class="s">&#39;ampmascii&#39;</span><span class="p">,</span>
-            <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
-            <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
-            <span class="s">&#39;utcoffset&#39;</span>
-        <span class="p">]</span>
+        <span class="s">&#39;persianday&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonth&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmicrosecond&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour12&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour24&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianminute&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiansecond&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianutcoffset&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localshortdatetimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localshortdatetimeformatascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdatetimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdatetimeformatascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localtimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ampm&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ampmascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;utcoffset&#39;</span>
+    <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_string</span><span class="p">,</span> <span class="n">directive_db</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">directive_db</span><span class="p">:</span>
@@ -207,7 +223,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

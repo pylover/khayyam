@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; Khayyam 2.3.0-alpha documentation</title>
+    <title>Introduction &mdash; Khayyam 2.4.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.3.0-alpha',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.3.0-alpha documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.4.0-beta documentation" href="index.html" />
     <link rel="next" title="Migration from python’s builtin datetime" href="migration.html" />
     <link rel="prev" title="Khayyam" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Khayyam"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -170,8 +170,8 @@ emulator, you can install the rtl package:</p>
 <p>All format directives supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are covered by this library, plus:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="88%" />
+<col width="8%" />
+<col width="92%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Directive</th>
@@ -199,6 +199,39 @@ emulator, you can install the rtl package:</p>
 </tr>
 <tr class="row-even"><td>%Q</td>
 <td>ASCII Locale’s appropriate date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%D</td>
+<td>Day of the month as a decimal number in persian form [۰۱, ۳۱].</td>
+</tr>
+<tr class="row-even"><td>%J</td>
+<td>Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].</td>
+</tr>
+<tr class="row-odd"><td>%R</td>
+<td>Month as a decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-even"><td>%N</td>
+<td>Year with century as a decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%n</td>
+<td>Year without century as a decimal number in persian form [۰۰, ۹۹].</td>
+</tr>
+<tr class="row-even"><td>%F</td>
+<td>Microsecond as a decimal number in persian from [۰, ۹۹۹۹۹۹], zero-padded on the left</td>
+</tr>
+<tr class="row-odd"><td>%h</td>
+<td>Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].</td>
+</tr>
+<tr class="row-even"><td>%i</td>
+<td>Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-odd"><td>%r</td>
+<td>Minute as a decimal number in persian form [۰۰, ۵۹].</td>
+</tr>
+<tr class="row-even"><td>%s</td>
+<td>Second as a decimal number in persian form [۰۰, ۵۹].</td>
+</tr>
+<tr class="row-odd"><td>%o</td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.</td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +441,7 @@ directive alongside time and date directives in your pattern. for example:</p>
         <li class="right" >
           <a href="index.html" title="Khayyam"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.3.0-alpha documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
