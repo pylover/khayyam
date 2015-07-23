@@ -104,7 +104,7 @@ Today
   چهارشنبه 31 تیر 1394
 
   >>> print(JalaliDate(1394, 5, 1).strftime('%A %D %B %N'))
-  پنجشنبه ۰۱ مرداد ۱۳۹۴
+  پنجشنبه ۱ مرداد ۱۳۹۴
 
 
 
@@ -149,32 +149,8 @@ Extending your practice environment by defining a handy print function for RTL:
 Formatting & Parsing
 --------------------
 
-All format directives supported by python's native :ref:`strftime-strptime-behavior` are covered by this library, plus:
-
-=========     =======
-Directive     Meaning
-=========     =======
-%e	          ASCII Locale’s abbreviated weekday name.
-%E	          ASCII Locale’s full weekday name.
-%g	          ASCII Locale’s abbreviated month name.
-%G	          ASCII Locale’s full month name.
-%C	          Locale’s appropriate date and time representation.
-%q	          ASCII Locale’s appropriate short date and time representation.
-%Q	          ASCII Locale’s appropriate date and time representation.
-%D            Day of the month as a decimal number in persian form [۰۱, ۳۱].
-%J            Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].
-%R            Month as a decimal number in persian form [۰۱, ۱۲].
-%N            Year with century as a decimal number in persian form.
-%n            Year without century as a decimal number in persian form [۰۰, ۹۹].
-%F            Microsecond as a decimal number in persian from [۰, ۹۹۹۹۹۹], zero-padded on the left
-%h            Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].
-%i            Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].
-%r            Minute as a decimal number in persian form [۰۰, ۵۹].
-%s            Second as a decimal number in persian form [۰۰, ۵۹].
-%o            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.
-=========     =======
-
-All format directives are documented in :py:meth:`khayyam.JalaliDate.strftime`
+All format directives supported by python's native :ref:`strftime-strptime-behavior` are covered by this library.
+For a list of all supported directives, see :py:meth:`khayyam.JalaliDate.strftime`.
 
 To format locale's date & time:
 

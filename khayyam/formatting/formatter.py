@@ -8,10 +8,15 @@ class JalaliDateFormatter(object):
 
     _post_parsers = [
         'persianday',
+        'persiandayzeropadded',
         'persiandayofyear',
+        'persiandayofyearzeropadded',
         'persianmonth',
+        'persianmonthzeropadded',
         'persianyear',
+        'persianyearzeropadded',
         'persianshortyear',
+        'persianshortyearzeropadded',
         'localdateformat',
         'monthabbr',
         'monthabbr_ascii',
@@ -109,10 +114,15 @@ class JalaliDateFormatter(object):
 class JalaliDatetimeFormatter(JalaliDateFormatter):
     _post_parsers = [
         'persianday',
+        'persiandayzeropadded',
         'persiandayofyear',
+        'persiandayofyearzeropadded',
         'persianmonth',
+        'persianmonthzeropadded',
         'persianyear',
+        'persianyearzeropadded',
         'persianshortyear',
+        'persianshortyearzeropadded',
         'persianmicrosecond',
         'persianhour12',
         'persianhour24',

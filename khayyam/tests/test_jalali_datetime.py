@@ -126,7 +126,7 @@ class TestJalaliDateTime(unittest.TestCase):
             check_format(d_test, '%Y%m%d%H%a%A%b%B%c%C%f%I%j%M%p%S%w%x%X%y%g%G%e%E%W%%')
             check_format(d_test, '%Y-%m-%d %p %I:%M:%S.%f')
             check_format(d_test, '%N-%R-%D %p %i:%r:%s.%F')
-            check_format(d_test, '%N-%R-%D %h:%r:%s.%F %o')
+            check_format(d_test, '%N-%R-%D %k:%r:%s.%F %o')
             check_format(d_test, '%Y-%m-%d %X')
             check_format(d_test, '%x %H')
             check_format(d_test, '%c')

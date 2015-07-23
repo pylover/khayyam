@@ -192,19 +192,24 @@ Directive    Meaning
 %b           Locale’s abbreviated month name.
 %B           Locale’s full month name.
 %d           Day of the month as a decimal number [01, 31].
-%D           Day of the month as a decimal number in persian form [۰۱, ۳۱].
-%j           Day of the year as a decimal number [001, 366].
-%J           Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].
+%D           Day of the month as a decimal number in persian form [۱, ۳۱].
+%K           Day of the month as a zero padded decimal number in persian form [۰۱, ۳۱].
+%j           Day of the year as a zero padded decimal number [001, 366].
+%J           Day of the year as a decimal number in persian form [۱, ۳۶۶].
+%V           Day of the year as a zero padded decimal number in persian form [..۱, ۳۶۶].
 %m           Month as a decimal number [01, 12].
-%R           Month as a decimal number in persian form [۰۱, ۱۲].
+%R           Month as a decimal number in persian form [۱, ۱۲].
+%P           Month as a zero padded decimal number in persian form [۰۱, ۱۲].
 %w           Weekday as a decimal number [0(Saturday), 6(Friday)].
 %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.
 %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.
 %x           Locale’s appropriate date representation.
 %y           Year without century as a decimal number [00, 99].
 %Y           Year with century as a decimal number [1-3178].
-%n           Year without century as a decimal number in persian form [۰۰, ۹۹].
+%n           Year without century as a decimal number in persian form [۱, ۹۹].
+%u           Year without century as a zero padded decimal number in persian form [۰۱, ۹۹].
 %N           Year with century as a decimal number in persian form [۱-۳۱۷۸].
+%O           Year with century as a zero padded decimal number in persian form [۰۰۰۱-۳۱۷۸].
 %e           ASCII Locale’s abbreviated weekday name.
 %E           ASCII Locale’s full weekday name.
 %g           ASCII Locale’s abbreviated month name.
@@ -223,16 +228,20 @@ Directive    Meaning
 %Q            ASCII Locale’s appropriate date and time representation.
 %f            Microsecond as a decimal number [0, 999999], zero-padded on the left
 %F            Microsecond as a decimal number in persian from[۰, ۹۹۹۹۹۹], zero-padded on the left
-%H            Hour (24-hour clock) as a decimal number [00, 23].
-%h            Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].
-%I            Hour (12-hour clock) as a decimal number [01, 12].
-%i            Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].
+%H            Hour (24-hour clock) as a zero padded decimal number [00, 23].
+%k            Hour (24-hour clock) as a decimal number in persian form [۱, ۲۳].
+-%h            Hour (24-hour clock) as a zero padded decimal number in persian form [۰۰, ۲۳].
+%I            Hour (12-hour clock) as a zero padded decimal number [01, 12].
+%i            Hour (12-hour clock) as a zero padded decimal number in persian form [۰۱, ۱۲].
+-%l            Hour (12-hour clock) as a decimal number in persian form [۱, ۱۲].
 %M            Minute as a decimal number [00, 59].
-%r            Minute as a decimal number in persian form [۰۰, ۵۹].
+%r            Minute as a zero padded decimal number in persian form [۰۰, ۵۹].
+-%v            Minute as a decimal number in persian form [۰, ۵۹].
 %p            Locale’s equivalent of either AM or PM in persian format [ق.ظ, ب.ظ].
 %t            Locale’s equivalent of either AM or PM in ASCII format.
 %S            Second as a decimal number [00, 59].
-%s            Second as a decimal number in persian form [۰۰, ۵۹].
+%s            Second as a zero padded decimal number in persian form [۰۰, ۵۹].
+-%L            Second as a decimal number in persian form [۰, ۵۹].
 %X            Locale’s appropriate time representation.
 %z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).
 %o            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.

@@ -34,10 +34,39 @@ DATE_FORMAT_DIRECTIVES = [
     DayOfYearDirective(),
     LocalDateFormatDirective(),
     PersianDayDirective(),
+    PersianDayDirective(
+        'K',
+        'persiandayzeropadded',
+        consts.PERSIAN_DAY_ZERO_PADDED_REGEX,
+        zero_padding=True
+    ),
     PersianDayOfYearDirective(),
+    PersianDayOfYearDirective(
+        'V',
+        'persiandayofyearzeropadded',
+        consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX,
+        zero_padding=True
+    ),
     PersianMonthDirective(),
+    PersianMonthDirective(
+        'P',
+        'persianmonthzeropadded',
+        consts.PERSIAN_MONTH_ZERO_PADDED_REGEX,
+        zero_padding=True
+
+    ),
     PersianYearDirective(),
+    PersianYearDirective(
+        'O',
+        'persianyearzeropadded',
+        zero_padding=True
+    ),
     PersianShortYearDirective(),
+    PersianShortYearDirective(
+        'u',
+        'persianshortyearzeropadded',
+        zero_padding=True
+    ),
     PersianSecondDirective(),
     PersianMinuteDirective(),
     PersianUTCOffsetDirective(),
@@ -206,6 +235,7 @@ TIME_FORMAT_DIRECTIVES = [
 
 DATETIME_FORMAT_DIRECTIVES = DATE_FORMAT_DIRECTIVES + TIME_FORMAT_DIRECTIVES
 
+# TODO: RECREATE THIS
 __all__ = [
     'Directive',
     'LocalDatetimeFormatDirective',
@@ -224,5 +254,5 @@ __all__ = [
 ]
 
 """
-Available directives: k l u v K L O P R T V
+Available directives: T
 """

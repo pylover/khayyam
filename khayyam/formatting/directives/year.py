@@ -51,12 +51,15 @@ class DayOfYearDirective(Directive):
 
 
 class PersianDayOfYearDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianDayOfYearDirective, self).__init__(
-            'J', 'persiandayofyear', consts.PERSIAN_DAY_OF_YEAR_REGEX)
+
+    def __init__(self, key='J', name='persiandayofyear',
+                 regex=consts.PERSIAN_DAY_OF_YEAR_REGEX, zero_padding=False):
+        self.zero_padding = zero_padding
+        super(PersianDayOfYearDirective, self).__init__(key, name, regex)
 
     def format(self, d):
-        return super(PersianDayOfYearDirective, self).format('%.3d' % d.dayofyear())
+        fmt = '%%%sd' % ('.3' if self.zero_padding else '')
+        return super(PersianDayOfYearDirective, self).format(fmt % d.dayofyear())
 
     def post_parser(self, ctx, formatter):
         super(PersianDayOfYearDirective, self).post_parser(ctx, formatter)
@@ -66,12 +69,13 @@ class PersianDayOfYearDirective(PersianNumberDirective):
 
 
 class PersianYearDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianYearDirective, self).__init__(
-            'N', 'persianyear', consts.PERSIAN_YEAR_REGEX)
+    def __init__(self, key='N', name='persianyear', regex=consts.PERSIAN_YEAR_REGEX, zero_padding=False):
+        self.zero_padding = zero_padding
+        super(PersianYearDirective, self).__init__(key, name, regex)
 
     def format(self, d):
-        return super(PersianYearDirective, self).format('%.4d' % d.year)
+        fmt = '%%%sd' % ('.4' if self.zero_padding else '')
+        return super(PersianYearDirective, self).format(fmt % d.year)
 
     def post_parser(self, ctx, formatter):
         super(PersianYearDirective, self).post_parser(ctx, formatter)
@@ -80,12 +84,14 @@ class PersianYearDirective(PersianNumberDirective):
 
 
 class PersianShortYearDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianShortYearDirective, self).__init__(
-            'n', 'persianshortyear', consts.PERSIAN_SHORT_YEAR_REGEX)
+    def __init__(self, key='n', name='persianshortyear',
+                 regex=consts.PERSIAN_SHORT_YEAR_REGEX, zero_padding=False):
+        self.zero_padding = zero_padding
+        super(PersianShortYearDirective, self).__init__(key, name, regex)
 
     def format(self, d):
-        return super(PersianShortYearDirective, self).format('%.2d' % (d.year % 100))
+        fmt = '%%%sd' % ('.2' if self.zero_padding else '')
+        return super(PersianShortYearDirective, self).format(fmt % (d.year % 100))
 
     def post_parser(self, ctx, formatter):
         super(PersianShortYearDirective, self).post_parser(ctx, formatter)
