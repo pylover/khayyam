@@ -99,57 +99,72 @@
 <td>Day of the month as a decimal number [01, 31].</td>
 </tr>
 <tr class="row-odd"><td>%D</td>
-<td>Day of the month as a decimal number in persian form [۰۱, ۳۱].</td>
+<td>Day of the month as a decimal number in persian form [۱, ۳۱].</td>
 </tr>
-<tr class="row-even"><td>%j</td>
-<td>Day of the year as a decimal number [001, 366].</td>
+<tr class="row-even"><td>%K</td>
+<td>Day of the month as a zero padded decimal number in persian form [۰۱, ۳۱].</td>
 </tr>
-<tr class="row-odd"><td>%J</td>
-<td>Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].</td>
+<tr class="row-odd"><td>%j</td>
+<td>Day of the year as a zero padded decimal number [001, 366].</td>
+</tr>
+<tr class="row-even"><td>%J</td>
+<td>Day of the year as a decimal number in persian form [۱, ۳۶۶].</td>
+</tr>
+<tr class="row-odd"><td>%V</td>
+<td>Day of the year as a zero padded decimal number in persian form [..۱, ۳۶۶].</td>
 </tr>
 <tr class="row-even"><td>%m</td>
 <td>Month as a decimal number [01, 12].</td>
 </tr>
 <tr class="row-odd"><td>%R</td>
-<td>Month as a decimal number in persian form [۰۱, ۱۲].</td>
+<td>Month as a decimal number in persian form [۱, ۱۲].</td>
 </tr>
-<tr class="row-even"><td>%w</td>
+<tr class="row-even"><td>%P</td>
+<td>Month as a zero padded decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-odd"><td>%w</td>
 <td>Weekday as a decimal number [0(Saturday), 6(Friday)].</td>
 </tr>
-<tr class="row-odd"><td>%W</td>
+<tr class="row-even"><td>%W</td>
 <td>Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.</td>
 </tr>
-<tr class="row-even"><td>%U</td>
+<tr class="row-odd"><td>%U</td>
 <td>Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
 </tr>
-<tr class="row-odd"><td>%x</td>
+<tr class="row-even"><td>%x</td>
 <td>Locale’s appropriate date representation.</td>
 </tr>
-<tr class="row-even"><td>%y</td>
+<tr class="row-odd"><td>%y</td>
 <td>Year without century as a decimal number [00, 99].</td>
 </tr>
-<tr class="row-odd"><td>%Y</td>
+<tr class="row-even"><td>%Y</td>
 <td>Year with century as a decimal number [1-3178].</td>
 </tr>
-<tr class="row-even"><td>%n</td>
-<td>Year without century as a decimal number in persian form [۰۰, ۹۹].</td>
+<tr class="row-odd"><td>%n</td>
+<td>Year without century as a decimal number in persian form [۱, ۹۹].</td>
+</tr>
+<tr class="row-even"><td>%u</td>
+<td>Year without century as a zero padded decimal number in persian form [۰۱, ۹۹].</td>
 </tr>
 <tr class="row-odd"><td>%N</td>
 <td>Year with century as a decimal number in persian form [۱-۳۱۷۸].</td>
 </tr>
-<tr class="row-even"><td>%e</td>
+<tr class="row-even"><td>%O</td>
+<td>Year with century as a zero padded decimal number in persian form [۰۰۰۱-۳۱۷۸].</td>
+</tr>
+<tr class="row-odd"><td>%e</td>
 <td>ASCII Locale’s abbreviated weekday name.</td>
 </tr>
-<tr class="row-odd"><td>%E</td>
+<tr class="row-even"><td>%E</td>
 <td>ASCII Locale’s full weekday name.</td>
 </tr>
-<tr class="row-even"><td>%g</td>
+<tr class="row-odd"><td>%g</td>
 <td>ASCII Locale’s abbreviated month name.</td>
 </tr>
-<tr class="row-odd"><td>%G</td>
+<tr class="row-even"><td>%G</td>
 <td>ASCII Locale’s full month name.</td>
 </tr>
-<tr class="row-even"><td>%%</td>
+<tr class="row-odd"><td>%%</td>
 <td>A literal &#8216;%&#8217; character.</td>
 </tr>
 </tbody>
@@ -185,34 +200,46 @@
 <td>Microsecond as a decimal number in persian from[۰, ۹۹۹۹۹۹], zero-padded on the left</td>
 </tr>
 <tr class="row-even"><td>%H</td>
-<td>Hour (24-hour clock) as a decimal number [00, 23].</td>
+<td>Hour (24-hour clock) as a zero padded decimal number [00, 23].</td>
 </tr>
-<tr class="row-odd"><td>%h</td>
-<td>Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].</td>
+<tr class="row-odd"><td>%k</td>
+<td>Hour (24-hour clock) as a decimal number in persian form [۱, ۲۳].</td>
 </tr>
-<tr class="row-even"><td>%I</td>
-<td>Hour (12-hour clock) as a decimal number [01, 12].</td>
+<tr class="row-even"><td>-%h</td>
+<td>Hour (24-hour clock) as a zero padded decimal number in persian form [۰۰, ۲۳].</td>
 </tr>
-<tr class="row-odd"><td>%i</td>
-<td>Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].</td>
+<tr class="row-odd"><td>%I</td>
+<td>Hour (12-hour clock) as a zero padded decimal number [01, 12].</td>
+</tr>
+<tr class="row-even"><td>%i</td>
+<td>Hour (12-hour clock) as a zero padded decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-odd"><td>-%l</td>
+<td>Hour (12-hour clock) as a decimal number in persian form [۱, ۱۲].</td>
 </tr>
 <tr class="row-even"><td>%M</td>
 <td>Minute as a decimal number [00, 59].</td>
 </tr>
 <tr class="row-odd"><td>%r</td>
-<td>Minute as a decimal number in persian form [۰۰, ۵۹].</td>
+<td>Minute as a zero padded decimal number in persian form [۰۰, ۵۹].</td>
 </tr>
-<tr class="row-even"><td>%p</td>
+<tr class="row-even"><td>-%v</td>
+<td>Minute as a decimal number in persian form [۰, ۵۹].</td>
+</tr>
+<tr class="row-odd"><td>%p</td>
 <td>Locale’s equivalent of either AM or PM in persian format [ق.ظ, ب.ظ].</td>
 </tr>
-<tr class="row-odd"><td>%t</td>
+<tr class="row-even"><td>%t</td>
 <td>Locale’s equivalent of either AM or PM in ASCII format.</td>
 </tr>
-<tr class="row-even"><td>%S</td>
+<tr class="row-odd"><td>%S</td>
 <td>Second as a decimal number [00, 59].</td>
 </tr>
-<tr class="row-odd"><td>%s</td>
-<td>Second as a decimal number in persian form [۰۰, ۵۹].</td>
+<tr class="row-even"><td>%s</td>
+<td>Second as a zero padded decimal number in persian form [۰۰, ۵۹].</td>
+</tr>
+<tr class="row-odd"><td>-%L</td>
+<td>Second as a decimal number in persian form [۰, ۵۹].</td>
 </tr>
 <tr class="row-even"><td>%X</td>
 <td>Locale’s appropriate time representation.</td>
@@ -444,57 +471,72 @@
 <td>Day of the month as a decimal number [01, 31].</td>
 </tr>
 <tr class="row-odd"><td>%D</td>
-<td>Day of the month as a decimal number in persian form [۰۱, ۳۱].</td>
+<td>Day of the month as a decimal number in persian form [۱, ۳۱].</td>
 </tr>
-<tr class="row-even"><td>%j</td>
-<td>Day of the year as a decimal number [001, 366].</td>
+<tr class="row-even"><td>%K</td>
+<td>Day of the month as a zero padded decimal number in persian form [۰۱, ۳۱].</td>
 </tr>
-<tr class="row-odd"><td>%J</td>
-<td>Day of the year as a decimal number in persian form [۰۰۱, ۳۶۶].</td>
+<tr class="row-odd"><td>%j</td>
+<td>Day of the year as a zero padded decimal number [001, 366].</td>
+</tr>
+<tr class="row-even"><td>%J</td>
+<td>Day of the year as a decimal number in persian form [۱, ۳۶۶].</td>
+</tr>
+<tr class="row-odd"><td>%V</td>
+<td>Day of the year as a zero padded decimal number in persian form [..۱, ۳۶۶].</td>
 </tr>
 <tr class="row-even"><td>%m</td>
 <td>Month as a decimal number [01, 12].</td>
 </tr>
 <tr class="row-odd"><td>%R</td>
-<td>Month as a decimal number in persian form [۰۱, ۱۲].</td>
+<td>Month as a decimal number in persian form [۱, ۱۲].</td>
 </tr>
-<tr class="row-even"><td>%w</td>
+<tr class="row-even"><td>%P</td>
+<td>Month as a zero padded decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-odd"><td>%w</td>
 <td>Weekday as a decimal number [0(Saturday), 6(Friday)].</td>
 </tr>
-<tr class="row-odd"><td>%W</td>
+<tr class="row-even"><td>%W</td>
 <td>Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.</td>
 </tr>
-<tr class="row-even"><td>%U</td>
+<tr class="row-odd"><td>%U</td>
 <td>Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
 </tr>
-<tr class="row-odd"><td>%x</td>
+<tr class="row-even"><td>%x</td>
 <td>Locale’s appropriate date representation.</td>
 </tr>
-<tr class="row-even"><td>%y</td>
+<tr class="row-odd"><td>%y</td>
 <td>Year without century as a decimal number [00, 99].</td>
 </tr>
-<tr class="row-odd"><td>%Y</td>
+<tr class="row-even"><td>%Y</td>
 <td>Year with century as a decimal number [1-3178].</td>
 </tr>
-<tr class="row-even"><td>%n</td>
-<td>Year without century as a decimal number in persian form [۰۰, ۹۹].</td>
+<tr class="row-odd"><td>%n</td>
+<td>Year without century as a decimal number in persian form [۱, ۹۹].</td>
+</tr>
+<tr class="row-even"><td>%u</td>
+<td>Year without century as a zero padded decimal number in persian form [۰۱, ۹۹].</td>
 </tr>
 <tr class="row-odd"><td>%N</td>
 <td>Year with century as a decimal number in persian form [۱-۳۱۷۸].</td>
 </tr>
-<tr class="row-even"><td>%e</td>
+<tr class="row-even"><td>%O</td>
+<td>Year with century as a zero padded decimal number in persian form [۰۰۰۱-۳۱۷۸].</td>
+</tr>
+<tr class="row-odd"><td>%e</td>
 <td>ASCII Locale’s abbreviated weekday name.</td>
 </tr>
-<tr class="row-odd"><td>%E</td>
+<tr class="row-even"><td>%E</td>
 <td>ASCII Locale’s full weekday name.</td>
 </tr>
-<tr class="row-even"><td>%g</td>
+<tr class="row-odd"><td>%g</td>
 <td>ASCII Locale’s abbreviated month name.</td>
 </tr>
-<tr class="row-odd"><td>%G</td>
+<tr class="row-even"><td>%G</td>
 <td>ASCII Locale’s full month name.</td>
 </tr>
-<tr class="row-even"><td>%%</td>
+<tr class="row-odd"><td>%%</td>
 <td>A literal &#8216;%&#8217; character.</td>
 </tr>
 </tbody>
@@ -530,34 +572,46 @@
 <td>Microsecond as a decimal number in persian from[۰, ۹۹۹۹۹۹], zero-padded on the left</td>
 </tr>
 <tr class="row-even"><td>%H</td>
-<td>Hour (24-hour clock) as a decimal number [00, 23].</td>
+<td>Hour (24-hour clock) as a zero padded decimal number [00, 23].</td>
 </tr>
-<tr class="row-odd"><td>%h</td>
-<td>Hour (24-hour clock) as a decimal number in persian form [۰۰, ۲۳].</td>
+<tr class="row-odd"><td>%k</td>
+<td>Hour (24-hour clock) as a decimal number in persian form [۱, ۲۳].</td>
 </tr>
-<tr class="row-even"><td>%I</td>
-<td>Hour (12-hour clock) as a decimal number [01, 12].</td>
+<tr class="row-even"><td>-%h</td>
+<td>Hour (24-hour clock) as a zero padded decimal number in persian form [۰۰, ۲۳].</td>
 </tr>
-<tr class="row-odd"><td>%i</td>
-<td>Hour (12-hour clock) as a decimal number in persian form [۰۱, ۱۲].</td>
+<tr class="row-odd"><td>%I</td>
+<td>Hour (12-hour clock) as a zero padded decimal number [01, 12].</td>
+</tr>
+<tr class="row-even"><td>%i</td>
+<td>Hour (12-hour clock) as a zero padded decimal number in persian form [۰۱, ۱۲].</td>
+</tr>
+<tr class="row-odd"><td>-%l</td>
+<td>Hour (12-hour clock) as a decimal number in persian form [۱, ۱۲].</td>
 </tr>
 <tr class="row-even"><td>%M</td>
 <td>Minute as a decimal number [00, 59].</td>
 </tr>
 <tr class="row-odd"><td>%r</td>
-<td>Minute as a decimal number in persian form [۰۰, ۵۹].</td>
+<td>Minute as a zero padded decimal number in persian form [۰۰, ۵۹].</td>
 </tr>
-<tr class="row-even"><td>%p</td>
+<tr class="row-even"><td>-%v</td>
+<td>Minute as a decimal number in persian form [۰, ۵۹].</td>
+</tr>
+<tr class="row-odd"><td>%p</td>
 <td>Locale’s equivalent of either AM or PM in persian format [ق.ظ, ب.ظ].</td>
 </tr>
-<tr class="row-odd"><td>%t</td>
+<tr class="row-even"><td>%t</td>
 <td>Locale’s equivalent of either AM or PM in ASCII format.</td>
 </tr>
-<tr class="row-even"><td>%S</td>
+<tr class="row-odd"><td>%S</td>
 <td>Second as a decimal number [00, 59].</td>
 </tr>
-<tr class="row-odd"><td>%s</td>
-<td>Second as a decimal number in persian form [۰۰, ۵۹].</td>
+<tr class="row-even"><td>%s</td>
+<td>Second as a zero padded decimal number in persian form [۰۰, ۵۹].</td>
+</tr>
+<tr class="row-odd"><td>-%L</td>
+<td>Second as a decimal number in persian form [۰, ۵۹].</td>
 </tr>
 <tr class="row-even"><td>%X</td>
 <td>Locale’s appropriate time representation.</td>
