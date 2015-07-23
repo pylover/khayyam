@@ -11,6 +11,10 @@ Jump To:
 
 #### Change Log
 
+  * 2.5.0-beta (2015-07-23)
+    * Doc: doctest
+    * Doc: adding examples of new formatting directives in introduction: %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o
+
   * 2.4.0-beta (2015-07-22)
     * Persian Numbers
     * %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o directives has been added.

@@ -1,1 +1,0 @@
-sphinx-apidoc --full -H Khayyam -A "Vahid Mardani" -V "1.0.0"  -o ./doc2 ./khayyam

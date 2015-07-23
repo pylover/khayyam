@@ -1,7 +1,9 @@
 
 
 ### To Do
-
+  * redesign directives
+  * in project doc/
+  * pdf doc
   * examples for %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o
   * Constructors act as converter: `JalaliDate(date)`
   * Create TehranDatetime object
@@ -13,6 +15,7 @@
     * Conversions
     * Operators
   * Doc
+    * doctest
     * Review all object's documentation
     * Parsing, post processors priority
     * Compatibility

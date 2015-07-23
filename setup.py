@@ -21,11 +21,16 @@ setup(
     keywords="Khayyam persian jalali date time datetime conversion",
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
     license="GPLv3",
+    test_suite="khayyam.tests",
+    tests_require=[
+        'rtl'
+    ],
     classifiers=[
         "Programming Language :: Python",
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
