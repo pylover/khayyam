@@ -14,6 +14,7 @@ Jump To:
   * 2.5.0-beta (2015-07-23)
     * Doc: doctest
     * Doc: adding examples of new formatting directives in introduction: %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o
+    * local date & time formats are changed: digits -> persian
 
   * 2.4.0-beta (2015-07-22)
     * Persian Numbers

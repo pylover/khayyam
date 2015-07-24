@@ -61,44 +61,7 @@ class TestJalaliDate(unittest.TestCase):
     def test_strftime(self):
         jdate = JalaliDate.strptime(JalaliDate(self.leap_year, 12, 23).isoformat(), '%Y-%m-%d')
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
-        self.assertEqual(jdate.strftime('%a%A%b%B%d%j%m%w%x%y%Y%%%W'), u'پپنجشنبهاساسفند23359125پنجشنبه 23 اسفند 1375751375%51')
-
-        self.assertEqual(JalaliDate(1361, 6, 2).strftime('%D'), u'۲')
-        self.assertEqual(JalaliDate(1361, 6, 2).strftime('%K'), u'۰۲')
-        self.assertEqual(JalaliDate(1361, 6, 2).strftime('%J'), u'۱۵۷')
-        self.assertEqual(JalaliDate(1361, 1, 5).strftime('%J'), u'۵')
-        self.assertEqual(JalaliDate(1361, 1, 25).strftime('%V'), u'۰۲۵')
-        self.assertEqual(JalaliDate(1361, 1, 5).strftime('%V'), u'۰۰۵')
-        self.assertEqual(JalaliDate(1361, 1, 5).strftime('%R'), u'۱')
-        self.assertEqual(JalaliDate(1361, 1, 5).strftime('%P'), u'۰۱')
-        self.assertEqual(JalaliDate(1361, 11, 5).strftime('%P'), u'۱۱')
-        self.assertEqual(JalaliDate(61, 11, 5).strftime('%N'), u'۶۱')
-        self.assertEqual(JalaliDate(61, 11, 5).strftime('%O'), u'۰۰۶۱')
-
-
         d1 = JalaliDate(1361, 6, 15)
-        self.assertEqual(d1.strftime('%a'), u'د')
-        self.assertEqual(d1.strftime('%A'), u'دوشنبه')
-        self.assertEqual(d1.strftime('%b'), u'شه')
-        self.assertEqual(d1.strftime('%B'), u'شهریور')
-        self.assertEqual(d1.strftime('%d'), u'15')
-        self.assertEqual(d1.strftime('%j'), u'170')
-        self.assertEqual(d1.strftime('%m'), u'06')
-        self.assertEqual(d1.strftime('%w'), u'2')
-        self.assertEqual(d1.strftime('%W'), u'24')
-        self.assertEqual(d1.strftime('%x'), u'دوشنبه 15 شهریور 1361')
-        self.assertEqual(d1.strftime('%y'), u'61')
-        self.assertEqual(d1.strftime('%Y'), u'1361')
-        self.assertEqual(d1.strftime('%e'), u'D')
-        self.assertEqual(d1.strftime('%E'), u'Doshanbeh')
-        self.assertEqual(d1.strftime('%g'), u'Sh')
-        self.assertEqual(d1.strftime('%G'), u'Shahrivar')
-        self.assertEqual(d1.strftime('%D'), u'۱۵')
-        self.assertEqual(d1.strftime('%%'), u'%')
-
-        self.assertEqual(
-            d1.strftime('%a%A%b%B%d%j%m%w%W%x%y%Y%e%E%g%G%%'),
-            u'ددوشنبهشهشهریور1517006224دوشنبه 15 شهریور 1361611361DDoshanbehShShahrivar%')
         self.assertEqual(d1.strftime('%Y-%m-%d'), '1361-06-15')
         self.assertEqual(d1.strftime(u'اول%Y-%m-%dآخر'), u'اول1361-06-15آخر')
 
@@ -163,13 +126,6 @@ class TestJalaliDate(unittest.TestCase):
         """
         %Z not working at all
         """
-
-        def check_format(jdate ,fmt):
-            jdate_str = jdate.strftime(fmt)
-            d2 = JalaliDate.strptime(jdate_str, fmt)
-            self.assertEqual(jdate, d2)
-
-        # Test Year
         self.assertEqual(JalaliDate.strptime('1361', '%Y'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime('1361%C', '%Y%C'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime(u'اریا1361گلگشت', u'اریا%Yگلگشت'), JalaliDate(1361))
@@ -178,117 +134,9 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime('61', '%y'), JalaliDate(current_century + 61))
         self.assertEqual(JalaliDate.strptime('61%C', '%y%C'), JalaliDate(current_century + 61))
         self.assertEqual(JalaliDate.strptime(u'اریا61گلگشت', u'اریا%yگلگشت'), JalaliDate(current_century+61))
-
-        # Test months
-        for i in range(1, 13):
-            self.assertEqual(JalaliDate.strptime(str(i), '%m'), JalaliDate(month=i))
-            self.assertEqual(JalaliDate.strptime('1345 %s' % PERSIAN_MONTH_ABBRS[i], '%Y %b'),
-                             JalaliDate(year=1345, month=i, day=1))
-            self.assertEqual(JalaliDate.strptime('1345 %s' % PERSIAN_MONTH_NAMES[i], '%Y %B'),
-                             JalaliDate(year=1345, month=i, day=1))
-            self.assertEqual(JalaliDate.strptime('1345 %s' % PERSIAN_MONTH_ABBRS_ASCII[i], '%Y %g'),
-                             JalaliDate(year=1345, month=i, day=1))
-            self.assertEqual(JalaliDate.strptime('1345 %s' % PERSIAN_MONTH_NAMES_ASCII[i], '%Y %G'),
-                             JalaliDate(year=1345, month=i, day=1))
-
-        self.assertRaises(ValueError, JalaliDate.strptime, '13', '%m')
-        self.assertRaises(ValueError, JalaliDate.strptime, '0', '%m')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %b')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 شتران', '%Y %B')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %g')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'1345 شتران', '%Y %G')
-
-        # Test Week and Weekdays
-        for i in range(7):
-            check_format(JalaliDate.min + timedelta(i), '%d %w %W %U')
-            self.assertEqual(
-                JalaliDate.strptime('1345 10 10 %s' % PERSIAN_WEEKDAY_ABBRS[i], '%Y %m %d %a'),
-                JalaliDate(year=1345, month=10, day=10))
-            self.assertEqual(
-                JalaliDate.strptime('1345 10 10 %s' % PERSIAN_WEEKDAY_ABBRS_ASCII[i], '%Y %m %d %e'),
-                JalaliDate(year=1345, month=10, day=10))
-            self.assertEqual(
-                JalaliDate.strptime('1345 10 10 %s' % PERSIAN_WEEKDAY_NAMES[i], '%Y %m %d %A'),
-                JalaliDate(year=1345, month=10, day=10))
-            self.assertEqual(
-                JalaliDate.strptime('1345 10 10 %s' % PERSIAN_WEEKDAY_NAMES_ASCII[i], '%Y %m %d %E'),
-                JalaliDate(year=1345, month=10, day=10))
-
-        # Test days
-        for i in range(1, 32):
-            self.assertEqual(JalaliDate.strptime(str(i), '%d'), JalaliDate(day=i))
-
-        self.assertRaises(ValueError, JalaliDate.strptime, '32', '%d')
-        self.assertRaises(ValueError, JalaliDate.strptime, '0', '%d')
-
-        # Test day of year
-        for i in range(1, 366):
-            self.assertEqual(JalaliDate.strptime(str(i), '%j'), JalaliDate.fromordinal(i))
-        self.assertRaises(ValueError, JalaliDate.strptime, '366', '%j')
-        self.assertRaises(ValueError, JalaliDate.strptime, '0', '%j')
-        self.assertEqual(JalaliDate.strptime('1345 5', '%Y %j'),
-                         JalaliDate(year=1345, month=1, day=5))
-
-        self.assertEqual(JalaliDate.strptime('1302 123 3 4', '%Y %j %m %d'),
-                         JalaliDate(year=1302, month=4, day=30))
-
-        self.assertEqual(JalaliDate.strptime('1302 3 4', '%Y %m %d'),
-                         JalaliDate(year=1302, month=3, day=4))
-
         self.assertEqual(JalaliDate.strptime(u'جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
                          JalaliDate(month=2, day=1))
 
-        self.assertEqual(JalaliDate.strptime(u'جمعه 01 فروردین 0001', '%x'),
-                         JalaliDate.min)
-
-        self.assertEqual(JalaliDate.strptime(u'جمعه 31 فروردین 1375%', '%x%%'),
-                         JalaliDate(1375, 1, 31))
-
-        check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
-        check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
-
-        for i in xrange(1, 400):
-            check_format(JalaliDate.fromordinal(i), "%Y-%m-%d %a%A%b%B%j%w%W%e%E%g%G%x %% %% %%")
-            check_format(JalaliDate.fromordinal(i), "%N-%R-%D")
-            check_format(JalaliDate.fromordinal(i), "%Y-%J")
-
-
-        d = JalaliDate.today().replace(month=1, day=1)
-        for i in xrange(1, algorithms.days_in_year(d.year)):
-            check_format(d + timedelta(i), "%y-%m-%d")
-            check_format(d + timedelta(i), "%n-%m-%d")
-
-        self.assertEqual(JalaliDate.strptime(u'۲', '%D'), JalaliDate(2))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۰۲', '%D')
-
-        self.assertEqual(JalaliDate.strptime(u'۰۲', '%K'), JalaliDate(1, 1, 2))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۲', '%K')
-
-        self.assertEqual(JalaliDate.strptime(u'۰۲', '%K'), JalaliDate(1, 1, 2))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۲', '%K')
-
-        self.assertEqual(JalaliDate.strptime(u'۱۵۷', '%J'), JalaliDate(1, 6, 2))
-        self.assertEqual(JalaliDate.strptime(u'۷', '%J'), JalaliDate(1, 1, 7))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۰۷', '%J')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۰۴۷', '%J')
-
-        self.assertEqual(JalaliDate.strptime(u'۰۴۷', '%V'), JalaliDate(1, 2, 16))
-        self.assertEqual(JalaliDate.strptime(u'۰۰۷', '%V'), JalaliDate(1, 1, 7))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۷', '%V')
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۴۷', '%V')
-
-        self.assertEqual(JalaliDate.strptime(u'۷', '%R'), JalaliDate(1, 7, 1))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۰۷', '%R')
-        self.assertEqual(JalaliDate.strptime(u'۰۷', '%P'), JalaliDate(1, 7, 1))
-        self.assertRaises(ValueError, JalaliDate.strptime, u'۷', '%P')
-
-        self.assertEqual(JalaliDate.strptime(u'۰۰۴', '%N'), JalaliDate(4, 1, 1))
-        self.assertEqual(JalaliDate.strptime(u'۰۴', '%N'), JalaliDate(4, 1, 1))
-        self.assertEqual(JalaliDate.strptime(u'۴', '%N'), JalaliDate(4, 1, 1))
-
-        self.assertEqual(JalaliDate.strptime(u'۰۰۴', '%O'), JalaliDate(4, 1, 1))
-        self.assertEqual(JalaliDate.strptime(u'۰۴', '%O'), JalaliDate(4, 1, 1))
-        self.assertEqual(JalaliDate.strptime(u'۴', '%O'), JalaliDate(4, 1, 1))
 
 
 if __name__ == '__main__':

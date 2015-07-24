@@ -4,12 +4,9 @@ from khayyam.formatting import constants as consts
 __author__ = 'vahid'
 
 class PersianHour24Directive(PersianNumberDirective):
-    def __init__(self):
-        super(PersianHour24Directive, self).__init__(
-            'k', 'persianhour24', consts.PERSIAN_HOUR24_REGEX)
 
     def format(self, d):
-        return super(PersianHour24Directive, self).format('%.2d' % d.hour)
+        return super(PersianHour24Directive, self).format(d.hour)
 
     def post_parser(self, ctx, formatter):
         super(PersianHour24Directive, self).post_parser(ctx, formatter)
@@ -18,12 +15,9 @@ class PersianHour24Directive(PersianNumberDirective):
 
 
 class PersianHour12Directive(PersianNumberDirective):
-    def __init__(self):
-        super(PersianHour12Directive, self).__init__(
-            'i', 'persianhour12', consts.PERSIAN_HOUR12_REGEX)
 
     def format(self, d):
-        return super(PersianHour12Directive, self).format('%.2d' % d.hour12())
+        return super(PersianHour12Directive, self).format(d.hour12())
 
     def post_parser(self, ctx, formatter):
         super(PersianHour12Directive, self).post_parser(ctx, formatter)
@@ -32,12 +26,9 @@ class PersianHour12Directive(PersianNumberDirective):
 
 
 class PersianMinuteDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianMinuteDirective, self).__init__(
-            'r', 'persianminute', consts.PERSIAN_MINUTE_REGEX)
 
     def format(self, d):
-        return super(PersianMinuteDirective, self).format('%.2d' % d.minute)
+        return super(PersianMinuteDirective, self).format(d.minute)
 
     def post_parser(self, ctx, formatter):
         super(PersianMinuteDirective, self).post_parser(ctx, formatter)
@@ -46,12 +37,9 @@ class PersianMinuteDirective(PersianNumberDirective):
 
 
 class PersianSecondDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianSecondDirective, self).__init__(
-            's', 'persiansecond', consts.PERSIAN_SECOND_REGEX)
 
     def format(self, d):
-        return super(PersianSecondDirective, self).format('%.2d' % d.second)
+        return super(PersianSecondDirective, self).format(d.second)
 
     def post_parser(self, ctx, formatter):
         super(PersianSecondDirective, self).post_parser(ctx, formatter)
@@ -60,9 +48,6 @@ class PersianSecondDirective(PersianNumberDirective):
 
 
 class PersianMicrosecondDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianMicrosecondDirective, self).__init__(
-            'F', 'persianmicrosecond', consts.PERSIAN_MICROSECOND_REGEX)
 
     def format(self, d):
         return super(PersianMicrosecondDirective, self).format('%.6d' % d.microsecond)

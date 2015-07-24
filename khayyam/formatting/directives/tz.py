@@ -10,9 +10,6 @@ __author__ = 'vahid'
 
 
 class UTCOffsetDirective(Directive):
-    def __init__(self):
-        super(UTCOffsetDirective, self).__init__(
-            'z', 'utcoffset', consts.UTC_OFFSET_FORMAT_REGEX, get_unicode)
 
     def format(self, d):
         if not d.tzinfo:
@@ -44,9 +41,6 @@ class UTCOffsetDirective(Directive):
 
 
 class PersianUTCOffsetDirective(PersianNumberDirective):
-    def __init__(self):
-        super(PersianUTCOffsetDirective, self).__init__(
-            'o', 'persianutcoffset', consts.PERSIAN_UTC_OFFSET_FORMAT_REGEX)
 
     def format(self, d):
         if not d.tzinfo:
@@ -65,9 +59,6 @@ class PersianUTCOffsetDirective(PersianNumberDirective):
 
 
 class TimezoneNameDirective(Directive):
-    def __init__(self):
-        super(TimezoneNameDirective, self).__init__(
-            'Z', 'tzname', consts.TZ_NAME_FORMAT_REGEX, get_unicode)
 
     def format(self, d):
         if d.tzinfo:

@@ -4,6 +4,7 @@ from khayyam.formatting import constants as consts
 __author__ = 'vahid'
 
 
+
 class JalaliDateFormatter(object):
 
     _post_parsers = [
@@ -79,8 +80,16 @@ class JalaliDateFormatter(object):
         result += self.format_string[index:]
         return result
 
+
+    @staticmethod
+    def filter_persian_digit(s):
+        for p, e in consts.PERSIAN_DIGIT_MAPPING:
+            s = s.replace(p[1], p[0])
+        return s
+
+
     def _parse(self, date_string):
-        m = re.match(self.parser_regex, date_string)
+        m = re.match(self.parser_regex, self.filter_persian_digit(date_string))
         if not m:
             raise ValueError(u"time data '%s' does not match format '%s' with generated regex: '%s'" % (
                 date_string, self.format_string, self.parser_regex))
@@ -125,7 +134,9 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
         'persianshortyearzeropadded',
         'persianmicrosecond',
         'persianhour12',
+        'persianhour12zeropadded',
         'persianhour24',
+        'persianhour24zeropadded',
         'persianminute',
         'persiansecond',
         'persianutcoffset',

@@ -26,22 +26,13 @@ class BaseAmPmDirective(Directive):
 
 
 class AmPmDirective(BaseAmPmDirective):
-    def __init__(self):
-        super(AmPmDirective, self).__init__(
-            'p',
-            'ampm',
-            consts.AM_PM_REGEX)
 
     def is_am(self, ctx):
         return ctx['ampm'] == consts.AM_PM[0]
 
 
 class AmPmASCIIDirective(BaseAmPmDirective):
-    def __init__(self):
-        super(AmPmASCIIDirective, self).__init__(
-            't',
-            'ampmascii',
-            consts.AM_PM_ASCII_REGEX)
+
 
     def is_am(self, ctx):
         return ctx[self.name] == consts.AM_PM_ASCII[0]

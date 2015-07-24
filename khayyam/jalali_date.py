@@ -134,13 +134,11 @@ class JalaliDate(object):
         return JalaliDate(self.year, self.month, self.day)
 
     def replace(self, year=None, month=None, day=None):
-
-        year, month, day = self._validate(
+        return JalaliDate(
             year if year else self.year,
             month if month else self.month,
-            day if day else self.day)
-
-        return JalaliDate(year, month, day)
+            day if day else self.day
+        )
 
 
     def todate(self):
@@ -204,7 +202,7 @@ Directive    Meaning
 %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.
 %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.
 %x           Locale’s appropriate date representation.
-%y           Year without century as a decimal number [00, 99].
+%y           Year without century as a zero padded decimal number [00, 99].
 %Y           Year with century as a decimal number [1-3178].
 %n           Year without century as a decimal number in persian form [۱, ۹۹].
 %u           Year without century as a zero padded decimal number in persian form [۰۱, ۹۹].
@@ -226,22 +224,22 @@ Directive    Meaning
 %C            Locale’s appropriate date and time representation.
 %q            ASCII Locale’s appropriate short date and time representation.
 %Q            ASCII Locale’s appropriate date and time representation.
-%f            Microsecond as a decimal number [0, 999999], zero-padded on the left
-%F            Microsecond as a decimal number in persian from[۰, ۹۹۹۹۹۹], zero-padded on the left
 %H            Hour (24-hour clock) as a zero padded decimal number [00, 23].
 %k            Hour (24-hour clock) as a decimal number in persian form [۱, ۲۳].
--%h            Hour (24-hour clock) as a zero padded decimal number in persian form [۰۰, ۲۳].
+%h            Hour (24-hour clock) as a zero padded decimal number in persian form [۰۰, ۲۳].
 %I            Hour (12-hour clock) as a zero padded decimal number [01, 12].
 %i            Hour (12-hour clock) as a zero padded decimal number in persian form [۰۱, ۱۲].
--%l            Hour (12-hour clock) as a decimal number in persian form [۱, ۱۲].
+%l            Hour (12-hour clock) as a decimal number in persian form [۱, ۱۲].
 %M            Minute as a decimal number [00, 59].
 %r            Minute as a zero padded decimal number in persian form [۰۰, ۵۹].
--%v            Minute as a decimal number in persian form [۰, ۵۹].
+%v            Minute as a decimal number in persian form [۰, ۵۹].
 %p            Locale’s equivalent of either AM or PM in persian format [ق.ظ, ب.ظ].
 %t            Locale’s equivalent of either AM or PM in ASCII format.
 %S            Second as a decimal number [00, 59].
 %s            Second as a zero padded decimal number in persian form [۰۰, ۵۹].
--%L            Second as a decimal number in persian form [۰, ۵۹].
+%L            Second as a decimal number in persian form [۰, ۵۹].
+%f            Microsecond as a decimal number [0, 999999], zero-padded on the left
+%F            Microsecond as a decimal number in persian from[۰۰۰۰۰۰, ۹۹۹۹۹۹], zero-padded on the left
 %X            Locale’s appropriate time representation.
 %z            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).
 %o            UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format i.e +۰۳:۳۰.
@@ -278,7 +276,7 @@ Directive    Meaning
         return PERSIAN_WEEKDAY_ABBRS_ASCII[self.weekday()]
 
     def localdateformat(self):
-        return self.strftime('%A %d %B %Y')
+        return self.strftime('%A %D %B %N')
 
     def firstdayofyear(self):
         return JalaliDate(self.year, 1, 1)
