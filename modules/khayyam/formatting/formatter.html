@@ -53,6 +53,7 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
 
+
 <div class="viewcode-block" id="JalaliDateFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDateFormatter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
@@ -127,9 +128,17 @@
             <span class="n">index</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
         <span class="k">return</span> <span class="n">result</span>
+
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="JalaliDateFormatter.filter_persian_digit"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.filter_persian_digit">[docs]</a>    <span class="k">def</span> <span class="nf">filter_persian_digit</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_DIGIT_MAPPING</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">s</span>
+
 </div>
     <span class="k">def</span> <span class="nf">_parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_string</span><span class="p">):</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parser_regex</span><span class="p">,</span> <span class="n">date_string</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parser_regex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_persian_digit</span><span class="p">(</span><span class="n">date_string</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&quot;time data &#39;</span><span class="si">%s</span><span class="s">&#39; does not match format &#39;</span><span class="si">%s</span><span class="s">&#39; with generated regex: &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span>
                 <span class="n">date_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser_regex</span><span class="p">))</span>
@@ -174,7 +183,9 @@
         <span class="s">&#39;persianshortyearzeropadded&#39;</span><span class="p">,</span>
         <span class="s">&#39;persianmicrosecond&#39;</span><span class="p">,</span>
         <span class="s">&#39;persianhour12&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour12zeropadded&#39;</span><span class="p">,</span>
         <span class="s">&#39;persianhour24&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour24zeropadded&#39;</span><span class="p">,</span>
         <span class="s">&#39;persianminute&#39;</span><span class="p">,</span>
         <span class="s">&#39;persiansecond&#39;</span><span class="p">,</span>
         <span class="s">&#39;persianutcoffset&#39;</span><span class="p">,</span>
