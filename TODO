@@ -11,10 +11,6 @@
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
-  * Readme:
-    * Formatting & parsing
-    * Conversions
-    * Operators
 
 ### Future plans
 

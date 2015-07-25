@@ -4,9 +4,97 @@ khayyam
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
 Jump To:
+--------
 
  * [Documentation](http://vahid.dobisel.com/khayyam)
  * [Python package index](https://pypi.python.org/pypi/khayyam)
+
+
+Basic Usage
+-----------
+
+    >>> from khayyam import *
+    >>> JalaliDate(1346, 12, 30)
+    khayyam.JalaliDate(1346, 12, 30, Chaharshanbeh)
+    
+    >>> JalaliDatetime(989, 3, 25, 10, 43, 23, 345453)
+    khayyam.JalaliDatetime(989, 3, 25, 10, 43, 23, 345453, Seshanbeh)
+
+#### Current date and time
+
+    >>> print(JalaliDatetime.now(TehranTimezone()) - timedelta(days=6*30))
+    1393-11-02 20:01:11.663719+03:30
+  
+    >>> print(JalaliDate.today())
+    1394-4-30
+  
+
+#### Parsing & Formatting
+  
+    >>> print(JalaliDatetime.now().strftime('%C'))
+    شنبه ۳ مرداد ۱۳۹۴ ۰۲:۳۷:۵۲ ب.ظ
+    
+    >>> JalaliDatetime.strptime(u'چهارشنبه ۳۱ تیر ۱۳۹۴ ۰۵:۴۵:۴۰ ب.ظ', '%C')
+    khayyam.JalaliDatetime(1394, 4, 31, 17, 45, 40, 0, Chaharshanbeh)
+
+#### Converting
+
+    >>> from datetime import date, datetime
+    >>> JalaliDate(1394, 4, 31).todate()
+    datetime.date(2015, 7, 22)
+  
+    >>> now = JalaliDatetime(1394, 4, 31, 15, 38, 6, 37269)
+    >>> now.todate()
+    datetime.date(2015, 7, 22)
+  
+    >>> now.todatetime()
+    datetime.datetime(2015, 7, 22, 15, 38, 6, 37269)
+  
+    >>> JalaliDatetime.fromdatetime(datetime(2015, 7, 22, 14, 47, 9, 821830))
+    khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)
+  
+    >>> JalaliDatetime.fromdatetime(datetime(2015, 7, 22, 14, 47, 9, 821830, TehranTimezone()))
+    khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)
+  
+    >>> JalaliDate.fromdate(date(2015, 7, 22))
+    khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)
+
+#### Arithmetics & Operators
+
+    >>> from datetime import timedelta
+    >>> from khayyam import JalaliDate, JalaliDatetime
+    >>> now = JalaliDatetime(1394, 4, 31, 16, 17, 31, 374398)
+    >>> now + timedelta(days=1)
+    khayyam.JalaliDatetime(1394, 5, 1, 16, 17, 31, 374398, Panjshanbeh)
+  
+    >>> now + timedelta(seconds=3600)
+    khayyam.JalaliDatetime(1394, 4, 31, 17, 17, 31, 374398, Chaharshanbeh)
+  
+    >>> now - timedelta(seconds=3600)
+    khayyam.JalaliDatetime(1394, 4, 31, 15, 17, 31, 374398, Chaharshanbeh)
+  
+    >>> yesterday = now - timedelta(1)
+    >>> yesterday
+    khayyam.JalaliDatetime(1394, 4, 30, 16, 17, 31, 374398, Seshanbeh)
+  
+    >>> now - yesterday
+    datetime.timedelta(1)
+  
+    >>> JalaliDatetime.now() - now
+    datetime.timedelta(0, 478, 328833) # 478 seconds taken to writing this section
+
+
+#### Comparison
+
+    >>> now > yesterday
+    True
+  
+    >>> now != yesterday
+    True
+  
+    >>> now.todate() == yesterday.todate()
+    False
+
 
 
 #### Change Log
@@ -21,6 +109,7 @@ Jump To:
     * `JalaliDate.days_in_month` renamed to `JalaliDate.daysinmonth`
     * `JalaliDate.is_leap` renamed to `JalaliDate.isleap`
     * `JalaliDatetime` Modern properties.
+    * README.md updated
     
     
 
