@@ -53,7 +53,7 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDatetime(1386, 12, 23, 23).strftime('%k'), u'۲۳')
         self.assertEqual(
             (JalaliDatetime(1386, 12, 23, 23, 59, 59) + timedelta(seconds=1)).strftime('%k'), u'۰')
-        self.assertEqual(JalaliDatetime.strptime('۸', '%k'), JalaliDatetime(hour=8))
+        self.assertEqual(JalaliDatetime.strptime(u'۸', '%k'), JalaliDatetime(hour=8))
         self.assertRaises(ValueError, JalaliDatetime.strptime, u'۰۲', '%k')
 
         self.assertEqual(JalaliDatetime(1386, 12, 23).strftime('%h'), u'۰۰')
@@ -63,7 +63,7 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDatetime(1386, 12, 23, 23).strftime('%h'), u'۲۳')
         self.assertEqual(
             (JalaliDatetime(1386, 12, 23, 23, 59, 59) + timedelta(seconds=1)).strftime('%h'), u'۰۰')
-        self.assertEqual(JalaliDatetime.strptime('۰۸', '%h'), JalaliDatetime(hour=8))
+        self.assertEqual(JalaliDatetime.strptime(u'۰۸', '%h'), JalaliDatetime(hour=8))
         self.assertRaises(ValueError, JalaliDatetime.strptime, u'۲', '%h')
 
         # Test HOUR 12
