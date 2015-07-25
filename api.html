@@ -156,8 +156,8 @@
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="khayyam.JalaliDate.days_in_month">
-<code class="descname">days_in_month</code><a class="headerlink" href="#khayyam.JalaliDate.days_in_month" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.JalaliDate.daysinmonth">
+<code class="descname">daysinmonth</code><a class="headerlink" href="#khayyam.JalaliDate.daysinmonth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get total days in the current month.</p>
 </dd></dl>
 
@@ -167,15 +167,15 @@
 <dd></dd></dl>
 
 <dl class="classmethod">
-<dt id="khayyam.JalaliDate.from_julian_days">
-<em class="property">classmethod </em><code class="descname">from_julian_days</code><span class="sig-paren">(</span><em>julian_day</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.from_julian_days"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.from_julian_days" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create JalaliDate from julian day</p>
-</dd></dl>
-
-<dl class="classmethod">
 <dt id="khayyam.JalaliDate.fromdate">
 <em class="property">classmethod </em><code class="descname">fromdate</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromdate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create JalaliDate from python&#8217;s datetime.date</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="khayyam.JalaliDate.fromjuliandays">
+<em class="property">classmethod </em><code class="descname">fromjuliandays</code><span class="sig-paren">(</span><em>julian_day</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromjuliandays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromjuliandays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create JalaliDate from julian day</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -191,8 +191,8 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="khayyam.JalaliDate.is_leap">
-<code class="descname">is_leap</code><a class="headerlink" href="#khayyam.JalaliDate.is_leap" title="Permalink to this definition">¶</a></dt>
+<dt id="khayyam.JalaliDate.isleap">
+<code class="descname">isleap</code><a class="headerlink" href="#khayyam.JalaliDate.isleap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines the year is leap or not.</p>
 </dd></dl>
 
@@ -462,31 +462,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <p>fromtimestamp() may raise ValueError, if the timestamp is out of the range of values supported by the platform C localtime() or gmtime() functions. It&#8217;s common for this to be restricted to years in 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then it&#8217;s possible to have two timestamps differing by a second that yield identical datetime objects. See also utcfromtimestamp().</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.get_hour">
-<code class="descname">get_hour</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.get_hour"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.get_hour" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.get_microsecond">
-<code class="descname">get_microsecond</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.get_microsecond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.get_microsecond" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.get_minute">
-<code class="descname">get_minute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.get_minute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.get_minute" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.get_second">
-<code class="descname">get_second</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.get_second"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.get_second" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.get_tzinfo">
-<code class="descname">get_tzinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.get_tzinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.get_tzinfo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="attribute">
 <dt id="khayyam.JalaliDatetime.hour">
 <code class="descname">hour</code><a class="headerlink" href="#khayyam.JalaliDatetime.hour" title="Permalink to this definition">¶</a></dt>
@@ -570,31 +545,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <dl class="attribute">
 <dt id="khayyam.JalaliDatetime.second">
 <code class="descname">second</code><a class="headerlink" href="#khayyam.JalaliDatetime.second" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.set_hour">
-<code class="descname">set_hour</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.set_hour"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.set_hour" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.set_microsecond">
-<code class="descname">set_microsecond</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.set_microsecond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.set_microsecond" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.set_minute">
-<code class="descname">set_minute</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.set_minute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.set_minute" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.set_second">
-<code class="descname">set_second</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.set_second"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.set_second" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="khayyam.JalaliDatetime.set_tzinfo">
-<code class="descname">set_tzinfo</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.set_tzinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.set_tzinfo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">

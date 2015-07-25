@@ -77,45 +77,47 @@
     <span class="c">### Properties ###</span>
     <span class="c">##################</span>
 </div>
-<div class="viewcode-block" id="JalaliDatetime.get_hour"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.get_hour">[docs]</a>    <span class="k">def</span> <span class="nf">get_hour</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hour</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">hour</span>
-</div>
-<div class="viewcode-block" id="JalaliDatetime.set_hour"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.set_hour">[docs]</a>    <span class="k">def</span> <span class="nf">set_hour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+    <span class="nd">@hour.setter</span>
+    <span class="k">def</span> <span class="nf">hour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="n">val</span>
-</div>
-    <span class="n">hour</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_hour</span><span class="p">,</span> <span class="n">set_hour</span><span class="p">)</span>
 
-<div class="viewcode-block" id="JalaliDatetime.get_minute"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.get_minute">[docs]</a>    <span class="k">def</span> <span class="nf">get_minute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">minute</span>
-</div>
-<div class="viewcode-block" id="JalaliDatetime.set_minute"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.set_minute">[docs]</a>    <span class="k">def</span> <span class="nf">set_minute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+    <span class="nd">@minute.setter</span>
+    <span class="k">def</span> <span class="nf">minute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">minute</span> <span class="o">=</span> <span class="n">val</span>
-</div>
-    <span class="n">minute</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_minute</span><span class="p">,</span> <span class="n">set_minute</span><span class="p">)</span>
 
-<div class="viewcode-block" id="JalaliDatetime.get_second"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.get_second">[docs]</a>    <span class="k">def</span> <span class="nf">get_second</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">second</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">second</span>
-</div>
-<div class="viewcode-block" id="JalaliDatetime.set_second"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.set_second">[docs]</a>    <span class="k">def</span> <span class="nf">set_second</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+    <span class="nd">@second.setter</span>
+    <span class="k">def</span> <span class="nf">second</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">val</span>
-</div>
-    <span class="n">second</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_second</span><span class="p">,</span> <span class="n">set_second</span><span class="p">)</span>
 
-<div class="viewcode-block" id="JalaliDatetime.get_microsecond"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.get_microsecond">[docs]</a>    <span class="k">def</span> <span class="nf">get_microsecond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">microsecond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">microsecond</span>
-</div>
-<div class="viewcode-block" id="JalaliDatetime.set_microsecond"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.set_microsecond">[docs]</a>    <span class="k">def</span> <span class="nf">set_microsecond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">=</span> <span class="n">val</span>
-</div>
-    <span class="n">microsecond</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_microsecond</span><span class="p">,</span> <span class="n">set_microsecond</span><span class="p">)</span>
 
-<div class="viewcode-block" id="JalaliDatetime.get_tzinfo"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.get_tzinfo">[docs]</a>    <span class="k">def</span> <span class="nf">get_tzinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@microsecond.setter</span>
+    <span class="k">def</span> <span class="nf">microsecond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tzinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">tzinfo</span>
-</div>
-<div class="viewcode-block" id="JalaliDatetime.set_tzinfo"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.set_tzinfo">[docs]</a>    <span class="k">def</span> <span class="nf">set_tzinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+    <span class="nd">@tzinfo.setter</span>
+    <span class="k">def</span> <span class="nf">tzinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">tzinfo</span> <span class="o">=</span> <span class="n">val</span>
-</div>
-    <span class="n">tzinfo</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tzinfo</span><span class="p">,</span> <span class="n">set_tzinfo</span><span class="p">)</span>
+
 
     <span class="c">######################</span>
     <span class="c">### Static Methods ###</span>
