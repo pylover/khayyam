@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Formatting and Parsing directives &mdash; Khayyam 2.6.0-beta documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.6.0-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="index.html" />
+    <link rel="next" title="Migration from python’s builtin datetime" href="migration.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="migration.html" title="Migration from python’s builtin datetime"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="formatting-and-parsing-directives">
+<h1>Formatting and Parsing directives<a class="headerlink" href="#formatting-and-parsing-directives" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jalalidate-directives">
+<h2>JalaliDate directives<a class="headerlink" href="#jalalidate-directives" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="12%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directive</th>
+<th class="head">Example</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%y</td>
+<td>00 - 99</td>
+<td>Year without century as a zero padded decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%Y</td>
+<td>1 - 3178</td>
+<td>Year with century as a decimal number.</td>
+</tr>
+<tr class="row-even"><td>%n</td>
+<td>۱ - ۹۹</td>
+<td>Year without century as a decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%u</td>
+<td>۰۱ - ۹۹</td>
+<td>Year without century as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%N</td>
+<td>۱ - ۳۱۷۸</td>
+<td>Year with century as a decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%O</td>
+<td>۰۰۰۱ - ۳۱۷۸</td>
+<td>Year with century as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%m</td>
+<td>01 - 12</td>
+<td>Month as a decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%R</td>
+<td>۱ - ۱۲</td>
+<td>Month as a decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%P</td>
+<td>۰۱ - ۱۲</td>
+<td>Month as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%b</td>
+<td>فر, ار, خر, تی, ...</td>
+<td>Month name in persian abbreviated style.</td>
+</tr>
+<tr class="row-even"><td>%B</td>
+<td>فروردین, اردیبهشت, ...</td>
+<td>Month name in persian.</td>
+</tr>
+<tr class="row-odd"><td>%g</td>
+<td>F, O, Kh, T, Mo, ...</td>
+<td>Month name in persian abbreviated ASCII style.</td>
+</tr>
+<tr class="row-even"><td>%G</td>
+<td>Farvardin, Tir, ...</td>
+<td>Month name in persian ASCII style.</td>
+</tr>
+<tr class="row-odd"><td>%a</td>
+<td>ش, ی, د, ...</td>
+<td>Weekday name in persian abbreviated style.</td>
+</tr>
+<tr class="row-even"><td>%e</td>
+<td>Sh, Y, D, Se, Ch, P, J</td>
+<td>Weekday name in persian abbreviated ASCII style.</td>
+</tr>
+<tr class="row-odd"><td>%A</td>
+<td>شنبه, یکشنبه, ...</td>
+<td>Weekday name in persian.</td>
+</tr>
+<tr class="row-even"><td>%E</td>
+<td>Shanbeh, Yekshanbeh, ..</td>
+<td>Weekday name in persian ASCII style.</td>
+</tr>
+<tr class="row-odd"><td>%w</td>
+<td>0(Saturday), 6(Friday)</td>
+<td>Weekday as a decimal number.</td>
+</tr>
+<tr class="row-even"><td>%W</td>
+<td>00 - 53</td>
+<td>Week number of the year (SATURDAY as the first day of the week) as a decimal number . All days in a new year preceding the first Monday are considered to be in week 0.</td>
+</tr>
+<tr class="row-odd"><td>%U</td>
+<td>00 - 53</td>
+<td>Week number of the year (Sunday as the first day of the week) as a decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
+</tr>
+<tr class="row-even"><td>%d</td>
+<td>01 - 31</td>
+<td>Day of the month as a zero padded decimal number in ASCII form.</td>
+</tr>
+<tr class="row-odd"><td>%K</td>
+<td>۰۱ - ۳۱</td>
+<td>Day of the month as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%D</td>
+<td>۱ - ۳۱</td>
+<td>Day of the month as a decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%j</td>
+<td>001 - 366</td>
+<td>Day of the year as a zero padded decimal number in ASCII form.</td>
+</tr>
+<tr class="row-even"><td>%V</td>
+<td>..۱ - ۳۶۶</td>
+<td>Day of the year as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%J</td>
+<td>۱ - ۳۶۶</td>
+<td>Day of the year as a decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%x</td>
+<td>دوشنبه ۱۵ شهریور ۱۳۶۱</td>
+<td>Persian appropriate date representation.</td>
+</tr>
+<tr class="row-odd"><td>%%</td>
+<td>%</td>
+<td>A literal &#8216;%&#8217; character.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="jalalidatetime-directives">
+<h2>JalaliDatetime directives<a class="headerlink" href="#jalalidatetime-directives" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="27%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directive</th>
+<th class="head">Example</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%H</td>
+<td>00 - 23</td>
+<td>Hour (24-hour clock) as a zero padded ASCII decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%k</td>
+<td>۱ - ۲۳</td>
+<td>Hour (24-hour clock) as a decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%h</td>
+<td>۰۰ - ۲۳</td>
+<td>Hour (24-hour clock) as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%I</td>
+<td>01 - 12</td>
+<td>Hour (12-hour clock) as a zero padded ASCII decimal number.</td>
+</tr>
+<tr class="row-even"><td>%i</td>
+<td>۰۱ - ۱۲</td>
+<td>Hour (12-hour clock) as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%l</td>
+<td>۱ - ۱۲</td>
+<td>Hour (12-hour clock) as a decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%M</td>
+<td>00 - 59</td>
+<td>Minute as a zero padded ASCII decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%r</td>
+<td>۰۰ - ۵۹</td>
+<td>Minute as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%v</td>
+<td>۰ - ۵۹</td>
+<td>Minute as a decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%S</td>
+<td>00 - 59</td>
+<td>Second as a zero padded ASCII decimal number.</td>
+</tr>
+<tr class="row-even"><td>%s</td>
+<td>۰۰ - ۵۹</td>
+<td>Second as a zero padded decimal number in persian form.</td>
+</tr>
+<tr class="row-odd"><td>%L</td>
+<td>۰ - ۵۹</td>
+<td>Second as a decimal number in persian form.</td>
+</tr>
+<tr class="row-even"><td>%f</td>
+<td>0 - 999999</td>
+<td>Microsecond as a zero padded ASCII decimal number.</td>
+</tr>
+<tr class="row-odd"><td>%F</td>
+<td>۰۰۰۰۰۰ - ۹۹۹۹۹۹</td>
+<td>Microsecond as a zero padded decimal number in persian from.</td>
+</tr>
+<tr class="row-even"><td>%p</td>
+<td>ق.ظ, ب.ظ</td>
+<td>AM or PM in persian format.</td>
+</tr>
+<tr class="row-odd"><td>%t</td>
+<td>AM, PM</td>
+<td>AM or PM in ASCII format.</td>
+</tr>
+<tr class="row-even"><td>%z</td>
+<td>+04:30</td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).</td>
+</tr>
+<tr class="row-odd"><td>%o</td>
+<td>+۰۳:۳۰</td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format.</td>
+</tr>
+<tr class="row-even"><td>%Z</td>
+<td>Tehran</td>
+<td>Time zone name (empty string if the object is naive).</td>
+</tr>
+<tr class="row-odd"><td>%c</td>
+<td>د ۱۵ شه ۶۱ ۰:۰</td>
+<td>Persian appropriate short date and time representation.</td>
+</tr>
+<tr class="row-even"><td>%C</td>
+<td>دوشنبه ۱۵ شهریور ۱۳۶۱ ۰۷:۳۴:۰۲ ب.ظ</td>
+<td>Persian appropriate date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%q</td>
+<td>D 15 Sh 61 19:34</td>
+<td>ASCII appropriate short date and time representation.</td>
+</tr>
+<tr class="row-even"><td>%Q</td>
+<td>Doshanbeh 15 Shahrivar 1361 07:34:02 PM</td>
+<td>ASCII Locale’s appropriate date and time representation.</td>
+</tr>
+<tr class="row-odd"><td>%X</td>
+<td>۰۷:۳۴:۰۲ ب.ظ</td>
+<td>Persian appropriate time representation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Formatting and Parsing directives</a><ul>
+<li><a class="reference internal" href="#jalalidate-directives">JalaliDate directives</a></li>
+<li><a class="reference internal" href="#jalalidatetime-directives">JalaliDatetime directives</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="migration.html"
+                        title="next chapter">Migration from python&#8217;s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/directives.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="migration.html" title="Migration from python’s builtin datetime"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Vahid Mardani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

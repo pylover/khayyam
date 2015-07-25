@@ -2,7 +2,7 @@
 from khayyam import SATURDAY, MONDAY
 from khayyam.compat import get_unicode
 from khayyam.formatting import constants as consts
-from .directive import Directive
+from .directive import Directive, CompositeDateDirective, CompositeDatetimeDirective
 from .day import \
     PersianDayDirective, \
     DayOfYearDirective, \
@@ -19,13 +19,6 @@ from .year import \
     ShortYearDirective, \
     PersianYearDirective, \
     PersianShortYearDirective
-from .local import \
-    LocalShortDatetimeFormatDirective, \
-    LocalDatetimeFormatDirective, \
-    LocalASCIIShortDatetimeFormatDirective, \
-    LocalASCIIDatetimeFormatDirective, \
-    LocalDateFormatDirective, \
-    LocalTimeFormatDirective
 from .tz import UTCOffsetDirective, TimezoneNameDirective, PersianUTCOffsetDirective
 
 __author__ = 'vahid'
@@ -36,7 +29,8 @@ DATE_FORMAT_DIRECTIVES = [
     Directive('Y', 'year', consts.YEAR_REGEX, int, lambda d: '%.4d' % d.year),
     ShortYearDirective('y', 'shortyear', consts.SHORT_YEAR_REGEX, int),
     PersianYearDirective('N', 'persianyear', consts.PERSIAN_YEAR_REGEX),
-    PersianYearDirective('O', 'persianyearzeropadded', consts.PERSIAN_YEAR_ZERO_PADDED_REGEX, zero_padding=True),
+    PersianYearDirective('O', 'persianyearzeropadded', consts.PERSIAN_YEAR_ZERO_PADDED_REGEX,
+                         zero_padding=True, zero_padding_length=4),
     PersianShortYearDirective('n', 'persianshortyear', consts.PERSIAN_SHORT_YEAR_REGEX, ),
     PersianShortYearDirective('u', 'persianshortyearzeropadded', consts.PERSIAN_SHORT_YEAR_ZERO_PADDED_REGEX,
                               zero_padding=True),
@@ -81,8 +75,14 @@ DATE_FORMAT_DIRECTIVES = [
               lambda d: d.weekdayname_ascii()),
 
     # COMPOSITE
-    LocalDateFormatDirective('x', 'localdateformat', consts.LOCAL_DATE_FORMAT_REGEX),
+    CompositeDateDirective('x', 'localdateformat', '%s %s %s %s' % (
+        consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+        consts.PERSIAN_DAY_REGEX,
+        consts.PERSIAN_MONTH_NAMES_REGEX,
+        consts.PERSIAN_YEAR_REGEX
+    ), "%A %D %B %N"),
 
+    # MISCELLANEOUS
     Directive('%', 'percent', '%', None, lambda d: '%', ),
 ]
 
@@ -120,46 +120,75 @@ TIME_FORMAT_DIRECTIVES = [
     PersianUTCOffsetDirective('o', 'persianutcoffset', consts.PERSIAN_UTC_OFFSET_FORMAT_REGEX),
 
     # COMPOSITE
-    LocalShortDatetimeFormatDirective('c', 'localshortdatetimeformat', consts.LOCAL_SHORT_DATE_TIME_FORMAT_REGEX),
-    LocalDatetimeFormatDirective('C', 'localdatetimeformat', consts.LOCAL_DATE_TIME_FORMAT_REGEX),
-    LocalASCIIShortDatetimeFormatDirective('q', 'localshortdatetimeformatascii',
-                                           consts.LOCAL_SHORT_DATE_TIME_FORMAT_ASCII_REGEX),
-    LocalASCIIDatetimeFormatDirective('Q', 'localdatetimeformatascii', consts.LOCAL_DATE_TIME_FORMAT_ASCII_REGEX),
-    LocalTimeFormatDirective('X', 'localtimeformat', consts.LOCAL_TIME_FORMAT_REGEX),
+    CompositeDatetimeDirective('c', 'localshortdatetimeformat', '%s %s %s %s %s:%s' % (
+        consts.PERSIAN_WEEKDAY_ABBRS_REGEX,
+        consts.PERSIAN_DAY_REGEX,
+        consts.PERSIAN_MONTH_ABBRS_REGEX,
+        consts.PERSIAN_SHORT_YEAR_REGEX,
+        consts.PERSIAN_HOUR24_REGEX,
+        consts.PERSIAN_MINUTE_REGEX
+    ), "%a %D %b %n %k:%v"),
+    CompositeDatetimeDirective('C', 'localdatetimeformat', '%s %s %s %s %s:%s:%s %s' % (
+        consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+        consts.PERSIAN_DAY_REGEX,
+        consts.PERSIAN_MONTH_NAMES_REGEX,
+        consts.PERSIAN_YEAR_REGEX,
+        consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
+        consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
+        consts.PERSIAN_SECOND_ZERO_PADDED_REGEX,
+        consts.AM_PM_REGEX
+    ), "%A %D %B %N %i:%r:%s %p"),
+    CompositeDatetimeDirective('q', 'localshortdatetimeformatascii', '%s %s %s %s %s:%s' % (
+        consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX,
+        consts.DAY_REGEX,
+        consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX,
+        consts.SHORT_YEAR_REGEX,
+        consts.HOUR24_REGEX,
+        consts.MINUTE_REGEX
+    ), "%e %d %g %y %H:%M"),
+    CompositeDatetimeDirective('Q', 'localdatetimeformatascii', '%s %s %s %s %s:%s:%s %s' % (
+        consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX,
+        consts.DAY_REGEX,
+        consts.PERSIAN_MONTH_NAMES_ASCII_REGEX,
+        consts.YEAR_REGEX,
+        consts.HOUR12_REGEX,
+        consts.MINUTE_REGEX,
+        consts.SECOND_REGEX,
+        consts.AM_PM_ASCII_REGEX
+    ), "%E %d %G %Y %I:%M:%S %t"),
+    CompositeDatetimeDirective('X', 'localtimeformat', '%s:%s:%s %s' % (
+        consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
+        consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
+        consts.PERSIAN_SECOND_ZERO_PADDED_REGEX,
+        consts.AM_PM_REGEX
+    ), "%i:%r:%s %p"),
 
 ]
 
 DATETIME_FORMAT_DIRECTIVES = DATE_FORMAT_DIRECTIVES + TIME_FORMAT_DIRECTIVES
 
 __all__ = [
-    Directive,
-    PersianDayDirective,
-    DayOfYearDirective,
-    PersianDayOfYearDirective,
-    PersianMonthDirective,
-    AmPmDirective,
-    AmPmASCIIDirective,
-    PersianMicrosecondDirective,
-    PersianHour12Directive,
-    PersianHour24Directive,
-    PersianSecondDirective,
-    PersianMinuteDirective,
-    ShortYearDirective,
-    PersianYearDirective,
-    PersianShortYearDirective,
-    LocalShortDatetimeFormatDirective,
-    LocalDatetimeFormatDirective,
-    LocalASCIIShortDatetimeFormatDirective,
-    LocalASCIIDatetimeFormatDirective,
-    LocalDateFormatDirective,
-    LocalTimeFormatDirective,
-    UTCOffsetDirective,
-    TimezoneNameDirective,
-    PersianUTCOffsetDirective,
-    DATE_FORMAT_DIRECTIVES,
-    TIME_FORMAT_DIRECTIVES,
-    DATETIME_FORMAT_DIRECTIVES,
-
+    'Directive',
+    'PersianDayDirective',
+    'DayOfYearDirective',
+    'PersianDayOfYearDirective',
+    'PersianMonthDirective',
+    'AmPmDirective',
+    'AmPmASCIIDirective',
+    'PersianMicrosecondDirective',
+    'PersianHour12Directive',
+    'PersianHour24Directive',
+    'PersianSecondDirective',
+    'PersianMinuteDirective',
+    'ShortYearDirective',
+    'PersianYearDirective',
+    'PersianShortYearDirective',
+    'UTCOffsetDirective',
+    'TimezoneNameDirective',
+    'PersianUTCOffsetDirective',
+    'DATE_FORMAT_DIRECTIVES',
+    'TIME_FORMAT_DIRECTIVES',
+    'DATETIME_FORMAT_DIRECTIVES',
 ]
 
 """

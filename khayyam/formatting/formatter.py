@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from khayyam.formatting import constants as consts
+from .directives import DATE_FORMAT_DIRECTIVES
 __author__ = 'vahid'
 
 
@@ -29,7 +30,6 @@ class JalaliDateFormatter(object):
 
     def __init__(self, format_string, directive_db=None):
         if not directive_db:
-            from .directives import DATE_FORMAT_DIRECTIVES
             directive_db = DATE_FORMAT_DIRECTIVES
         self.format_string = format_string
         self.directives = directive_db
@@ -138,7 +138,9 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
         'persianhour24',
         'persianhour24zeropadded',
         'persianminute',
+        'persianminutezeropadded',
         'persiansecond',
+        'persiansecondzeropadded',
         'persianutcoffset',
         'localdateformat',
         'localshortdatetimeformat',

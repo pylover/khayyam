@@ -20,8 +20,15 @@ class PersianNumberDirective(Directive):
         super(PersianNumberDirective, self).__init__(key, name, regex, get_unicode)
 
     def format(self, i):
-        fmt = '%%%sd' % ('.%d' % self.zero_padding_length if self.zero_padding else '')
-        return eng_to_persian(fmt % i)
+        if self.zero_padding:
+            fmt = '%%.%dd' % self.zero_padding_length
+            return eng_to_persian(fmt % i)
+        elif isinstance(i, int):
+            return eng_to_persian(str(i))
+        else:
+            return eng_to_persian(i)
+
+
 
     def post_parser(self, ctx, formatter):
         exp = ctx[self.name]

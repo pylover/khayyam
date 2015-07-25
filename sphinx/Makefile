@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
-BUILDDIR      = _build
+BUILDDIR      = ../docs
 GITHUB_OUT_DIR = ./../../khayyam.io
 
 # User-friendly check for sphinx-build

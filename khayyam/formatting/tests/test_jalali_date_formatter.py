@@ -249,7 +249,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         Testing:
             %x           Locale’s appropriate date representation.
         """
-
         self.assertEqual(JalaliDate(1361, 6, 15).strftime('%x'), u'دوشنبه ۱۵ شهریور ۱۳۶۱')
         self.assertEqual(JalaliDate().strftime('%x'), u'جمعه ۱ فروردین ۱')
         self.assertEqual(JalaliDate.strptime(u'جمعه ۱ فروردین ۱', '%x'), JalaliDate.min)

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>khayyam.formatting.formatter &mdash; Khayyam 2.6.0-beta documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.6.0-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for khayyam.formatting.formatter</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">consts</span>
+<span class="kn">from</span> <span class="nn">.directives</span> <span class="kn">import</span> <span class="n">DATE_FORMAT_DIRECTIVES</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
+
+
+
+<div class="viewcode-block" id="JalaliDateFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDateFormatter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;persianday&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonth&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonthzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_string</span><span class="p">,</span> <span class="n">directive_db</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">directive_db</span><span class="p">:</span>
+            <span class="n">directive_db</span> <span class="o">=</span> <span class="n">DATE_FORMAT_DIRECTIVES</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span> <span class="o">=</span> <span class="n">format_string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directives</span> <span class="o">=</span> <span class="n">directive_db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_name</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parser_regex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_parser_regex</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_create_parser_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="s">u&#39;^&#39;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">consts</span><span class="o">.</span><span class="n">FORMAT_DIRECTIVE_REGEX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">):</span>
+            <span class="n">directive_key</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">directive_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">directive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">[</span><span class="n">directive_key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">():</span>
+                <span class="n">regex</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">()]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">directive</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s">&#39;%&#39;</span><span class="p">:</span>
+                <span class="n">regex</span> <span class="o">+=</span> <span class="s">&#39;%&#39;</span>
+                <span class="k">continue</span>
+            <span class="n">regex</span> <span class="o">+=</span> <span class="s">u&#39;(?P&lt;</span><span class="si">%(group_name)s</span><span class="s">&gt;</span><span class="si">%(regexp)s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">group_name</span><span class="o">=</span><span class="n">directive</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                <span class="n">regexp</span><span class="o">=</span><span class="n">directive</span><span class="o">.</span><span class="n">regex</span>
+            <span class="p">)</span>
+        <span class="n">regex</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+        <span class="n">regex</span> <span class="o">+=</span> <span class="s">&#39;$&#39;</span>
+        <span class="k">return</span> <span class="n">regex</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parser_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parser_regex</span>
+
+<div class="viewcode-block" id="JalaliDateFormatter.iter_format_directives"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.iter_format_directives">[docs]</a>    <span class="k">def</span> <span class="nf">iter_format_directives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">consts</span><span class="o">.</span><span class="n">FORMAT_DIRECTIVE_REGEX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JalaliDateFormatter.format"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jalali_date</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">match</span><span class="p">,</span> <span class="n">directive</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_format_directives</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()]</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">directive</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jalali_date</span><span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="JalaliDateFormatter.filter_persian_digit"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.filter_persian_digit">[docs]</a>    <span class="k">def</span> <span class="nf">filter_persian_digit</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_DIGIT_MAPPING</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">_parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_string</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parser_regex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_persian_digit</span><span class="p">(</span><span class="n">date_string</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&quot;time data &#39;</span><span class="si">%s</span><span class="s">&#39; does not match format &#39;</span><span class="si">%s</span><span class="s">&#39; with generated regex: &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">date_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser_regex</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">directive_key</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">directive_key</span> <span class="o">==</span> <span class="s">&#39;percent&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">directive_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;directive key: </span><span class="si">%%%s</span><span class="s"> was not exists.&#39;</span> <span class="o">%</span> <span class="n">directive_key</span><span class="p">)</span>
+            <span class="n">directive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_key</span><span class="p">[</span><span class="n">directive_key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">directive</span><span class="o">.</span><span class="n">type_</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">directive</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">directive</span><span class="o">.</span><span class="n">type_</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">post_parsers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_parsers</span>
+
+    <span class="k">def</span> <span class="nf">_parse_post_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parse_result</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">directive_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">post_parsers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">directive_name</span> <span class="ow">in</span> <span class="n">parse_result</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">directives_by_name</span><span class="p">[</span><span class="n">directive_name</span><span class="p">]</span><span class="o">.</span><span class="n">post_parser</span><span class="p">(</span><span class="n">parse_result</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JalaliDateFormatter.parse"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_string</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_post_processor</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+</div></div>
+<div class="viewcode-block" id="JalaliDatetimeFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDatetimeFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">JalaliDateFormatter</span><span class="p">):</span>
+    <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;persianday&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiandayofyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonth&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmonthzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianshortyearzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianmicrosecond&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour12&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour12zeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour24&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianhour24zeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianminute&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianminutezeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiansecond&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persiansecondzeropadded&#39;</span><span class="p">,</span>
+        <span class="s">&#39;persianutcoffset&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdateformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localshortdatetimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localshortdatetimeformatascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdatetimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localdatetimeformatascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;localtimeformat&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthabbr_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname&#39;</span><span class="p">,</span>
+        <span class="s">&#39;monthname_ascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ampm&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ampmascii&#39;</span><span class="p">,</span>
+        <span class="s">&#39;shortyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span>
+        <span class="s">&#39;utcoffset&#39;</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_string</span><span class="p">,</span> <span class="n">directive_db</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">directive_db</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.directives</span> <span class="kn">import</span> <span class="n">DATETIME_FORMAT_DIRECTIVES</span>
+            <span class="n">directive_db</span> <span class="o">=</span> <span class="n">DATETIME_FORMAT_DIRECTIVES</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">format_string</span><span class="p">,</span> <span class="n">directive_db</span><span class="o">=</span><span class="n">directive_db</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Vahid Mardani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

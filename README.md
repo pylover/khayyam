@@ -11,10 +11,19 @@ Jump To:
 
 #### Change Log
 
+  * 2.6.0
+    * All possible formatting directives(a-z, A-Z) are supported, except: T
+    * All format directives are tested.
+    * Formatting and parsing test cases moved to `khayyam.formatting.tests` package.
+    * In project: docs/html
+    
+
   * 2.5.0-beta (2015-07-23)
     * Doc: doctest
-    * Doc: adding examples of new formatting directives in introduction: %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o
+    * Doc: formatting and parsing directives table.
+    * Doc: adding examples of new formatting directives in introduction: %D, %J, %R, %N, %n, %F, %h, %i, %r, %s, %o.
     * local date & time formats are changed: digits -> persian
+    * Formatting and parsing test cases has been separated
 
   * 2.4.0-beta (2015-07-22)
     * Persian Numbers

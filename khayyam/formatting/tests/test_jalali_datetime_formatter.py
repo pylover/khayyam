@@ -98,14 +98,14 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDatetime.strptime, u'۲', '%i')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(10000):
+        for i in range(1000):
             d_test = d2 + timedelta(hours=i)
             self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
             self.check_format(d_test, '%N-%R-%D %k:%r:%s')
             self.check_format(d_test, '%N-%R-%D %h:%v:%L')
-            self.check_format(d_test, '%Y-%m-%d %I:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %i:%r:%s')
-            self.check_format(d_test, '%N-%R-%D %l:%v:%L')
+            self.check_format(d_test, '%Y-%m-%d %p %I:%M:%S')
+            self.check_format(d_test, '%N-%R-%D %t %i:%r:%s')
+            self.check_format(d_test, '%N-%R-%D %p %l:%v:%L')
 
 
 
@@ -120,8 +120,8 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDatetime(1386, 12, 23, 4, 6).strftime('%r'), u'۰۶')
         self.assertEqual(JalaliDatetime(1386, 12, 23, 4, 6).strftime('%v'), u'۶')
         d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(10000):
-            d_test = d2 + timedelta(seconds=i)
+        for i in range(1000):
+            d_test = d2 + timedelta(minutes=i)
             self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
             self.check_format(d_test, '%N-%R-%D %H:%r:%s')
             self.check_format(d_test, '%N-%R-%D %H:%v:%L')
@@ -132,14 +132,14 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         Testing:
             %S            Second as a decimal number [00, 59].
             %s            Second as a zero padded decimal number in persian form [۰۰, ۵۹].
-            -%L            Second as a decimal number in persian form [۰, ۵۹].
+            %L            Second as a decimal number in persian form [۰, ۵۹].
         """
         self.assertEqual(JalaliDatetime(1386, 12, 23, 4, 6, 5).strftime('%S'), u'05')
         self.assertEqual(JalaliDatetime(1386, 12, 23, 4, 6, 5).strftime('%s'), u'۰۵')
         self.assertEqual(JalaliDatetime(1386, 12, 23, 4, 6, 5).strftime('%L'), u'۵')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(10000):
+        for i in range(1000):
             d_test = d2 + timedelta(seconds=i)
             self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
             self.check_format(d_test, '%N-%R-%D %H:%r:%s')
@@ -209,7 +209,7 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         self.check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(100000000, step=31):
+        for i in range(0, 100000000, 100000):
             d_test = d2 + timedelta(microseconds=i)
             self.check_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
             self.check_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
@@ -246,14 +246,14 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             %X            Locale’s appropriate time representation.
         """
 
-        self.assertEqual(JalaliDatetime(1361, 6, 15).strftime('%c'), u'د ۱۵ شه ۶۱ ۰۰:۰۰')
-        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%C'), u'د ۱۵ شه ۶۱ ۰۰:۰۰')
-        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%q'), u'د ۱۵ شه ۶۱ ۰۰:۰۰')
-        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%Q'), u'د ۱۵ شه ۶۱ ۰۰:۰۰')
-        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%X'), u'د ۱۵ شه ۶۱ ۰۰:۰۰')
+        self.assertEqual(JalaliDatetime(1361, 6, 15).strftime('%c'), u'د ۱۵ شه ۶۱ ۰:۰')
+        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%C'), u'دوشنبه ۱۵ شهریور ۱۳۶۱ ۰۷:۳۴:۰۲ ب.ظ')
+        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%q'), u'D 15 Sh 61 19:34')
+        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%Q'), u'Doshanbeh 15 Shahrivar 1361 07:34:02 PM')
+        self.assertEqual(JalaliDatetime(1361, 6, 15, 19, 34, 2).strftime('%X'), u'۰۷:۳۴:۰۲ ب.ظ')
         d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(10000):
-            d_test = d2 + timedelta(microseconds=i)
+        for i in range(1000):
+            d_test = d2 + timedelta(minutes=i)
             self.check_format(d_test, '%c')
             self.check_format(d_test, '%C')
             self.check_format(d_test, '%q')

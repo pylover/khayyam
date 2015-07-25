@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Khayyam 2.6.0-beta documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.6.0-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="index.html" />
+    <link rel="next" title="Formatting and Parsing directives" href="directives.html" />
+    <link rel="prev" title="Khayyam" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="directives.html" title="Formatting and Parsing directives"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Khayyam"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="importing">
+<h3>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>This will imports
+<a class="reference internal" href="api.html#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.Timezone" title="khayyam.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.Timezone</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.MINYEAR" title="khayyam.MINYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MINYEAR</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.MAXYEAR" title="khayyam.MAXYEAR"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MAXYEAR</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.SATURDAY" title="khayyam.SATURDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.SATURDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.SUNDAY" title="khayyam.SUNDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.SUNDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.MONDAY" title="khayyam.MONDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.MONDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.THURSDAY" title="khayyam.THURSDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.THURSDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.WEDNESDAY" title="khayyam.WEDNESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.WEDNESDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.TUESDAY" title="khayyam.TUESDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.TUESDAY</span></code></a>,
+<a class="reference internal" href="api.html#khayyam.FRIDAY" title="khayyam.FRIDAY"><code class="xref py py-obj docutils literal"><span class="pre">khayyam.FRIDAY</span></code></a></p>
+<p>Or</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDatetime</span><span class="p">,</span> <span class="n">TehranTimezone</span>
+</pre></div>
+</div>
+<p>And:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="p">)</span>
+<span class="go">&lt;class &#39;khayyam.jalali_datetime.JalaliDatetime&#39;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instantiating">
+<h3>Instantiating<a class="headerlink" href="#instantiating" title="Permalink to this headline">¶</a></h3>
+<p>Simply you can instantiate <a class="reference internal" href="api.html#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>
+and <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> classes just like the other regular python classes.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1345</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDate(1345, 1, 1, Doshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">427</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="c"># Khayyam&#39;s birthday</span>
+<span class="go">khayyam.JalaliDate(427, 2, 28, Panjshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1345</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> 
+<span class="go">ValueError: .... # So, it&#39;s not a leap year!</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1346</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c"># A leap year.</span>
+<span class="go">khayyam.JalaliDate(1346, 12, 30, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">()</span>
+<span class="go">khayyam.JalaliDatetime(1, 1, 1, 0, 0, 0, 0, Jomeh)</span>
+</pre></div>
+</div>
+<p>Interesting! the calendar starting by friday.</p>
+<p>Adjusting microseconds:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">989</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">345453</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(989, 3, 25, 10, 43, 23, 345453, Seshanbeh)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="current-date-and-time">
+<h3>Current date and time<a class="headerlink" href="#current-date-and-time" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> 
+<span class="go">khayyam.JalaliDatetime(1394, 4, 30, 20, 49, 55, 205834, Seshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span> 
+<span class="go">1394-04-30 20:56:20.991585</span>
+</pre></div>
+</div>
+<p>DST aware</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">()))</span> 
+<span class="go">1394-04-30 19:59:12.935506+04:30</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">())</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="mi">30</span><span class="p">))</span> 
+<span class="go">1393-11-02 20:01:11.663719+03:30</span>
+</pre></div>
+</div>
+<p>As you see, the DST offset in the second statement is <cite>+3:30</cite>. so
+the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a> is supporting <cite>daylight saving time</cite> properly.</p>
+<p>Today</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> 
+<span class="go">khayyam.JalaliDate(1394, 4, 30, Seshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">())</span> 
+<span class="go">1394-4-30</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %B %Y&#39;</span><span class="p">))</span> 
+<span class="go">چهارشنبه 31 تیر 1394</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A %D %B %N&#39;</span><span class="p">))</span>
+<span class="go">پنجشنبه ۱ مرداد ۱۳۹۴</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="right-to-left">
+<h3>Right-to-left<a class="headerlink" href="#right-to-left" title="Permalink to this headline">¶</a></h3>
+<p>Additionally, if right to left text rendering is not supported by your terminal emulator:</p>
+<div class="highlight-python"><div class="highlight"><pre>ﻅ.ﺏ 05:45:40 1394 ﺩاﺩﺮﻣ 01 ﻪﺒﻨﺸﺠﻨﭘ
+</pre></div>
+</div>
+<p>You can install the rtl package:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install rtl
+</pre></div>
+</div>
+<p>And then use it to reshape and change direction of the text</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="n">rtl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rtl</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">)))</span> 
+<span class="go">پنجشنبه 01 مرداد 1394 05:45:40 ب.ظ</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rprint-function">
+<h3>rprint() function<a class="headerlink" href="#rprint-function" title="Permalink to this headline">¶</a></h3>
+<p>If you are using python2 its good to import new print function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+</pre></div>
+</div>
+<p>Extending your practice environment by defining a handy print function for RTL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rprint</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">rtl</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rprint</span><span class="p">(</span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">))</span> 
+<span class="go">پنجشنبه 01 مرداد 1394 05:45:40 ب.ظ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="formatting-parsing">
+<h2>Formatting &amp; Parsing<a class="headerlink" href="#formatting-parsing" title="Permalink to this headline">¶</a></h2>
+<p>All Supported format directives are listed here: <a class="reference internal" href="directives.html"><em>Formatting and Parsing directives</em></a>.</p>
+<p>All formatting behaviours are driven from <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a>.</p>
+<p>To format locale&#8217;s date &amp; time:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDatetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_string</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">time_string</span><span class="p">)</span>
+<span class="go">چهارشنبه ۳۱ تیر ۱۳۹۴ ۰۵:۴۵:۴۰ ب.ظ</span>
+</pre></div>
+</div>
+<p>And parsing it again to a <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time_string</span><span class="p">,</span> <span class="s">&#39;%C&#39;</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 17, 45, 40, 0, Chaharshanbeh)</span>
+</pre></div>
+</div>
+<p>You may use <cite>%f</cite> and or <cite>%z</cite> formatting directives to represent
+microseconds and timezone info in your formatting or parsing pattern.</p>
+<p>So, to reach accurate serialization, you could include those two
+directive alongside time and date directives in your pattern. for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">Timezone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tz</span> <span class="o">=</span> <span class="n">Timezone</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="o">*</span><span class="mi">210</span><span class="p">))</span> <span class="c"># +3:30 Tehran</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now_string</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">452958</span><span class="p">,</span> <span class="n">tz</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s"> %z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">now_string</span><span class="p">)</span>
+<span class="go">1394-04-31 14:10:21.452958 +03:30</span>
+</pre></div>
+</div>
+<p>Parse it back to the <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">now_string</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s"> %z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 10, 21, 452958, tzinfo=+03:30, Chaharshanbeh)</span>
+</pre></div>
+</div>
+<p>Try some formatting and parsing directives:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%a </span><span class="si">%d</span><span class="s"> %B %y&#39;</span><span class="p">))</span>
+<span class="go">چ 31 تیر 94</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %b %Y&#39;</span><span class="p">))</span>
+<span class="go">چهارشنبه 31 تی 1394</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">TehranTimezone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">TehranTimezone</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A </span><span class="si">%d</span><span class="s"> %B %Y %Z&#39;</span><span class="p">))</span>
+<span class="go">چهارشنبه 31 تیر 1394 Iran/Tehran</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting">
+<h2>Converting<a class="headerlink" href="#converting" title="Permalink to this headline">¶</a></h2>
+<p>Converting to gregorian calendar, python&#8217;s native
+<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> and <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDate</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">,</span> <span class="n">TehranTimezone</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
+<span class="go">datetime.date(2015, 7, 22)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">37269</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
+<span class="go">datetime.date(2015, 7, 22)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span>
+<span class="go">datetime.datetime(2015, 7, 22, 15, 38, 6, 37269)</span>
+</pre></div>
+</div>
+<p>And vise-versa:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromdatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">))</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromdatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">,</span> <span class="n">TehranTimezone</span><span class="p">()))</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">fromdate</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">))</span>
+<span class="go">khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="arithmetics-operators">
+<h2>Arithmetics &amp; Operators<a class="headerlink" href="#arithmetics-operators" title="Permalink to this headline">¶</a></h2>
+<p>Addition and subtraction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDate</span><span class="p">,</span> <span class="n">JalaliDatetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">374398</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 16, 17, 31, 374398, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 5, 1, 16, 17, 31, 374398, Panjshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 17, 17, 31, 374398, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 31, 15, 17, 31, 374398, Chaharshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yesterday</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yesterday</span>
+<span class="go">khayyam.JalaliDatetime(1394, 4, 30, 16, 17, 31, 374398, Seshanbeh)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">-</span> <span class="n">yesterday</span>
+<span class="go">datetime.timedelta(1)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">now</span> 
+<span class="go">datetime.timedelta(0, 478, 328833) # 478 seconds taken to writing this section</span>
+</pre></div>
+</div>
+<p>Supported operators:</p>
+<ul class="simple">
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__add__" title="khayyam.JalaliDate.__add__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__add__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__sub__" title="khayyam.JalaliDate.__sub__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__sub__()</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="comparison">
+<h2>Comparison<a class="headerlink" href="#comparison" title="Permalink to this headline">¶</a></h2>
+<p>Just like the <a class="reference external" href="https://docs.python.org/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, all comparison operators are overridden:</p>
+<ul class="simple">
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__lt__" title="khayyam.JalaliDate.__lt__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__lt__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__le__" title="khayyam.JalaliDate.__le__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__le__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__hash__" title="khayyam.JalaliDate.__hash__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__hash__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__eq__" title="khayyam.JalaliDate.__eq__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__ne__" title="khayyam.JalaliDate.__ne__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__ne__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__gt__" title="khayyam.JalaliDate.__gt__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__gt__()</span></code></a></li>
+<li><a class="reference internal" href="api.html#khayyam.JalaliDate.__ge__" title="khayyam.JalaliDate.__ge__"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.__ge__()</span></code></a></li>
+</ul>
+<p>So:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">&gt;</span> <span class="n">yesterday</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span> <span class="o">!=</span> <span class="n">yesterday</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">now</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span> <span class="o">==</span> <span class="n">yesterday</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference internal" href="#importing">Importing</a></li>
+<li><a class="reference internal" href="#instantiating">Instantiating</a></li>
+<li><a class="reference internal" href="#current-date-and-time">Current date and time</a></li>
+<li><a class="reference internal" href="#right-to-left">Right-to-left</a></li>
+<li><a class="reference internal" href="#rprint-function">rprint() function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formatting-parsing">Formatting &amp; Parsing</a></li>
+<li><a class="reference internal" href="#converting">Converting</a></li>
+<li><a class="reference internal" href="#arithmetics-operators">Arithmetics &amp; Operators</a></li>
+<li><a class="reference internal" href="#comparison">Comparison</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Khayyam</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="directives.html"
+                        title="next chapter">Formatting and Parsing directives</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/intro.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="directives.html" title="Formatting and Parsing directives"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Khayyam"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Vahid Mardani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
