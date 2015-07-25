@@ -9,9 +9,7 @@ __author__ = 'vahid'
 
 class JalaliDateFormatterTestCase(unittest.TestCase):
 
-
-    # TODO: rename it to assert_parse_and_format
-    def check_format(self, jdate ,fmt, print_=False):
+    def assert_parse_and_format(self, jdate ,fmt, print_=False):
         jdate_str = jdate.strftime(fmt)
         if print_:
             print(jdate_str)
@@ -42,7 +40,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
 
 
         for i in range(7):
-            self.check_format(JalaliDate.min + timedelta(i), '%d %w %W %U')
+            self.assert_parse_and_format(JalaliDate.min + timedelta(i), '%d %w %W %U')
             self.assertEqual(
                 JalaliDate.strptime('1345 10 10 %s' % c.PERSIAN_WEEKDAY_ABBRS[i], '%Y %m %d %a'),
                 JalaliDate(year=1345, month=10, day=10))
@@ -93,14 +91,14 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
 
         this_century = JalaliDate(int(JalaliDate.today().year/100) * 100)
         for i in range(99):
-            self.check_format(this_century.replace(year=this_century.year+i), '%y')
-            self.check_format(this_century.replace(year=this_century.year+i), '%n')
-            self.check_format(this_century.replace(year=this_century.year+i), '%u')
+            self.assert_parse_and_format(this_century.replace(year=this_century.year+i), '%y')
+            self.assert_parse_and_format(this_century.replace(year=this_century.year+i), '%n')
+            self.assert_parse_and_format(this_century.replace(year=this_century.year+i), '%u')
 
         for i in range(1, 1001):
-            self.check_format(JalaliDate(i), '%Y')
-            self.check_format(JalaliDate(i), '%N')
-            self.check_format(JalaliDate(i), '%O')
+            self.assert_parse_and_format(JalaliDate(i), '%Y')
+            self.assert_parse_and_format(JalaliDate(i), '%N')
+            self.assert_parse_and_format(JalaliDate(i), '%O')
 
 
     def test_month(self):
@@ -161,13 +159,13 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
 
         start_date = JalaliDate()
         for i in range(1, 501):
-            self.check_format(start_date + timedelta(days=i) , '%Y %m %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %b %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %B %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %g %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %G %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %R %d')
-            self.check_format(start_date + timedelta(days=i) , '%Y %P %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %m %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %b %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %B %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %g %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %G %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %R %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %P %d')
 
 
     def test_day(self):
@@ -236,12 +234,12 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
 
 
         for i in range(1, 400):
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%m-%d")
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%m-%D")
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%m-%K")
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%j")
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%J")
-            self.check_format(JalaliDate.fromordinal(i), "%Y-%V")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%m-%d")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%m-%D")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%m-%K")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%j")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%J")
+            self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%V")
 
 
     def test_locale_date(self):
@@ -263,8 +261,8 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         Testing:
             %%      A literal '%' character.
         """
-        self.check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
-        self.check_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
+        self.assert_parse_and_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
+        self.assert_parse_and_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
 
 
 if __name__ == '__main__':

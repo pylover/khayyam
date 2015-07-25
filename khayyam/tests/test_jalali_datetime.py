@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDatetime, teh_tz
+from khayyam import JalaliDatetime, teh_tz, MAXYEAR
 from datetime import datetime, timedelta
-from khayyam.timezones import TehranTimezone, Timezone
+from khayyam.timezones import TehranTimezone
 from khayyam.jalali_date import JalaliDate
-from khayyam.compat import xrange
 __author__ = 'vahid'
 
 
@@ -15,19 +14,31 @@ class TestJalaliDateTime(unittest.TestCase):
         self.naive_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3)
         self.aware_jdt = JalaliDatetime(self.leap_year, 12, 30, 10, 2, 1, 3, TehranTimezone())
 
+    def test_instantiate(self):
+
+        jtime = JalaliDatetime(1376, 10, 9, 8, 7, 6, 5)
+        self.assertFalse(jtime is None)
+
+        self.assertEqual(JalaliDatetime(jtime.todatetime()), jtime)
+        self.assertEqual(JalaliDatetime(jtime), jtime)
+        self.assertEqual(JalaliDatetime(jtime.date()).date(), jtime.date())
+
+        self.assertEqual(JalaliDatetime(julian_day=2450674), JalaliDatetime(1376, 5, 23))
+
+
     def test_to_from_datetime(self):
         # Naive
-        jdate1 = JalaliDatetime.fromdatetime(self.naive_jdt.todatetime())
+        jdate1 = JalaliDatetime(self.naive_jdt.todatetime())
         self.assertEqual(self.naive_jdt, jdate1)
         
         # Aware
-        jdate2 = JalaliDatetime.fromdatetime(self.aware_jdt.todatetime())
+        jdate2 = JalaliDatetime(self.aware_jdt.todatetime())
         self.assertEqual(self.aware_jdt, jdate2)
         
     def test_today(self):
         dt = datetime.now().date()
         jdt = JalaliDatetime.today().date()
-        self.assertEqual(jdt, JalaliDate.fromdate(dt))
+        self.assertEqual(jdt, JalaliDate(dt))
         
     def test_now(self):
         self.assertIsNotNone(JalaliDatetime.now())
@@ -59,7 +70,7 @@ class TestJalaliDateTime(unittest.TestCase):
         days = 0
         while True:
             dt = min + timedelta(days=days)
-            jd = JalaliDatetime.fromdatetime(dt)
+            jd = JalaliDatetime(dt)
             # print('Processing day: %s' % jd.year)
             dt2 = jd.todatetime()
             self.assertEqual(dt, dt2)
@@ -78,11 +89,14 @@ class TestJalaliDateTime(unittest.TestCase):
         jdate2 = jdate - timedelta(10)
         
         self.assertEqual(jdate2, JalaliDatetime(self.leap_year, 12, 13))
-        
+
         jtimedelta = jdate - JalaliDatetime(self.leap_year - 1, 12, 1)
-        
+
         self.assertEqual(jtimedelta, timedelta(387))
-        
+
+        jdate = JalaliDatetime(self.leap_year, 12, 23, 4, 2, 10, 7)
+        self.assertEqual(jdate - jdate.date(), timedelta(hours=4, minutes=2, seconds=10, microseconds=7))
+
     def test_lt_gt_le_ge_ne_eg(self):
         jdate = JalaliDatetime(self.leap_year, 12, 23)
         jdate2 = JalaliDatetime(self.leap_year, 12, 24)

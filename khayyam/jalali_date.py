@@ -27,10 +27,21 @@ class JalaliDate(object):
     resolution = datetime.timedelta(days=1)
 
     """
-    Representing the Jalali Date, without the time data.
+    Representing a specific day in Jalali calendar.
     """
 
-    def __init__(self, year=1, month=1, day=1):
+    def __init__(self, year=1, month=1, day=1, julian_day=None):
+        if isinstance(year, JalaliDate):
+            jd = year
+            year = jd.year
+            month = jd.month
+            day = jd.day
+        elif isinstance(year, datetime.date):
+            julian_day = get_julian_day_from_gregorian(year.year, year.month, year.day)
+
+        if julian_day is not None:
+            year, month, day = jalali_date_from_julian_day(julian_day)
+
         self.year, self.month, self.day = self._validate(year, month, day)
 
 
@@ -65,35 +76,18 @@ class JalaliDate(object):
     #####################
 
     @classmethod
-    def fromjuliandays(cls, julian_day):
-        """
-        Create JalaliDate from julian day
-        """
-        arr = jalali_date_from_julian_day(julian_day)
-        return cls(arr[0], arr[1], arr[2])
-
-    @classmethod
-    def fromdate(cls, d):
-        """
-        Create JalaliDate from python's datetime.date
-        """
-        julian_days = get_julian_day_from_gregorian(d.year, d.month, d.day)
-        return cls.fromjuliandays(julian_days)
-
-
-    @classmethod
     def today(cls):
         """
         Return the current local date. 
         """
-        return cls.fromdate(datetime.date.today())
+        return cls(datetime.date.today())
 
     @classmethod
     def fromtimestamp(cls, timestamp):
         """
         Return the local date corresponding to the POSIX timestamp. such as is returned by :func:`time.time()`. This may raise :class:`ValueError`, if the timestamp is out of the range of values supported by the platform C localtime() function. It’s common for this to be restricted to years from 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp().
         """
-        return cls.fromdate(datetime.date.fromtimestamp(timestamp))
+        return cls(datetime.date.fromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
@@ -236,14 +230,14 @@ class JalaliDate(object):
     def __add__(self, x):
         if isinstance(x, datetime.timedelta):
             days = self.tojulianday() + x.days
-            return JalaliDate.fromjuliandays(days)
+            return JalaliDate(julian_day=days)
 
         raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, datetime.timedelta):
             days = self.tojulianday() - x.days
-            return JalaliDate.fromjuliandays(days)
+            return JalaliDate(julian_day=days)
         elif isinstance(x, JalaliDate):
             days = self.tojulianday() - x.tojulianday()
             return datetime.timedelta(days=days)

@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDate, algorithms, MAXYEAR
+from khayyam import JalaliDate, MAXYEAR
 from datetime import timedelta, date
-from khayyam.compat import xrange
-from khayyam.formatting import \
-    PERSIAN_MONTH_ABBRS, \
-    PERSIAN_MONTH_NAMES, \
-    PERSIAN_MONTH_ABBRS_ASCII, \
-    PERSIAN_MONTH_NAMES_ASCII, \
-    PERSIAN_WEEKDAY_ABBRS, \
-    PERSIAN_WEEKDAY_ABBRS_ASCII, \
-    PERSIAN_WEEKDAY_NAMES, \
-    PERSIAN_WEEKDAY_NAMES_ASCII
 __author__ = 'vahid'
 
 class TestJalaliDate(unittest.TestCase):
@@ -23,7 +13,12 @@ class TestJalaliDate(unittest.TestCase):
         
         jdate = JalaliDate(1376, 5, 23)
         self.assertFalse(jdate is None)
-        
+
+        self.assertEqual(JalaliDate(jdate.todate()), jdate)
+        self.assertEqual(JalaliDate(jdate), jdate)
+
+        self.assertEqual(JalaliDate(julian_day=2450674), jdate)
+
         self.assertRaises(ValueError, JalaliDate, MAXYEAR + 1, 5, 23)
         self.assertRaises(ValueError, JalaliDate, MAXYEAR, 13, 23)
         self.assertRaises(ValueError, JalaliDate, MAXYEAR, 12, 30)
@@ -42,12 +37,12 @@ class TestJalaliDate(unittest.TestCase):
         
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.fromjuliandays(jdate.tojulianday())
+        jdate2 = JalaliDate(julian_day=jdate.tojulianday())
         self.assertEqual(jdate, jdate2)
         
     def test_to_from_date(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.fromdate(jdate.todate())
+        jdate2 = JalaliDate(jdate.todate())
         self.assertEqual(jdate, jdate2)
 
     def test_iso_calendar(self):
@@ -107,7 +102,7 @@ class TestJalaliDate(unittest.TestCase):
         days = 0
         while True:
             dt = min + timedelta(days=days)
-            jd = JalaliDate.fromdate(dt)
+            jd = JalaliDate(dt)
             # print('Processing day: %s' % jd)
             dt2 = jd.todate()
             self.assertEqual(dt, dt2)

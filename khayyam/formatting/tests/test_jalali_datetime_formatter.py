@@ -9,9 +9,7 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
     def setUp(self):
         self.leap_year = 1375
 
-
-    # TODO: rename it to assert_parse_and_format
-    def check_format(self, jdate ,fmt, print_=False):
+    def assert_parse_and_format(self, jdate ,fmt, print_=False):
         jalali_date_str = jdate.strftime(fmt)
         parsed_dt = JalaliDatetime.strptime(jalali_date_str, fmt)
         if print_:
@@ -100,12 +98,12 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(1000):
             d_test = d2 + timedelta(hours=i)
-            self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %k:%r:%s')
-            self.check_format(d_test, '%N-%R-%D %h:%v:%L')
-            self.check_format(d_test, '%Y-%m-%d %p %I:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %t %i:%r:%s')
-            self.check_format(d_test, '%N-%R-%D %p %l:%v:%L')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %k:%r:%s')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %h:%v:%L')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %p %I:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %t %i:%r:%s')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %p %l:%v:%L')
 
 
 
@@ -122,9 +120,9 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(1000):
             d_test = d2 + timedelta(minutes=i)
-            self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %H:%r:%s')
-            self.check_format(d_test, '%N-%R-%D %H:%v:%L')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%s')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %H:%v:%L')
 
 
     def test_second(self):
@@ -141,9 +139,9 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(1000):
             d_test = d2 + timedelta(seconds=i)
-            self.check_format(d_test, '%Y-%m-%d %H:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %H:%r:%s')
-            self.check_format(d_test, '%N-%R-%D %H:%r:%L')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%s')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%L')
 
 
     def test_timezone(self):
@@ -203,16 +201,16 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             %F            Microsecond as a decimal number in persian from[۰۰۰۰۰۰, ۹۹۹۹۹۹], zero-padded on the left
         """
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
-        self.check_format(d1, '%Y-%m-%d %H:%M:%S.%f')
-        self.check_format(d1, '%Y-%m-%d %H:%M:%S.%F')
-        self.check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
-        self.check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
+        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%f')
+        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%F')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(0, 100000000, 100000):
             d_test = d2 + timedelta(microseconds=i)
-            self.check_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
-            self.check_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
 
 
     def test_am_pm(self):
@@ -222,18 +220,18 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             %t            Locale’s equivalent of either AM or PM in ASCII format.
         """
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
-        self.check_format(d1, '%Y-%m-%d %p %I:%M:%S.%f')
-        self.check_format(d1, '%Y-%m-%d %t %I:%M:%S.%F')
-        self.check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
-        self.check_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %t %I:%M:%S.%F')
+        self.assert_parse_and_format(d1, '%Y-%m-%d %p %I:%M:%S.%f')
+        self.assert_parse_and_format(d1, '%Y-%m-%d %t %I:%M:%S.%F')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %t %I:%M:%S.%F')
 
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(500):
             d_test = d2 + timedelta(hours=i)
-            self.check_format(d_test, '%Y-%m-%d %p %I:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %p %i:%r:%s')
-            self.check_format(d_test, '%Y-%m-%d %t %I:%M:%S')
-            self.check_format(d_test, '%N-%R-%D %t %i:%r:%s')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %p %I:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %p %i:%r:%s')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %t %I:%M:%S')
+            self.assert_parse_and_format(d_test, '%N-%R-%D %t %i:%r:%s')
 
 
     def test_locale_date_time(self):
@@ -254,11 +252,11 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         d2 = JalaliDatetime(self.leap_year, 12, 23)
         for i in range(1000):
             d_test = d2 + timedelta(minutes=i)
-            self.check_format(d_test, '%c')
-            self.check_format(d_test, '%C')
-            self.check_format(d_test, '%q')
-            self.check_format(d_test, '%Q')
-            self.check_format(d_test, '%Y-%m-%d %X')
+            self.assert_parse_and_format(d_test, '%c')
+            self.assert_parse_and_format(d_test, '%C')
+            self.assert_parse_and_format(d_test, '%q')
+            self.assert_parse_and_format(d_test, '%Q')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %X')
 
 if __name__ == '__main__':
     unittest.main()

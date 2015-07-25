@@ -14,14 +14,17 @@ class JalaliDatetime(JalaliDate):
     max = (MAXYEAR, 12, 29, 23, 59, 59, 999999)
     resolution = timedelta(microseconds=1)
 
-    def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0, microsecond=0, tzinfo=None):
-        if isinstance(year, JalaliDate):
-            jd = year
-            year = jd.year
-            month = jd.month
-            day = jd.day
+    def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0,
+                 microsecond=0, tzinfo=None, julian_day=None):
+        if isinstance(year, JalaliDatetime):
+            year, month, day, hour, minute, second, microsecond = \
+                year.year, year.month, year.day, year.hour, year.minute, year.second, year.microsecond
+        elif isinstance(year, datetime):
+            hour, minute, second, microsecond = year.hour, year.minute, year.second, year.microsecond
+            if not tzinfo:
+                tzinfo = year.tzinfo
 
-        JalaliDate.__init__(self, year, month, day)
+        JalaliDate.__init__(self, year, month, day, julian_day)
         self._time = time(hour, minute, second, microsecond, tzinfo)
 
     # #################
@@ -83,29 +86,20 @@ class JalaliDatetime(JalaliDate):
     #####################
 
     @classmethod
-    def fromdatetime(cls, dt, tz=None):
-        julian_days = get_julian_day_from_gregorian(dt.year, dt.month, dt.day)
-        arr = jalali_date_from_julian_day(julian_days)
-        if not tz:
-            tz = dt.tzinfo
-        return cls(arr[0], arr[1], arr[2], dt.hour, dt.minute, dt.second, dt.microsecond, tz)
-
-
-    @classmethod
     def now(cls, tz=None):
         """
         Return the current local date and _time. If optional argument tz is None or not specified, this is like today(), but, if possible, supplies more precision than can be gotten from going through a _time._time() timestamp (for example, this may be possible on platforms supplying the C gettimeofday() function).
         
         Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().
         """
-        return cls.fromdatetime(datetime.now(tz))
+        return cls(datetime.now(tz))
 
     @classmethod
     def utcnow(cls):
         """
         Return the current UTC date and _time, with tzinfo None. This is like now(), but returns the current UTC date and _time, as a naive datetime object. See also now().
         """
-        return cls.fromdatetime(datetime.utcnow())
+        return cls(datetime.utcnow())
 
     @classmethod
     def dstnow(cls, tz):
@@ -121,21 +115,21 @@ class JalaliDatetime(JalaliDate):
         
         fromtimestamp() may raise ValueError, if the timestamp is out of the range of values supported by the platform C localtime() or gmtime() functions. It's common for this to be restricted to years in 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then it's possible to have two timestamps differing by a second that yield identical datetime objects. See also utcfromtimestamp().
         """
-        return cls.fromdatetime(datetime.fromtimestamp(timestamp, tz=tz))
+        return cls(datetime.fromtimestamp(timestamp, tz=tz))
 
     @classmethod
     def utcfromtimestamp(cls, timestamp):
         """
         Return the UTC datetime corresponding to the POSIX timestamp, with tzinfo None. This may raise ValueError, if the timestamp is out of the range of values supported by the platform C gmtime() function. It's common for this to be restricted to years in 1970 through 2038. See also fromtimestamp().
         """
-        return cls.fromdatetime(datetime.utcfromtimestamp(timestamp))
+        return cls(datetime.utcfromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
         """
         Return the jalali datetime corresponding to the proleptic Gregorian ordinal, where January 1 of year 1 has ordinal 1. ValueError is raised unless 1 <= ordinal <= datetime.max.toordinal(). The hour, minute, second and microsecond of the result are all 0, and tzinfo is None.
         """
-        return cls.fromdatetime(datetime.fromordinal(ordinal))
+        return cls(datetime.fromordinal(ordinal))
 
     @classmethod
     def combine(cls, date, _time):
@@ -144,7 +138,7 @@ class JalaliDatetime(JalaliDate):
         """
         if isinstance(date, (JalaliDatetime, JalaliDate)):
             date = date.todatetime()
-        return cls.fromdatetime(datetime.combine(date, _time))
+        return cls(datetime.combine(date, _time))
 
     @classmethod
     def strptime(cls, date_string, fmt):
@@ -303,16 +297,16 @@ class JalaliDatetime(JalaliDate):
 
     def __add__(self, x):
         if isinstance(x, timedelta):
-            return JalaliDatetime.fromdatetime(self.todatetime() + x)
+            return JalaliDatetime(self.todatetime() + x)
 
         raise ValueError('JalaliDatetime object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, timedelta):
-            return JalaliDatetime.fromdatetime(self.todatetime() - x)
+            return JalaliDatetime(self.todatetime() - x)
         elif isinstance(x, JalaliDatetime):
             return self.todatetime() - x.todatetime()
-        elif isinstance(x, JalaliDate): # TODO: Cover it by Test
+        elif isinstance(x, JalaliDate):
             return self.todatetime() - JalaliDatetime(x).todatetime()
 
         raise ValueError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')

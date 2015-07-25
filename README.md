@@ -3,15 +3,14 @@ khayyam
 
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
-Jump To:
---------
+### Jump To:
 
  * [Documentation](http://vahid.dobisel.com/khayyam)
  * [Python package index](https://pypi.python.org/pypi/khayyam)
+ * [Source on github](https://github.com/pylover/khayyam)
 
 
-Basic Usage
------------
+### Basic Usage
 
     >>> from khayyam import *
     >>> JalaliDate(1346, 12, 30)
@@ -97,10 +96,14 @@ Basic Usage
 
 
 
-#### Change Log
+### Change Log
 
-  * 2.6.1-beta (2015-07-25)
+  * 2.7.0-beta (2015-07-25)
     * some bug fixes.
+    * method `Jalalidate.fromdate` removed. use constructor instead: `JalaliDate(date)`
+    * method `Jalalidate.fromjulianday` removed. use constructor instead: `JalaliDate(julian_days=..)`
+    * method `Jalalidate.fromdatetime` removed. use constructor instead: `JalaliDatetime(date)`
+
                                  
   * 2.6.0-beta (2015-07-25)
     * All possible formatting directives(a-z, A-Z) are supported, except: T
