@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.formatting.directives.year &mdash; Khayyam 2.4.0-beta documentation</title>
+    <title>khayyam.formatting.directives.year &mdash; Khayyam 2.6.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.6.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.4.0-beta documentation" href="../../../../index.html" />
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="../../../../index.html" />
     <link rel="up" title="Module code" href="../../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -50,16 +50,11 @@
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">.directive</span> <span class="kn">import</span> <span class="n">Directive</span>
 <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">consts</span>
-<span class="kn">from</span> <span class="nn">khayyam.algorithms</span> <span class="kn">import</span> <span class="n">days_in_year</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 <span class="kn">from</span> <span class="nn">.persian</span> <span class="kn">import</span> <span class="n">PersianNumberDirective</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
 
 <div class="viewcode-block" id="ShortYearDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.ShortYearDirective">[docs]</a><span class="k">class</span> <span class="nc">ShortYearDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShortYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;shortyear&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">SHORT_YEAR_REGEX</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ShortYearDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.ShortYearDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="si">%.2d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
@@ -69,85 +64,28 @@
         <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">year</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;shortyear&#39;</span><span class="p">]</span>
 
 </div></div>
-<div class="viewcode-block" id="DayOfYearDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.DayOfYearDirective">[docs]</a><span class="k">class</span> <span class="nc">DayOfYearDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">DayOfYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="s">&#39;j&#39;</span><span class="p">,</span> <span class="s">&#39;dayofyear&#39;</span><span class="p">,</span> <span class="n">consts</span><span class="o">.</span><span class="n">DAY_OF_YEAR_REGEX</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<div class="viewcode-block" id="PersianYearDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianYearDirective">[docs]</a><span class="k">class</span> <span class="nc">PersianYearDirective</span><span class="p">(</span><span class="n">PersianNumberDirective</span><span class="p">):</span>
 
-<div class="viewcode-block" id="DayOfYearDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.DayOfYearDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%.3d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">d</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">()</span>
+<div class="viewcode-block" id="PersianYearDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianYearDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PersianYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="DayOfYearDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.DayOfYearDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
-        <span class="n">_dayofyear</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;dayofyear&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s">&#39;year&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ctx</span><span class="p">:</span>
-            <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="s">&#39;month&#39;</span> <span class="ow">in</span> <span class="n">ctx</span><span class="p">:</span>
-            <span class="k">del</span> <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;month&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s">&#39;day&#39;</span> <span class="ow">in</span> <span class="n">ctx</span><span class="p">:</span>
-            <span class="k">del</span> <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;day&#39;</span><span class="p">]</span>
-
-        <span class="n">max_days</span> <span class="o">=</span> <span class="n">days_in_year</span><span class="p">(</span><span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">_dayofyear</span> <span class="o">&gt;</span> <span class="n">max_days</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s">&#39;Invalid dayofyear: </span><span class="si">%.3d</span><span class="s"> for year </span><span class="si">%.4d</span><span class="s">. Valid values are: 1-</span><span class="si">%s</span><span class="s">&#39;</span> \
-                 <span class="o">%</span> <span class="p">(</span><span class="n">_dayofyear</span><span class="p">,</span> <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">],</span> <span class="n">max_days</span><span class="p">))</span>
-        <span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDate</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">_dayofyear</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
-            <span class="n">month</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
-            <span class="n">day</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">day</span>
-        <span class="p">))</span>
-
-</div></div>
-<span class="k">class</span> <span class="nc">PersianDayOfYearDirective</span><span class="p">(</span><span class="n">PersianNumberDirective</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">&#39;J&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;persiandayofyear&#39;</span><span class="p">,</span>
-                 <span class="n">regex</span><span class="o">=</span><span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_DAY_OF_YEAR_REGEX</span><span class="p">,</span> <span class="n">zero_padding</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="o">=</span> <span class="n">zero_padding</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PersianDayOfYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">regex</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="n">fmt</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%%%s</span><span class="s">d&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;.3&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PersianDayOfYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="n">d</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PersianDayOfYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">post_parser</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">ctx</span> <span class="ow">and</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
-            <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;dayofyear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
-
-
-
-<span class="k">class</span> <span class="nc">PersianYearDirective</span><span class="p">(</span><span class="n">PersianNumberDirective</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;persianyear&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_YEAR_REGEX</span><span class="p">,</span> <span class="n">zero_padding</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="o">=</span> <span class="n">zero_padding</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PersianYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">regex</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="n">fmt</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%%%s</span><span class="s">d&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;.4&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PersianYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="PersianYearDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianYearDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PersianYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">post_parser</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">ctx</span> <span class="ow">and</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
             <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
 
+</div></div>
+<div class="viewcode-block" id="PersianShortYearDirective"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianShortYearDirective">[docs]</a><span class="k">class</span> <span class="nc">PersianShortYearDirective</span><span class="p">(</span><span class="n">PersianNumberDirective</span><span class="p">):</span>
 
-<span class="k">class</span> <span class="nc">PersianShortYearDirective</span><span class="p">(</span><span class="n">PersianNumberDirective</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;persianshortyear&#39;</span><span class="p">,</span>
-                 <span class="n">regex</span><span class="o">=</span><span class="n">consts</span><span class="o">.</span><span class="n">PERSIAN_SHORT_YEAR_REGEX</span><span class="p">,</span> <span class="n">zero_padding</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="o">=</span> <span class="n">zero_padding</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PersianShortYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">regex</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="n">fmt</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%%%s</span><span class="s">d&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;.2&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero_padding</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PersianShortYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+<div class="viewcode-block" id="PersianShortYearDirective.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianShortYearDirective.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PersianShortYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="PersianShortYearDirective.post_parser"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.PersianShortYearDirective.post_parser">[docs]</a>    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PersianShortYearDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">post_parser</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>
         <span class="c"># from khayyam import JalaliDate</span>
         <span class="c"># ctx[&#39;year&#39;] = int(JalaliDate.today().year / 100) * 100 + ctx[&#39;shortyear&#39;]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">ctx</span> <span class="ow">and</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;shortyear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">ctx</span><span class="p">[</span><span class="s">&#39;shortyear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span></div></div>
 </pre></div>
 
           </div>
@@ -181,7 +119,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

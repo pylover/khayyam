@@ -43,6 +43,7 @@ Contents:
    :maxdepth: 2
 
    intro
+   directives
    migration
    installation
    development

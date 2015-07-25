@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.formatting.directives.directive &mdash; Khayyam 2.4.0-beta documentation</title>
+    <title>khayyam.formatting.directives.directive &mdash; Khayyam 2.6.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.6.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.4.0-beta documentation" href="../../../../index.html" />
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="../../../../index.html" />
     <link rel="up" title="Module code" href="../../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -48,6 +48,7 @@
             
   <h1>Source code for khayyam.formatting.directives.directive</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">khayyam.compat</span> <span class="kn">import</span> <span class="n">get_unicode</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
 <div class="viewcode-block" id="Directive"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.Directive">[docs]</a><span class="k">class</span> <span class="nc">Directive</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -69,7 +70,41 @@
 </div>
 <div class="viewcode-block" id="Directive.format"><a class="viewcode-back" href="../../../../api.html#khayyam.formatting.directives.Directive.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span>
-</pre></div></div></div>
+
+</div></div>
+<span class="k">class</span> <span class="nc">CompositeDateDirective</span><span class="p">(</span><span class="n">Directive</span><span class="p">):</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">format_string</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">format_string</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span> <span class="o">=</span> <span class="n">format_string</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_formatter</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CompositeDateDirective</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">get_unicode</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">JalaliDateFormatter</span>
+        <span class="k">return</span> <span class="n">JalaliDateFormatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sub_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_formatter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_formatter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_formatter</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_formatter</span>
+
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">post_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_formatter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ctx</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]))</span>
+
+
+<span class="k">class</span> <span class="nc">CompositeDatetimeDirective</span><span class="p">(</span><span class="n">CompositeDateDirective</span><span class="p">):</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_create_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">JalaliDatetimeFormatter</span>
+        <span class="k">return</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">)</span>
+</pre></div>
 
           </div>
         </div>
@@ -102,7 +137,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

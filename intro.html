@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; Khayyam 2.4.0-beta documentation</title>
+    <title>Introduction &mdash; Khayyam 2.6.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.6.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.4.0-beta documentation" href="index.html" />
-    <link rel="next" title="Migration from python’s builtin datetime" href="migration.html" />
+    <link rel="top" title="Khayyam 2.6.0-beta documentation" href="index.html" />
+    <link rel="next" title="Formatting and Parsing directives" href="directives.html" />
     <link rel="prev" title="Khayyam" href="index.html" /> 
   </head>
   <body role="document">
@@ -38,12 +38,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="migration.html" title="Migration from python’s builtin datetime"
+          <a href="directives.html" title="Formatting and Parsing directives"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Khayyam"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -181,14 +181,14 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 </div>
 <div class="section" id="formatting-parsing">
 <h2>Formatting &amp; Parsing<a class="headerlink" href="#formatting-parsing" title="Permalink to this headline">¶</a></h2>
-<p>All format directives supported by python&#8217;s native <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a> are covered by this library.
-For a list of all supported directives, see <a class="reference internal" href="api.html#khayyam.JalaliDate.strftime" title="khayyam.JalaliDate.strftime"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.strftime()</span></code></a>.</p>
+<p>All Supported format directives are listed here: <a class="reference internal" href="directives.html"><em>Formatting and Parsing directives</em></a>.</p>
+<p>All formatting behaviours are driven from <a class="reference external" href="https://docs.python.org/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a>.</p>
 <p>To format locale&#8217;s date &amp; time:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDatetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_string</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">time_string</span><span class="p">)</span>
-<span class="go">چهارشنبه 31 تیر 1394 05:45:40 ب.ظ</span>
+<span class="go">چهارشنبه ۳۱ تیر ۱۳۹۴ ۰۵:۴۵:۴۰ ب.ظ</span>
 </pre></div>
 </div>
 <p>And parsing it again to a <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance:</p>
@@ -348,8 +348,8 @@ directive alongside time and date directives in your pattern. for example:</p>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Khayyam</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="migration.html"
-                        title="next chapter">Migration from python&#8217;s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></p>
+  <p class="topless"><a href="directives.html"
+                        title="next chapter">Formatting and Parsing directives</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -384,12 +384,12 @@ directive alongside time and date directives in your pattern. for example:</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="migration.html" title="Migration from python’s builtin datetime"
+          <a href="directives.html" title="Formatting and Parsing directives"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Khayyam"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.4.0-beta documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

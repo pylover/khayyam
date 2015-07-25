@@ -149,8 +149,9 @@ Extending your practice environment by defining a handy print function for RTL:
 Formatting & Parsing
 --------------------
 
-All format directives supported by python's native :ref:`strftime-strptime-behavior` are covered by this library.
-For a list of all supported directives, see :py:meth:`khayyam.JalaliDate.strftime`.
+All Supported format directives are listed here: :doc:`/directives`.
+
+All formatting behaviours are driven from :ref:`strftime-strptime-behavior`.
 
 To format locale's date & time:
 
@@ -158,7 +159,7 @@ To format locale's date & time:
   >>> dt = JalaliDatetime(1394, 4, 31, 17, 45, 40)
   >>> time_string = dt.strftime('%C')
   >>> print(time_string)
-  چهارشنبه 31 تیر 1394 05:45:40 ب.ظ
+  چهارشنبه ۳۱ تیر ۱۳۹۴ ۰۵:۴۵:۴۰ ب.ظ
 
 
 And parsing it again to a :py:class:`khayyam.JalaliDatetime` instance:
