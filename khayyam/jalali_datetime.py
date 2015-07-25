@@ -28,45 +28,47 @@ class JalaliDatetime(JalaliDate):
     ### Properties ###
     ##################
 
-    def get_hour(self):
+    @property
+    def hour(self):
         return self._time.hour
 
-    def set_hour(self, val):
+    @hour.setter
+    def hour(self, val):
         self._time.hour = val
 
-    hour = property(get_hour, set_hour)
 
-    def get_minute(self):
+    @property
+    def minute(self):
         return self._time.minute
 
-    def set_minute(self, val):
+    @minute.setter
+    def minute(self, val):
         self._time.minute = val
 
-    minute = property(get_minute, set_minute)
-
-    def get_second(self):
+    @property
+    def second(self):
         return self._time.second
 
-    def set_second(self, val):
+    @second.setter
+    def second(self, val):
         self._time.second = val
 
-    second = property(get_second, set_second)
-
-    def get_microsecond(self):
+    @property
+    def microsecond(self):
         return self._time.microsecond
 
-    def set_microsecond(self, val):
+    @microsecond.setter
+    def microsecond(self, val):
         self._time.microsecond = val
 
-    microsecond = property(get_microsecond, set_microsecond)
-
-    def get_tzinfo(self):
+    @property
+    def tzinfo(self):
         return self._time.tzinfo
 
-    def set_tzinfo(self, val):
+    @tzinfo.setter
+    def tzinfo(self, val):
         self._time.tzinfo = val
 
-    tzinfo = property(get_tzinfo, set_tzinfo)
 
     ######################
     ### Static Methods ###

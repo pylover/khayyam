@@ -49,7 +49,7 @@
   <h1>Source code for khayyam.jalali_date</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">khayyam.algorithms</span> <span class="kn">import</span> <span class="n">days_in_month</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">khayyam.algorithms</span> <span class="kn">import</span> <span class="n">daysinmonth</span><span class="p">,</span> \
     <span class="n">is_leap_year</span><span class="p">,</span> \
     <span class="n">get_julian_day_from_gregorian</span><span class="p">,</span> \
     <span class="n">jalali_date_from_julian_day</span><span class="p">,</span> \
@@ -88,18 +88,18 @@
     <span class="c">##################</span>
 </div>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_leap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">isleap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determines the year is leap or not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">is_leap_year</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">days_in_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">daysinmonth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get total days in the current month.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">days_in_month</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">daysinmonth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
 
     <span class="c">######################</span>
     <span class="c">### Static Methods ###</span>
@@ -167,7 +167,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Year must be between </span><span class="si">%s</span><span class="s"> and </span><span class="si">%s</span><span class="s">, but it is: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">MINYEAR</span><span class="p">,</span> <span class="n">MAXYEAR</span><span class="p">,</span> <span class="n">year</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">month</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">month</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Month must be between 1 and 12, but it is: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">month</span><span class="p">)</span>
-        <span class="n">_days_in_month</span> <span class="o">=</span> <span class="n">days_in_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+        <span class="n">_days_in_month</span> <span class="o">=</span> <span class="n">daysinmonth</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;</span> <span class="n">_days_in_month</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Day must be between 1 and </span><span class="si">%s</span><span class="s">, but it is: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_days_in_month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span>

@@ -39,14 +39,14 @@ class JalaliDate(object):
     ##################
 
     @property
-    def is_leap(self):
+    def isleap(self):
         """
         Determines the year is leap or not.
         """
         return is_leap_year(self.year)
 
     @property
-    def days_in_month(self):
+    def daysinmonth(self):
         """
         Get total days in the current month.
         """
@@ -65,7 +65,7 @@ class JalaliDate(object):
     #####################
 
     @classmethod
-    def from_julian_days(cls, julian_day):
+    def fromjuliandays(cls, julian_day):
         """
         Create JalaliDate from julian day
         """
@@ -78,7 +78,7 @@ class JalaliDate(object):
         Create JalaliDate from python's datetime.date
         """
         julian_days = get_julian_day_from_gregorian(d.year, d.month, d.day)
-        return cls.from_julian_days(julian_days)
+        return cls.fromjuliandays(julian_days)
 
 
     @classmethod
@@ -236,14 +236,14 @@ class JalaliDate(object):
     def __add__(self, x):
         if isinstance(x, datetime.timedelta):
             days = self.tojulianday() + x.days
-            return JalaliDate.from_julian_days(days)
+            return JalaliDate.fromjuliandays(days)
 
         raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, datetime.timedelta):
             days = self.tojulianday() - x.days
-            return JalaliDate.from_julian_days(days)
+            return JalaliDate.fromjuliandays(days)
         elif isinstance(x, JalaliDate):
             days = self.tojulianday() - x.tojulianday()
             return datetime.timedelta(days=days)

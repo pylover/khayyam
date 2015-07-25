@@ -10,12 +10,18 @@ Jump To:
 
 
 #### Change Log
-
-  * 2.6.0
+                                 
+  * 2.6.0-beta (2015-07-25)
     * All possible formatting directives(a-z, A-Z) are supported, except: T
     * All format directives are tested.
     * Formatting and parsing test cases moved to `khayyam.formatting.tests` package.
     * In project: docs/html
+    * `JalaliDate.from_julian_days` renamed to `JalaliDate.fromjuliandays`
+    * `JalaliDate.from_julian_days` renamed to `JalaliDate.fromjuliandays`
+    * `JalaliDate.days_in_month` renamed to `JalaliDate.daysinmonth`
+    * `JalaliDate.is_leap` renamed to `JalaliDate.isleap`
+    * `JalaliDatetime` Modern properties.
+    
     
 
   * 2.5.0-beta (2015-07-23)

@@ -35,6 +35,9 @@ attribute, tzinfo, that can be set to an instance of a subclass of the abstract 
 The package's API is considered to be exactly the same as the :py:mod:`datetime` module,
 so if you are familiar with the :py:mod:`datetime`, you can read the :ref:`migration`.
 
+.. warning:: Compatibility
+
+   Khayyam 2.X.x is not compatible with any previous versions.
 
 Contents:
 ---------

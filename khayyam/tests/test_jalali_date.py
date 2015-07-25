@@ -34,15 +34,15 @@ class TestJalaliDate(unittest.TestCase):
 
     def test_is_leap(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        self.assertTrue(jdate.is_leap)
+        self.assertTrue(jdate.isleap)
         
     def test_days_in_month(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        self.assertEqual(jdate.days_in_month, 30)
+        self.assertEqual(jdate.daysinmonth, 30)
         
     def test_to_from_julian_day(self):
         jdate = JalaliDate(self.leap_year, 12, 23)
-        jdate2 = JalaliDate.from_julian_days(jdate.tojulianday())
+        jdate2 = JalaliDate.fromjuliandays(jdate.tojulianday())
         self.assertEqual(jdate, jdate2)
         
     def test_to_from_date(self):

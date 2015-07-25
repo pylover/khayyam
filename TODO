@@ -2,21 +2,19 @@
 
 ### To Do
 
-  * pdf doc
+  * Doc: Review all object's documentation
+  * Doc: Parsing, post processors priority
+  * Error messages
   * Constructors act as converter: `JalaliDate(date)`
+  * http://dobisel.com/khayyam
+  * pdf doc
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
-  * Error messages
   * Readme:
     * Formatting & parsing
     * Conversions
     * Operators
-  * Doc
-    * Review all object's documentation
-    * Parsing, post processors priority
-    * Compatibility
-    * Naming conventions
 
 ### Future plans
 
