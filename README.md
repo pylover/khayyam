@@ -102,7 +102,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     * some bug fixes.
     * method `Jalalidate.fromdate` removed. use constructor instead: `JalaliDate(date)`
     * method `Jalalidate.fromjulianday` removed. use constructor instead: `JalaliDate(julian_days=..)`
-    * method `Jalalidate.fromdatetime` removed. use constructor instead: `JalaliDatetime(date)`
+    * method `Jalalidate.fromdatetime` removed. use constructor instead: `JalaliDatetime(datetime)`
 
                                  
   * 2.6.0-beta (2015-07-25)
