@@ -2,11 +2,11 @@
 
 ### To Do
 
+  * http://dobisel.com/khayyam
   * Doc: Review all object's documentation
   * Doc: Parsing, post processors priority
   * Error messages
   * Constructors act as converter: `JalaliDate(date)`
-  * http://dobisel.com/khayyam
   * pdf doc
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)

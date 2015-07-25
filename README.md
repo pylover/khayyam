@@ -100,7 +100,7 @@ Basic Usage
 #### Change Log
 
   * 2.6.1-beta (2015-07-25)
-    * some bug fixes
+    * some bug fixes.
                                  
   * 2.6.0-beta (2015-07-25)
     * All possible formatting directives(a-z, A-Z) are supported, except: T
