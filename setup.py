@@ -9,6 +9,14 @@ __author__ = 'vahid'
 with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
+# try:
+#     from pypandoc import convert
+#     read_md = lambda f: convert(f, 'rst')
+# except ImportError:
+#     print("warning: pypandoc module not found, could not convert Markdown to RST")
+#     read_md = lambda f: open(f, 'r').read()
+
+
 setup(
     name="Khayyam",
     version=package_version,
@@ -19,7 +27,7 @@ setup(
     description="Persian(Jalali) date and time library",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
-    long_description=open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
+    long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     license="GPLv3",
     test_suite="khayyam.tests",
     tests_require=[

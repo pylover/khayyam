@@ -3,14 +3,16 @@ khayyam
 
 Jalali Date and Time types and algorithms for Python2 and Python3.
 
-### Jump To:
+Jump To:
+^^^^^^^^
 
  * [Documentation](http://khayyam.dobisel.com)
  * [Python package index](https://pypi.python.org/pypi/khayyam)
  * [Source on github](https://github.com/pylover/khayyam)
 
 
-### Basic Usage
+Basic Usage
+^^^^^^^^^^^
 
     >>> from khayyam import *
     >>> JalaliDate(1346, 12, 30)
@@ -19,7 +21,8 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     >>> JalaliDatetime(989, 3, 25, 10, 43, 23, 345453)
     khayyam.JalaliDatetime(989, 3, 25, 10, 43, 23, 345453, Seshanbeh)
 
-#### Current date and time
+Current date and time
+^^^^^^^^^^^^^^^^^^^^^
 
     >>> print(JalaliDatetime.now(TehranTimezone()) - timedelta(days=6*30))
     1393-11-02 20:01:11.663719+03:30
@@ -28,7 +31,8 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     1394-4-30
   
 
-#### Parsing & Formatting
+Parsing & Formatting
+^^^^^^^^^^^^^^^^^^^^
   
     >>> print(JalaliDatetime.now().strftime('%C'))
     شنبه ۳ مرداد ۱۳۹۴ ۰۲:۳۷:۵۲ ب.ظ
@@ -36,7 +40,8 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     >>> JalaliDatetime.strptime(u'چهارشنبه ۳۱ تیر ۱۳۹۴ ۰۵:۴۵:۴۰ ب.ظ', '%C')
     khayyam.JalaliDatetime(1394, 4, 31, 17, 45, 40, 0, Chaharshanbeh)
 
-#### Converting
+Converting
+^^^^^^^^^^
 
     >>> from datetime import date, datetime
     >>> JalaliDate(1394, 4, 31).todate()
@@ -58,7 +63,8 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     >>> JalaliDate.fromdate(date(2015, 7, 22))
     khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)
 
-#### Arithmetics & Operators
+Arithmetics & Operators
+^^^^^^^^^^^^^^^^^^^^^^^
 
     >>> from datetime import timedelta
     >>> from khayyam import JalaliDate, JalaliDatetime
@@ -83,7 +89,8 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     datetime.timedelta(0, 478, 328833) # 478 seconds taken to writing this section
 
 
-#### Comparison
+Comparison
+^^^^^^^^^^
 
     >>> now > yesterday
     True
@@ -92,11 +99,16 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
     True
   
     >>> now.todate() == yesterday.todate()
+
     False
 
 
+Change Log
+^^^^^^^^^^
 
-### Change Log
+  * 2.7.0b2 (2015-07-26)
+    * README.rst
+
 
   * 2.7.0-beta (2015-07-25)
     * some bug fixes.
