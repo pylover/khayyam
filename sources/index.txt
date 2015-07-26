@@ -63,7 +63,7 @@ Links:
 
 * Python package index: `https://pypi.python.org/pypi/Khayyam <https://pypi.python.org/pypi/Khayyam>`_
 * Source code on Github: `https://github.com/pylover/khayyam <https://github.com/pylover/khayyam>`_
-* Main Page: `http://vahid.dobisel.com/khayyam/ <http://vahid.dobisel.com/khayyam/>`_
+* Main Page: `http://khayyam.dobisel.com/ <http://khayyam.dobisel.com/>`_
 
 
 Indices and tables
