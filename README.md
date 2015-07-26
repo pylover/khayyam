@@ -5,7 +5,7 @@ Jalali Date and Time types and algorithms for Python2 and Python3.
 
 ### Jump To:
 
- * [Documentation](http://vahid.dobisel.com/khayyam)
+ * [Documentation](http://khayyam.dobisel.com)
  * [Python package index](https://pypi.python.org/pypi/khayyam)
  * [Source on github](https://github.com/pylover/khayyam)
 

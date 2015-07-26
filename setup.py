@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     author="Vahid Mardani",
     author_email="vahid.mardani@gmail.com",
-    url="http://vahid.dobisel.com/khayyam",
+    url="http://khayyam.dobisel.com",
     description="Persian(Jalali) date and time library",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
