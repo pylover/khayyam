@@ -99,7 +99,6 @@ Comparison
     True
   
     >>> now.todate() == yesterday.todate()
-
     False
 
 
