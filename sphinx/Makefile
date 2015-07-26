@@ -63,6 +63,7 @@ github.io:
 	sed -i 's/_static\//static\//g' $(GITHUB_OUT_DIR)/*.html
 	sed -i 's/_sources\//source\//g' $(GITHUB_OUT_DIR)/*.html
 	sed -i 's/_modules\//modules\//g' $(GITHUB_OUT_DIR)/*.html
+	echo "khayyam.dobisel.com" > $(GITHUB_OUT_DIR)/CNAME
 	git --work-tree=$(GITHUB_OUT_DIR) --git-dir=$(GITHUB_OUT_DIR)/.git add --all
 	@echo
 	@echo "Build finished. The HTML pages are in $(GITHUB_OUT_DIR)."
