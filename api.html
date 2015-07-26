@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &mdash; Khayyam 2.6.1-beta documentation</title>
+    <title>API Reference &mdash; Khayyam 2.7.0b documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.6.1-beta',
+        VERSION:     '2.7.0b',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.6.1-beta documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.7.0b documentation" href="index.html" />
     <link rel="prev" title="Persian(Jalali) Calendar" href="persiancalendar.html" /> 
   </head>
   <body role="document">
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.1-beta documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,7 +54,7 @@
 <h2>Date objects<a class="headerlink" href="#date-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="khayyam.JalaliDate">
-<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDate</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDate</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
 <dt id="khayyam.JalaliDate.__add__">
@@ -91,7 +91,7 @@
 
 <dl class="method">
 <dt id="khayyam.JalaliDate.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -165,18 +165,6 @@
 <dt id="khayyam.JalaliDate.firstdayofyear">
 <code class="descname">firstdayofyear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.firstdayofyear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.firstdayofyear" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="khayyam.JalaliDate.fromdate">
-<em class="property">classmethod </em><code class="descname">fromdate</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromdate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create JalaliDate from python&#8217;s datetime.date</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="khayyam.JalaliDate.fromjuliandays">
-<em class="property">classmethod </em><code class="descname">fromjuliandays</code><span class="sig-paren">(</span><em>julian_day</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromjuliandays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromjuliandays" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create JalaliDate from julian day</p>
-</dd></dl>
 
 <dl class="classmethod">
 <dt id="khayyam.JalaliDate.fromordinal">
@@ -255,7 +243,7 @@
 <dl class="attribute">
 <dt id="khayyam.JalaliDate.resolution">
 <code class="descname">resolution</code><em class="property"> = datetime.timedelta(1)</em><a class="headerlink" href="#khayyam.JalaliDate.resolution" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Jalali Date, without the time data.</p>
+<dd><p>Representing a specific day in Jalali calendar.</p>
 </dd></dl>
 
 <dl class="method">
@@ -334,7 +322,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <h2>Date &amp; Time objects<a class="headerlink" href="#date-time-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="khayyam.JalaliDatetime">
-<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">khayyam.jalali_date.JalaliDate</span></code></p>
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.__add__">
@@ -363,7 +351,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -441,11 +429,6 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.dstnow">
 <em class="property">classmethod </em><code class="descname">dstnow</code><span class="sig-paren">(</span><em>tz</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.dstnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.dstnow" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="khayyam.JalaliDatetime.fromdatetime">
-<em class="property">classmethod </em><code class="descname">fromdatetime</code><span class="sig-paren">(</span><em>dt</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.fromdatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromdatetime" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -1092,7 +1075,7 @@ Return a <a class="reference external" href="https://docs.python.org/library/tim
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.6.1-beta documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
