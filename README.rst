@@ -54,13 +54,13 @@ Converting
     >>> now.todatetime()
     datetime.datetime(2015, 7, 22, 15, 38, 6, 37269)
   
-    >>> JalaliDatetime.fromdatetime(datetime(2015, 7, 22, 14, 47, 9, 821830))
+    >>> JalaliDatetime(datetime(2015, 7, 22, 14, 47, 9, 821830))
     khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)
   
-    >>> JalaliDatetime.fromdatetime(datetime(2015, 7, 22, 14, 47, 9, 821830, TehranTimezone()))
+    >>> JalaliDatetime(datetime(2015, 7, 22, 14, 47, 9, 821830, TehranTimezone()))
     khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)
   
-    >>> JalaliDate.fromdate(date(2015, 7, 22))
+    >>> JalaliDate(date(2015, 7, 22))
     khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)
 
 Arithmetics & Operators
@@ -145,7 +145,7 @@ Change Log
     * Constants are moved to formatting packages except MINYEAR, MAXYEAR ans weekdays.
     * Doc: Introduction -> Formatting & parsing
     * Doc: Introduction -> Converting
-    * New methods `jalaliDate.todate`, `jalaliDate.fromdate`, `jalaliDatetime.todatetime` and `jalaliDatetimefromdatetime`
+    * New methods `jalaliDate.todate`, `jalaliDate.fromdate`, `jalaliDatetime.todatetime` and `jalaliDatetime.fromdatetime`
     * Removed methods `jalaliDate.to_date`, `jalaliDate.from_date`, `jalaliDatetime.to_datetime` and `jalaliDatetime.fromdate_time`
 
 

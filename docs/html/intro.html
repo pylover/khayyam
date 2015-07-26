@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; Khayyam 2.7.0b1 documentation</title>
+    <title>Introduction &mdash; Khayyam 2.7.0b2 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.7.0b1',
+        VERSION:     '2.7.0b2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.7.0b1 documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.7.0b2 documentation" href="index.html" />
     <link rel="next" title="Formatting and Parsing directives" href="directives.html" />
     <link rel="prev" title="Khayyam" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Khayyam"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -247,13 +247,13 @@ directive alongside time and date directives in your pattern. for example:</p>
 </pre></div>
 </div>
 <p>And vise-versa:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromdatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">))</span>
 <span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromdatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">,</span> <span class="n">TehranTimezone</span><span class="p">()))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">821830</span><span class="p">,</span> <span class="n">TehranTimezone</span><span class="p">()))</span>
 <span class="go">khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">fromdate</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">22</span><span class="p">))</span>
 <span class="go">khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)</span>
 </pre></div>
 </div>
@@ -389,7 +389,7 @@ directive alongside time and date directives in your pattern. for example:</p>
         <li class="right" >
           <a href="index.html" title="Khayyam"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
