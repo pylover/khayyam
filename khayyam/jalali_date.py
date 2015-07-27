@@ -24,7 +24,6 @@ __author__ = 'vahid'
 
 class JalaliDate(object):
     """
-
     Represent a day in :doc:`/persiancalendar`.
 
     The first parameter can be an integer, :py:class:`datetime.date` or :py:class:`khayyam.JalaliDate`.

@@ -2,8 +2,6 @@
 from datetime import timedelta, time, datetime
 from khayyam.algorithms import gregorian_date_from_julian_day
 import khayyam
-# from khayyam import MINYEAR, MAXYEAR
-# from khayyam import JalaliDate
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 __author__ = 'vahid'
 
@@ -12,15 +10,52 @@ class JalaliDatetime(khayyam.JalaliDate):
     """
     Inherited from :py:class:`khayyam.JalaliDate`.
 
+    Represent a moment in :doc:`/persiancalendar`.
+
+    The first parameter can be an integer,
+    :py:class:`datetime.date`, :py:class:`khayyam.JalaliDate`,
+    :py:class:`datetime.datetime` or :py:class:`khayyam.JalaliDatetime`.
+
+    You may create this object by passing `julian_day` parameter.
+
+
+    :param year: jalali year
+    :param month: 1-12
+    :param day: 1-31
+    :param hour: 0-23
+    :param minute: 0-59
+    :param second: 0-59
+    :param microsecond: 0-999999
+    :param tzinfo: Timezone info
+    :param julian_day:
+
+    :type year: :py:class:`int` | :py:class:`datetime.date` | :py:class:`khayyam.JalaliDate`
+    :type month: int
+    :type day: int
+    :type hour: int
+    :type minute: int
+    :type second: int
+    :type microsecond: int
+    :type tzinfo: :py:class:`datetime.tzinfo`
+    :type julian_day: int
+
+
+    :return: An object representing a moment persian calendar.
+    :rtype: :py:class:`khayyam.JalaliDatetime`
+
     """
 
-
+    #: Represent the earlier moment which supported by this class.
     min = (khayyam.MINYEAR, 1, 1)
+
+    #: Represent the last moment which supported by this class.
     max = (khayyam.MAXYEAR, 12, 29, 23, 59, 59, 999999)
+
     resolution = timedelta(microseconds=1)
 
     def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0,
                  microsecond=0, tzinfo=None, julian_day=None):
+
         if isinstance(year, JalaliDatetime):
             year, month, day, hour, minute, second, microsecond = \
                 year.year, year.month, year.day, year.hour, year.minute, year.second, year.microsecond
@@ -38,6 +73,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @property
     def hour(self):
+        """
+        :getter: Returns the hour
+        :setter: Sets the hour
+        :type: int
+        """
         return self._time.hour
 
     @hour.setter
@@ -46,6 +86,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @property
     def minute(self):
+        """
+        :getter: Returns the minute
+        :setter: Sets the minute
+        :type: int
+        """
         return self._time.minute
 
     @minute.setter
@@ -54,6 +99,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @property
     def second(self):
+        """
+        :getter: Returns the second
+        :setter: Sets the second
+        :type: int
+        """
         return self._time.second
 
     @second.setter
@@ -62,6 +112,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @property
     def microsecond(self):
+        """
+        :getter: Returns the microsecond
+        :setter: Sets the microsecond
+        :type: int
+        """
         return self._time.microsecond
 
     @microsecond.setter
@@ -70,6 +125,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @property
     def tzinfo(self):
+        """
+        :getter: Returns the timezone info
+        :setter: Sets(change) the timezone info
+        :type: :py:class:`datetime.tzinfo`
+        """
         return self._time.tzinfo
 
     @tzinfo.setter
@@ -84,53 +144,82 @@ class JalaliDatetime(khayyam.JalaliDate):
     def formatterfactory(fmt):
         return JalaliDatetimeFormatter(fmt)
 
-    #####################
-    ### Class Methods ###
-    #####################
+    #################
+    # Class Methods #
+    #################
 
     @classmethod
     def now(cls, tz=None):
         """
-        Return the current local date and _time. If optional argument tz is None or not specified, this is like today(), but, if possible, supplies more precision than can be gotten from going through a _time._time() timestamp (for example, this may be possible on platforms supplying the C gettimeofday() function).
+        If optional argument tz is None or not specified, this is like today(), but,
+        if possible, supplies more precision than can be gotten from going through a
+        :py:func:`time.time()` timestamp (for example,
+        this may be possible on platforms supplying the C gettimeofday() function).
         
-        Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().
+        Else tz must be an instance of a :py:class:`datetime.tzinfo` subclass,
+        and the current date and time are converted to tz's time zone.
+        In this case the result is equivalent to `tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))`.
+        See also :py:meth:`khayyam.JalaliDate.today` and :py:meth:`khayyam.JalaliDatetime.utcnow`.
+
+        :return: the current local date and time
+        :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return cls(datetime.now(tz))
 
     @classmethod
     def utcnow(cls):
         """
-        Return the current UTC date and _time, with tzinfo None. This is like now(), but returns the current UTC date and _time, as a naive datetime object. See also now().
+        This is like :py:meth:`khayyam.JalaliDatetime.now`, but returns the current
+        UTC date and time, as a naive datetime object.
+
+        :return: The current UTC date and time, with tzinfo None.
+        :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return cls(datetime.utcnow())
 
     @classmethod
-    def dstnow(cls, tz):
-        now = cls.now(tz=tz)
-        return now + now.dst()
-
-    @classmethod
     def fromtimestamp(cls, timestamp, tz=None):
         """
-        Return the local date and _time corresponding to the POSIX timestamp, such as is returned by _time._time(). If optional argument tz is None or not specified, the timestamp is converted to the platform's local date and _time, and the returned datetime object is naive.
+        If optional argument tz is None or not specified, the timestamp is converted to
+        the platform's local date and time, and the returned datetime object is naive.
         
-        Else tz must be an instance of a class tzinfo subclass, and the timestamp is converted to tz's _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcfromtimestamp(timestamp).replace(tzinfo=tz)).
+        Else tz must be an instance of a class :py:class:`datetime.tzinfo` subclass,
+        and the timestamp is converted to tz's time zone. In this case the result is
+        equivalent to `tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))`.
         
-        fromtimestamp() may raise ValueError, if the timestamp is out of the range of values supported by the platform C localtime() or gmtime() functions. It's common for this to be restricted to years in 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then it's possible to have two timestamps differing by a second that yield identical datetime objects. See also utcfromtimestamp().
+        This method may raise `ValueError`, if the timestamp is out of the range of values
+        supported by the platform C localtime() or gmtime() functions.
+        It's common for this to be restricted to years in 1970 through 2038.
+
+        Note that on non-POSIX systems that include leap seconds in their
+        notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then
+        it's possible to have two timestamps differing by a second that yield
+        identical datetime objects. See also utcfromtimestamp().
+
+        :return: The local date and time corresponding to the POSIX timestamp,
+                such as is returned by :py:func:`time.time()`.
+        :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return cls(datetime.fromtimestamp(timestamp, tz=tz))
 
     @classmethod
     def utcfromtimestamp(cls, timestamp):
         """
-        Return the UTC datetime corresponding to the POSIX timestamp, with tzinfo None. This may raise ValueError, if the timestamp is out of the range of values supported by the platform C gmtime() function. It's common for this to be restricted to years in 1970 through 2038. See also fromtimestamp().
+        Return the UTC datetime corresponding to the POSIX timestamp,
+        with tzinfo None. This may raise ValueError, if the timestamp is
+        out of the range of values supported by the platform C gmtime()
+        function. It's common for this to be restricted to years in 1970
+        through 2038. See also fromtimestamp().
         """
         return cls(datetime.utcfromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
         """
-        Return the jalali datetime corresponding to the proleptic Gregorian ordinal, where January 1 of year 1 has ordinal 1. ValueError is raised unless 1 <= ordinal <= datetime.max.toordinal(). The hour, minute, second and microsecond of the result are all 0, and tzinfo is None.
+        Return the jalali datetime corresponding to the proleptic Gregorian ordinal,
+        where January 1 of year 1 has ordinal 1. ValueError is
+        raised unless 1 <= ordinal <= datetime.max.toordinal(). The hour, minute, second
+        and microsecond of the result are all 0, and tzinfo is None.
         """
         return cls(datetime.fromordinal(ordinal))
 
@@ -242,7 +331,6 @@ class JalaliDatetime(khayyam.JalaliDate):
     def localtimeformat(self):
         return self.strftime('%I:%M:%S %p')
 
-
     def hour12(self):
         res = self.hour
         if res > 12:
@@ -276,6 +364,10 @@ class JalaliDatetime(khayyam.JalaliDate):
     def dayofyear(self):
         return (self.date() - khayyam.JalaliDate(self.year, 1, 1)).days + 1
 
+    ###################
+    # Special Members #
+    ###################
+
     def __repr__(self):
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
             self.year,
@@ -291,10 +383,6 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def __str__(self):
         return self.isoformat(sep=' ')
-
-    #############
-    # Operators #
-    #############
 
     def __add__(self, x):
         if isinstance(x, timedelta):
@@ -337,7 +425,6 @@ class JalaliDatetime(khayyam.JalaliDate):
             return hash(self) == hash(x)
         else:
             raise ValueError('Comparison only allowed with JalaliDatetime and datetime.datetime objects.')
-
 
     def __gt__(self, x):
         assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
