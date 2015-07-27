@@ -2,8 +2,7 @@
 
 ### To Do
 
-  * Doc: Review all object's documentation
-  * Doc: Parsing, post processors priority
+  * Doc: Review JalaliDatetime documents
   * Error messages
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
@@ -11,6 +10,7 @@
 
 ### Future plans
 
+  * Doc: Parsing, post processors priority
   * Cython
     * setup.py pure python fallback switch
     * Distribute pre compiled binaries from some platforms

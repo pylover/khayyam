@@ -194,7 +194,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         Note that on non-POSIX systems that include leap seconds in their
         notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then
         it's possible to have two timestamps differing by a second that yield
-        identical datetime objects. See also utcfromtimestamp().
+        identical datetime objects. See also :py:class:`khayyam.JalaliDatetime.utcfromtimestamp`.
 
         :return: The local date and time corresponding to the POSIX timestamp,
                 such as is returned by :py:func:`time.time()`.
@@ -206,11 +206,15 @@ class JalaliDatetime(khayyam.JalaliDate):
     @classmethod
     def utcfromtimestamp(cls, timestamp):
         """
-        Return the UTC datetime corresponding to the POSIX timestamp,
-        with tzinfo None. This may raise ValueError, if the timestamp is
+        This may raise ValueError, if the timestamp is
         out of the range of values supported by the platform C gmtime()
         function. It's common for this to be restricted to years in 1970
-        through 2038. See also fromtimestamp().
+        through 2038. See also :py:meth:`khayyam.JalaliDatetime.fromtimestamp`.
+
+        :return: The UTC datetime corresponding to the POSIX timestamp,
+                with tzinfo None.
+
+        :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return cls(datetime.utcfromtimestamp(timestamp))
 
