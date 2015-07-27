@@ -195,7 +195,7 @@ class JalaliDate(object):
 
             >>> source_date = JalaliDate(1394, 3, 24)
             >>> JalaliDate(source_date.year, source_date.month, source_date.day)
-            khayyam.JalaliDate(1394, 3, 24)
+            khayyam.JalaliDate(1394, 3, 24, Yekshanbeh)
 
         :return: A Copy of the current instance.
         :rtype: :py:class:`khayyam.JalaiDate`
@@ -232,6 +232,12 @@ class JalaliDate(object):
     def toordinal(self):
         """
         It's equivalent to:
+        .. testsetup:: api-toordinal
+
+            import khayyam
+            from khayyam import JalaliDate
+
+        .. doctestLL api-toordinal
 
             >>> d = JalaliDate(1361, 6, 15)
             >>> (d - JalaliDate(khayyam.MINYEAR)).days + 1
@@ -245,7 +251,7 @@ class JalaliDate(object):
         """
         It's equivalent to:
 
-            >>> time.struct_time((d.year, d.month, d.day, d.hour, d.minute, d.second, d.weekday(), dayofyear, [-1|1|0]))
+            >>> time.struct_time((d.year, d.month, d.day, d.hour, d.minute, d.second, d.weekday(), dayofyear, [-1|1|0])) # doctest: +SKIP
             time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)
 
 
@@ -297,9 +303,10 @@ class JalaliDate(object):
         For example:
 
             >>> JalaliDate(1361, 12, 4).isoformat() == '1361-12-04'
+            True
 
         """
-        return '%s-%s-%s' % (self.year, self.month, self.day)
+        return self.strftime('%Y-%m-%d')
 
     def strftime(self, format_string):
         """
@@ -376,12 +383,21 @@ class JalaliDate(object):
         """
         It's equivalent to:
 
-            >>> JalaliDate(1361, 6, 15).strftime('%A %D %B %N')
+        .. testsetup:: api-localdateformat
+
+            from __future__ import print_function
+            from khayyam import JalaliDate
+
+        .. doctest:: api-localdateformat
+
+            >>> print(JalaliDate(1361, 6, 15).strftime('%A %D %B %N'))
             دوشنبه ۱۵ شهریور ۱۳۶۱
 
         For example:
 
-            >>> JalaliDate(1394, 5, 6).localdateformat()
+        .. doctest:: api-localdateformat
+
+            >>> print(JalaliDate(1394, 5, 6).localdateformat())
             سه شنبه ۶ مرداد ۱۳۹۴
 
 

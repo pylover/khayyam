@@ -198,6 +198,7 @@ class JalaliDatetime(khayyam.JalaliDate):
 
         :return: The local date and time corresponding to the POSIX timestamp,
                 such as is returned by :py:func:`time.time()`.
+
         :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return cls(datetime.fromtimestamp(timestamp, tz=tz))
