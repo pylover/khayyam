@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import time
-from khayyam.algorithms import days_in_month, \
+from khayyam.algorithms_pure import days_in_month, \
     is_leap_year, \
     get_julian_day_from_gregorian, \
     jalali_date_from_julian_day, \

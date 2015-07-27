@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
+from Cython.Build import cythonize
 
 __author__ = 'vahid'
 
@@ -9,18 +10,17 @@ __author__ = 'vahid'
 with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
-# try:
-#     from pypandoc import convert
-#     read_md = lambda f: convert(f, 'rst')
-# except ImportError:
-#     print("warning: pypandoc module not found, could not convert Markdown to RST")
-#     read_md = lambda f: open(f, 'r').read()
 
+ext_modules = [
+    Extension("khayyam.algorithms_c",
+              sources=["khayyam/algorithms_c.pyx"],
+              libraries=["m"]  # Unix-like specific
+              )
+]
 
 setup(
     name="Khayyam",
     version=package_version,
-    packages=find_packages(),
     author="Vahid Mardani",
     author_email="vahid.mardani@gmail.com",
     url="http://khayyam.dobisel.com",
@@ -29,6 +29,8 @@ setup(
     keywords="Khayyam persian jalali date time datetime conversion",
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     license="GPLv3",
+    packages=find_packages(),
+    ext_modules=cythonize(ext_modules),
     test_suite="khayyam.tests",
     tests_require=[
         'rtl'

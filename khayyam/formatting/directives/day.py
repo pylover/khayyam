@@ -2,7 +2,7 @@
 from .directive import Directive
 from .persian import PersianNumberDirective
 from khayyam.formatting import constants as consts
-from khayyam.algorithms import days_in_year
+from khayyam.algorithms_pure import days_in_year
 from datetime import timedelta
 __author__ = 'vahid'
 

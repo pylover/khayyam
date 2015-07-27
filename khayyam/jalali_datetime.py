@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta, time, datetime
-from khayyam.algorithms import gregorian_date_from_julian_day
+from khayyam.algorithms_pure import gregorian_date_from_julian_day
 import khayyam
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 __author__ = 'vahid'
