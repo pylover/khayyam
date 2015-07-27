@@ -5,4 +5,10 @@
     <orderEntry type="jdk" jdkName="Python 2.7.6 virtualenv at ~/pythonenv/khayyam-py2" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
 </module>
