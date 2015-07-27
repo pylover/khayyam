@@ -49,6 +49,7 @@
   <h1>Source code for khayyam.jalali_date</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">khayyam.algorithms</span> <span class="kn">import</span> <span class="n">days_in_month</span><span class="p">,</span> \
     <span class="n">is_leap_year</span><span class="p">,</span> \
     <span class="n">get_julian_day_from_gregorian</span><span class="p">,</span> \
@@ -94,9 +95,9 @@
 <span class="sd">        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
 
 
-<span class="sd">    :param year: Jalali year as integer or :py:class:`datetime.date`, :py:class:`khayyam.JalaliDate`</span>
-<span class="sd">    :param month: month as integer</span>
-<span class="sd">    :param day: day as integer</span>
+<span class="sd">    :param year: jalali year</span>
+<span class="sd">    :param month: month 1-12</span>
+<span class="sd">    :param day: day of month</span>
 <span class="sd">    :param julian_day: julian day</span>
 
 <span class="sd">    :type year: :py:class:`int` | :py:class:`datetime.date` | :py:class:`khayyam.JalaliDate`</span>
@@ -108,8 +109,12 @@
 <span class="sd">    :rtype: :py:class:`khayyam.JalaliDate`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">min</span> <span class="o">=</span> <span class="p">(</span><span class="n">MINYEAR</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># To be converted to JalaliDate at the bottom of this module</span>
+    <span class="c">#: Represent the minimum year which supported by this class.</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="p">(</span><span class="n">MINYEAR</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c"># To be converted to JalaliDate at the bottom of this module</span>
+
+    <span class="c">#: Represent the maximum year which supported by this class.</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">MAXYEAR</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>
+
     <span class="n">resolution</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -145,7 +150,7 @@
         <span class="k">return</span> <span class="n">days_in_month</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="JalaliDate.create_formatter"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.create_formatter">[docs]</a>    <span class="k">def</span> <span class="nf">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDate.formatterfactory"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.formatterfactory">[docs]</a>    <span class="k">def</span> <span class="nf">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        By default it will be return a :py:class:`khayyam.formatting.JalaliDateFormatter`</span>
 <span class="sd">        instance based on given format string.</span>
@@ -206,8 +211,9 @@
 <span class="sd">        :param date_string:</span>
 <span class="sd">        :param format:</span>
 <span class="sd">        :return: A :py:class:`khayyam.JalaliDate` corresponding to date_string, parsed according to format</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaiDate`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">create_formatter</span><span class="p">(</span><span class="n">format</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">formatterfactory</span><span class="p">(</span><span class="n">format</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="s">&#39;month&#39;</span><span class="p">,</span> <span class="s">&#39;day&#39;</span><span class="p">)}</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span>
 </div>
@@ -226,96 +232,245 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Day must be between 1 and </span><span class="si">%s</span><span class="s">, but it is: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_days_in_month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span>
 
-    <span class="k">def</span> <span class="nf">tojulianday</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDate.tojulianday"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.tojulianday">[docs]</a>    <span class="k">def</span> <span class="nf">tojulianday</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: Julian day representing the current instance.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">julian_day_from_jalali_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.copy"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It&#39;s equivalent to:</span>
 
-    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">            &gt;&gt;&gt; source_date = JalaliDate(1394, 3, 24)</span>
+<span class="sd">            &gt;&gt;&gt; JalaliDate(source_date.year, source_date.month, source_date.day)</span>
+<span class="sd">            khayyam.JalaliDate(1394, 3, 24)</span>
+
+<span class="sd">        :return: A Copy of the current instance.</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaiDate`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.replace"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces the given arguments on this instance, and return a new instance.</span>
 
-    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="sd">        :param year:</span>
+<span class="sd">        :param month:</span>
+<span class="sd">        :param day:</span>
+<span class="sd">        :return: A :py:class:`khayyam.JalaliDate` with the same attributes, except for those</span>
+<span class="sd">            attributes given new values by which keyword arguments are specified.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="n">JalaliDate</span><span class="p">(</span>
             <span class="n">year</span> <span class="k">if</span> <span class="n">year</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
             <span class="n">month</span> <span class="k">if</span> <span class="n">month</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
             <span class="n">day</span> <span class="k">if</span> <span class="n">day</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span>
         <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.todate"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.todate">[docs]</a>    <span class="k">def</span> <span class="nf">todate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the corresponding day in the gregorian calendar. this is the main use case of this library.</span>
 
-    <span class="k">def</span> <span class="nf">todate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">        :return: Corresponding date in gregorian calendar.</span>
+<span class="sd">        :rtype: :py:class:`datetime.date`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">gregorian_date_from_julian_day</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.toordinal"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.toordinal">[docs]</a>    <span class="k">def</span> <span class="nf">toordinal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It&#39;s equivalent to:</span>
 
-    <span class="k">def</span> <span class="nf">toordinal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">            &gt;&gt;&gt; d = JalaliDate(1361, 6, 15)</span>
+<span class="sd">            &gt;&gt;&gt; (d - JalaliDate(khayyam.MINYEAR)).days + 1</span>
+
+<span class="sd">        :return: The corresponding proleptic Shamsi ordinal days.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
-
+</div>
 <div class="viewcode-block" id="JalaliDate.timetuple"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.timetuple">[docs]</a>    <span class="k">def</span> <span class="nf">timetuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The same as: :func:`datetime.date.timetuple()`.</span>
-<span class="sd">        Return a :class:`time.struct_time` such as returned by :func:`time.localtime()`. The hours, minutes and seconds are 0, and the DST flag is -1. d.timetuple() is equivalent to `time.struct_time((d.year, d.month, d.day, 0, 0, 0, d.weekday(), yday, -1))`, where `yday = d.toordinal() - date(d.year, 1, 1).toordinal() + 1` is the day number within the current year starting with `1` for January 1st.</span>
+<span class="sd">        It&#39;s equivalent to:</span>
+
+<span class="sd">            &gt;&gt;&gt; time.struct_time((d.year, d.month, d.day, d.hour, d.minute, d.second, d.weekday(), dayofyear, [-1|1|0]))</span>
+<span class="sd">            time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)</span>
+
+
+<span class="sd">        The tm_isdst flag of the result is set according to the dst() method: `tzinfo`</span>
+<span class="sd">        is None or dst() returns None, tm_isdst is set to -1; else if dst()</span>
+<span class="sd">        returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</span>
+
+
+<span class="sd">        :return: A :py:class:`time.struct_time` such as returned by time.localtime().</span>
+<span class="sd">        :rtype: :py:class:`time.struct_time`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">(),</span>
+            <span class="o">-</span><span class="mi">1</span>
+        <span class="p">))</span>
 </div>
 <div class="viewcode-block" id="JalaliDate.weekday"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekday">[docs]</a>    <span class="k">def</span> <span class="nf">weekday</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the day of the week as an integer, where Saturday is 0 and Friday is 6.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :return: The day of the week as an integer, where Saturday is 0 and Friday is 6.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
 </div>
 <div class="viewcode-block" id="JalaliDate.isoweekday"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.isoweekday">[docs]</a>    <span class="k">def</span> <span class="nf">isoweekday</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the day of the week as an integer, where Saturday is 1 and Friday is 7.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :return: The day of the week as an integer, where Saturday is 1 and Friday is 7.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 </div>
-    <span class="k">def</span> <span class="nf">isocalendar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDate.isocalendar"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.isocalendar">[docs]</a>    <span class="k">def</span> <span class="nf">isocalendar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :return: Return a 3-tuple, (year, week number, isoweekday).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekofyear</span><span class="p">(</span><span class="n">SATURDAY</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoweekday</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.isoformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.isoformat">[docs]</a>    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.</span>
+<span class="sd">        For example:</span>
 
-    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">            &gt;&gt;&gt; JalaliDate(1361, 12, 4).isoformat() == &#39;1361-12-04&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.strftime"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.strftime">[docs]</a>    <span class="k">def</span> <span class="nf">strftime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_string</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Format codes referring to hours, minutes or seconds will see 0 values.</span>
+<span class="sd">        For a complete list of formatting directives, see :doc:`/directives`.</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;khayyam.JalaliDate(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> \
-               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekdayname_ascii</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">strftime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="n">__format__</span> <span class="o">=</span> <span class="n">strftime</span>
-
-    <span class="k">def</span> <span class="nf">weekdayname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">        :param format_string: The format string.</span>
+<span class="sd">        :return: A string representing the date, controlled by an explicit format string</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatterfactory</span><span class="p">(</span><span class="n">format_string</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.weekdayname"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekdayname">[docs]</a>    <span class="k">def</span> <span class="nf">weekdayname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: The corresponding persian weekday name: [شنبه - جمعه]</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PERSIAN_WEEKDAY_NAMES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">()]</span>
-
-    <span class="k">def</span> <span class="nf">weekdayabbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.weekdayabbr"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekdayabbr">[docs]</a>    <span class="k">def</span> <span class="nf">weekdayabbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: The corresponding persian weekday abbreviation: [ش ی د س چ پ ج]</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PERSIAN_WEEKDAY_ABBRS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">()]</span>
-
-    <span class="k">def</span> <span class="nf">monthabbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PERSIAN_MONTH_ABBRS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">monthname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PERSIAN_MONTH_NAMES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">monthabbr_ascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PERSIAN_MONTH_ABBRS_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">monthname_ascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PERSIAN_MONTH_NAMES_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">weekdayname_ascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.weekdaynameascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekdaynameascii">[docs]</a>    <span class="k">def</span> <span class="nf">weekdaynameascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        :return: The corresponding persian weekday name in ASCII:</span>
+<span class="sd">                [Shanbeh - Jomeh]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PERSIAN_WEEKDAY_NAMES_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">()]</span>
-
-    <span class="k">def</span> <span class="nf">weekdayabbr_ascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.weekdayabbrascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekdayabbrascii">[docs]</a>    <span class="k">def</span> <span class="nf">weekdayabbrascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: The corresponding persian weekday abbreviation in ASCII:</span>
+<span class="sd">            [Sh, Y, D, Se, Ch, P, J]</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PERSIAN_WEEKDAY_ABBRS_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">()]</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.monthname"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.monthname">[docs]</a>    <span class="k">def</span> <span class="nf">monthname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        :return: The corresponding persian month name: [فروردین - اسفند]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PERSIAN_MONTH_NAMES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.monthabbr"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.monthabbr">[docs]</a>    <span class="k">def</span> <span class="nf">monthabbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        :return: The corresponding persian month abbreviation:</span>
+<span class="sd">                [فر, ار, خر, تی, مر, شه, مه, آب, آذ, دی, به, اس]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PERSIAN_MONTH_ABBRS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.monthabbr_ascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.monthabbr_ascii">[docs]</a>    <span class="k">def</span> <span class="nf">monthabbr_ascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        :return: The corresponding persian month abbreviation in ASCII: [F, O , Kh ... E].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PERSIAN_MONTH_ABBRS_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.monthnameascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.monthnameascii">[docs]</a>    <span class="k">def</span> <span class="nf">monthnameascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        :return: The corresponding persian month name in ASCII:</span>
+<span class="sd">            [Farvardin - Esfand]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PERSIAN_MONTH_NAMES_ASCII</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.localdateformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.localdateformat">[docs]</a>    <span class="k">def</span> <span class="nf">localdateformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It&#39;s equivalent to:</span>
 
-    <span class="k">def</span> <span class="nf">localdateformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">            &gt;&gt;&gt; JalaliDate(1361, 6, 15).strftime(&#39;%A %D %B %N&#39;)</span>
+<span class="sd">            دوشنبه ۱۵ شهریور ۱۳۶۱</span>
+
+<span class="sd">        For example:</span>
+
+<span class="sd">            &gt;&gt;&gt; JalaliDate(1394, 5, 6).localdateformat()</span>
+<span class="sd">            سه شنبه ۶ مرداد ۱۳۹۴</span>
+
+
+<span class="sd">        :return: Appropriate localized string representing a persian day</span>
+<span class="sd">        :rtype: unicode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A %D %B %N&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.firstdayofyear"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.firstdayofyear">[docs]</a>    <span class="k">def</span> <span class="nf">firstdayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        As it&#39;s name says: it&#39;s referring to a :py:class:`JalaliDate`</span>
+<span class="sd">        representing the first day of current instance&#39;s year.</span>
 
-    <span class="k">def</span> <span class="nf">firstdayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">        :return: First day of corresponding year.</span>
+<span class="sd">        :rtype: :py:class:`JalaliDate`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">dayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.dayofyear"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.dayofyear">[docs]</a>    <span class="k">def</span> <span class="nf">dayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: Day of year az integer: 1-35[5,6]</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">firstdayofyear</span><span class="p">())</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
+</div>
+<div class="viewcode-block" id="JalaliDate.weekofyear"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.weekofyear">[docs]</a>    <span class="k">def</span> <span class="nf">weekofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_day_of_week</span><span class="o">=</span><span class="n">SATURDAY</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;weekofyear(first_day_of_week=SATURDAY)</span>
 
-    <span class="k">def</span> <span class="nf">weekofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_day_of_week</span><span class="o">=</span><span class="n">SATURDAY</span><span class="p">):</span>
+<span class="sd">        :param first_day_of_week: One of the</span>
+<span class="sd">                :py:data:`khayyam.SATURDAY`,</span>
+<span class="sd">                :py:data:`khayyam.SUNDAY`,</span>
+<span class="sd">                :py:data:`khayyam.MONDAY`,</span>
+<span class="sd">                :py:data:`khayyam.TUESDAY`,</span>
+<span class="sd">                :py:data:`khayyam.WEDNESDAY`,</span>
+<span class="sd">                :py:data:`khayyam.THURSDAY` or</span>
+<span class="sd">                :py:data:`khayyam.FRIDAY`</span>
+<span class="sd">        :return: The week number of the year.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">first_day_of_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">firstdayofyear</span><span class="p">()</span>
         <span class="n">days</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span> <span class="o">-</span> <span class="n">first_day_of_year</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="n">first_day_of_week</span> <span class="o">-</span> <span class="n">first_day_of_year</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span>
@@ -327,9 +482,18 @@
 
         <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">days</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span> <span class="o">/</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c">#############</span>
-    <span class="c"># Operators #</span>
-    <span class="c">#############</span>
+    <span class="c">###################</span>
+    <span class="c"># Special Members #</span>
+    <span class="c">###################</span>
+</div>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="n">strftime</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;khayyam.JalaliDate(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> \
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekdaynameascii</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>

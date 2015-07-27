@@ -130,7 +130,7 @@
     <span class="c">##################</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
 
     <span class="c">#####################</span>
@@ -194,7 +194,7 @@
 </div>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">strptime</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">date_string</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
             <span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="s">&#39;month&#39;</span><span class="p">,</span> <span class="s">&#39;day&#39;</span><span class="p">,</span> <span class="s">&#39;hour&#39;</span><span class="p">,</span> <span class="s">&#39;minute&#39;</span><span class="p">,</span> <span class="s">&#39;second&#39;</span><span class="p">,</span> <span class="s">&#39;microsecond&#39;</span><span class="p">,</span> <span class="s">&#39;tzinfo&#39;</span><span class="p">)}</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span>
@@ -335,7 +335,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
             <span class="s">&#39;, tzinfo=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">weekdayname_ascii</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weekdaynameascii</span><span class="p">()</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
