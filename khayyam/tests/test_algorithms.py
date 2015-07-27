@@ -12,6 +12,12 @@ class TestCAlgorithms(unittest.TestCase):
                 alg_c.get_julian_day_from_gregorian(i, 1, 1),
                 alg_p.get_julian_day_from_gregorian(i, 1, 1))
 
+    def test_is_leap_year(self):
+        for i in range(3000):
+            self.assertEqual(
+                alg_c.is_leap_year(i),
+                alg_p.is_leap_year(i))
+
 
 if __name__ == '__main__':
     unittest.main()
