@@ -96,7 +96,7 @@
 <dd><p>It&#8217;s equivalent to:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">source_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
-<span class="go">khayyam.JalaliDate(1394, 3, 24)</span>
+<span class="go">khayyam.JalaliDate(1394, 3, 24, Yekshanbeh)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -257,6 +257,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 </table>
 <p>For example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;1361-12-04&#39;</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -280,12 +281,12 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <dt id="khayyam.JalaliDate.localdateformat">
 <code class="descname">localdateformat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.localdateformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.localdateformat" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A %D %B %N&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A %D %B %N&#39;</span><span class="p">))</span>
 <span class="go">دوشنبه ۱۵ شهریور ۱۳۶۱</span>
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">localdateformat</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">localdateformat</span><span class="p">())</span>
 <span class="go">سه شنبه ۶ مرداد ۱۳۹۴</span>
 </pre></div>
 </div>
@@ -449,7 +450,7 @@ complete list of formatting directives, see <a class="reference internal" href="
 <dt id="khayyam.JalaliDate.timetuple">
 <code class="descname">timetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.timetuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.timetuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span> <span class="n">dayofyear</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">0</span><span class="p">]))</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span> <span class="n">dayofyear</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">0</span><span class="p">]))</span> 
 <span class="go">time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)</span>
 </pre></div>
 </div>
@@ -517,11 +518,11 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <dl class="method">
 <dt id="khayyam.JalaliDate.toordinal">
 <code class="descname">toordinal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.toordinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.toordinal" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="n">khayyam</span><span class="o">.</span><span class="n">MINYEAR</span><span class="p">))</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-</div>
+<dd><p>It&#8217;s equivalent to:
+.. testsetup:: api-toordinal</p>
+<blockquote>
+<div>import khayyam
+from khayyam import JalaliDate</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

@@ -247,6 +247,7 @@
 
 <span class="sd">        :return: The local date and time corresponding to the POSIX timestamp,</span>
 <span class="sd">                such as is returned by :py:func:`time.time()`.</span>
+
 <span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">))</span>
