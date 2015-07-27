@@ -644,6 +644,36 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <dt id="khayyam.JalaliDatetime">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inherited from <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
+<p>Represent a moment in <a class="reference internal" href="persiancalendar.html"><em>Persian(Jalali) Calendar</em></a>.</p>
+<p>The first parameter can be an integer,
+<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>,
+<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>.</p>
+<p>You may create this object by passing <cite>julian_day</cite> parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
+<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-12</li>
+<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-31</li>
+<li><strong>hour</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-23</li>
+<li><strong>minute</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
+<li><strong>second</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
+<li><strong>microsecond</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-999999</li>
+<li><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a>) &#8211; Timezone info</li>
+<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An object representing a moment persian calendar.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.combine">
 <em class="property">classmethod </em><code class="descname">combine</code><span class="sig-paren">(</span><em>date</em>, <em>_time</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.combine" title="Permalink to this definition">¶</a></dt>
@@ -659,15 +689,55 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.fromordinal">
 <em class="property">classmethod </em><code class="descname">fromordinal</code><span class="sig-paren">(</span><em>ordinal</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.fromordinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromordinal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the jalali datetime corresponding to the proleptic Gregorian ordinal, where January 1 of year 1 has ordinal 1. ValueError is raised unless 1 &lt;= ordinal &lt;= datetime.max.toordinal(). The hour, minute, second and microsecond of the result are all 0, and tzinfo is None.</p>
+<dd><p>Return the jalali datetime corresponding to the proleptic Gregorian ordinal,
+where January 1 of year 1 has ordinal 1. ValueError is
+raised unless 1 &lt;= ordinal &lt;= datetime.max.toordinal(). The hour, minute, second
+and microsecond of the result are all 0, and tzinfo is None.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.fromtimestamp">
 <em class="property">classmethod </em><code class="descname">fromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.fromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the local date and _time corresponding to the POSIX timestamp, such as is returned by _time._time(). If optional argument tz is None or not specified, the timestamp is converted to the platform&#8217;s local date and _time, and the returned datetime object is naive.</p>
-<p>Else tz must be an instance of a class tzinfo subclass, and the timestamp is converted to tz&#8217;s _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcfromtimestamp(timestamp).replace(tzinfo=tz)).</p>
-<p>fromtimestamp() may raise ValueError, if the timestamp is out of the range of values supported by the platform C localtime() or gmtime() functions. It&#8217;s common for this to be restricted to years in 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then it&#8217;s possible to have two timestamps differing by a second that yield identical datetime objects. See also utcfromtimestamp().</p>
+<dd><p>If optional argument tz is None or not specified, the timestamp is converted to
+the platform&#8217;s local date and time, and the returned datetime object is naive.</p>
+<p>Else tz must be an instance of a class <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
+and the timestamp is converted to tz&#8217;s time zone. In this case the result is
+equivalent to <cite>tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))</cite>.</p>
+<p>This method may raise <cite>ValueError</cite>, if the timestamp is out of the range of values
+supported by the platform C localtime() or gmtime() functions.
+It&#8217;s common for this to be restricted to years in 1970 through 2038.</p>
+<p>Note that on non-POSIX systems that include leap seconds in their
+notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then
+it&#8217;s possible to have two timestamps differing by a second that yield
+identical datetime objects. See also utcfromtimestamp().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The local date and time corresponding to the POSIX timestamp,
+such as is returned by <a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.hour">
+<code class="descname">hour</code><a class="headerlink" href="#khayyam.JalaliDatetime.hour" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the hour</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the hour</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -677,11 +747,73 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <p>If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.max">
+<code class="descname">max</code><em class="property"> = khayyam.JalaliDatetime(3178, 12, 29, 23, 59, 59, 999999, Chaharshanbeh)</em><a class="headerlink" href="#khayyam.JalaliDatetime.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the last moment which supported by this class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.microsecond">
+<code class="descname">microsecond</code><a class="headerlink" href="#khayyam.JalaliDatetime.microsecond" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the microsecond</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the microsecond</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.min">
+<code class="descname">min</code><em class="property"> = khayyam.JalaliDatetime(1, 1, 1, 0, 0, 0, 0, Jomeh)</em><a class="headerlink" href="#khayyam.JalaliDatetime.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the earlier moment which supported by this class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.minute">
+<code class="descname">minute</code><a class="headerlink" href="#khayyam.JalaliDatetime.minute" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the minute</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the minute</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.now">
 <em class="property">classmethod </em><code class="descname">now</code><span class="sig-paren">(</span><em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.now" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current local date and _time. If optional argument tz is None or not specified, this is like today(), but, if possible, supplies more precision than can be gotten from going through a _time._time() timestamp (for example, this may be possible on platforms supplying the C gettimeofday() function).</p>
-<p>Else tz must be an instance of a class tzinfo subclass, and the current date and _time are converted to tz&#8217;s _time zone. In this case the result is equivalent to tz.fromutc(datetime.utcnow().replace(tzinfo=tz)). See also today(), utcnow().</p>
+<dd><p>If optional argument tz is None or not specified, this is like today(), but,
+if possible, supplies more precision than can be gotten from going through a
+<a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a> timestamp (for example,
+this may be possible on platforms supplying the C gettimeofday() function).</p>
+<p>Else tz must be an instance of a <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
+and the current date and time are converted to tz&#8217;s time zone.
+In this case the result is equivalent to <cite>tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))</cite>.
+See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="khayyam.JalaliDate.today"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.today()</span></code></a> and <a class="reference internal" href="#khayyam.JalaliDatetime.utcnow" title="khayyam.JalaliDatetime.utcnow"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.utcnow()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the current local date and time</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -690,16 +822,65 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <dd><p>Without adjusting the the and time based tzinfo</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.second">
+<code class="descname">second</code><a class="headerlink" href="#khayyam.JalaliDatetime.second" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the second</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the second</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="khayyam.JalaliDatetime.tzinfo">
+<code class="descname">tzinfo</code><a class="headerlink" href="#khayyam.JalaliDatetime.tzinfo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the timezone info</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets(change) the timezone info</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.utcfromtimestamp">
 <em class="property">classmethod </em><code class="descname">utcfromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.utcfromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the UTC datetime corresponding to the POSIX timestamp, with tzinfo None. This may raise ValueError, if the timestamp is out of the range of values supported by the platform C gmtime() function. It&#8217;s common for this to be restricted to years in 1970 through 2038. See also fromtimestamp().</p>
+<dd><p>Return the UTC datetime corresponding to the POSIX timestamp,
+with tzinfo None. This may raise ValueError, if the timestamp is
+out of the range of values supported by the platform C gmtime()
+function. It&#8217;s common for this to be restricted to years in 1970
+through 2038. See also fromtimestamp().</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.utcnow">
 <em class="property">classmethod </em><code class="descname">utcnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.utcnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.utcnow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current UTC date and _time, with tzinfo None. This is like now(), but returns the current UTC date and _time, as a naive datetime object. See also now().</p>
+<dd><p>This is like <a class="reference internal" href="#khayyam.JalaliDatetime.now" title="khayyam.JalaliDatetime.now"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.now()</span></code></a>, but returns the current
+UTC date and time, as a naive datetime object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current UTC date and time, with tzinfo None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
