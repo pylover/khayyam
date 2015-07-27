@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta, time, datetime
-from khayyam.algorithms import get_julian_day_from_gregorian, \
-    jalali_date_from_julian_day, \
-    gregorian_date_from_julian_day
-from khayyam import MINYEAR, MAXYEAR
-from khayyam import JalaliDate
+from khayyam.algorithms import gregorian_date_from_julian_day
+import khayyam
+# from khayyam import MINYEAR, MAXYEAR
+# from khayyam import JalaliDate
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 __author__ = 'vahid'
 
 
-class JalaliDatetime(JalaliDate):
-    min = (MINYEAR, 1, 1)
-    max = (MAXYEAR, 12, 29, 23, 59, 59, 999999)
+class JalaliDatetime(khayyam.JalaliDate):
+    """
+    Inherited from :py:class:`khayyam.JalaliDate`.
+
+    """
+
+
+    min = (khayyam.MINYEAR, 1, 1)
+    max = (khayyam.MAXYEAR, 12, 29, 23, 59, 59, 999999)
     resolution = timedelta(microseconds=1)
 
     def __init__(self, year=1, month=1, day=1, hour=0, minute=0, second=0,
@@ -24,12 +29,12 @@ class JalaliDatetime(JalaliDate):
             if not tzinfo:
                 tzinfo = year.tzinfo
 
-        JalaliDate.__init__(self, year, month, day, julian_day)
+        khayyam.JalaliDate.__init__(self, year, month, day, julian_day)
         self._time = time(hour, minute, second, microsecond, tzinfo)
 
-    # #################
-    ### Properties ###
-    ##################
+    ##############
+    # Properties #
+    ##############
 
     @property
     def hour(self):
@@ -38,7 +43,6 @@ class JalaliDatetime(JalaliDate):
     @hour.setter
     def hour(self, val):
         self._time.hour = val
-
 
     @property
     def minute(self):
@@ -72,10 +76,9 @@ class JalaliDatetime(JalaliDate):
     def tzinfo(self, val):
         self._time.tzinfo = val
 
-
-    ######################
-    ### Static Methods ###
-    ######################
+    ##################
+    # Static Methods #
+    ##################
 
     @staticmethod
     def create_formatter(fmt):
@@ -136,22 +139,20 @@ class JalaliDatetime(JalaliDate):
         """
         Return a new jalali datetime object whose date members are equal to the given date object's, and whose _time and tzinfo members are equal to the given _time object's. For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time and tzinfo members are ignored.
         """
-        if isinstance(date, (JalaliDatetime, JalaliDate)):
+        if isinstance(date, (JalaliDatetime, khayyam.JalaliDate)):
             date = date.todatetime()
         return cls(datetime.combine(date, _time))
 
     @classmethod
     def strptime(cls, date_string, fmt):
         result = cls.create_formatter(fmt).parse(date_string)
-        result = {k:v for k, v in result.items() if k in (
+        result = {k: v for k, v in result.items() if k in (
             'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
         return cls(**result)
 
-
-    ########################
-    ### Instance Methods ###
-    ########################
-
+    ####################
+    # Instance Methods #
+    ####################
 
     def todatetime(self):
         arr = gregorian_date_from_julian_day(self.tojulianday())
@@ -159,7 +160,7 @@ class JalaliDatetime(JalaliDate):
                         self.tzinfo)
 
     def date(self):
-        return JalaliDate(self.year, self.month, self.day)
+        return khayyam.JalaliDate(self.year, self.month, self.day)
 
     def time(self):
         return time(self.hour, self.minute, self.second, self.microsecond)
@@ -273,7 +274,7 @@ class JalaliDatetime(JalaliDate):
         return self.tzname() or ''
 
     def dayofyear(self):
-        return (self.date() - JalaliDate(self.year, 1, 1)).days + 1
+        return (self.date() - khayyam.JalaliDate(self.year, 1, 1)).days + 1
 
     def __repr__(self):
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
@@ -291,13 +292,13 @@ class JalaliDatetime(JalaliDate):
     def __str__(self):
         return self.isoformat(sep=' ')
 
-    #################
-    ### Operators ###
-    #################
+    #############
+    # Operators #
+    #############
 
     def __add__(self, x):
         if isinstance(x, timedelta):
-            return JalaliDatetime(self.todatetime() + x)
+            return JalaliDatetime(x + self.todatetime())
 
         raise ValueError('JalaliDatetime object can added by timedelta or JalaliDate object')
 
@@ -306,7 +307,7 @@ class JalaliDatetime(JalaliDate):
             return JalaliDatetime(self.todatetime() - x)
         elif isinstance(x, JalaliDatetime):
             return self.todatetime() - x.todatetime()
-        elif isinstance(x, JalaliDate):
+        elif isinstance(x, khayyam.JalaliDate):
             return self.todatetime() - JalaliDatetime(x).todatetime()
 
         raise ValueError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')

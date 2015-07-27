@@ -23,7 +23,8 @@ __author__ = 'vahid'
 
 class JalaliDate(object):
     """
-    Jalali Date
+
+    Represent a day in :doc:`/persiancalendar`.
 
     The first parameter can be an integer, :py:class:`datetime.date` or :py:class:`khayyam.JalaliDate`.
 
@@ -54,7 +55,7 @@ class JalaliDate(object):
     :type day: int
     :type julian_day: int
 
-    :return:
+    :return: A :py:class:`khayyam.JalaliDate` instance.
     :rtype: :py:class:`khayyam.JalaliDate`
     """
 
@@ -83,14 +84,14 @@ class JalaliDate(object):
 
         :type: bool
         """
-
         return is_leap_year(self.year)
 
     @property
     def daysinmonth(self):
         """
-        Get total days in the current month.
-        :rtype int:
+        Total days in the current month.
+
+        :type: int
         """
         return days_in_month(self.year, self.month)
 
@@ -110,29 +111,54 @@ class JalaliDate(object):
     @classmethod
     def today(cls):
         """
-        Return the current local date.
-
-        :return: :py:class:`khayyam.JalaiDate`
+        :return: The current local date.
+        :rtype: :py:class:`khayyam.JalaiDate`
         """
         return cls(datetime.date.today())
 
     @classmethod
     def fromtimestamp(cls, timestamp):
         """
-        Return the local date corresponding to the POSIX timestamp. such as is returned by :func:`time.time()`. This may raise :class:`ValueError`, if the timestamp is out of the range of values supported by the platform C localtime() function. It’s common for this to be restricted to years from 1970 through 2038. Note that on non-POSIX systems that include leap seconds in their notion of a timestamp, leap seconds are ignored by fromtimestamp().
+        Such as is returned by :func:`time.time()`. This may raise :class:`ValueError`,
+        if the timestamp is out of the range of values supported by the platform C localtime()
+        function. It’s common for this to be restricted to years from 1970 through 2038.
+        Note that on non-POSIX systems that include leap seconds in their notion of a
+        timestamp, leap seconds are ignored by fromtimestamp().
+
+        :return: Local date corresponding to the POSIX timestamp
+        :rtype: :py:class:`khayyam.JalaiDate`
+
         """
         return cls(datetime.date.fromtimestamp(timestamp))
 
     @classmethod
     def fromordinal(cls, ordinal):
         """
-        Return the datetime corresponding to the proleptic Shamsi ordinal, where Farvardin 1 of year 1 has ordinal 1. ValueError is raised unless 1 <= ordinal <= :func:`datetime.max.toordinal()`.
+        Where Farvardin 1 of year 1 has ordinal 1.
+
+        ValueError is raised unless 1 <= ordinal <= `khayyam.jalaliDate(khayyam.MAXYEAR).toordinal()`.
+
+        :return: The date corresponding to the proleptic Shamsi ordinal.
+        :rtype: :py:class:`khayyam.JalaiDate`
         """
         return cls.min + datetime.timedelta(days=ordinal-1)
 
     @classmethod
-    def strptime(cls, date_string, fmt):
-        result = cls.create_formatter(fmt).parse(date_string)
+    def strptime(cls, date_string, format):
+        """
+        This is opposite of the :py:meth:`khayyam.JalaliDate.strftime`,
+        and used to parse date strings into date object.
+
+        `ValueError` is raised if the date_string and format can’t be
+        parsed by time.strptime() or if it returns a value which isn’t a time tuple. For a
+        complete list of formatting directives, see :doc:`/directives`.
+
+
+        :param date_string:
+        :param format:
+        :return: A :py:class:`khayyam.JalaliDate` corresponding to date_string, parsed according to format
+        """
+        result = cls.create_formatter(format).parse(date_string)
         result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
 
