@@ -4,7 +4,7 @@ API Reference
 Date objects
 ------------
 
-.. autoclass:: khayyam.jalali_date.JalaliDate
+.. autoclass:: khayyam.JalaliDate
     :members:
 
 .. Commented
@@ -19,7 +19,6 @@ Date & Time objects
 
 .. autoclass:: khayyam.JalaliDatetime
     :members:
-    :show-inheritance:
 
 
 Formatting & Parsing
