@@ -25,7 +25,7 @@ class JalaliDateFormatter(BaseFormatter):
         'monthabbr',
         'monthabbr_ascii',
         'monthname',
-        'monthname_ascii',
+        'monthnameascii',
         'shortyear',
         'dayofyear',
     ]
@@ -151,7 +151,7 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
         'monthabbr',
         'monthabbr_ascii',
         'monthname',
-        'monthname_ascii',
+        'monthnameascii',
         'ampm',
         'ampmascii',
         'shortyear',

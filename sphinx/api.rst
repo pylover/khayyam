@@ -8,9 +8,10 @@ Date objects
     :members:
 
 .. Commented
-:show-inheritance:
-:undoc-members:
     :private-members:
+    :show-inheritance:
+    :undoc-members:
+
     :special-members:
     :exclude-members: __dict__
 

@@ -105,6 +105,10 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 2.8.0b1 (2015-07-28)
+    * `Jalalidate.timetuple` method implemented from scratch including unit test.
+    * Some methods with underscore renamed: `JalaliDate.*_ascii` to `JalaliDate.*ascii`
+
 * 2.7.0b2 (2015-07-26)
     * README.rst
 

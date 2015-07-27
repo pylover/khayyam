@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import time
 from khayyam.algorithms import days_in_month, \
     is_leap_year, \
     get_julian_day_from_gregorian, \
@@ -45,9 +46,9 @@ class JalaliDate(object):
         khayyam.JalaliDate(1361, 6, 15, Doshanbeh)
 
 
-    :param year: Jalali year as integer or :py:class:`datetime.date`, :py:class:`khayyam.JalaliDate`
-    :param month: month as integer
-    :param day: day as integer
+    :param year: jalali year
+    :param month: month 1-12
+    :param day: day of month
     :param julian_day: julian day
 
     :type year: :py:class:`int` | :py:class:`datetime.date` | :py:class:`khayyam.JalaliDate`
@@ -59,8 +60,12 @@ class JalaliDate(object):
     :rtype: :py:class:`khayyam.JalaliDate`
     """
 
-    min = (MINYEAR, 1, 1) # To be converted to JalaliDate at the bottom of this module
+    #: Represent the minimum year which supported by this class.
+    min = (MINYEAR, 1, 1)   # To be converted to JalaliDate at the bottom of this module
+
+    #: Represent the maximum year which supported by this class.
     max = (MAXYEAR, 12, 29)
+
     resolution = datetime.timedelta(days=1)
 
     def __init__(self, year=1, month=1, day=1, julian_day=None):
@@ -96,7 +101,7 @@ class JalaliDate(object):
         return days_in_month(self.year, self.month)
 
     @staticmethod
-    def create_formatter(fmt):
+    def formatterfactory(fmt):
         """
         By default it will be return a :py:class:`khayyam.formatting.JalaliDateFormatter`
         instance based on given format string.
@@ -157,8 +162,9 @@ class JalaliDate(object):
         :param date_string:
         :param format:
         :return: A :py:class:`khayyam.JalaliDate` corresponding to date_string, parsed according to format
+        :rtype: :py:class:`khayyam.JalaiDate`
         """
-        result = cls.create_formatter(format).parse(date_string)
+        result = cls.formatterfactory(format).parse(date_string)
         result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
 
@@ -178,12 +184,36 @@ class JalaliDate(object):
         return year, month, day
 
     def tojulianday(self):
+        """
+        :return: Julian day representing the current instance.
+        :rtype: int
+        """
         return julian_day_from_jalali_date(self.year, self.month, self.day)
 
     def copy(self):
+        """
+        It's equivalent to:
+
+            >>> source_date = JalaliDate(1394, 3, 24)
+            >>> JalaliDate(source_date.year, source_date.month, source_date.day)
+            khayyam.JalaliDate(1394, 3, 24)
+
+        :return: A Copy of the current instance.
+        :rtype: :py:class:`khayyam.JalaiDate`
+        """
         return JalaliDate(self.year, self.month, self.day)
 
     def replace(self, year=None, month=None, day=None):
+        """
+        Replaces the given arguments on this instance, and return a new instance.
+
+        :param year:
+        :param month:
+        :param day:
+        :return: A :py:class:`khayyam.JalaliDate` with the same attributes, except for those
+            attributes given new values by which keyword arguments are specified.
+        """
+
         return JalaliDate(
             year if year else self.year,
             month if month else self.month,
@@ -191,82 +221,207 @@ class JalaliDate(object):
         )
 
     def todate(self):
+        """
+        Calculates the corresponding day in the gregorian calendar. this is the main use case of this library.
+
+        :return: Corresponding date in gregorian calendar.
+        :rtype: :py:class:`datetime.date`
+        """
         arr = gregorian_date_from_julian_day(self.tojulianday())
         return datetime.date(int(arr[0]), int(arr[1]), int(arr[2]))
 
     def toordinal(self):
+        """
+        It's equivalent to:
+
+            >>> d = JalaliDate(1361, 6, 15)
+            >>> (d - JalaliDate(khayyam.MINYEAR)).days + 1
+
+        :return: The corresponding proleptic Shamsi ordinal days.
+        :rtype: int
+        """
         return (self - self.min).days + 1
 
     def timetuple(self):
         """
-        The same as: :func:`datetime.date.timetuple()`.
-        Return a :class:`time.struct_time` such as returned by :func:`time.localtime()`. The hours, minutes and seconds are 0, and the DST flag is -1. d.timetuple() is equivalent to `time.struct_time((d.year, d.month, d.day, 0, 0, 0, d.weekday(), yday, -1))`, where `yday = d.toordinal() - date(d.year, 1, 1).toordinal() + 1` is the day number within the current year starting with `1` for January 1st.
+        It's equivalent to:
+
+            >>> time.struct_time((d.year, d.month, d.day, d.hour, d.minute, d.second, d.weekday(), dayofyear, [-1|1|0]))
+            time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)
+
+
+        The tm_isdst flag of the result is set according to the dst() method: `tzinfo`
+        is None or dst() returns None, tm_isdst is set to -1; else if dst()
+        returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.
+
+
+        :return: A :py:class:`time.struct_time` such as returned by time.localtime().
+        :rtype: :py:class:`time.struct_time`
         """
-        return self.todate().timetuple()
+        return time.struct_time((
+            self.year,
+            self.month,
+            self.day,
+            0,
+            0,
+            0,
+            self.weekday(),
+            self.dayofyear(),
+            -1
+        ))
 
     def weekday(self):
         """
-        Return the day of the week as an integer, where Saturday is 0 and Friday is 6.
+        :rtype: int
+        :return: The day of the week as an integer, where Saturday is 0 and Friday is 6.
         """
         return (self.todate().weekday() + 2) % 7
 
     def isoweekday(self):
         """
-        Return the day of the week as an integer, where Saturday is 1 and Friday is 7.
+        :rtype: int
+        :return: The day of the week as an integer, where Saturday is 1 and Friday is 7.
         """
         return self.weekday() + 1
 
     def isocalendar(self):
+        """
+        :rtype: tuple
+        :return: Return a 3-tuple, (year, week number, isoweekday).
+        """
         return self.year, self.weekofyear(SATURDAY), self.isoweekday()
 
     def isoformat(self):
+        """
+        :rtype: str
+        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.
+        For example:
+
+            >>> JalaliDate(1361, 12, 4).isoformat() == '1361-12-04'
+
+        """
         return '%s-%s-%s' % (self.year, self.month, self.day)
 
-    def __str__(self):
-        return self.isoformat()
+    def strftime(self, format_string):
+        """
+        Format codes referring to hours, minutes or seconds will see 0 values.
+        For a complete list of formatting directives, see :doc:`/directives`.
 
-    def __repr__(self):
-        return 'khayyam.JalaliDate(%s, %s, %s, %s)' % \
-               (self.year, self.month, self.day, self.weekdayname_ascii())
-
-    def strftime(self, fmt):
-        return self.create_formatter(fmt).format(self)
-    __format__ = strftime
+        :param format_string: The format string.
+        :return: A string representing the date, controlled by an explicit format string
+        :rtype: unicode
+        """
+        return self.formatterfactory(format_string).format(self)
 
     def weekdayname(self):
+        """
+        :return: The corresponding persian weekday name: [شنبه - جمعه]
+        :rtype: unicode
+        """
         return PERSIAN_WEEKDAY_NAMES[self.weekday()]
 
     def weekdayabbr(self):
+        """
+        :return: The corresponding persian weekday abbreviation: [ش ی د س چ پ ج]
+        :rtype: unicode
+        """
         return PERSIAN_WEEKDAY_ABBRS[self.weekday()]
 
-    def monthabbr(self):
-        return PERSIAN_MONTH_ABBRS[self.month]
-
-    def monthname(self):
-        return PERSIAN_MONTH_NAMES[self.month]
-
-    def monthabbr_ascii(self):
-        return PERSIAN_MONTH_ABBRS_ASCII[self.month]
-
-    def monthname_ascii(self):
-        return PERSIAN_MONTH_NAMES_ASCII[self.month]
-
-    def weekdayname_ascii(self):
+    def weekdaynameascii(self):
+        """
+        :rtype: unicode
+        :return: The corresponding persian weekday name in ASCII:
+                [Shanbeh - Jomeh]
+        """
         return PERSIAN_WEEKDAY_NAMES_ASCII[self.weekday()]
 
-    def weekdayabbr_ascii(self):
+    def weekdayabbrascii(self):
+        """
+        :return: The corresponding persian weekday abbreviation in ASCII:
+            [Sh, Y, D, Se, Ch, P, J]
+        :rtype: unicode
+        """
         return PERSIAN_WEEKDAY_ABBRS_ASCII[self.weekday()]
 
+    def monthname(self):
+        """
+        :rtype: unicode
+        :return: The corresponding persian month name: [فروردین - اسفند]
+        """
+        return PERSIAN_MONTH_NAMES[self.month]
+
+    def monthabbr(self):
+        """
+        :rtype: unicode
+        :return: The corresponding persian month abbreviation:
+                [فر, ار, خر, تی, مر, شه, مه, آب, آذ, دی, به, اس]
+        """
+        return PERSIAN_MONTH_ABBRS[self.month]
+
+    def monthabbr_ascii(self):
+        """
+        :rtype: unicode
+        :return: The corresponding persian month abbreviation in ASCII: [F, O , Kh ... E].
+        """
+        return PERSIAN_MONTH_ABBRS_ASCII[self.month]
+
+    def monthnameascii(self):
+        """
+        :rtype: unicode
+        :return: The corresponding persian month name in ASCII:
+            [Farvardin - Esfand]
+        """
+        return PERSIAN_MONTH_NAMES_ASCII[self.month]
+
     def localdateformat(self):
+        """
+        It's equivalent to:
+
+            >>> JalaliDate(1361, 6, 15).strftime('%A %D %B %N')
+            دوشنبه ۱۵ شهریور ۱۳۶۱
+
+        For example:
+
+            >>> JalaliDate(1394, 5, 6).localdateformat()
+            سه شنبه ۶ مرداد ۱۳۹۴
+
+
+        :return: Appropriate localized string representing a persian day
+        :rtype: unicode
+        """
         return self.strftime('%A %D %B %N')
 
     def firstdayofyear(self):
+        """
+        As it's name says: it's referring to a :py:class:`JalaliDate`
+        representing the first day of current instance's year.
+
+        :return: First day of corresponding year.
+        :rtype: :py:class:`JalaliDate`
+        """
         return JalaliDate(self.year, 1, 1)
 
     def dayofyear(self):
+        """
+        :return: Day of year az integer: 1-35[5,6]
+        :rtype: int
+        """
         return (self - self.firstdayofyear()).days + 1
 
     def weekofyear(self, first_day_of_week=SATURDAY):
+        """weekofyear(first_day_of_week=SATURDAY)
+
+        :param first_day_of_week: One of the
+                :py:data:`khayyam.SATURDAY`,
+                :py:data:`khayyam.SUNDAY`,
+                :py:data:`khayyam.MONDAY`,
+                :py:data:`khayyam.TUESDAY`,
+                :py:data:`khayyam.WEDNESDAY`,
+                :py:data:`khayyam.THURSDAY` or
+                :py:data:`khayyam.FRIDAY`
+        :return: The week number of the year.
+        :rtype: int
+        """
         first_day_of_year = self.firstdayofyear()
         days = (self - first_day_of_year).days
         offset = first_day_of_week - first_day_of_year.weekday()
@@ -278,9 +433,18 @@ class JalaliDate(object):
 
         return int((days - offset) / 7 + 1)
 
-    #############
-    # Operators #
-    #############
+    ###################
+    # Special Members #
+    ###################
+
+    __format__ = strftime
+
+    def __str__(self):
+        return self.isoformat()
+
+    def __repr__(self):
+        return 'khayyam.JalaliDate(%s, %s, %s, %s)' % \
+               (self.year, self.month, self.day, self.weekdaynameascii())
 
     def __add__(self, x):
         if isinstance(x, datetime.timedelta):

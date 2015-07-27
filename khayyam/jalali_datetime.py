@@ -81,7 +81,7 @@ class JalaliDatetime(khayyam.JalaliDate):
     ##################
 
     @staticmethod
-    def create_formatter(fmt):
+    def formatterfactory(fmt):
         return JalaliDatetimeFormatter(fmt)
 
     #####################
@@ -145,7 +145,7 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @classmethod
     def strptime(cls, date_string, fmt):
-        result = cls.create_formatter(fmt).parse(date_string)
+        result = cls.formatterfactory(fmt).parse(date_string)
         result = {k: v for k, v in result.items() if k in (
             'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
         return cls(**result)
@@ -286,7 +286,7 @@ class JalaliDatetime(khayyam.JalaliDate):
             self.second,
             self.microsecond,
             ', tzinfo=%s' % self.tzinfo if self.tzinfo else '',
-            self.weekdayname_ascii()
+            self.weekdaynameascii()
         )
 
     def __str__(self):

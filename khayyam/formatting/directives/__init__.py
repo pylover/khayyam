@@ -49,10 +49,10 @@ DATE_FORMAT_DIRECTIVES = [
               lambda d: d.monthabbr_ascii(),
               lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if
                                                    v == ctx['monthabbr_ascii']][0][0]})),
-    Directive('G', 'monthname_ascii', consts.PERSIAN_MONTH_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.monthname_ascii(),
+    Directive('G', 'monthnameascii', consts.PERSIAN_MONTH_NAMES_ASCII_REGEX, get_unicode,
+              lambda d: d.monthnameascii(),
               lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if
-                                                   v == ctx['monthname_ascii']][0][0]})),
+                                                   v == ctx['monthnameascii']][0][0]})),
 
     # DAY
     Directive('d', 'day', consts.DAY_REGEX, int, lambda d: '%.2d' % d.day),
@@ -69,10 +69,10 @@ DATE_FORMAT_DIRECTIVES = [
     Directive('U', 'weekofyear', consts.WEEK_OF_YEAR_REGEX, int, lambda d: '%.2d' % d.weekofyear(MONDAY)),
     Directive('a', 'weekdayabbr', consts.PERSIAN_WEEKDAY_ABBRS_REGEX, get_unicode, lambda d: d.weekdayabbr()),
     Directive('A', 'weekdayname', consts.PERSIAN_WEEKDAY_NAMES_REGEX, get_unicode, lambda d: d.weekdayname()),
-    Directive('e', 'weekdayabbr_ascii', consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX, get_unicode,
-              lambda d: d.weekdayabbr_ascii()),
-    Directive('E', 'weekdayname_ascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.weekdayname_ascii()),
+    Directive('e', 'weekdayabbrascii', consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX, get_unicode,
+              lambda d: d.weekdayabbrascii()),
+    Directive('E', 'weekdaynameascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
+              lambda d: d.weekdaynameascii()),
 
     # COMPOSITE
     CompositeDateDirective('x', 'localdateformat', '%s %s %s %s' % (

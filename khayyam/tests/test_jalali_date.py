@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 import unittest
 from khayyam import JalaliDate, MAXYEAR
 from datetime import timedelta, date
@@ -132,7 +133,10 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime(u'جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
                          JalaliDate(month=2, day=1))
 
-
+    def test_timetuple(self):
+        self.assertEqual(
+            JalaliDate(1361, 6, 15).timetuple(),
+            time.struct_time((1361, 6, 15, 0, 0, 0, 2, 170, -1)))
 
 if __name__ == '__main__':
     unittest.main()
