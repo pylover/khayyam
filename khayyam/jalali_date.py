@@ -22,13 +22,45 @@ __author__ = 'vahid'
 
 
 class JalaliDate(object):
+    """
+    Jalali Date
+
+    The first parameter can be an integer, :py:class:`datetime.date` or :py:class:`khayyam.JalaliDate`.
+
+    You may create this object by passing `julian_day` parameter.
+
+
+    .. doctest::
+
+        >>> from khayyam import JalaliDate
+        >>> JalaliDate(julian_day=2445218)
+        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)
+
+        >>> from datetime import date
+        >>> JalaliDate(date(1982, 9, 6))
+        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)
+
+        >>> JalaliDate(1361, 6, 15)
+        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)
+
+
+    :param year: Jalali year as integer or :py:class:`datetime.date`, :py:class:`khayyam.JalaliDate`
+    :param month: month as integer
+    :param day: day as integer
+    :param julian_day: julian day
+
+    :type year: :py:class:`int` | :py:class:`datetime.date` | :py:class:`khayyam.JalaliDate`
+    :type month: int
+    :type day: int
+    :type julian_day: int
+
+    :return:
+    :rtype: :py:class:`khayyam.JalaliDate`
+    """
+
     min = (MINYEAR, 1, 1) # To be converted to JalaliDate at the bottom of this module
     max = (MAXYEAR, 12, 29)
     resolution = datetime.timedelta(days=1)
-
-    """
-    Representing a specific day in Jalali calendar.
-    """
 
     def __init__(self, year=1, month=1, day=1, julian_day=None):
         if isinstance(year, JalaliDate):
@@ -44,41 +76,43 @@ class JalaliDate(object):
 
         self.year, self.month, self.day = self._validate(year, month, day)
 
-
-    ##################
-    ### Properties ###
-    ##################
-
     @property
     def isleap(self):
         """
-        Determines the year is leap or not.
+        `True` if the current instance is in a leap year.
+
+        :type: bool
         """
+
         return is_leap_year(self.year)
 
     @property
     def daysinmonth(self):
         """
         Get total days in the current month.
+        :rtype int:
         """
         return days_in_month(self.year, self.month)
 
-    ######################
-    ### Static Methods ###
-    ######################
-
     @staticmethod
     def create_formatter(fmt):
-        return JalaliDateFormatter(fmt)
+        """
+        By default it will be return a :py:class:`khayyam.formatting.JalaliDateFormatter`
+        instance based on given format string.
 
-    #####################
-    ### Class Methods ###
-    #####################
+        :param fmt: see: :doc:`/directives`
+        :type fmt: str
+        :return: Formatter object, based on the given format string.
+        :rtype: khayyam.formatting.BaseFormatter
+        """
+        return JalaliDateFormatter(fmt)
 
     @classmethod
     def today(cls):
         """
-        Return the current local date. 
+        Return the current local date.
+
+        :return: :py:class:`khayyam.JalaiDate`
         """
         return cls(datetime.date.today())
 
@@ -117,10 +151,6 @@ class JalaliDate(object):
             raise ValueError('Day must be between 1 and %s, but it is: %s' % (_days_in_month, day))
         return year, month, day
 
-    ########################
-    ### Instance Methods ###
-    ########################
-
     def tojulianday(self):
         return julian_day_from_jalali_date(self.year, self.month, self.day)
 
@@ -133,7 +163,6 @@ class JalaliDate(object):
             month if month else self.month,
             day if day else self.day
         )
-
 
     def todate(self):
         arr = gregorian_date_from_julian_day(self.tojulianday())
@@ -223,9 +252,9 @@ class JalaliDate(object):
 
         return int((days - offset) / 7 + 1)
 
-    #################
-    ### Operators ###
-    #################
+    #############
+    # Operators #
+    #############
 
     def __add__(self, x):
         if isinstance(x, datetime.timedelta):
@@ -256,11 +285,6 @@ class JalaliDate(object):
         return hash(self.year) ^ hash(self.month) ^ hash(self.day)
 
     def __eq__(self, x):
-        """
-        Check equality
-        :param x: datetime.date or JalaliDate
-        :return: bool
-        """
         if not x:
             return False
         if isinstance(x, datetime.date):
@@ -269,7 +293,6 @@ class JalaliDate(object):
             return hash(self) == hash(x)
         else:
             raise ValueError('Comparison only allowed with JalaliDate and datetime.date objects.')
-
 
     def __ne__(self, x):
         return not self.__eq__(x)

@@ -4,9 +4,11 @@ from khayyam.formatting import constants as consts
 from .directives import DATE_FORMAT_DIRECTIVES
 __author__ = 'vahid'
 
+class BaseFormatter(object):
+    pass
 
 
-class JalaliDateFormatter(object):
+class JalaliDateFormatter(BaseFormatter):
 
     _post_parsers = [
         'persianday',
@@ -80,13 +82,11 @@ class JalaliDateFormatter(object):
         result += self.format_string[index:]
         return result
 
-
     @staticmethod
     def filter_persian_digit(s):
         for p, e in consts.PERSIAN_DIGIT_MAPPING:
             s = s.replace(p[1], p[0])
         return s
-
 
     def _parse(self, date_string):
         m = re.match(self.parser_regex, self.filter_persian_digit(date_string))

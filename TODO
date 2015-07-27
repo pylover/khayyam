@@ -2,14 +2,9 @@
 
 ### To Do
 
-  * Google analytic
-  * pythonhosted
-  * http://dobisel.com/khayyam
   * Doc: Review all object's documentation
   * Doc: Parsing, post processors priority
   * Error messages
-  * Constructors act as converter: `JalaliDate(date)`
-  * pdf doc
   * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
