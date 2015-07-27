@@ -243,7 +243,7 @@
 <span class="sd">        Note that on non-POSIX systems that include leap seconds in their</span>
 <span class="sd">        notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then</span>
 <span class="sd">        it&#39;s possible to have two timestamps differing by a second that yield</span>
-<span class="sd">        identical datetime objects. See also utcfromtimestamp().</span>
+<span class="sd">        identical datetime objects. See also :py:class:`khayyam.JalaliDatetime.utcfromtimestamp`.</span>
 
 <span class="sd">        :return: The local date and time corresponding to the POSIX timestamp,</span>
 <span class="sd">                such as is returned by :py:func:`time.time()`.</span>
@@ -255,11 +255,15 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDatetime.utcfromtimestamp"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.utcfromtimestamp">[docs]</a>    <span class="k">def</span> <span class="nf">utcfromtimestamp</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the UTC datetime corresponding to the POSIX timestamp,</span>
-<span class="sd">        with tzinfo None. This may raise ValueError, if the timestamp is</span>
+<span class="sd">        This may raise ValueError, if the timestamp is</span>
 <span class="sd">        out of the range of values supported by the platform C gmtime()</span>
 <span class="sd">        function. It&#39;s common for this to be restricted to years in 1970</span>
-<span class="sd">        through 2038. See also fromtimestamp().</span>
+<span class="sd">        through 2038. See also :py:meth:`khayyam.JalaliDatetime.fromtimestamp`.</span>
+
+<span class="sd">        :return: The UTC datetime corresponding to the POSIX timestamp,</span>
+<span class="sd">                with tzinfo None.</span>
+
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
 </div>

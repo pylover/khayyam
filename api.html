@@ -710,7 +710,7 @@ It&#8217;s common for this to be restricted to years in 1970 through 2038.</p>
 <p>Note that on non-POSIX systems that include leap seconds in their
 notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then
 it&#8217;s possible to have two timestamps differing by a second that yield
-identical datetime objects. See also utcfromtimestamp().</p>
+identical datetime objects. See also <a class="reference internal" href="#khayyam.JalaliDatetime.utcfromtimestamp" title="khayyam.JalaliDatetime.utcfromtimestamp"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime.utcfromtimestamp</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -860,11 +860,21 @@ See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="k
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.utcfromtimestamp">
 <em class="property">classmethod </em><code class="descname">utcfromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.utcfromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the UTC datetime corresponding to the POSIX timestamp,
-with tzinfo None. This may raise ValueError, if the timestamp is
+<dd><p>This may raise ValueError, if the timestamp is
 out of the range of values supported by the platform C gmtime()
 function. It&#8217;s common for this to be restricted to years in 1970
-through 2038. See also fromtimestamp().</p>
+through 2038. See also <a class="reference internal" href="#khayyam.JalaliDatetime.fromtimestamp" title="khayyam.JalaliDatetime.fromtimestamp"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.fromtimestamp()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The UTC datetime corresponding to the POSIX timestamp,
+with tzinfo None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
