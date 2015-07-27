@@ -55,6 +55,13 @@ and :py:class:`khayyam.JalaliDatetime` classes just like the other regular pytho
   >>> JalaliDate(1346, 12, 30) # A leap year.
   khayyam.JalaliDate(1346, 12, 30, Chaharshanbeh)
 
+  >>> JalaliDatetime(JalaliDate(1345, 1, 1))
+  khayyam.JalaliDatetime(1345, 1, 1, 0, 0, 0, 0, Doshanbeh)
+
+  >>> from datetime import datetime
+  >>> JalaliDatetime(datetime(1982, 9, 6))
+  khayyam.JalaliDatetime(1361, 6, 15, 0, 0, 0, 0, Doshanbeh)
+
   >>> JalaliDatetime()
   khayyam.JalaliDatetime(1, 1, 1, 0, 0, 0, 0, Jomeh)
 

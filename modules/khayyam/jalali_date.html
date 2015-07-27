@@ -71,15 +71,47 @@
 
 
 <div class="viewcode-block" id="JalaliDate"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate">[docs]</a><span class="k">class</span> <span class="nc">JalaliDate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Jalali Date</span>
+
+<span class="sd">    The first parameter can be an integer, :py:class:`datetime.date` or :py:class:`khayyam.JalaliDate`.</span>
+
+<span class="sd">    You may create this object by passing `julian_day` parameter.</span>
+
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; from khayyam import JalaliDate</span>
+<span class="sd">        &gt;&gt;&gt; JalaliDate(julian_day=2445218)</span>
+<span class="sd">        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
+
+<span class="sd">        &gt;&gt;&gt; from datetime import date</span>
+<span class="sd">        &gt;&gt;&gt; JalaliDate(date(1982, 9, 6))</span>
+<span class="sd">        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
+
+<span class="sd">        &gt;&gt;&gt; JalaliDate(1361, 6, 15)</span>
+<span class="sd">        khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
+
+
+<span class="sd">    :param year: Jalali year as integer or :py:class:`datetime.date`, :py:class:`khayyam.JalaliDate`</span>
+<span class="sd">    :param month: month as integer</span>
+<span class="sd">    :param day: day as integer</span>
+<span class="sd">    :param julian_day: julian day</span>
+
+<span class="sd">    :type year: :py:class:`int` | :py:class:`datetime.date` | :py:class:`khayyam.JalaliDate`</span>
+<span class="sd">    :type month: int</span>
+<span class="sd">    :type day: int</span>
+<span class="sd">    :type julian_day: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: :py:class:`khayyam.JalaliDate`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nb">min</span> <span class="o">=</span> <span class="p">(</span><span class="n">MINYEAR</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># To be converted to JalaliDate at the bottom of this module</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">MAXYEAR</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>
     <span class="n">resolution</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Representing a specific day in Jalali calendar.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="JalaliDate.__init__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">JalaliDate</span><span class="p">):</span>
             <span class="n">jd</span> <span class="o">=</span> <span class="n">year</span>
             <span class="n">year</span> <span class="o">=</span> <span class="n">jd</span><span class="o">.</span><span class="n">year</span>
@@ -93,41 +125,43 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
 
-
-    <span class="c">##################</span>
-    <span class="c">### Properties ###</span>
-    <span class="c">##################</span>
-</div>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">isleap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Determines the year is leap or not.</span>
+<span class="sd">        `True` if the current instance is in a leap year.</span>
+
+<span class="sd">        :type: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="n">is_leap_year</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">daysinmonth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get total days in the current month.</span>
+<span class="sd">        :rtype int:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">days_in_month</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
 
-    <span class="c">######################</span>
-    <span class="c">### Static Methods ###</span>
-    <span class="c">######################</span>
-
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="JalaliDate.create_formatter"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.create_formatter">[docs]</a>    <span class="k">def</span> <span class="nf">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">JalaliDateFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default it will be return a :py:class:`khayyam.formatting.JalaliDateFormatter`</span>
+<span class="sd">        instance based on given format string.</span>
 
-    <span class="c">#####################</span>
-    <span class="c">### Class Methods ###</span>
-    <span class="c">#####################</span>
+<span class="sd">        :param fmt: see: :doc:`/directives`</span>
+<span class="sd">        :type fmt: str</span>
+<span class="sd">        :return: Formatter object, based on the given format string.</span>
+<span class="sd">        :rtype: khayyam.formatting.BaseFormatter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">JalaliDateFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDate.today"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.today">[docs]</a>    <span class="k">def</span> <span class="nf">today</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the current local date. </span>
+<span class="sd">        Return the current local date.</span>
+
+<span class="sd">        :return: :py:class:`khayyam.JalaiDate`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
 </div>
@@ -152,7 +186,7 @@
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span>
 </div>
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="JalaliDate._validate"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate._validate">[docs]</a>    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
         <span class="n">year</span> <span class="o">=</span> <span class="n">year</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
         <span class="n">month</span> <span class="o">=</span> <span class="n">month</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
         <span class="n">day</span> <span class="o">=</span> <span class="n">day</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
@@ -166,10 +200,6 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Day must be between 1 and </span><span class="si">%s</span><span class="s">, but it is: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_days_in_month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span>
 
-    <span class="c">########################</span>
-    <span class="c">### Instance Methods ###</span>
-    <span class="c">########################</span>
-</div>
 <div class="viewcode-block" id="JalaliDate.tojulianday"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.tojulianday">[docs]</a>    <span class="k">def</span> <span class="nf">tojulianday</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">julian_day_from_jalali_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 </div>
@@ -182,7 +212,6 @@
             <span class="n">month</span> <span class="k">if</span> <span class="n">month</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
             <span class="n">day</span> <span class="k">if</span> <span class="n">day</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span>
         <span class="p">)</span>
-
 </div>
 <div class="viewcode-block" id="JalaliDate.todate"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.todate">[docs]</a>    <span class="k">def</span> <span class="nf">todate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">gregorian_date_from_julian_day</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">())</span>
@@ -216,13 +245,13 @@
 <div class="viewcode-block" id="JalaliDate.isoformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.isoformat">[docs]</a>    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="JalaliDate.__str__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__repr__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__repr__">[docs]</a>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;khayyam.JalaliDate(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> \
                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekdayname_ascii</span><span class="p">())</span>
-</div>
+
 <div class="viewcode-block" id="JalaliDate.strftime"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.strftime">[docs]</a>    <span class="k">def</span> <span class="nf">strftime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
     <span class="n">__format__</span> <span class="o">=</span> <span class="n">strftime</span>
@@ -272,18 +301,18 @@
 
         <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">days</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span> <span class="o">/</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c">#################</span>
-    <span class="c">### Operators ###</span>
-    <span class="c">#################</span>
+    <span class="c">#############</span>
+    <span class="c"># Operators #</span>
+    <span class="c">#############</span>
 </div>
-<div class="viewcode-block" id="JalaliDate.__add__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__add__">[docs]</a>    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
             <span class="n">days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">days</span>
             <span class="k">return</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="n">julian_day</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
 
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;JalaliDate object can added by timedelta or JalaliDate object&#39;</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__sub__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__sub__">[docs]</a>    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
             <span class="n">days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">days</span>
             <span class="k">return</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="n">julian_day</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
@@ -292,24 +321,19 @@
             <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
 
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;JalaliDate object can added by timedelta or JalaliDate object&#39;</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__lt__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__lt__">[docs]</a>    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDate</span><span class="p">),</span> <span class="s">&#39;Comparison just allow with JalaliDate&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__le__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__le__">[docs]</a>    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDate</span><span class="p">),</span> <span class="s">&#39;Comparison just allow with JalaliDate&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__hash__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__hash__">[docs]</a>    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__eq__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Check equality</span>
-<span class="sd">        :param x: datetime.date or JalaliDate</span>
-<span class="sd">        :return: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
@@ -319,20 +343,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Comparison only allowed with JalaliDate and datetime.date objects.&#39;</span><span class="p">)</span>
 
-</div>
-<div class="viewcode-block" id="JalaliDate.__ne__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__ne__">[docs]</a>    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__gt__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__gt__">[docs]</a>    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDate</span><span class="p">),</span> <span class="s">&#39;Comparison just allow with JalaliDate&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="JalaliDate.__ge__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.__ge__">[docs]</a>    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDate</span><span class="p">),</span> <span class="s">&#39;Comparison just allow with JalaliDate&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">()</span>
 
 
-<span class="c"># Class attributes</span></div></div>
+<span class="c"># Class attributes</span></div>
 <span class="n">JalaliDate</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="o">*</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
 <span class="n">JalaliDate</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="o">*</span><span class="n">JalaliDate</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 </pre></div>

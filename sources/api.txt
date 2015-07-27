@@ -4,10 +4,12 @@ API Reference
 Date objects
 ------------
 
-.. autoclass:: khayyam.JalaliDate
+.. autoclass:: khayyam.jalali_date.JalaliDate
     :members:
-    :undoc-members:
-    :show-inheritance:
+
+.. Commented
+:show-inheritance:
+:undoc-members:
     :private-members:
     :special-members:
     :exclude-members: __dict__
@@ -17,24 +19,22 @@ Date & Time objects
 
 .. autoclass:: khayyam.JalaliDatetime
     :members:
-    :undoc-members:
     :show-inheritance:
-    :private-members:
-    :special-members:
-    :exclude-members: __dict__
 
 
 Formatting & Parsing
 --------------------
 
+.. autoclass:: khayyam.formatting.BaseFormatter
+    :members:
+    :show-inheritance:
+
 .. autoclass:: khayyam.formatting.JalaliDateFormatter
     :members:
-    :undoc-members:
     :show-inheritance:
 
 .. autoclass:: khayyam.formatting.JalaliDatetimeFormatter
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Directives
