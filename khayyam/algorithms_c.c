@@ -526,29 +526,6 @@ static const char *__pyx_f[] = {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_getattro))
-        return tp->tp_getattro(obj, attr_name);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_getattr))
-        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
-#endif
-    return PyObject_GetAttr(obj, attr_name);
-}
-#else
-#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
-#endif
-
-static PyObject *__Pyx_GetBuiltinName(PyObject *name);
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
 static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
 static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb);
 
@@ -587,6 +564,10 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
                                                      int is_list, int wraparound, int boundscheck);
 
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
+
+static CYTHON_INLINE long __Pyx_mod_long(long, long); /* proto */
+
+static CYTHON_INLINE long __Pyx_div_long(long, long); /* proto */
 
 typedef struct {
     int code_line;
@@ -718,25 +699,30 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 /* Module declarations from 'khayyam.algorithms_c' */
 static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int, int, int, int __pyx_skip_dispatch); /*proto*/
 static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int, int __pyx_skip_dispatch); /*proto*/
+static int __pyx_f_7khayyam_12algorithms_c_days_in_year(int, int __pyx_skip_dispatch); /*proto*/
+static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int, int, int __pyx_skip_dispatch); /*proto*/
+static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int, int, int, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "khayyam.algorithms_c"
 int __pyx_module_is_main_khayyam__algorithms_c = 0;
 
 /* Implementation of 'khayyam.algorithms_c' */
-static PyObject *__pyx_builtin_round;
 static PyObject *__pyx_pf_7khayyam_12algorithms_c_get_julian_day_from_gregorian(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month, int __pyx_v_day); /* proto */
 static PyObject *__pyx_pf_7khayyam_12algorithms_c_2is_leap_year(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year); /* proto */
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_4days_in_year(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year); /* proto */
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_6days_in_month(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month); /* proto */
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_8julian_day_from_jalali_date(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month, int __pyx_v_day); /* proto */
 static char __pyx_k_day[] = "day";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_year[] = "year";
 static char __pyx_k_month[] = "month";
-static char __pyx_k_round[] = "round";
 static char __pyx_k_Invalid_date[] = "Invalid date";
+static char __pyx_k_Month_must_be_between_1_and_12[] = "Month must be between 1 and 12";
 static PyObject *__pyx_kp_s_Invalid_date;
+static PyObject *__pyx_kp_s_Month_must_be_between_1_and_12;
 static PyObject *__pyx_n_s_day;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_month;
-static PyObject *__pyx_n_s_round;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_year;
 static PyObject *__pyx_int_38;
@@ -763,10 +749,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   double __pyx_v_result;
   double __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
+  int __pyx_t_1;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -824,24 +807,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *         if year / 100.0 == round(year / 100.0):
  *             if year / 400.0 == round(year / 400.0):
  */
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__pyx_t_4) {
+  __pyx_t_1 = (((__pyx_v_year / 4.0) == round((__pyx_v_year / 4.0))) != 0);
+  if (__pyx_t_1) {
 
     /* "khayyam/algorithms_c.pyx":12
  * 
@@ -850,24 +817,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *             if year / 400.0 == round(year / 400.0):
  *                 # Leap year checking #
  */
-    __pyx_t_3 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
-    __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (__pyx_t_4) {
+    __pyx_t_1 = (((__pyx_v_year / 100.0) == round((__pyx_v_year / 100.0))) != 0);
+    if (__pyx_t_1) {
 
       /* "khayyam/algorithms_c.pyx":13
  *     if year / 4.0 == round(year / 4.0):
@@ -876,24 +827,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *                 # Leap year checking #
  *                 if month == 2:
  */
-      __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_GIVEREF(__pyx_t_2);
-      PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
-      __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_4) {
+      __pyx_t_1 = (((__pyx_v_year / 400.0) == round((__pyx_v_year / 400.0))) != 0);
+      if (__pyx_t_1) {
 
         /* "khayyam/algorithms_c.pyx":15
  *             if year / 400.0 == round(year / 400.0):
@@ -902,8 +837,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *                     assert day <= 29, 'Invalid date'
  *         else:
  */
-        __pyx_t_4 = ((__pyx_v_month == 2) != 0);
-        if (__pyx_t_4) {
+        __pyx_t_1 = ((__pyx_v_month == 2) != 0);
+        if (__pyx_t_1) {
 
           /* "khayyam/algorithms_c.pyx":16
  *                 # Leap year checking #
@@ -937,8 +872,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *                 assert day <= 29, 'Invalid date'
  * 
  */
-      __pyx_t_4 = ((__pyx_v_month == 2) != 0);
-      if (__pyx_t_4) {
+      __pyx_t_1 = ((__pyx_v_month == 2) != 0);
+      if (__pyx_t_1) {
 
         /* "khayyam/algorithms_c.pyx":20
  *             # Leap year #
@@ -971,8 +906,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  *         _year -= 1
  *         _month += 12
  */
-  __pyx_t_4 = ((__pyx_v__month <= 2.0) != 0);
-  if (__pyx_t_4) {
+  __pyx_t_1 = ((__pyx_v__month <= 2.0) != 0);
+  if (__pyx_t_1) {
 
     /* "khayyam/algorithms_c.pyx":24
  * 
@@ -1069,9 +1004,6 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_WriteUnraisable("khayyam.algorithms_c.get_julian_day_from_gregorian", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
@@ -1180,6 +1112,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_get_julian_day_from_gregorian(
  * 
  * cpdef bool is_leap_year(int year):             # <<<<<<<<<<<<<<
  *     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682
+ * 
  */
 
 static PyObject *__pyx_pw_7khayyam_12algorithms_c_3is_leap_year(PyObject *__pyx_self, PyObject *__pyx_arg_year); /*proto*/
@@ -1199,6 +1132,8 @@ static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int __pyx_v_ye
  * 
  * cpdef bool is_leap_year(int year):
  *     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1246,6 +1181,7 @@ static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int __pyx_v_ye
  * 
  * cpdef bool is_leap_year(int year):             # <<<<<<<<<<<<<<
  *     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682
+ * 
  */
 
   /* function exit code */
@@ -1313,9 +1249,615 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_2is_leap_year(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
+/* "khayyam/algorithms_c.pyx":41
+ * 
+ * 
+ * cpdef int days_in_year(int year):             # <<<<<<<<<<<<<<
+ *     return 366 if is_leap_year(year) else 365
+ * 
+ */
+
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_5days_in_year(PyObject *__pyx_self, PyObject *__pyx_arg_year); /*proto*/
+static int __pyx_f_7khayyam_12algorithms_c_days_in_year(int __pyx_v_year, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("days_in_year", 0);
+
+  /* "khayyam/algorithms_c.pyx":42
+ * 
+ * cpdef int days_in_year(int year):
+ *     return 366 if is_leap_year(year) else 365             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_2 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_3) {
+    __pyx_t_1 = 366;
+  } else {
+    __pyx_t_1 = 365;
+  }
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "khayyam/algorithms_c.pyx":41
+ * 
+ * 
+ * cpdef int days_in_year(int year):             # <<<<<<<<<<<<<<
+ *     return 366 if is_leap_year(year) else 365
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_WriteUnraisable("khayyam.algorithms_c.days_in_year", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_5days_in_year(PyObject *__pyx_self, PyObject *__pyx_arg_year); /*proto*/
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_5days_in_year(PyObject *__pyx_self, PyObject *__pyx_arg_year) {
+  int __pyx_v_year;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("days_in_year (wrapper)", 0);
+  assert(__pyx_arg_year); {
+    __pyx_v_year = __Pyx_PyInt_As_int(__pyx_arg_year); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("khayyam.algorithms_c.days_in_year", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7khayyam_12algorithms_c_4days_in_year(__pyx_self, ((int)__pyx_v_year));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_4days_in_year(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("days_in_year", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("khayyam.algorithms_c.days_in_year", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "khayyam/algorithms_c.pyx":45
+ * 
+ * 
+ * cpdef int days_in_month(int year, int month):             # <<<<<<<<<<<<<<
+ *     if 1 <= month <= 6:
+ *         return 31
+ */
+
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_7days_in_month(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int __pyx_v_month, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("days_in_month", 0);
+
+  /* "khayyam/algorithms_c.pyx":46
+ * 
+ * cpdef int days_in_month(int year, int month):
+ *     if 1 <= month <= 6:             # <<<<<<<<<<<<<<
+ *         return 31
+ *     elif 7 <= month < 12:
+ */
+  __pyx_t_1 = (1 <= __pyx_v_month);
+  if (__pyx_t_1) {
+    __pyx_t_1 = (__pyx_v_month <= 6);
+  }
+  __pyx_t_2 = (__pyx_t_1 != 0);
+  if (__pyx_t_2) {
+
+    /* "khayyam/algorithms_c.pyx":47
+ * cpdef int days_in_month(int year, int month):
+ *     if 1 <= month <= 6:
+ *         return 31             # <<<<<<<<<<<<<<
+ *     elif 7 <= month < 12:
+ *         return 30
+ */
+    __pyx_r = 31;
+    goto __pyx_L0;
+  }
+
+  /* "khayyam/algorithms_c.pyx":48
+ *     if 1 <= month <= 6:
+ *         return 31
+ *     elif 7 <= month < 12:             # <<<<<<<<<<<<<<
+ *         return 30
+ * 
+ */
+  __pyx_t_2 = (7 <= __pyx_v_month);
+  if (__pyx_t_2) {
+    __pyx_t_2 = (__pyx_v_month < 12);
+  }
+  __pyx_t_1 = (__pyx_t_2 != 0);
+  if (__pyx_t_1) {
+
+    /* "khayyam/algorithms_c.pyx":49
+ *         return 31
+ *     elif 7 <= month < 12:
+ *         return 30             # <<<<<<<<<<<<<<
+ * 
+ *     assert month == 12, 'Month must be between 1 and 12'
+ */
+    __pyx_r = 30;
+    goto __pyx_L0;
+  }
+
+  /* "khayyam/algorithms_c.pyx":51
+ *         return 30
+ * 
+ *     assert month == 12, 'Month must be between 1 and 12'             # <<<<<<<<<<<<<<
+ * 
+ *     # Esfand()
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    if (unlikely(!((__pyx_v_month == 12) != 0))) {
+      PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Month_must_be_between_1_and_12);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+  }
+  #endif
+
+  /* "khayyam/algorithms_c.pyx":54
+ * 
+ *     # Esfand()
+ *     if is_leap_year(year):             # <<<<<<<<<<<<<<
+ *         return 30
+ *     else:
+ */
+  __pyx_t_3 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (__pyx_t_1) {
+
+    /* "khayyam/algorithms_c.pyx":55
+ *     # Esfand()
+ *     if is_leap_year(year):
+ *         return 30             # <<<<<<<<<<<<<<
+ *     else:
+ *         return 29
+ */
+    __pyx_r = 30;
+    goto __pyx_L0;
+  }
+  /*else*/ {
+
+    /* "khayyam/algorithms_c.pyx":57
+ *         return 30
+ *     else:
+ *         return 29             # <<<<<<<<<<<<<<
+ * 
+ * cpdef double julian_day_from_jalali_date(int year, int month, int day):
+ */
+    __pyx_r = 29;
+    goto __pyx_L0;
+  }
+
+  /* "khayyam/algorithms_c.pyx":45
+ * 
+ * 
+ * cpdef int days_in_month(int year, int month):             # <<<<<<<<<<<<<<
+ *     if 1 <= month <= 6:
+ *         return 31
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_WriteUnraisable("khayyam.algorithms_c.days_in_month", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_7days_in_month(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_7days_in_month(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_year;
+  int __pyx_v_month;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("days_in_month (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_year,&__pyx_n_s_month,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_year)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "days_in_month") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("khayyam.algorithms_c.days_in_month", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7khayyam_12algorithms_c_6days_in_month(__pyx_self, __pyx_v_year, __pyx_v_month);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_6days_in_month(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("days_in_month", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_month(__pyx_v_year, __pyx_v_month, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("khayyam.algorithms_c.days_in_month", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "khayyam/algorithms_c.pyx":59
+ *         return 29
+ * 
+ * cpdef double julian_day_from_jalali_date(int year, int month, int day):             # <<<<<<<<<<<<<<
+ *     cdef int base = year - ([473, 474][year >= 0])
+ *     cdef int julian_year = 474 + (base % 2820)
+ */
+
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __pyx_v_year, int __pyx_v_month, int __pyx_v_day, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_base;
+  int __pyx_v_julian_year;
+  double __pyx_v_result;
+  double __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
+  double __pyx_t_7;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("julian_day_from_jalali_date", 0);
+
+  /* "khayyam/algorithms_c.pyx":60
+ * 
+ * cpdef double julian_day_from_jalali_date(int year, int month, int day):
+ *     cdef int base = year - ([473, 474][year >= 0])             # <<<<<<<<<<<<<<
+ *     cdef int julian_year = 474 + (base % 2820)
+ *     cdef double result = day
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_int_473);
+  __Pyx_GIVEREF(__pyx_int_473);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_int_473);
+  __Pyx_INCREF(__pyx_int_474);
+  __Pyx_GIVEREF(__pyx_int_474);
+  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_int_474);
+  __pyx_t_3 = (__pyx_v_year >= 0);
+  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_t_2, __pyx_t_3, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_base = __pyx_t_5;
+
+  /* "khayyam/algorithms_c.pyx":61
+ * cpdef double julian_day_from_jalali_date(int year, int month, int day):
+ *     cdef int base = year - ([473, 474][year >= 0])
+ *     cdef int julian_year = 474 + (base % 2820)             # <<<<<<<<<<<<<<
+ *     cdef double result = day
+ *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
+ */
+  __pyx_v_julian_year = (474 + __Pyx_mod_long(__pyx_v_base, 2820));
+
+  /* "khayyam/algorithms_c.pyx":62
+ *     cdef int base = year - ([473, 474][year >= 0])
+ *     cdef int julian_year = 474 + (base % 2820)
+ *     cdef double result = day             # <<<<<<<<<<<<<<
+ *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
+ *     result += floor(((julian_year * 682) - 110) / 2816)
+ */
+  __pyx_v_result = __pyx_v_day;
+
+  /* "khayyam/algorithms_c.pyx":63
+ *     cdef int julian_year = 474 + (base % 2820)
+ *     cdef double result = day
+ *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]             # <<<<<<<<<<<<<<
+ *     result += floor(((julian_year * 682) - 110) / 2816)
+ *     result += (julian_year - 1) * 365
+ */
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_result); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyInt_From_long((((__pyx_v_month - 1) * 30) + 6)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_PyInt_From_long(((__pyx_v_month - 1) * 31)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyList_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
+  __pyx_t_4 = 0;
+  __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_v_month <= 7);
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_t_6, __pyx_t_3, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PyNumber_InPlaceAdd(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_result = __pyx_t_7;
+
+  /* "khayyam/algorithms_c.pyx":64
+ *     cdef double result = day
+ *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
+ *     result += floor(((julian_year * 682) - 110) / 2816)             # <<<<<<<<<<<<<<
+ *     result += (julian_year - 1) * 365
+ *     result += floor(base / 2820) * 1029983
+ */
+  __pyx_v_result = (__pyx_v_result + floor(__Pyx_div_long(((__pyx_v_julian_year * 682) - 110), 2816)));
+
+  /* "khayyam/algorithms_c.pyx":65
+ *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
+ *     result += floor(((julian_year * 682) - 110) / 2816)
+ *     result += (julian_year - 1) * 365             # <<<<<<<<<<<<<<
+ *     result += floor(base / 2820) * 1029983
+ *     result += 1948320.5 - 1
+ */
+  __pyx_v_result = (__pyx_v_result + ((__pyx_v_julian_year - 1) * 365));
+
+  /* "khayyam/algorithms_c.pyx":66
+ *     result += floor(((julian_year * 682) - 110) / 2816)
+ *     result += (julian_year - 1) * 365
+ *     result += floor(base / 2820) * 1029983             # <<<<<<<<<<<<<<
+ *     result += 1948320.5 - 1
+ *     return result
+ */
+  __pyx_v_result = (__pyx_v_result + (floor(__Pyx_div_long(__pyx_v_base, 2820)) * 1029983.0));
+
+  /* "khayyam/algorithms_c.pyx":67
+ *     result += (julian_year - 1) * 365
+ *     result += floor(base / 2820) * 1029983
+ *     result += 1948320.5 - 1             # <<<<<<<<<<<<<<
+ *     return result
+ */
+  __pyx_v_result = (__pyx_v_result + (1948320.5 - 1.0));
+
+  /* "khayyam/algorithms_c.pyx":68
+ *     result += floor(base / 2820) * 1029983
+ *     result += 1948320.5 - 1
+ *     return result             # <<<<<<<<<<<<<<
+ */
+  __pyx_r = __pyx_v_result;
+  goto __pyx_L0;
+
+  /* "khayyam/algorithms_c.pyx":59
+ *         return 29
+ * 
+ * cpdef double julian_day_from_jalali_date(int year, int month, int day):             # <<<<<<<<<<<<<<
+ *     cdef int base = year - ([473, 474][year >= 0])
+ *     cdef int julian_year = 474 + (base % 2820)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_WriteUnraisable("khayyam.algorithms_c.julian_day_from_jalali_date", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_year;
+  int __pyx_v_month;
+  int __pyx_v_day;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("julian_day_from_jalali_date (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_year,&__pyx_n_s_month,&__pyx_n_s_day,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_year)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_day)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "julian_day_from_jalali_date") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("khayyam.algorithms_c.julian_day_from_jalali_date", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7khayyam_12algorithms_c_8julian_day_from_jalali_date(__pyx_self, __pyx_v_year, __pyx_v_month, __pyx_v_day);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7khayyam_12algorithms_c_8julian_day_from_jalali_date(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month, int __pyx_v_day) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("julian_day_from_jalali_date", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("khayyam.algorithms_c.julian_day_from_jalali_date", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {"get_julian_day_from_gregorian", (PyCFunction)__pyx_pw_7khayyam_12algorithms_c_1get_julian_day_from_gregorian, METH_VARARGS|METH_KEYWORDS, 0},
   {"is_leap_year", (PyCFunction)__pyx_pw_7khayyam_12algorithms_c_3is_leap_year, METH_O, 0},
+  {"days_in_year", (PyCFunction)__pyx_pw_7khayyam_12algorithms_c_5days_in_year, METH_O, 0},
+  {"days_in_month", (PyCFunction)__pyx_pw_7khayyam_12algorithms_c_7days_in_month, METH_VARARGS|METH_KEYWORDS, 0},
+  {"julian_day_from_jalali_date", (PyCFunction)__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -1339,19 +1881,16 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Invalid_date, __pyx_k_Invalid_date, sizeof(__pyx_k_Invalid_date), 0, 0, 1, 0},
+  {&__pyx_kp_s_Month_must_be_between_1_and_12, __pyx_k_Month_must_be_between_1_and_12, sizeof(__pyx_k_Month_must_be_between_1_and_12), 0, 0, 1, 0},
   {&__pyx_n_s_day, __pyx_k_day, sizeof(__pyx_k_day), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_month, __pyx_k_month, sizeof(__pyx_k_month), 0, 0, 1, 1},
-  {&__pyx_n_s_round, __pyx_k_round, sizeof(__pyx_k_round), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_year, __pyx_k_year, sizeof(__pyx_k_year), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_n_s_round); if (!__pyx_builtin_round) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
-  __pyx_L1_error:;
-  return -1;
 }
 
 static int __Pyx_InitCachedConstants(void) {
@@ -1469,7 +2008,7 @@ PyMODINIT_FUNC PyInit_algorithms_c(void)
   /*--- Execution code ---*/
 
   /* "khayyam/algorithms_c.pyx":1
- * from libc.math cimport floor             # <<<<<<<<<<<<<<
+ * from libc.math cimport floor, round             # <<<<<<<<<<<<<<
  * from cpython cimport bool
  * 
  */
@@ -1514,38 +2053,6 @@ end:
     Py_XDECREF(p);
     Py_XDECREF(m);
     return (__Pyx_RefNannyAPIStruct *)r;
-}
-#endif
-
-static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
-    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
-    if (unlikely(!result)) {
-        PyErr_Format(PyExc_NameError,
-#if PY_MAJOR_VERSION >= 3
-            "name '%U' is not defined", name);
-#else
-            "name '%.200s' is not defined", PyString_AS_STRING(name));
-#endif
-    }
-    return result;
-}
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
 }
 #endif
 
@@ -1846,6 +2353,19 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
+}
+
+static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
+    long r = a % b;
+    r += ((r != 0) & ((r ^ b) < 0)) * b;
+    return r;
+}
+
+static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
+    long q = a / b;
+    long r = a - q*b;
+    q -= ((r != 0) & ((r ^ b) < 0));
+    return q;
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {

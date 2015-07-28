@@ -18,6 +18,19 @@ class TestCAlgorithms(unittest.TestCase):
                 alg_c.is_leap_year(i),
                 alg_p.is_leap_year(i))
 
+    def test_days_in_year(self):
+        for i in range(3000):
+            self.assertEqual(
+                alg_c.days_in_year(i),
+                alg_p.days_in_year(i))
+
+    def test_days_in_month(self):
+        for i in range(3000):
+            for m in range(1, 13):
+                self.assertEqual(
+                    alg_c.days_in_month(i, m),
+                    alg_p.days_in_month(i, m))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -36,3 +36,33 @@ cpdef double get_julian_day_from_gregorian(int year, int month, int day):
 
 cpdef bool is_leap_year(int year):
     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682
+
+
+cpdef int days_in_year(int year):
+    return 366 if is_leap_year(year) else 365
+
+
+cpdef int days_in_month(int year, int month):
+    if 1 <= month <= 6:
+        return 31
+    elif 7 <= month < 12:
+        return 30
+
+    assert month == 12, 'Month must be between 1 and 12'
+
+    # Esfand(اسفند)
+    if is_leap_year(year):
+        return 30
+    else:
+        return 29
+
+cpdef double julian_day_from_jalali_date(int year, int month, int day):
+    cdef int base = year - ([473, 474][year >= 0])
+    cdef int julian_year = 474 + (base % 2820)
+    cdef double result = day
+    result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
+    result += floor(((julian_year * 682) - 110) / 2816)
+    result += (julian_year - 1) * 365
+    result += floor(base / 2820) * 1029983
+    result += 1948320.5 - 1
+    return result

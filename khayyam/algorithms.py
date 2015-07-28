@@ -6,7 +6,10 @@ __author__ = 'vahid'
 try:
     from .algorithms_c import \
         is_leap_year, \
-        get_julian_day_from_gregorian
+        days_in_year, \
+        days_in_month, \
+        get_julian_day_from_gregorian, \
+        julian_day_from_jalali_date
 
 except ImportError:
     warnings.warn(
@@ -14,14 +17,12 @@ except ImportError:
         "so it's may be slower than C implementation of the algorithms.")
     from .algorithms_pure import \
         is_leap_year, \
-        get_julian_day_from_gregorian
+        days_in_year, \
+        days_in_month, \
+        get_julian_day_from_gregorian, \
+        julian_day_from_jalali_date
 
 from .algorithms_pure import \
-    days_in_month, \
-    days_in_year, \
     gregorian_date_from_julian_day, \
     jalali_date_from_gregorian_date, \
-    jalali_date_from_julian_day, \
-    julian_day_from_jalali_date
-
-
+    jalali_date_from_julian_day

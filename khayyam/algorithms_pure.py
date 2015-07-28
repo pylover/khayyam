@@ -33,7 +33,7 @@ def is_leap_year(year):
 
 
 def days_in_year(year):
-    return 366if is_leap_year(year) else 365
+    return 366 if is_leap_year(year) else 365
 
 
 def days_in_month(year, month):
