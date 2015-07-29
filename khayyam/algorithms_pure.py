@@ -105,7 +105,7 @@ def gregorian_date_from_julian_day(jd):
     elif m == 1 or m == 2:
         y = c - 4715
 
-    return y, m, day
+    return int(y), int(m), int(day)
 
 
 def jalali_date_from_gregorian_date(year, month, day):
