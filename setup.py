@@ -24,7 +24,8 @@ setup(
     author="Vahid Mardani",
     author_email="vahid.mardani@gmail.com",
     url="http://khayyam.dobisel.com",
-    description="Persian(Jalali) date and time library",
+    description="A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with timezone, DST"
+                "(daylight-saving), full formatting & parsing support for python 2 & 3.",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),

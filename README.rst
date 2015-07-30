@@ -1,7 +1,8 @@
 khayyam
 =======
 
-Jalali Date and Time types and algorithms for Python2 and Python3.
+A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with timezone, DST
+(daylight-saving), full formatting & parsing support for python 2 & 3.
 
 Jump To:
 ^^^^^^^^
@@ -104,6 +105,12 @@ Comparison
 
 Change Log
 ^^^^^^^^^^
+
+* 2.9.0b0 (2015-07-30)
+    * All algorithms reimplemented using cython and static typing, so the calculation
+        with new C extension is very faster than python pure algorithm implementation.
+    * Fallback switch to pure python algorithm implementation, if compiled binaries not available.
+    * Test case(s) for algorithms(C & Python).
 
 * 2.8.0b1 (2015-07-28)
     * `Jalalidate.timetuple` method implemented from scratch including unit test.

@@ -2,11 +2,12 @@ from libc.math cimport floor, round, ceil
 from cpython cimport bool
 
 cpdef double get_julian_day_from_gregorian(int year, int month, int day):
-    cdef double _year = year
-    cdef double _month = month
-    cdef double _day = day
-    cdef double _century = 0
-    cdef double result = 0
+    cdef:
+        double _year = year
+        double _month = month
+        double _day = day
+        double _century = 0
+        double result = 0
 
     if year / 4.0 == round(year / 4.0):
         if year / 100.0 == round(year / 100.0):
@@ -57,9 +58,11 @@ cpdef int days_in_month(int year, int month):
         return 29
 
 cpdef double julian_day_from_jalali_date(int year, int month, int day):
-    cdef int base = year - (474 if year >= 0 else 473)
-    cdef int julian_year = 474 + (base % 2820)
-    cdef double result = day
+    cdef:
+        int base = year - (474 if year >= 0 else 473)
+        int julian_year = 474 + (base % 2820)
+        double result = day
+
     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
     result += floor(((julian_year * 682) - 110) / 2816)
     result += (julian_year - 1) * 365
@@ -69,12 +72,14 @@ cpdef double julian_day_from_jalali_date(int year, int month, int day):
 
 
 cpdef tuple jalali_date_from_julian_day(double jd):
-    cdef double julian_day = floor(jd) + 0.5
-    cdef double offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
-    cdef double cycle = floor(offset / 1029983)
-    cdef double remaining = offset % 1029983
-    cdef double a1, a2, year_cycle
-    cdef int year, month, day
+    cdef:
+        double julian_day = floor(jd) + 0.5
+        double offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
+        double cycle = floor(offset / 1029983)
+        double remaining = offset % 1029983
+        double a1, a2, year_cycle, days_in_year
+        int year, month, day
+
     if remaining == 1029982:
         year_cycle = 2820
     else:
@@ -84,38 +89,45 @@ cpdef tuple jalali_date_from_julian_day(double jd):
     year = <int>(year_cycle + (2820 * cycle) + 474)
     if year <= 0:
         year -= 1
-    days_in_year = <int>(julian_day - julian_day_from_jalali_date(year, 1, 1)) + 1
+    days_in_year = (julian_day - julian_day_from_jalali_date(year, 1, 1)) + 1
     month = <int>ceil([(days_in_year - 6) / 30, days_in_year / 31][days_in_year <= 186])
     day = <int>(julian_day - julian_day_from_jalali_date(year, month, 1)) + 1
     return year, month, day
 
 
 cpdef tuple gregorian_date_from_julian_day(double jd):
-    cdef double year, month, day, jdm, z, f, alpha, b, c, d, e
+    cdef:
+        double year, month, day
+        double julian_day, actual_days, remains, alpha, b, c, d, e
 
     if jd <= 0:
         raise ValueError('Invalid Date')
 
-    jdm = jd + 0.5
-    z = floor(jdm)
-    f = jdm - z
+    julian_day = jd + 0.5
+    actual_days = floor(julian_day)
+    remains = julian_day - actual_days
 
-    alpha = floor((z - 1867216.25) / 36524.25)
-    b = (z + 1 + alpha - floor(alpha / 4)) + 1524 # TODO: USE % MOD
+    alpha = floor((actual_days - 1867216.25) / 36524.25)
+    b = (actual_days + 1 + alpha - floor(alpha / 4)) + 1524
     c = floor((b - 122.1) / 365.25)
     d = floor(365.25 * c)
     e = floor((b - d) / 30.6001)
-    day = b - d - floor(30.6001 * e) + f
+    day = b - d - floor(30.6001 * e) + remains
 
     if e < 14:
         month = e - 1
     elif e == 14 or e == 15:
         month = e - 13
+    else:
+        raise ValueError('Cannot calculate month')
+
 
     if month > 2:
         year = c - 4716
     elif month == 1 or month == 2:
         year = c - 4715
+    else:
+        raise ValueError('Invalid month: %s' % month)
 
     return <int>year, <int>month, <int>day
 
