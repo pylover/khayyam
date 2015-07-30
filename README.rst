@@ -108,6 +108,7 @@ Change Log
 
 * 2.9.0b0 (2015-07-30)
     * Using any available C compiler if cython is not available.
+    * Using pure python if any error raised on installation with extension.
 
 * 2.9.0b0 (2015-07-30)
     * All algorithms reimplemented using cython and static typing, so the calculation
