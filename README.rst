@@ -106,7 +106,7 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
-* 2.9.0b0 (2015-07-30)
+* 2.9.1b0 (2015-07-30)
     * Using any available C compiler if cython is not available.
     * Using pure python if any error raised on installation with extension.
 
