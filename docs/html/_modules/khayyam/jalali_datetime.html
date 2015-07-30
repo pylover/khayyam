@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.jalali_datetime &mdash; Khayyam 2.7.0b2 documentation</title>
+    <title>khayyam.jalali_datetime &mdash; Khayyam 2.9.0b0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.7.0b2',
+        VERSION:     '2.9.0b0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.7.0b2 documentation" href="../../index.html" />
+    <link rel="top" title="Khayyam 2.9.0b0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.0b0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,7 +49,7 @@
   <h1>Source code for khayyam.jalali_datetime</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">khayyam.algorithms</span> <span class="kn">import</span> <span class="n">gregorian_date_from_julian_day</span>
+<span class="kn">from</span> <span class="nn">khayyam.algorithms_pure</span> <span class="kn">import</span> <span class="n">gregorian_date_from_julian_day</span>
 <span class="kn">import</span> <span class="nn">khayyam</span>
 <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="n">AM_PM</span><span class="p">,</span> <span class="n">AM_PM_ASCII</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
@@ -243,7 +243,7 @@
 <span class="sd">        Note that on non-POSIX systems that include leap seconds in their</span>
 <span class="sd">        notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then</span>
 <span class="sd">        it&#39;s possible to have two timestamps differing by a second that yield</span>
-<span class="sd">        identical datetime objects. See also utcfromtimestamp().</span>
+<span class="sd">        identical datetime objects. See also :py:class:`khayyam.JalaliDatetime.utcfromtimestamp`.</span>
 
 <span class="sd">        :return: The local date and time corresponding to the POSIX timestamp,</span>
 <span class="sd">                such as is returned by :py:func:`time.time()`.</span>
@@ -255,11 +255,15 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDatetime.utcfromtimestamp"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.utcfromtimestamp">[docs]</a>    <span class="k">def</span> <span class="nf">utcfromtimestamp</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the UTC datetime corresponding to the POSIX timestamp,</span>
-<span class="sd">        with tzinfo None. This may raise ValueError, if the timestamp is</span>
+<span class="sd">        This may raise ValueError, if the timestamp is</span>
 <span class="sd">        out of the range of values supported by the platform C gmtime()</span>
 <span class="sd">        function. It&#39;s common for this to be restricted to years in 1970</span>
-<span class="sd">        through 2038. See also fromtimestamp().</span>
+<span class="sd">        through 2038. See also :py:meth:`khayyam.JalaliDatetime.fromtimestamp`.</span>
+
+<span class="sd">        :return: The UTC datetime corresponding to the POSIX timestamp,</span>
+<span class="sd">                with tzinfo None.</span>
+
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
 </div>
@@ -521,7 +525,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.0b0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

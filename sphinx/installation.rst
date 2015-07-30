@@ -17,7 +17,19 @@ Debian
 
 .. code-block:: console
 
-  $ sudo apt-get install build-essential
+  $ apt-get install build-essential
+
+And python 2 headers:
+
+.. code-block:: console
+
+  $ apt-get install python-dev
+
+Or, python 3 headers:
+
+.. code-block:: console
+
+  $ apt-get install python3-dev
 
 For windows , you have to install Microsoft Visual Studio, see:
   `here <http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express/>`_,

@@ -15,6 +15,8 @@ Making development environment:
   $ cd workspace
   $ git clone <Your fork Url>
   $ cd khayyam
+  $ pip install cython
+  $ python setup.py build_ext --inplace
   $ pip install -e .
 
 
@@ -90,13 +92,6 @@ Without nose:
 
   OK
 
-.. code-block:: console
-
-  $ cd path/to/khayyam
-  $ python tests/test_jalali_date.py
-  $ python tests/test_jalali_datetime.py
-  $ python tests/test_teh_tz.py
-
 
 Document authoring
 ^^^^^^^^^^^^^^^^^^
@@ -107,14 +102,22 @@ Clone/checkout the `gh-pages` branch from Github alongside the master branch wor
 
   $ cd path/to/khayyam
   $ cd ..
-  $ git clone -b gh-pages <Your fork url>
+  $ git clone -b gh-pages <Your fork url> kayyam.io
 
-Build documents:
+Build in-project documents: `docs/html`
 
 .. code-block:: console
 
   $ cd path/to/khayyam/sphinx
   $ make html
+
+Build `khayyam.io` documents: `../khayyam.io`
+
+.. code-block:: console
+
+  $ cd path/to/khayyam.io
+  $ make github.io
+
 
 Or watch for changes:
 

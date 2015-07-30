@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Khayyam 2.7.0b2 documentation</title>
+    <title>Installation &mdash; Khayyam 2.9.0b0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.7.0b2',
+        VERSION:     '2.9.0b0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.7.0b2 documentation" href="index.html" />
+    <link rel="top" title="Khayyam 2.9.0b0 documentation" href="index.html" />
     <link rel="next" title="Development &amp; Contribution" href="development.html" />
     <link rel="prev" title="Migration from python’s builtin datetime" href="migration.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="migration.html" title="Migration from python’s builtin datetime"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.0b0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,41 +54,79 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>At first, you have to install cython, it&#8217;s mandatory for build the c extension:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install cython
+</pre></div>
+</div>
+<p>Of course if cython was not available, any preferred C compiler is enough to
+build the included C source codes, for example: GCC, Visual C++, Cygwin &amp; etc ...</p>
+<p>Debian</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install build-essential
+</pre></div>
+</div>
+<p>And python 2 headers:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-dev
+</pre></div>
+</div>
+<p>Or, python 3 headers:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python3-dev
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>For windows , you have to install Microsoft Visual Studio, see:</dt>
+<dd><a class="reference external" href="http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express/">here</a>,
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=44266">here</a>
+and
+<a class="reference external" href="http://www.falatic.com/index.php/120/a-guide-to-building-python-2-x-and-3-x-extensions-for-windows">here</a>.</dd>
+</dl>
+</div>
 <div class="section" id="from-pypi">
 <h2>From PyPI<a class="headerlink" href="#from-pypi" title="Permalink to this headline">¶</a></h2>
 <p>pip:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install khayyam
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install cython
+<span class="gp">$</span> pip install khayyam
 </pre></div>
 </div>
 <p>Specific version:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install &quot;khayyam&gt;=2.0.0&quot;
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install <span class="s2">&quot;khayyam&gt;=2.0.0&quot;</span>
 </pre></div>
 </div>
 <p>easy_install:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ easy_install khayyam
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> easy_install khayyam
 </pre></div>
 </div>
 </div>
 <div class="section" id="from-source">
 <h2>From Source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>$ cd path/to/source/directory
-$ pip install .
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/source/directory
+<span class="gp">$</span> pip install .
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ python setup.py install
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python setup.py install
+</pre></div>
+</div>
+<p>You may use the source folder in-place as a python library in <cite>sys.path</cite>, so you have to
+build the C extensions before using the library:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/source/directory
+<span class="gp">$</span> python setup.py build_ext --inplace
 </pre></div>
 </div>
 <p>Development, editable:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd path/to/source/directory
-$ pip install -e .
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/source/directory
+<span class="gp">$</span> python setup.py build_ext --inplace
+<span class="gp">$</span> nosetests
+<span class="gp">$</span> pip install -e .
 </pre></div>
 </div>
 </div>
 <div class="section" id="from-github">
 <h2>From Github<a class="headerlink" href="#from-github" title="Permalink to this headline">¶</a></h2>
 <p>Latest development code:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install git+https://github.com/pylover/khayyam.git
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install cython
+<span class="gp">$</span> pip install git+https://github.com/pylover/khayyam.git
 </pre></div>
 </div>
 </div>
@@ -103,6 +141,7 @@ $ pip install -e .
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li><a class="reference internal" href="#from-pypi">From PyPI</a></li>
 <li><a class="reference internal" href="#from-source">From Source</a></li>
 <li><a class="reference internal" href="#from-github">From Github</a></li>
@@ -155,7 +194,7 @@ $ pip install -e .
         <li class="right" >
           <a href="migration.html" title="Migration from python’s builtin datetime"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.7.0b2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.0b0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
