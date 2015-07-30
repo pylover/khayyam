@@ -61,6 +61,8 @@ for both versions of python before supplying any pull-request.</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>workspace
 <span class="gp">$</span> git clone &lt;Your fork Url&gt;
 <span class="gp">$</span> <span class="nb">cd </span>khayyam
+<span class="gp">$</span> pip install cython
+<span class="gp">$</span> python setup.py build_ext --inplace
 <span class="gp">$</span> pip install -e .
 </pre></div>
 </div>
@@ -128,12 +130,6 @@ for both versions of python before supplying any pull-request.</p>
 <span class="go">OK</span>
 </pre></div>
 </div>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam
-<span class="gp">$</span> python tests/test_jalali_date.py
-<span class="gp">$</span> python tests/test_jalali_datetime.py
-<span class="gp">$</span> python tests/test_teh_tz.py
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="document-authoring">
@@ -141,12 +137,17 @@ for both versions of python before supplying any pull-request.</p>
 <p>Clone/checkout the <cite>gh-pages</cite> branch from Github alongside the master branch working copy directory :</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam
 <span class="gp">$</span> <span class="nb">cd</span> ..
-<span class="gp">$</span> git clone -b gh-pages &lt;Your fork url&gt;
+<span class="gp">$</span> git clone -b gh-pages &lt;Your fork url&gt; kayyam.io
 </pre></div>
 </div>
-<p>Build documents:</p>
+<p>Build in-project documents: <cite>docs/html</cite></p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam/sphinx
 <span class="gp">$</span> make html
+</pre></div>
+</div>
+<p>Build <cite>khayyam.io</cite> documents: <cite>../khayyam.io</cite></p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam.io
+<span class="gp">$</span> make github.io
 </pre></div>
 </div>
 <p>Or watch for changes:</p>
