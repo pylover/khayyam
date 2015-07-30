@@ -7,9 +7,9 @@ A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with time
 Jump To:
 ^^^^^^^^
 
- * [Documentation](http://khayyam.dobisel.com)
- * [Python package index](https://pypi.python.org/pypi/khayyam)
- * [Source on github](https://github.com/pylover/khayyam)
+ * `Documentation <http://khayyam.dobisel.com>`_
+ * `Python package index <https://pypi.python.org/pypi/khayyam>`_
+ * `Source on github <https://github.com/pylover/khayyam>`_
 
 
 Basic Usage
