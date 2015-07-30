@@ -1,8 +1,6 @@
 
 
 ### To Do
-
-   * cython in build help
   * Doc: Review JalaliDatetime documents
   * Error messages
   * Create TehranDatetime object
@@ -13,6 +11,4 @@
 
   * Doc: Parsing, post processors priority
   * Cython
-    * setup.py pure python fallback switch
     * Distribute pre compiled binaries from some platforms
-  * Alphabetical number format

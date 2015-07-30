@@ -107,6 +107,9 @@ Change Log
 ^^^^^^^^^^
 
 * 2.9.0b0 (2015-07-30)
+    * Using any available C compiler if cython is not available.
+
+* 2.9.0b0 (2015-07-30)
     * All algorithms reimplemented using cython and static typing, so the calculation
         with new C extension is very faster than python pure algorithm implementation.
     * Fallback switch to pure python algorithm implementation, if compiled binaries not available.

@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+import warnings
 from setuptools import setup, find_packages, Extension
-from Cython.Build import cythonize
+try:
+    from Cython.Build import cythonize
+    print('Using Cython to build the extensions.')
+    USE_CYTHON = True
+except ImportError:
+    USE_CYTHON = False
+    warnings.warn('Not using Cython to build the extensions.')
+
 
 __author__ = 'vahid'
 
@@ -11,12 +19,18 @@ with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as 
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
 
-ext_modules = [
+ext = '.pyx' if USE_CYTHON else '.c'
+
+extensions = [
     Extension("khayyam.algorithms_c",
-              sources=["khayyam/algorithms_c.pyx"],
+              sources=["khayyam/algorithms_c%s" % ext],
               libraries=["m"]  # Unix-like specific
               )
 ]
+
+if USE_CYTHON:
+    extensions = cythonize(extensions)
+
 
 setup(
     name="Khayyam",
@@ -31,7 +45,7 @@ setup(
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     license="GPLv3",
     packages=find_packages(),
-    ext_modules=cythonize(ext_modules),
+    ext_modules=extensions,
     test_suite="khayyam.tests",
     tests_require=[
         'rtl'
