@@ -65,7 +65,7 @@ def run_setup(with_extensions=True):
 
         setup_args['ext_modules'] = extensions
 
-    if with_extensions:
+    if not with_extensions:
 
         del setup_args['ext_modules']
 

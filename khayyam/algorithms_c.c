@@ -3,7 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [], 
+        "depends": [],
         "libraries": [
             "m"
         ]
