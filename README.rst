@@ -106,7 +106,7 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
-* 2.9.1b0 (2015-07-30)
+* 2.9.1b1 (2015-07-30)
     * Fixing setup.py bug
 
 * 2.9.1b0 (2015-07-30)
@@ -145,8 +145,6 @@ Change Log
     * `JalaliDate.is_leap` renamed to `JalaliDate.isleap`
     * `JalaliDatetime` Modern properties.
     * README.md updated
-
-
 
 * 2.5.0-beta (2015-07-23)
     * Doc: doctest
