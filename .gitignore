@@ -36,3 +36,4 @@ nosetests.xml
 .idea/*
 sphinx/_build
 sphinx/_inv-cache
+docs/doctest
