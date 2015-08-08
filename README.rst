@@ -106,6 +106,9 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 2.9.1
+    * Release !
+
 * 2.9.1b2
     * encoding all __repr__ functions
 
