@@ -15,11 +15,6 @@ PERSIAN_DIGIT_MAPPING = [
 ]
 
 
-
-######################
-# Parsing & Formatting
-######################
-
 PERSIAN_WEEKDAY_NAMES = {
     0: 'شنبه',
     1: 'یکشنبه',
