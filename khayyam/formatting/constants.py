@@ -152,7 +152,7 @@ MICROSECOND_REGEX = '\d{1,6}'
 UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'
 TZ_NAME_FORMAT_REGEX='.+'
 
-PERSIAN_YEAR_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}' # TODO: Remove zero-padding
+PERSIAN_YEAR_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
 PERSIAN_YEAR_ZERO_PADDED_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
 PERSIAN_SHORT_YEAR_REGEX = '(۰|[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]?)'
 PERSIAN_SHORT_YEAR_ZERO_PADDED_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,2}'
