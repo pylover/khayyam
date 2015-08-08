@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import datetime
 import time
+from khayyam.helpers import force_encoded_string_output
 from khayyam.algorithms_pure import days_in_month, \
     is_leap_year, \
     get_julian_day_from_gregorian, \
@@ -457,6 +459,7 @@ class JalaliDate(object):
     def __str__(self):
         return self.isoformat()
 
+    @force_encoded_string_output
     def __repr__(self):
         return 'khayyam.JalaliDate(%s, %s, %s, %s)' % \
                (self.year, self.month, self.day, self.weekdaynameascii())

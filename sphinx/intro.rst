@@ -34,6 +34,7 @@ And:
   >>> print(JalaliDatetime)
   <class 'khayyam.jalali_datetime.JalaliDatetime'>
 
+
 Instantiating
 ^^^^^^^^^^^^^
 
@@ -71,6 +72,7 @@ Adjusting microseconds:
 
   >>> JalaliDatetime(989, 3, 25, 10, 43, 23, 345453)
   khayyam.JalaliDatetime(989, 3, 25, 10, 43, 23, 345453, Seshanbeh)
+
 
 Current date and time
 ^^^^^^^^^^^^^^^^^^^^^
@@ -136,6 +138,7 @@ And then use it to reshape and change direction of the text
   >>> print(rtl(JalaliDatetime(1394, 5, 1, 17, 45, 40).strftime('%C'))) # doctest: +SKIP
   پنجشنبه 01 مرداد 1394 05:45:40 ب.ظ
 
+
 rprint() function
 ^^^^^^^^^^^^^^^^^
 
@@ -152,6 +155,7 @@ Extending your practice environment by defining a handy print function for RTL:
 
   >>> rprint(JalaliDatetime(1394, 5, 1, 17, 45, 40).strftime('%C')) # doctest: +SKIP
   پنجشنبه 01 مرداد 1394 05:45:40 ب.ظ
+
 
 Formatting & Parsing
 --------------------
@@ -231,6 +235,7 @@ Converting to gregorian calendar, python's native
   >>> now.todatetime()
   datetime.datetime(2015, 7, 22, 15, 38, 6, 37269)
 
+
 And vise-versa:
 
 .. doctest::
@@ -239,7 +244,7 @@ And vise-versa:
   khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)
 
   >>> JalaliDatetime(datetime(2015, 7, 22, 14, 47, 9, 821830, TehranTimezone()))
-  khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)
+  khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30 dst:60, Chaharshanbeh)
 
   >>> JalaliDate(date(2015, 7, 22))
   khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)

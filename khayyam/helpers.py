@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+import sys
 import re
 from .compat import get_unicode
 import warnings
 __author__ = 'vahid'
+
+
+def force_encoded_string_output(func):
+    if sys.version_info.major < 3:
+        def _func(*args, **kwargs):
+            return func(*args, **kwargs).encode('utf-8')
+        return _func
+    else:
+        return func
 
 
 def deprecated(func):
@@ -26,3 +37,5 @@ def replace_if_match(data, pattern, new):
             new = new()
         return data.replace(pattern, get_unicode(new))
     return data
+
+

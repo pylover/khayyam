@@ -106,6 +106,9 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 2.9.1b2
+    * encoding all __repr__ functions
+
 * 2.9.1b1 (2015-07-30)
     * Fixing setup.py bug
 

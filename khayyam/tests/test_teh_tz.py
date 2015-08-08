@@ -21,6 +21,12 @@ class TestTehTz(unittest.TestCase):
         self.assertEqual(dst_aware_time.dst(), timedelta(0), "invalid dst")
         self.assertIsNone(naive_time.dst(), "invalid dst")
 
+    def test_repr(self):
+        t = TehranTimezone()
+        self.assertEqual(type(repr(t)), str)
+        self.assertEqual(repr(t), '+03:30 dst:60')
+
+
 
 if __name__ == '__main__':
     unittest.main()        

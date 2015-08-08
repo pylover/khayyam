@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import tzinfo, timedelta
+from khayyam.helpers import force_encoded_string_output
 __author__ = 'vahid'
 
 ZERO_DELTA = timedelta(0)
@@ -9,6 +11,7 @@ DSTDIFF = DSTOFFSET - STDOFFSET
 
 
 class Timezone(tzinfo):
+
     def __init__(self, offset, dst_offset=None, dst_checker=None, name=None):
         assert (isinstance(offset, timedelta))
         self._offset = offset
@@ -49,14 +52,16 @@ class Timezone(tzinfo):
         else:
             return ZERO_DELTA
 
-    def __repr__(self):
+    def __unicode__(self):
         off = self._offset
         return '%s%.2d:%.2d%s' % (
             '+' if off.total_seconds() >= 0 else '-',
             int(off.total_seconds() / 3600),
             int((off.total_seconds() % 3600) / 60),
-            ('±%d' % (self._dst_offset.total_seconds() / 60)) if self._dst_offset else ''
+            (' dst:%d' % (self._dst_offset.total_seconds() / 60)) if self._dst_offset else ''
         )
+
+    __repr__ = force_encoded_string_output(__unicode__)
 
     def tzname(self, dt):
         if self._name:

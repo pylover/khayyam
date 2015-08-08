@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import timedelta, time, datetime
 from khayyam.algorithms_pure import gregorian_date_from_julian_day
 import khayyam
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
+from khayyam.helpers import force_encoded_string_output
 __author__ = 'vahid'
 
 
@@ -373,7 +375,7 @@ class JalaliDatetime(khayyam.JalaliDate):
     # Special Members #
     ###################
 
-    def __repr__(self):
+    def __unicode__(self):
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
             self.year,
             self.month,
@@ -382,9 +384,12 @@ class JalaliDatetime(khayyam.JalaliDate):
             self.minute,
             self.second,
             self.microsecond,
-            ', tzinfo=%s' % self.tzinfo if self.tzinfo else '',
+            ', tzinfo=%s' % self.tzinfo.__unicode__() if self.tzinfo else '',
             self.weekdaynameascii()
         )
+
+
+    __repr__ = force_encoded_string_output(__unicode__)
 
     def __str__(self):
         return self.isoformat(sep=' ')
