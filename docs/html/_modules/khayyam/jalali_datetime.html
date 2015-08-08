@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.jalali_datetime &mdash; Khayyam 2.9.1b1 documentation</title>
+    <title>khayyam.jalali_datetime &mdash; Khayyam 2.9.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.9.1b1',
+        VERSION:     '2.9.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.9.1b1 documentation" href="../../index.html" />
+    <link rel="top" title="Khayyam 2.9.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.1b1 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -48,10 +48,12 @@
             
   <h1>Source code for khayyam.jalali_datetime</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">khayyam.algorithms_pure</span> <span class="kn">import</span> <span class="n">gregorian_date_from_julian_day</span>
 <span class="kn">import</span> <span class="nn">khayyam</span>
 <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="n">AM_PM</span><span class="p">,</span> <span class="n">AM_PM_ASCII</span>
+<span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="kn">import</span> <span class="n">force_encoded_string_output</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;vahid&#39;</span>
 
 
@@ -422,7 +424,7 @@
     <span class="c"># Special Members #</span>
     <span class="c">###################</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;khayyam.JalaliDatetime(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
@@ -431,9 +433,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
-            <span class="s">&#39;, tzinfo=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+            <span class="s">&#39;, tzinfo=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weekdaynameascii</span><span class="p">()</span>
         <span class="p">)</span>
+
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">force_encoded_string_output</span><span class="p">(</span><span class="n">__unicode__</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span>
@@ -525,7 +530,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.1b1 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 2.9.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

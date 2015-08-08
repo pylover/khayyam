@@ -2,6 +2,7 @@
 import os
 import re
 import warnings
+import platform
 from setuptools import setup, find_packages, Extension
 import traceback
 __author__ = 'vahid'
@@ -53,10 +54,16 @@ def run_setup(with_extensions=True):
             USE_CYTHON = False
             warnings.warn('Not using Cython to build the extensions.')
 
+        libraries = []
+
+        if platform.system() != 'Windows':
+            libraries.append('m') # Unix-like specific
+
+
         extensions = [
             Extension("khayyam.algorithms_c",
                       sources=["khayyam/algorithms_c%s" % ('.pyx' if USE_CYTHON else '.c')],
-                      libraries=["m"]  # Unix-like specific
+                      libraries=libraries
                       )
         ]
 

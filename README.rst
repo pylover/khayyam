@@ -1,9 +1,6 @@
 khayyam
 =======
 
-A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with timezone, DST
-(daylight-saving), full formatting & parsing support for python 2 & 3.
-
 Jump To:
 ^^^^^^^^
 
@@ -59,7 +56,7 @@ Converting
     khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, Chaharshanbeh)
   
     >>> JalaliDatetime(datetime(2015, 7, 22, 14, 47, 9, 821830, TehranTimezone()))
-    khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30±60, Chaharshanbeh)
+    khayyam.JalaliDatetime(1394, 4, 31, 14, 47, 9, 821830, tzinfo=+03:30 dst:60, Chaharshanbeh)
   
     >>> JalaliDate(date(2015, 7, 22))
     khayyam.JalaliDate(1394, 4, 31, Chaharshanbeh)
@@ -105,6 +102,9 @@ Comparison
 
 Change Log
 ^^^^^^^^^^
+
+* 2.9.3
+    * setup.py for windows
 
 * 2.9.1
     * Release !
