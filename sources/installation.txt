@@ -10,7 +10,7 @@ At first, you have to install cython, it's mandatory for build the c extension:
 
   $ pip install cython
 
-Of course if cython was not available, any preferred C compiler is enough to
+Of course, if cython was not available, any preferred C compiler is enough to
 build the included C source codes, for example: GCC, Visual C++, Cygwin & etc ... ::
 
 Debian
@@ -32,10 +32,11 @@ Or, python 3 headers:
   $ apt-get install python3-dev
 
 For windows , you have to install Microsoft Visual Studio, see:
-  `here <http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express/>`_,
-  `here <https://www.microsoft.com/en-us/download/details.aspx?id=44266>`_
-  and
-  `here <http://www.falatic.com/index.php/120/a-guide-to-building-python-2-x-and-3-x-extensions-for-windows>`_.
+
+`here <http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express/>`_,
+`here <https://www.microsoft.com/en-us/download/details.aspx?id=44266>`_
+and
+`here <http://www.falatic.com/index.php/120/a-guide-to-building-python-2-x-and-3-x-extensions-for-windows>`_.
 
 
 From PyPI
@@ -45,14 +46,14 @@ pip:
 
 .. code-block:: console
 
-  $ pip install cython
+  $ pip install cython # Optional
   $ pip install khayyam
 
 Specific version:
 
 .. code-block:: console
 
-  $ pip install "khayyam>=2.0.0"
+  $ pip install "khayyam>=2.9.6"
 
 easy_install:
 
