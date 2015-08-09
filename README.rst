@@ -22,6 +22,9 @@ Basic Usage
 Current date and time
 ^^^^^^^^^^^^^^^^^^^^^
 
+    >>> print(JalaliDatetime.now())
+    khayyam.JalaliDatetime(1394, 5, 18, 16, 4, 48, 628383, Yekshanbeh)
+
     >>> print(JalaliDatetime.now(TehranTimezone()) - timedelta(days=6*30))
     1393-11-02 20:01:11.663719+03:30
   
