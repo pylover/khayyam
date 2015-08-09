@@ -10,5 +10,3 @@
 ### Future plans
 
   * Doc: Parsing, post processors priority
-  * Cython
-    * Distribute pre compiled binaries from some platforms
