@@ -34,7 +34,7 @@ Current date and time
 
 Parsing & Formatting
 ^^^^^^^^^^^^^^^^^^^^
-  
+
     >>> print(JalaliDatetime.now().strftime('%C'))
     شنبه ۳ مرداد ۱۳۹۴ ۰۲:۳۷:۵۲ ب.ظ
     
@@ -105,6 +105,9 @@ Comparison
 
 Change Log
 ^^^^^^^^^^
+
+* 2.9.7
+    * Fixing problem in setup.py in python3 #15
 
 * 2.9.3
     * setup.py for windows

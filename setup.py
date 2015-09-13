@@ -21,7 +21,7 @@ setup_args = dict(
                 "(daylight-saving), full formatting & parsing support for python 2 & 3.",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
-    long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
+    long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst'), encoding='UTF-8').read(),
     license="GPLv3",
     packages=find_packages(),
     test_suite="khayyam.tests",
