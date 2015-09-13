@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+import sys
 import warnings
 import platform
 from setuptools import setup, find_packages, Extension
@@ -10,6 +11,11 @@ __author__ = 'vahid'
 # reading package version (same way sqlalchemy does)
 with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
+
+if sys.version_info.major == 3:
+    readme = lambda fn: open(fn, encoding='UTF-8').read()
+else:
+    readme = lambda fn: open(fn).read()
 
 setup_args = dict(
     name="Khayyam",
@@ -21,7 +27,7 @@ setup_args = dict(
                 "(daylight-saving), full formatting & parsing support for python 2 & 3.",
     zip_safe=True,
     keywords="Khayyam persian jalali date time datetime conversion",
-    long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst'), encoding='UTF-8').read(),
+    long_description=readme(os.path.join(os.path.dirname(__file__), 'README.rst')),
     license="GPLv3",
     packages=find_packages(),
     test_suite="khayyam.tests",
