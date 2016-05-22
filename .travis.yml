@@ -15,10 +15,9 @@ python:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install gdb python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dbg || true
+  - sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true
   - sudo pip install cython
   - sudo pip install rtl
-  - dpkg -l gdb || true
 
 install:
   - sudo pip install -e .
