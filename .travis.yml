@@ -3,7 +3,7 @@ language: c
 
 env:
   - PYTHON=python PYSUF='' PYVER=2.7
-  - PYTHON=python3 PYSUF='3' PYVER=3.3
+  - PYTHON=python3 PYSUF='3' PYVER=3.2
 
 #
 #python:
