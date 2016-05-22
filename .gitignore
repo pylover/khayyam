@@ -16,8 +16,6 @@ var
 sdist
 develop-eggs
 .installed.cfg
-/docs/doctrees
-lib
 lib64
 
 # Installer logs
@@ -33,10 +31,19 @@ nosetests.xml
 
 # Mr Developer
 .mr.developer.cfg
+
+# Eclipse
 .project
+
+# Aptana/PyDev
 .pydevproject
+
+# Pycharm
 .idea/*
+
 sphinx/_build
 sphinx/_inv-cache
 docs/doctest
+docs/doctrees
+docs/html
 _site
