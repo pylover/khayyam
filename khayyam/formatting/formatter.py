@@ -4,6 +4,7 @@ from khayyam.formatting import constants as consts
 from .directives import DATE_FORMAT_DIRECTIVES
 __author__ = 'vahid'
 
+
 class BaseFormatter(object):
     pass
 
@@ -164,4 +165,3 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
             from .directives import DATETIME_FORMAT_DIRECTIVES
             directive_db = DATETIME_FORMAT_DIRECTIVES
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
-

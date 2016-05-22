@@ -15,9 +15,13 @@ with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as 
 
 
 if sys.version_info.major == 3:
-    readme = lambda fn: open(fn, encoding='UTF-8').read()
+    def readme(fn):
+        with open(fn, encoding='UTF-8') as f:
+            return f.read()
 else:
-    readme = lambda fn: open(fn).read()
+    def readme(fn):
+        with open(fn) as f:
+            return f.read()
 
 
 WARNING_HEADER = '#' * 40
@@ -59,11 +63,17 @@ setup_args = dict(
 def run_setup(with_extensions=True):
     if with_extensions:
         try:
+            # noinspection PyPackageRequirements
             from Cython.Build import cythonize
             print('Using Cython to build the extensions.')
-            USE_CYTHON = True
+            use_cython = True
         except ImportError:
-            USE_CYTHON = False
+            use_cython = False
+
+            # noinspection PyUnusedLocal
+            def cythonize(*a, **kw):
+                raise ImportError('Cython is not installed.')
+
             warnings.warn(
                 '\n%s\nNot using Cython to build the extensions.\nUsing available C compiler instead.\n%s' % (
                     WARNING_HEADER, WARNING_HEADER
@@ -72,16 +82,16 @@ def run_setup(with_extensions=True):
         libraries = []
 
         if platform.system() != 'Windows':
-            libraries.append('m') # Unix-like specific
+            libraries.append('m')  # Unix-like specific
 
         extensions = [
             Extension("khayyam.algorithms_c",
-                      sources=["khayyam/algorithms_c%s" % ('.pyx' if USE_CYTHON else '.c')],
+                      sources=["khayyam/algorithms_c%s" % ('.pyx' if use_cython else '.c')],
                       libraries=libraries
                       )
         ]
 
-        if USE_CYTHON:
+        if use_cython:
             extensions = cythonize(extensions)
 
         setup_args['ext_modules'] = extensions
@@ -104,13 +114,10 @@ def warning_c_extention():
 
 try:
     run_setup()
-except Exception as ex:
+
+# noinspection PyBroadException
+except:
     traceback.print_exc()
-
     warning_c_extention()
-
     run_setup(False)
-
     warning_c_extention()
-
-
