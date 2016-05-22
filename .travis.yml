@@ -16,11 +16,7 @@ python:
 before_install:
   - sudo apt-get update
   - sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true
-  - pip install cython
-  - pip install sphinx
-  - pip install coverage
-  - pip install coveralls
-  - pip install rtl
+  - pip install -r requirement.txt
 
 install:
   - pip install -e .

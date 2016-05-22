@@ -1,0 +1,5 @@
+cython
+rtl
+sphinx
+coverage
+coveralls
