@@ -28,8 +28,6 @@ class PersianNumberDirective(Directive):
         else:
             return eng_to_persian(i)
 
-
-
     def post_parser(self, ctx, formatter):
         exp = ctx[self.name]
         if exp.strip() != '':

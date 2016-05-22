@@ -8,14 +8,20 @@ from setuptools import setup, find_packages, Extension
 import traceback
 __author__ = 'vahid'
 
+
 # reading package version (same way sqlalchemy does)
 with open(os.path.join(os.path.dirname(__file__), 'khayyam', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
+
 
 if sys.version_info.major == 3:
     readme = lambda fn: open(fn, encoding='UTF-8').read()
 else:
     readme = lambda fn: open(fn).read()
+
+
+WARNING_HEADER = '#' * 40
+
 
 setup_args = dict(
     name="Khayyam",
@@ -58,13 +64,15 @@ def run_setup(with_extensions=True):
             USE_CYTHON = True
         except ImportError:
             USE_CYTHON = False
-            warnings.warn('Not using Cython to build the extensions.')
+            warnings.warn(
+                '\n%s\nNot using Cython to build the extensions.\nUsing available C compiler instead.\n%s' % (
+                    WARNING_HEADER, WARNING_HEADER
+                ))
 
         libraries = []
 
         if platform.system() != 'Windows':
             libraries.append('m') # Unix-like specific
-
 
         extensions = [
             Extension("khayyam.algorithms_c",
@@ -84,22 +92,25 @@ def run_setup(with_extensions=True):
     setup(**setup_args)
 
 
+def warning_c_extention():
+    warnings.warn(
+        '\n%s\n%s\n%s' % (
+            WARNING_HEADER,
+            "WARNING: The C extension could not be compiled.\n"
+            "WARNING: Speedups are not enabled.",
+            WARNING_HEADER
+        ))
+
+
 try:
     run_setup()
 except Exception as ex:
     traceback.print_exc()
-    BUILD_EXT_WARNING = ("WARNING: The C extension could not be compiled, "
-                         "speedups are not enabled.")
-    print('*' * 75)
-    print(BUILD_EXT_WARNING)
-    print("Failure information, if any, is above.")
-    print("I'm retrying the build without the C extension now.")
-    print('*' * 75)
+
+    warning_c_extention()
 
     run_setup(False)
 
-    print('*' * 75)
-    print(BUILD_EXT_WARNING)
-    print("Plain-Python installation succeeded.")
-    print('*' * 75)
+    warning_c_extention()
+
 

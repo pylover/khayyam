@@ -1,28 +1,20 @@
 
-language: c
+language: python
 
-env:
-  - PYTHON=python PYSUF='' PYVER=2.7 PIPVER=''
-  - PYTHON=python3 PYSUF='3' PYVER=3.2 PIPVER='==7.1.2'
+#env:
+#  - PYTHON=python PYSUF='' PYVER=2.7 PIPVER=''
+#  - PYTHON=python3 PYSUF='3' PYVER=3.2 PIPVER='==7.1.2'
 
-#
-#python:
-#  - "2.6"
-#  - "2.7"
-#  - "3.2"
-#  - "3.3"
-#  - "3.4"
-#  - "3.5"
-#  - "pypy"
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "pypy"
 
 install:
-  - sudo apt-get update
-  - sudo apt-get install $PYTHON-dev
-  - sudo apt-get install $PYTHON-setuptools
-  - sudo easy_install$PYSUF pip$PIPVER
-  - sudo pip$PYVER install cython
-  - sudo pip$PYVER install nose
-  - sudo pip$PYVER install rtl
-  - sudo pip$PYVER install -e .
+  - pip install cython rtl
+  - sudo pip install -e .
 
 script: nosetests

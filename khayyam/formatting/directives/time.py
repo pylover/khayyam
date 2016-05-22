@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .persian import PersianNumberDirective
-from khayyam.formatting import constants as consts
 __author__ = 'vahid'
+
 
 class PersianHour24Directive(PersianNumberDirective):
 

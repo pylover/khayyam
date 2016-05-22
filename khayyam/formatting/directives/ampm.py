@@ -4,6 +4,7 @@ from khayyam.formatting import constants as consts
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
 
+
 class BaseAmPmDirective(Directive):
     def __init__(self, key, name, regex):
         super(BaseAmPmDirective, self).__init__(key, name, regex, get_unicode)
@@ -32,7 +33,6 @@ class AmPmDirective(BaseAmPmDirective):
 
 
 class AmPmASCIIDirective(BaseAmPmDirective):
-
 
     def is_am(self, ctx):
         return ctx[self.name] == consts.AM_PM_ASCII[0]

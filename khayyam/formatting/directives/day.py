@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
 from .persian import PersianNumberDirective
-from khayyam.formatting import constants as consts
 from khayyam.algorithms_pure import days_in_year
 from datetime import timedelta
 __author__ = 'vahid'
+
 
 class PersianDayDirective(PersianNumberDirective):
 
@@ -34,8 +34,10 @@ class DayOfYearDirective(Directive):
         max_days = days_in_year(ctx['year'])
         if _dayofyear > max_days:
             raise ValueError(
-                'Invalid dayofyear: %.3d for year %.4d. Valid values are: 1-%s' \
-                 % (_dayofyear, ctx['year'], max_days))
+                'Invalid dayofyear: %.3d for year %.4d. Valid values are: 1-%s' % (
+                    _dayofyear,
+                    ctx['year'],
+                    max_days))
         from khayyam import JalaliDate
         d = JalaliDate(year=ctx['year']) + timedelta(days=_dayofyear-1)
         ctx.update(dict(

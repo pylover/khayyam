@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
-from khayyam.formatting import constants as consts
 from .persian import PersianNumberDirective
 __author__ = 'vahid'
 
@@ -33,7 +32,5 @@ class PersianShortYearDirective(PersianNumberDirective):
 
     def post_parser(self, ctx, formatter):
         super(PersianShortYearDirective, self).post_parser(ctx, formatter)
-        # from khayyam import JalaliDate
-        # ctx['year'] = int(JalaliDate.today().year / 100) * 100 + ctx['shortyear']
         if self.name in ctx and ctx[self.name] is not None:
             ctx['shortyear'] = ctx[self.name]

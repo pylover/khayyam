@@ -2,6 +2,7 @@
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
 
+
 class Directive(object):
     def __init__(self, key, name, regex, type_, formatter=None, post_parser=None):
         self.key = key

@@ -40,7 +40,7 @@ class JalaliDateFormatter(BaseFormatter):
         self._parser_regex = self._create_parser_regex()
 
     def _create_parser_regex(self):
-        regex = '^'
+        regex = u'^'
         index = 0
         for m in re.finditer(consts.FORMAT_DIRECTIVE_REGEX, self.format_string):
             directive_key = m.group()[1:]
@@ -50,15 +50,15 @@ class JalaliDateFormatter(BaseFormatter):
             if index < m.start():
                 regex += self.format_string[index:m.start()]
             index = m.end()
-            if directive.key == '%':
-                regex += '%'
+            if directive.key == u'%':
+                regex += u'%'
                 continue
-            regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
+            regex += u'(?P<%(group_name)s>%(regexp)s)' % dict(
                 group_name=directive.key,
                 regexp=directive.regex
             )
         regex += self.format_string[index:]
-        regex += '$'
+        regex += u'$'
         return regex
 
     @property
@@ -91,14 +91,14 @@ class JalaliDateFormatter(BaseFormatter):
     def _parse(self, date_string):
         m = re.match(self.parser_regex, self.filter_persian_digit(date_string))
         if not m:
-            raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
+            raise ValueError(u"time data '%s' does not match format '%s' with generated regex: '%s'" % (
                 date_string, self.format_string, self.parser_regex))
         result = {}
         for directive_key, v in m.groupdict().items():
             if directive_key == 'percent':
                 continue
             if directive_key not in self.directives_by_key:
-                raise ValueError('directive key: %%%s was not exists.' % directive_key)
+                raise ValueError(u'directive key: %%%s was not exists.' % directive_key)
             directive = self.directives_by_key[directive_key]
             if not directive.type_:
                 continue
