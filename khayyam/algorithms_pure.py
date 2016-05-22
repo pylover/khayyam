@@ -5,16 +5,18 @@ __author__ = 'vahid'
 
 
 def get_julian_day_from_gregorian(year, month, day):
+    is_leap = False
     if year / 4.0 == round(year / 4.0):
         if year / 100.0 == round(year / 100.0):
             if year / 400.0 == round(year / 400.0):
-                # Leap year checking #
-                if month == 2:
-                    assert day <= 29, 'Invalid date'
+                is_leap = True
         else:
-            # Leap year #
-            if month == 2:
-                assert day <= 29, 'Invalid date'
+            is_leap = True
+
+    if month == 2:
+        max_days = 29 if is_leap else 28
+        if day > max_days:
+            raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
 
     year = float(year)
     month = float(month)

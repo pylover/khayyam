@@ -4,9 +4,16 @@ from khayyam import algorithms_c as alg_c
 from khayyam import algorithms_pure as alg_p
 __author__ = 'vahid'
 
+
 class TestCAlgorithms(unittest.TestCase):
 
     def test_get_julian_day_from_gregorian(self):
+        # self.assertRaises(ValueError, alg_c.get_julian_day_from_gregorian, 2016, 2, 30)
+        self.assertRaises(ValueError, alg_p.get_julian_day_from_gregorian, 2016, 2, 30)
+
+        # self.assertRaises(ValueError, alg_c.get_julian_day_from_gregorian, 2015, 2, 29)
+        self.assertRaises(ValueError, alg_p.get_julian_day_from_gregorian, 2015, 2, 29)
+
         for i in range(3000):
             self.assertEqual(
                 alg_c.get_julian_day_from_gregorian(i, 1, 1),
@@ -49,6 +56,8 @@ class TestCAlgorithms(unittest.TestCase):
 
     def test_gregorian_date_from_julian_day(self):
         jd = 0
+        # self.assertRaises(ValueError, alg_c.gregorian_date_from_julian_day, jd)
+        self.assertRaises(ValueError, alg_p.gregorian_date_from_julian_day, jd)
         while jd < 365 * 200:
             jd += 1
             self.assertEqual(
@@ -62,6 +71,18 @@ class TestCAlgorithms(unittest.TestCase):
             self.assertEqual(
                 alg_c.jalali_date_from_gregorian_date(*alg_c.gregorian_date_from_julian_day(jd)),
                 alg_p.jalali_date_from_gregorian_date(*alg_p.gregorian_date_from_julian_day(jd)),)
+
+    def test_algorithm_import(self):
+        from khayyam import algorithms
+        self.assertTrue(hasattr(algorithms, 'is_leap_year'))
+        self.assertTrue(hasattr(algorithms, 'days_in_year'))
+        self.assertTrue(hasattr(algorithms, 'days_in_month'))
+        self.assertTrue(hasattr(algorithms, 'get_julian_day_from_gregorian'))
+        self.assertTrue(hasattr(algorithms, 'julian_day_from_jalali_date'))
+        self.assertTrue(hasattr(algorithms, 'jalali_date_from_julian_day'))
+        self.assertTrue(hasattr(algorithms, 'gregorian_date_from_julian_day'))
+        self.assertTrue(hasattr(algorithms, 'jalali_date_from_gregorian_date'))
+
 
 if __name__ == '__main__':
     unittest.main()

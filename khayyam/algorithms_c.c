@@ -612,10 +612,8 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
 #endif
 
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
@@ -670,6 +668,11 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
+/* WriteUnraisableException.proto */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil);
+
 /* None.proto */
 static CYTHON_INLINE long __Pyx_mod_long(long, long);
 
@@ -678,9 +681,6 @@ static CYTHON_INLINE long __Pyx_div_long(long, long);
 
 /* None.proto */
 static CYTHON_INLINE double __Pyx_mod_double(double, double);
-
-/* RaiseException.proto */
-static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
 /* CodeObjectCache.proto */
 typedef struct {
@@ -843,13 +843,13 @@ static const char __pyx_k_month[] = "month";
 static const char __pyx_k_round[] = "round";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_Invalid_Date[] = "Invalid Date";
-static const char __pyx_k_Invalid_date[] = "Invalid date";
 static const char __pyx_k_Invalid_month_s[] = "Invalid month: %s";
 static const char __pyx_k_Cannot_calculate_month[] = "Cannot calculate month";
+static const char __pyx_k_Invalid_day_s_it_must_be_s[] = "Invalid day: %s, it must be <= %s";
 static const char __pyx_k_Month_must_be_between_1_and_12[] = "Month must be between 1 and 12";
 static PyObject *__pyx_kp_s_Cannot_calculate_month;
 static PyObject *__pyx_kp_s_Invalid_Date;
-static PyObject *__pyx_kp_s_Invalid_date;
+static PyObject *__pyx_kp_s_Invalid_day_s_it_must_be_s;
 static PyObject *__pyx_kp_s_Invalid_month_s;
 static PyObject *__pyx_kp_s_Month_must_be_between_1_and_12;
 static PyObject *__pyx_n_s_ValueError;
@@ -876,10 +876,10 @@ static PyObject *__pyx_int_2820;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 
-/* "khayyam/algorithms_c.pyx":4
- * from cpython cimport bool
+/* "khayyam/algorithms_c.pyx":6
  * 
- * cpdef double get_julian_day_from_gregorian(int year, int month, int day):             # <<<<<<<<<<<<<<
+ * 
+ * cpdef double get_julian_day_from_gregorian(int year, int month, int day) except -1:             # <<<<<<<<<<<<<<
  *     cdef:
  *         double _year = year
  */
@@ -891,16 +891,19 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   double __pyx_v__day;
   double __pyx_v__century;
   double __pyx_v_result;
+  PyBoolObject *__pyx_v_is_leap = 0;
+  long __pyx_v_max_days;
   double __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   int __pyx_t_4;
+  long __pyx_t_5;
   __Pyx_RefNannySetupContext("get_julian_day_from_gregorian", 0);
 
-  /* "khayyam/algorithms_c.pyx":6
- * cpdef double get_julian_day_from_gregorian(int year, int month, int day):
+  /* "khayyam/algorithms_c.pyx":8
+ * cpdef double get_julian_day_from_gregorian(int year, int month, int day) except -1:
  *     cdef:
  *         double _year = year             # <<<<<<<<<<<<<<
  *         double _month = month
@@ -908,7 +911,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v__year = __pyx_v_year;
 
-  /* "khayyam/algorithms_c.pyx":7
+  /* "khayyam/algorithms_c.pyx":9
  *     cdef:
  *         double _year = year
  *         double _month = month             # <<<<<<<<<<<<<<
@@ -917,7 +920,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v__month = __pyx_v_month;
 
-  /* "khayyam/algorithms_c.pyx":8
+  /* "khayyam/algorithms_c.pyx":10
  *         double _year = year
  *         double _month = month
  *         double _day = day             # <<<<<<<<<<<<<<
@@ -926,147 +929,132 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v__day = __pyx_v_day;
 
-  /* "khayyam/algorithms_c.pyx":9
+  /* "khayyam/algorithms_c.pyx":11
  *         double _month = month
  *         double _day = day
  *         double _century = 0             # <<<<<<<<<<<<<<
  *         double result = 0
- * 
+ *         bool is_leap = False
  */
   __pyx_v__century = 0.0;
 
-  /* "khayyam/algorithms_c.pyx":10
+  /* "khayyam/algorithms_c.pyx":12
  *         double _day = day
  *         double _century = 0
  *         double result = 0             # <<<<<<<<<<<<<<
+ *         bool is_leap = False
  * 
- *     if year / 4.0 == round(year / 4.0):
  */
   __pyx_v_result = 0.0;
 
-  /* "khayyam/algorithms_c.pyx":12
+  /* "khayyam/algorithms_c.pyx":13
+ *         double _century = 0
  *         double result = 0
+ *         bool is_leap = False             # <<<<<<<<<<<<<<
+ * 
+ *     if year / 4.0 == round(year / 4.0):
+ */
+  __Pyx_INCREF(Py_False);
+  __pyx_v_is_leap = ((PyBoolObject *)Py_False);
+
+  /* "khayyam/algorithms_c.pyx":15
+ *         bool is_leap = False
  * 
  *     if year / 4.0 == round(year / 4.0):             # <<<<<<<<<<<<<<
  *         if year / 100.0 == round(year / 100.0):
  *             if year / 400.0 == round(year / 400.0):
  */
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 4.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_4) {
 
-    /* "khayyam/algorithms_c.pyx":13
+    /* "khayyam/algorithms_c.pyx":16
  * 
  *     if year / 4.0 == round(year / 4.0):
  *         if year / 100.0 == round(year / 100.0):             # <<<<<<<<<<<<<<
  *             if year / 400.0 == round(year / 400.0):
  *                 # Leap year checking #
  */
-    __pyx_t_3 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 100.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "khayyam/algorithms_c.pyx":14
+      /* "khayyam/algorithms_c.pyx":17
  *     if year / 4.0 == round(year / 4.0):
  *         if year / 100.0 == round(year / 100.0):
  *             if year / 400.0 == round(year / 400.0):             # <<<<<<<<<<<<<<
  *                 # Leap year checking #
- *                 if month == 2:
+ *                 is_leap = True
  */
-      __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_1 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_2 = PyFloat_FromDouble((__pyx_v_year / 400.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (__pyx_t_4) {
 
-        /* "khayyam/algorithms_c.pyx":16
+        /* "khayyam/algorithms_c.pyx":19
  *             if year / 400.0 == round(year / 400.0):
  *                 # Leap year checking #
- *                 if month == 2:             # <<<<<<<<<<<<<<
- *                     assert day <= 29, 'Invalid date'
- *         else:
- */
-        __pyx_t_4 = ((__pyx_v_month == 2) != 0);
-        if (__pyx_t_4) {
-
-          /* "khayyam/algorithms_c.pyx":17
- *                 # Leap year checking #
- *                 if month == 2:
- *                     assert day <= 29, 'Invalid date'             # <<<<<<<<<<<<<<
+ *                 is_leap = True             # <<<<<<<<<<<<<<
  *         else:
  *             # Leap year #
  */
-          #ifndef CYTHON_WITHOUT_ASSERTIONS
-          if (unlikely(!Py_OptimizeFlag)) {
-            if (unlikely(!((__pyx_v_day <= 29) != 0))) {
-              PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Invalid_date);
-              __PYX_ERR(0, 17, __pyx_L1_error)
-            }
-          }
-          #endif
+        __Pyx_INCREF(Py_True);
+        __Pyx_DECREF_SET(__pyx_v_is_leap, ((PyBoolObject *)Py_True));
 
-          /* "khayyam/algorithms_c.pyx":16
- *             if year / 400.0 == round(year / 400.0):
- *                 # Leap year checking #
- *                 if month == 2:             # <<<<<<<<<<<<<<
- *                     assert day <= 29, 'Invalid date'
- *         else:
- */
-        }
-
-        /* "khayyam/algorithms_c.pyx":14
+        /* "khayyam/algorithms_c.pyx":17
  *     if year / 4.0 == round(year / 4.0):
  *         if year / 100.0 == round(year / 100.0):
  *             if year / 400.0 == round(year / 400.0):             # <<<<<<<<<<<<<<
  *                 # Leap year checking #
- *                 if month == 2:
+ *                 is_leap = True
  */
       }
 
-      /* "khayyam/algorithms_c.pyx":13
+      /* "khayyam/algorithms_c.pyx":16
  * 
  *     if year / 4.0 == round(year / 4.0):
  *         if year / 100.0 == round(year / 100.0):             # <<<<<<<<<<<<<<
@@ -1076,46 +1064,21 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
       goto __pyx_L4;
     }
 
-    /* "khayyam/algorithms_c.pyx":20
+    /* "khayyam/algorithms_c.pyx":22
  *         else:
  *             # Leap year #
- *             if month == 2:             # <<<<<<<<<<<<<<
- *                 assert day <= 29, 'Invalid date'
+ *             is_leap = True             # <<<<<<<<<<<<<<
  * 
+ *     if month == 2:
  */
     /*else*/ {
-      __pyx_t_4 = ((__pyx_v_month == 2) != 0);
-      if (__pyx_t_4) {
-
-        /* "khayyam/algorithms_c.pyx":21
- *             # Leap year #
- *             if month == 2:
- *                 assert day <= 29, 'Invalid date'             # <<<<<<<<<<<<<<
- * 
- * 
- */
-        #ifndef CYTHON_WITHOUT_ASSERTIONS
-        if (unlikely(!Py_OptimizeFlag)) {
-          if (unlikely(!((__pyx_v_day <= 29) != 0))) {
-            PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Invalid_date);
-            __PYX_ERR(0, 21, __pyx_L1_error)
-          }
-        }
-        #endif
-
-        /* "khayyam/algorithms_c.pyx":20
- *         else:
- *             # Leap year #
- *             if month == 2:             # <<<<<<<<<<<<<<
- *                 assert day <= 29, 'Invalid date'
- * 
- */
-      }
+      __Pyx_INCREF(Py_True);
+      __Pyx_DECREF_SET(__pyx_v_is_leap, ((PyBoolObject *)Py_True));
     }
     __pyx_L4:;
 
-    /* "khayyam/algorithms_c.pyx":12
- *         double result = 0
+    /* "khayyam/algorithms_c.pyx":15
+ *         bool is_leap = False
  * 
  *     if year / 4.0 == round(year / 4.0):             # <<<<<<<<<<<<<<
  *         if year / 100.0 == round(year / 100.0):
@@ -1124,7 +1087,94 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   }
 
   /* "khayyam/algorithms_c.pyx":24
+ *             is_leap = True
  * 
+ *     if month == 2:             # <<<<<<<<<<<<<<
+ *         max_days = 29 if is_leap else 28
+ *         if day > max_days:
+ */
+  __pyx_t_4 = ((__pyx_v_month == 2) != 0);
+  if (__pyx_t_4) {
+
+    /* "khayyam/algorithms_c.pyx":25
+ * 
+ *     if month == 2:
+ *         max_days = 29 if is_leap else 28             # <<<<<<<<<<<<<<
+ *         if day > max_days:
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
+ */
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(((PyObject *)__pyx_v_is_leap)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (__pyx_t_4) {
+      __pyx_t_5 = 29;
+    } else {
+      __pyx_t_5 = 28;
+    }
+    __pyx_v_max_days = __pyx_t_5;
+
+    /* "khayyam/algorithms_c.pyx":26
+ *     if month == 2:
+ *         max_days = 29 if is_leap else 28
+ *         if day > max_days:             # <<<<<<<<<<<<<<
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
+ * 
+ */
+    __pyx_t_4 = ((__pyx_v_day > __pyx_v_max_days) != 0);
+    if (__pyx_t_4) {
+
+      /* "khayyam/algorithms_c.pyx":27
+ *         max_days = 29 if is_leap else 28
+ *         if day > max_days:
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))             # <<<<<<<<<<<<<<
+ * 
+ *     if _month <= 2:
+ */
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_day); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_max_days); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
+      __pyx_t_3 = 0;
+      __pyx_t_2 = 0;
+      __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_Invalid_day_s_it_must_be_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+      __pyx_t_2 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __PYX_ERR(0, 27, __pyx_L1_error)
+
+      /* "khayyam/algorithms_c.pyx":26
+ *     if month == 2:
+ *         max_days = 29 if is_leap else 28
+ *         if day > max_days:             # <<<<<<<<<<<<<<
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
+ * 
+ */
+    }
+
+    /* "khayyam/algorithms_c.pyx":24
+ *             is_leap = True
+ * 
+ *     if month == 2:             # <<<<<<<<<<<<<<
+ *         max_days = 29 if is_leap else 28
+ *         if day > max_days:
+ */
+  }
+
+  /* "khayyam/algorithms_c.pyx":29
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
  * 
  *     if _month <= 2:             # <<<<<<<<<<<<<<
  *         _year -= 1
@@ -1133,7 +1183,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   __pyx_t_4 = ((__pyx_v__month <= 2.0) != 0);
   if (__pyx_t_4) {
 
-    /* "khayyam/algorithms_c.pyx":25
+    /* "khayyam/algorithms_c.pyx":30
  * 
  *     if _month <= 2:
  *         _year -= 1             # <<<<<<<<<<<<<<
@@ -1142,7 +1192,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
     __pyx_v__year = (__pyx_v__year - 1.0);
 
-    /* "khayyam/algorithms_c.pyx":26
+    /* "khayyam/algorithms_c.pyx":31
  *     if _month <= 2:
  *         _year -= 1
  *         _month += 12             # <<<<<<<<<<<<<<
@@ -1151,8 +1201,8 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
     __pyx_v__month = (__pyx_v__month + 12.0);
 
-    /* "khayyam/algorithms_c.pyx":24
- * 
+    /* "khayyam/algorithms_c.pyx":29
+ *             raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
  * 
  *     if _month <= 2:             # <<<<<<<<<<<<<<
  *         _year -= 1
@@ -1160,7 +1210,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":28
+  /* "khayyam/algorithms_c.pyx":33
  *         _month += 12
  * 
  *     _century = floor(_year / 100)             # <<<<<<<<<<<<<<
@@ -1169,7 +1219,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v__century = floor((__pyx_v__year / 100.0));
 
-  /* "khayyam/algorithms_c.pyx":29
+  /* "khayyam/algorithms_c.pyx":34
  * 
  *     _century = floor(_year / 100)
  *     result += floor(365.25 * (_year + 4716))             # <<<<<<<<<<<<<<
@@ -1178,7 +1228,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v_result = (__pyx_v_result + floor((365.25 * (__pyx_v__year + 4716.0))));
 
-  /* "khayyam/algorithms_c.pyx":30
+  /* "khayyam/algorithms_c.pyx":35
  *     _century = floor(_year / 100)
  *     result += floor(365.25 * (_year + 4716))
  *     result += floor(30.6001 * (_month + 1))             # <<<<<<<<<<<<<<
@@ -1187,7 +1237,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v_result = (__pyx_v_result + floor((30.6001 * (__pyx_v__month + 1.0))));
 
-  /* "khayyam/algorithms_c.pyx":31
+  /* "khayyam/algorithms_c.pyx":36
  *     result += floor(365.25 * (_year + 4716))
  *     result += floor(30.6001 * (_month + 1))
  *     result += _day             # <<<<<<<<<<<<<<
@@ -1196,7 +1246,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v_result = (__pyx_v_result + __pyx_v__day);
 
-  /* "khayyam/algorithms_c.pyx":32
+  /* "khayyam/algorithms_c.pyx":37
  *     result += floor(30.6001 * (_month + 1))
  *     result += _day
  *     result += 2 - _century + floor(_century / 4)             # <<<<<<<<<<<<<<
@@ -1205,7 +1255,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v_result = (__pyx_v_result + ((2.0 - __pyx_v__century) + floor((__pyx_v__century / 4.0))));
 
-  /* "khayyam/algorithms_c.pyx":33
+  /* "khayyam/algorithms_c.pyx":38
  *     result += _day
  *     result += 2 - _century + floor(_century / 4)
  *     result -= 1524.5             # <<<<<<<<<<<<<<
@@ -1214,7 +1264,7 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
  */
   __pyx_v_result = (__pyx_v_result - 1524.5);
 
-  /* "khayyam/algorithms_c.pyx":35
+  /* "khayyam/algorithms_c.pyx":40
  *     result -= 1524.5
  * 
  *     return result             # <<<<<<<<<<<<<<
@@ -1224,10 +1274,10 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":4
- * from cpython cimport bool
+  /* "khayyam/algorithms_c.pyx":6
  * 
- * cpdef double get_julian_day_from_gregorian(int year, int month, int day):             # <<<<<<<<<<<<<<
+ * 
+ * cpdef double get_julian_day_from_gregorian(int year, int month, int day) except -1:             # <<<<<<<<<<<<<<
  *     cdef:
  *         double _year = year
  */
@@ -1237,9 +1287,10 @@ static double __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(int 
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_WriteUnraisable("khayyam.algorithms_c.get_julian_day_from_gregorian", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
-  __pyx_r = 0;
+  __Pyx_AddTraceback("khayyam.algorithms_c.get_julian_day_from_gregorian", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1.0;
   __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_is_leap);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -1274,16 +1325,16 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_1get_julian_day_from_gregorian
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, 1); __PYX_ERR(0, 4, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, 1); __PYX_ERR(0, 6, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_day)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, 2); __PYX_ERR(0, 4, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, 2); __PYX_ERR(0, 6, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_julian_day_from_gregorian") < 0)) __PYX_ERR(0, 4, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_julian_day_from_gregorian") < 0)) __PYX_ERR(0, 6, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1292,13 +1343,13 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_1get_julian_day_from_gregorian
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 4, __pyx_L3_error)
-    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 4, __pyx_L3_error)
-    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 4, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
+    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 4, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_julian_day_from_gregorian", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("khayyam.algorithms_c.get_julian_day_from_gregorian", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1314,18 +1365,20 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_1get_julian_day_from_gregorian
 static PyObject *__pyx_pf_7khayyam_12algorithms_c_get_julian_day_from_gregorian(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_year, int __pyx_v_month, int __pyx_v_day) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  double __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_julian_day_from_gregorian", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0); if (unlikely(__pyx_t_1 == -1.0)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("khayyam.algorithms_c.get_julian_day_from_gregorian", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1334,7 +1387,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_get_julian_day_from_gregorian(
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":38
+/* "khayyam/algorithms_c.pyx":43
  * 
  * 
  * cpdef bool is_leap_year(int year):             # <<<<<<<<<<<<<<
@@ -1352,7 +1405,7 @@ static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int __pyx_v_ye
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("is_leap_year", 0);
 
-  /* "khayyam/algorithms_c.pyx":39
+  /* "khayyam/algorithms_c.pyx":44
  * 
  * cpdef bool is_leap_year(int year):
  *     return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682             # <<<<<<<<<<<<<<
@@ -1360,9 +1413,9 @@ static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int __pyx_v_ye
  * 
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_473);
   __Pyx_GIVEREF(__pyx_int_473);
@@ -1371,36 +1424,36 @@ static PyBoolObject *__pyx_f_7khayyam_12algorithms_c_is_leap_year(int __pyx_v_ye
   __Pyx_GIVEREF(__pyx_int_474);
   PyList_SET_ITEM(__pyx_t_2, 1, __pyx_int_474);
   __pyx_t_3 = (__pyx_v_year > 0);
-  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_t_2, __pyx_t_3, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_t_2, __pyx_t_3, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_RemainderObjC(__pyx_t_2, __pyx_int_2820, 0xB04, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_RemainderObjC(__pyx_t_2, __pyx_int_2820, 0xB04, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_AddObjC(__pyx_t_4, __pyx_int_474, 0x1DA, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_AddObjC(__pyx_t_4, __pyx_int_474, 0x1DA, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_38, 38, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_38, 38, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_int_682); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_int_682); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_RemainderObjC(__pyx_t_2, __pyx_int_2816, 0xB00, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_RemainderObjC(__pyx_t_2, __pyx_int_2816, 0xB00, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_4, __pyx_int_682, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_4, __pyx_int_682, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_7cpython_4bool_bool))))) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_7cpython_4bool_bool))))) __PYX_ERR(0, 44, __pyx_L1_error)
   __pyx_r = ((PyBoolObject *)__pyx_t_2);
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":38
+  /* "khayyam/algorithms_c.pyx":43
  * 
  * 
  * cpdef bool is_leap_year(int year):             # <<<<<<<<<<<<<<
@@ -1429,7 +1482,7 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_3is_leap_year(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_leap_year (wrapper)", 0);
   assert(__pyx_arg_year); {
-    __pyx_v_year = __Pyx_PyInt_As_int(__pyx_arg_year); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(__pyx_arg_year); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 43, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1450,7 +1503,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_2is_leap_year(CYTHON_UNUSED Py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("is_leap_year", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1467,7 +1520,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_2is_leap_year(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":42
+/* "khayyam/algorithms_c.pyx":47
  * 
  * 
  * cpdef int days_in_year(int year):             # <<<<<<<<<<<<<<
@@ -1484,16 +1537,16 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_year(int __pyx_v_year, CYTHON
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("days_in_year", 0);
 
-  /* "khayyam/algorithms_c.pyx":43
+  /* "khayyam/algorithms_c.pyx":48
  * 
  * cpdef int days_in_year(int year):
  *     return 366 if is_leap_year(year) else 365             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
     __pyx_t_1 = 0x16E;
@@ -1503,7 +1556,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_year(int __pyx_v_year, CYTHON
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":42
+  /* "khayyam/algorithms_c.pyx":47
  * 
  * 
  * cpdef int days_in_year(int year):             # <<<<<<<<<<<<<<
@@ -1529,7 +1582,7 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_5days_in_year(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("days_in_year (wrapper)", 0);
   assert(__pyx_arg_year); {
-    __pyx_v_year = __Pyx_PyInt_As_int(__pyx_arg_year); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(__pyx_arg_year); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1550,7 +1603,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_4days_in_year(CYTHON_UNUSED Py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("days_in_year", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1567,7 +1620,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_4days_in_year(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":46
+/* "khayyam/algorithms_c.pyx":51
  * 
  * 
  * cpdef int days_in_month(int year, int month):             # <<<<<<<<<<<<<<
@@ -1584,7 +1637,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("days_in_month", 0);
 
-  /* "khayyam/algorithms_c.pyx":47
+  /* "khayyam/algorithms_c.pyx":52
  * 
  * cpdef int days_in_month(int year, int month):
  *     if 1 <= month <= 6:             # <<<<<<<<<<<<<<
@@ -1598,7 +1651,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "khayyam/algorithms_c.pyx":48
+    /* "khayyam/algorithms_c.pyx":53
  * cpdef int days_in_month(int year, int month):
  *     if 1 <= month <= 6:
  *         return 31             # <<<<<<<<<<<<<<
@@ -1608,7 +1661,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
     __pyx_r = 31;
     goto __pyx_L0;
 
-    /* "khayyam/algorithms_c.pyx":47
+    /* "khayyam/algorithms_c.pyx":52
  * 
  * cpdef int days_in_month(int year, int month):
  *     if 1 <= month <= 6:             # <<<<<<<<<<<<<<
@@ -1617,7 +1670,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":49
+  /* "khayyam/algorithms_c.pyx":54
  *     if 1 <= month <= 6:
  *         return 31
  *     elif 7 <= month < 12:             # <<<<<<<<<<<<<<
@@ -1631,7 +1684,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":50
+    /* "khayyam/algorithms_c.pyx":55
  *         return 31
  *     elif 7 <= month < 12:
  *         return 30             # <<<<<<<<<<<<<<
@@ -1641,7 +1694,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
     __pyx_r = 30;
     goto __pyx_L0;
 
-    /* "khayyam/algorithms_c.pyx":49
+    /* "khayyam/algorithms_c.pyx":54
  *     if 1 <= month <= 6:
  *         return 31
  *     elif 7 <= month < 12:             # <<<<<<<<<<<<<<
@@ -1650,37 +1703,37 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":52
+  /* "khayyam/algorithms_c.pyx":57
  *         return 30
  * 
  *     assert month == 12, 'Month must be between 1 and 12'             # <<<<<<<<<<<<<<
  * 
- *     # Esfand()
+ *     # Esfand
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_month == 12) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Month_must_be_between_1_and_12);
-      __PYX_ERR(0, 52, __pyx_L1_error)
+      __PYX_ERR(0, 57, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "khayyam/algorithms_c.pyx":55
+  /* "khayyam/algorithms_c.pyx":60
  * 
- *     # Esfand()
+ *     # Esfand
  *     if is_leap_year(year):             # <<<<<<<<<<<<<<
  *         return 30
  *     else:
  */
-  __pyx_t_3 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7khayyam_12algorithms_c_is_leap_year(__pyx_v_year, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":56
- *     # Esfand()
+    /* "khayyam/algorithms_c.pyx":61
+ *     # Esfand
  *     if is_leap_year(year):
  *         return 30             # <<<<<<<<<<<<<<
  *     else:
@@ -1689,16 +1742,16 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
     __pyx_r = 30;
     goto __pyx_L0;
 
-    /* "khayyam/algorithms_c.pyx":55
+    /* "khayyam/algorithms_c.pyx":60
  * 
- *     # Esfand()
+ *     # Esfand
  *     if is_leap_year(year):             # <<<<<<<<<<<<<<
  *         return 30
  *     else:
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":58
+  /* "khayyam/algorithms_c.pyx":63
  *         return 30
  *     else:
  *         return 29             # <<<<<<<<<<<<<<
@@ -1710,7 +1763,7 @@ static int __pyx_f_7khayyam_12algorithms_c_days_in_month(int __pyx_v_year, int _
     goto __pyx_L0;
   }
 
-  /* "khayyam/algorithms_c.pyx":46
+  /* "khayyam/algorithms_c.pyx":51
  * 
  * 
  * cpdef int days_in_month(int year, int month):             # <<<<<<<<<<<<<<
@@ -1756,11 +1809,11 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_7days_in_month(PyObject *__pyx
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, 1); __PYX_ERR(0, 46, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, 1); __PYX_ERR(0, 51, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "days_in_month") < 0)) __PYX_ERR(0, 46, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "days_in_month") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1768,12 +1821,12 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_7days_in_month(PyObject *__pyx
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
-    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 46, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("days_in_month", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 51, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("khayyam.algorithms_c.days_in_month", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1792,7 +1845,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_6days_in_month(CYTHON_UNUSED P
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("days_in_month", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_month(__pyx_v_year, __pyx_v_month, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_7khayyam_12algorithms_c_days_in_month(__pyx_v_year, __pyx_v_month, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1809,7 +1862,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_6days_in_month(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":60
+/* "khayyam/algorithms_c.pyx":65
  *         return 29
  * 
  * cpdef double julian_day_from_jalali_date(int year, int month, int day):             # <<<<<<<<<<<<<<
@@ -1833,7 +1886,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
   double __pyx_t_7;
   __Pyx_RefNannySetupContext("julian_day_from_jalali_date", 0);
 
-  /* "khayyam/algorithms_c.pyx":62
+  /* "khayyam/algorithms_c.pyx":67
  * cpdef double julian_day_from_jalali_date(int year, int month, int day):
  *     cdef:
  *         int base = year - (474 if year >= 0 else 473)             # <<<<<<<<<<<<<<
@@ -1847,7 +1900,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
   }
   __pyx_v_base = (__pyx_v_year - __pyx_t_1);
 
-  /* "khayyam/algorithms_c.pyx":63
+  /* "khayyam/algorithms_c.pyx":68
  *     cdef:
  *         int base = year - (474 if year >= 0 else 473)
  *         int julian_year = 474 + (base % 2820)             # <<<<<<<<<<<<<<
@@ -1856,7 +1909,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_julian_year = (0x1DA + __Pyx_mod_long(__pyx_v_base, 0xB04));
 
-  /* "khayyam/algorithms_c.pyx":64
+  /* "khayyam/algorithms_c.pyx":69
  *         int base = year - (474 if year >= 0 else 473)
  *         int julian_year = 474 + (base % 2820)
  *         double result = day             # <<<<<<<<<<<<<<
@@ -1865,20 +1918,20 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_result = __pyx_v_day;
 
-  /* "khayyam/algorithms_c.pyx":66
+  /* "khayyam/algorithms_c.pyx":71
  *         double result = day
  * 
  *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]             # <<<<<<<<<<<<<<
  *     result += floor(((julian_year * 682) - 110) / 2816)
  *     result += (julian_year - 1) * 365
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_result); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_result); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_long((((__pyx_v_month - 1) * 30) + 6)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_long((((__pyx_v_month - 1) * 30) + 6)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_long(((__pyx_v_month - 1) * 31)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_long(((__pyx_v_month - 1) * 31)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -1887,18 +1940,18 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
   __pyx_t_6 = (__pyx_v_month <= 7);
-  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_t_5, __pyx_t_6, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_t_5, __pyx_t_6, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_result = __pyx_t_7;
 
-  /* "khayyam/algorithms_c.pyx":67
+  /* "khayyam/algorithms_c.pyx":72
  * 
  *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
  *     result += floor(((julian_year * 682) - 110) / 2816)             # <<<<<<<<<<<<<<
@@ -1907,7 +1960,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_result = (__pyx_v_result + floor(__Pyx_div_long(((__pyx_v_julian_year * 0x2AA) - 0x6E), 0xB00)));
 
-  /* "khayyam/algorithms_c.pyx":68
+  /* "khayyam/algorithms_c.pyx":73
  *     result += [((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]
  *     result += floor(((julian_year * 682) - 110) / 2816)
  *     result += (julian_year - 1) * 365             # <<<<<<<<<<<<<<
@@ -1916,7 +1969,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_result = (__pyx_v_result + ((__pyx_v_julian_year - 1) * 0x16D));
 
-  /* "khayyam/algorithms_c.pyx":69
+  /* "khayyam/algorithms_c.pyx":74
  *     result += floor(((julian_year * 682) - 110) / 2816)
  *     result += (julian_year - 1) * 365
  *     result += floor(base / 2820) * 1029983             # <<<<<<<<<<<<<<
@@ -1925,7 +1978,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_result = (__pyx_v_result + (floor(__Pyx_div_long(__pyx_v_base, 0xB04)) * 1029983.0));
 
-  /* "khayyam/algorithms_c.pyx":70
+  /* "khayyam/algorithms_c.pyx":75
  *     result += (julian_year - 1) * 365
  *     result += floor(base / 2820) * 1029983
  *     result += 1948320.5 - 1             # <<<<<<<<<<<<<<
@@ -1934,7 +1987,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
  */
   __pyx_v_result = (__pyx_v_result + (1948320.5 - 1.0));
 
-  /* "khayyam/algorithms_c.pyx":71
+  /* "khayyam/algorithms_c.pyx":76
  *     result += floor(base / 2820) * 1029983
  *     result += 1948320.5 - 1
  *     return result             # <<<<<<<<<<<<<<
@@ -1944,7 +1997,7 @@ static double __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(int __
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":60
+  /* "khayyam/algorithms_c.pyx":65
  *         return 29
  * 
  * cpdef double julian_day_from_jalali_date(int year, int month, int day):             # <<<<<<<<<<<<<<
@@ -1995,16 +2048,16 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date(P
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 1); __PYX_ERR(0, 60, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 1); __PYX_ERR(0, 65, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_day)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 2); __PYX_ERR(0, 60, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, 2); __PYX_ERR(0, 65, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "julian_day_from_jalali_date") < 0)) __PYX_ERR(0, 60, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "julian_day_from_jalali_date") < 0)) __PYX_ERR(0, 65, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2013,13 +2066,13 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_9julian_day_from_jalali_date(P
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
-    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
-    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L3_error)
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L3_error)
+    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 60, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("julian_day_from_jalali_date", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 65, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("khayyam.algorithms_c.julian_day_from_jalali_date", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2038,7 +2091,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_8julian_day_from_jalali_date(C
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("julian_day_from_jalali_date", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2055,7 +2108,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_8julian_day_from_jalali_date(C
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":74
+/* "khayyam/algorithms_c.pyx":79
  * 
  * 
  * cpdef tuple jalali_date_from_julian_day(double jd):             # <<<<<<<<<<<<<<
@@ -2086,7 +2139,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("jalali_date_from_julian_day", 0);
 
-  /* "khayyam/algorithms_c.pyx":76
+  /* "khayyam/algorithms_c.pyx":81
  * cpdef tuple jalali_date_from_julian_day(double jd):
  *     cdef:
  *         double julian_day = floor(jd) + 0.5             # <<<<<<<<<<<<<<
@@ -2095,7 +2148,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_julian_day = (floor(__pyx_v_jd) + 0.5);
 
-  /* "khayyam/algorithms_c.pyx":77
+  /* "khayyam/algorithms_c.pyx":82
  *     cdef:
  *         double julian_day = floor(jd) + 0.5
  *         double offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value             # <<<<<<<<<<<<<<
@@ -2104,7 +2157,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_offset = (__pyx_v_julian_day - 2121445.5);
 
-  /* "khayyam/algorithms_c.pyx":78
+  /* "khayyam/algorithms_c.pyx":83
  *         double julian_day = floor(jd) + 0.5
  *         double offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
  *         double cycle = floor(offset / 1029983)             # <<<<<<<<<<<<<<
@@ -2113,7 +2166,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_cycle = floor((__pyx_v_offset / 1029983.0));
 
-  /* "khayyam/algorithms_c.pyx":79
+  /* "khayyam/algorithms_c.pyx":84
  *         double offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
  *         double cycle = floor(offset / 1029983)
  *         double remaining = offset % 1029983             # <<<<<<<<<<<<<<
@@ -2122,7 +2175,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_remaining = __Pyx_mod_double(__pyx_v_offset, 1029983.0);
 
-  /* "khayyam/algorithms_c.pyx":83
+  /* "khayyam/algorithms_c.pyx":88
  *         int year, month, day
  * 
  *     if remaining == 1029982:             # <<<<<<<<<<<<<<
@@ -2132,7 +2185,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   __pyx_t_1 = ((__pyx_v_remaining == 1029982.0) != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":84
+    /* "khayyam/algorithms_c.pyx":89
  * 
  *     if remaining == 1029982:
  *         year_cycle = 2820             # <<<<<<<<<<<<<<
@@ -2141,7 +2194,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
     __pyx_v_year_cycle = 2820.0;
 
-    /* "khayyam/algorithms_c.pyx":83
+    /* "khayyam/algorithms_c.pyx":88
  *         int year, month, day
  * 
  *     if remaining == 1029982:             # <<<<<<<<<<<<<<
@@ -2151,7 +2204,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
     goto __pyx_L3;
   }
 
-  /* "khayyam/algorithms_c.pyx":86
+  /* "khayyam/algorithms_c.pyx":91
  *         year_cycle = 2820
  *     else:
  *         a1 = floor(remaining / 366)             # <<<<<<<<<<<<<<
@@ -2161,7 +2214,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   /*else*/ {
     __pyx_v_a1 = floor((__pyx_v_remaining / 366.0));
 
-    /* "khayyam/algorithms_c.pyx":87
+    /* "khayyam/algorithms_c.pyx":92
  *     else:
  *         a1 = floor(remaining / 366)
  *         a2 = remaining % 366             # <<<<<<<<<<<<<<
@@ -2170,7 +2223,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
     __pyx_v_a2 = __Pyx_mod_double(__pyx_v_remaining, 366.0);
 
-    /* "khayyam/algorithms_c.pyx":88
+    /* "khayyam/algorithms_c.pyx":93
  *         a1 = floor(remaining / 366)
  *         a2 = remaining % 366
  *         year_cycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1             # <<<<<<<<<<<<<<
@@ -2181,7 +2234,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   }
   __pyx_L3:;
 
-  /* "khayyam/algorithms_c.pyx":89
+  /* "khayyam/algorithms_c.pyx":94
  *         a2 = remaining % 366
  *         year_cycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1
  *     year = <int>(year_cycle + (2820 * cycle) + 474)             # <<<<<<<<<<<<<<
@@ -2190,7 +2243,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_year = ((int)((__pyx_v_year_cycle + (2820.0 * __pyx_v_cycle)) + 474.0));
 
-  /* "khayyam/algorithms_c.pyx":90
+  /* "khayyam/algorithms_c.pyx":95
  *         year_cycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1
  *     year = <int>(year_cycle + (2820 * cycle) + 474)
  *     if year <= 0:             # <<<<<<<<<<<<<<
@@ -2200,7 +2253,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   __pyx_t_1 = ((__pyx_v_year <= 0) != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":91
+    /* "khayyam/algorithms_c.pyx":96
  *     year = <int>(year_cycle + (2820 * cycle) + 474)
  *     if year <= 0:
  *         year -= 1             # <<<<<<<<<<<<<<
@@ -2209,7 +2262,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
     __pyx_v_year = (__pyx_v_year - 1);
 
-    /* "khayyam/algorithms_c.pyx":90
+    /* "khayyam/algorithms_c.pyx":95
  *         year_cycle = floor(((2134 * a1) + (2816 * a2) + 2815) / 1028522) + a1 + 1
  *     year = <int>(year_cycle + (2820 * cycle) + 474)
  *     if year <= 0:             # <<<<<<<<<<<<<<
@@ -2218,7 +2271,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":92
+  /* "khayyam/algorithms_c.pyx":97
  *     if year <= 0:
  *         year -= 1
  *     days_in_year = (julian_day - julian_day_from_jalali_date(year, 1, 1)) + 1             # <<<<<<<<<<<<<<
@@ -2227,18 +2280,18 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_days_in_year = ((__pyx_v_julian_day - __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(__pyx_v_year, 1, 1, 0)) + 1.0);
 
-  /* "khayyam/algorithms_c.pyx":93
+  /* "khayyam/algorithms_c.pyx":98
  *         year -= 1
  *     days_in_year = (julian_day - julian_day_from_jalali_date(year, 1, 1)) + 1
  *     month = <int>ceil([(days_in_year - 6) / 30, days_in_year / 31][days_in_year <= 186])             # <<<<<<<<<<<<<<
  *     day = <int>(julian_day - julian_day_from_jalali_date(year, month, 1)) + 1
  *     return year, month, day
  */
-  __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_days_in_year - 6.0) / 30.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_days_in_year - 6.0) / 30.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble((__pyx_v_days_in_year / 31.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble((__pyx_v_days_in_year / 31.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyList_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
@@ -2247,14 +2300,14 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_1 = (__pyx_v_days_in_year <= 186.0);
-  __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_t_4, __pyx_t_1, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_t_4, __pyx_t_1, int, 1, __Pyx_PyBool_FromLong, 1, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_month = ((int)ceil(__pyx_t_5));
 
-  /* "khayyam/algorithms_c.pyx":94
+  /* "khayyam/algorithms_c.pyx":99
  *     days_in_year = (julian_day - julian_day_from_jalali_date(year, 1, 1)) + 1
  *     month = <int>ceil([(days_in_year - 6) / 30, days_in_year / 31][days_in_year <= 186])
  *     day = <int>(julian_day - julian_day_from_jalali_date(year, month, 1)) + 1             # <<<<<<<<<<<<<<
@@ -2263,7 +2316,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  */
   __pyx_v_day = (((int)(__pyx_v_julian_day - __pyx_f_7khayyam_12algorithms_c_julian_day_from_jalali_date(__pyx_v_year, __pyx_v_month, 1, 0))) + 1);
 
-  /* "khayyam/algorithms_c.pyx":95
+  /* "khayyam/algorithms_c.pyx":100
  *     month = <int>ceil([(days_in_year - 6) / 30, days_in_year / 31][days_in_year <= 186])
  *     day = <int>(julian_day - julian_day_from_jalali_date(year, month, 1)) + 1
  *     return year, month, day             # <<<<<<<<<<<<<<
@@ -2271,13 +2324,13 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_year); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_month); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_month); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_day); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_day); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
@@ -2292,7 +2345,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(dou
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":74
+  /* "khayyam/algorithms_c.pyx":79
  * 
  * 
  * cpdef tuple jalali_date_from_julian_day(double jd):             # <<<<<<<<<<<<<<
@@ -2322,7 +2375,7 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_11jalali_date_from_julian_day(
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("jalali_date_from_julian_day (wrapper)", 0);
   assert(__pyx_arg_jd); {
-    __pyx_v_jd = __pyx_PyFloat_AsDouble(__pyx_arg_jd); if (unlikely((__pyx_v_jd == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+    __pyx_v_jd = __pyx_PyFloat_AsDouble(__pyx_arg_jd); if (unlikely((__pyx_v_jd == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2343,7 +2396,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_10jalali_date_from_julian_day(
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("jalali_date_from_julian_day", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(__pyx_v_jd, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(__pyx_v_jd, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2360,7 +2413,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_10jalali_date_from_julian_day(
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":98
+/* "khayyam/algorithms_c.pyx":103
  * 
  * 
  * cpdef tuple gregorian_date_from_julian_day(double jd):             # <<<<<<<<<<<<<<
@@ -2391,7 +2444,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("gregorian_date_from_julian_day", 0);
 
-  /* "khayyam/algorithms_c.pyx":103
+  /* "khayyam/algorithms_c.pyx":108
  *         double julian_day, actual_days, remains, alpha, b, c, d, e
  * 
  *     if jd <= 0:             # <<<<<<<<<<<<<<
@@ -2401,20 +2454,20 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_t_1 = ((__pyx_v_jd <= 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":104
+    /* "khayyam/algorithms_c.pyx":109
  * 
  *     if jd <= 0:
  *         raise ValueError('Invalid Date')             # <<<<<<<<<<<<<<
  * 
  *     julian_day = jd + 0.5
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 104, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
 
-    /* "khayyam/algorithms_c.pyx":103
+    /* "khayyam/algorithms_c.pyx":108
  *         double julian_day, actual_days, remains, alpha, b, c, d, e
  * 
  *     if jd <= 0:             # <<<<<<<<<<<<<<
@@ -2423,7 +2476,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   }
 
-  /* "khayyam/algorithms_c.pyx":106
+  /* "khayyam/algorithms_c.pyx":111
  *         raise ValueError('Invalid Date')
  * 
  *     julian_day = jd + 0.5             # <<<<<<<<<<<<<<
@@ -2432,7 +2485,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_julian_day = (__pyx_v_jd + 0.5);
 
-  /* "khayyam/algorithms_c.pyx":107
+  /* "khayyam/algorithms_c.pyx":112
  * 
  *     julian_day = jd + 0.5
  *     actual_days = floor(julian_day)             # <<<<<<<<<<<<<<
@@ -2441,7 +2494,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_actual_days = floor(__pyx_v_julian_day);
 
-  /* "khayyam/algorithms_c.pyx":108
+  /* "khayyam/algorithms_c.pyx":113
  *     julian_day = jd + 0.5
  *     actual_days = floor(julian_day)
  *     remains = julian_day - actual_days             # <<<<<<<<<<<<<<
@@ -2450,7 +2503,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_remains = (__pyx_v_julian_day - __pyx_v_actual_days);
 
-  /* "khayyam/algorithms_c.pyx":110
+  /* "khayyam/algorithms_c.pyx":115
  *     remains = julian_day - actual_days
  * 
  *     alpha = floor((actual_days - 1867216.25) / 36524.25)             # <<<<<<<<<<<<<<
@@ -2459,7 +2512,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_alpha = floor(((__pyx_v_actual_days - 1867216.25) / 36524.25));
 
-  /* "khayyam/algorithms_c.pyx":111
+  /* "khayyam/algorithms_c.pyx":116
  * 
  *     alpha = floor((actual_days - 1867216.25) / 36524.25)
  *     b = (actual_days + 1 + alpha - floor(alpha / 4)) + 1524             # <<<<<<<<<<<<<<
@@ -2468,7 +2521,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_b = ((((__pyx_v_actual_days + 1.0) + __pyx_v_alpha) - floor((__pyx_v_alpha / 4.0))) + 1524.0);
 
-  /* "khayyam/algorithms_c.pyx":112
+  /* "khayyam/algorithms_c.pyx":117
  *     alpha = floor((actual_days - 1867216.25) / 36524.25)
  *     b = (actual_days + 1 + alpha - floor(alpha / 4)) + 1524
  *     c = floor((b - 122.1) / 365.25)             # <<<<<<<<<<<<<<
@@ -2477,7 +2530,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_c = floor(((__pyx_v_b - 122.1) / 365.25));
 
-  /* "khayyam/algorithms_c.pyx":113
+  /* "khayyam/algorithms_c.pyx":118
  *     b = (actual_days + 1 + alpha - floor(alpha / 4)) + 1524
  *     c = floor((b - 122.1) / 365.25)
  *     d = floor(365.25 * c)             # <<<<<<<<<<<<<<
@@ -2486,7 +2539,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_d = floor((365.25 * __pyx_v_c));
 
-  /* "khayyam/algorithms_c.pyx":114
+  /* "khayyam/algorithms_c.pyx":119
  *     c = floor((b - 122.1) / 365.25)
  *     d = floor(365.25 * c)
  *     e = floor((b - d) / 30.6001)             # <<<<<<<<<<<<<<
@@ -2495,7 +2548,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_e = floor(((__pyx_v_b - __pyx_v_d) / 30.6001));
 
-  /* "khayyam/algorithms_c.pyx":115
+  /* "khayyam/algorithms_c.pyx":120
  *     d = floor(365.25 * c)
  *     e = floor((b - d) / 30.6001)
  *     day = b - d - floor(30.6001 * e) + remains             # <<<<<<<<<<<<<<
@@ -2504,7 +2557,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
   __pyx_v_day = (((__pyx_v_b - __pyx_v_d) - floor((30.6001 * __pyx_v_e))) + __pyx_v_remains);
 
-  /* "khayyam/algorithms_c.pyx":117
+  /* "khayyam/algorithms_c.pyx":122
  *     day = b - d - floor(30.6001 * e) + remains
  * 
  *     if e < 14:             # <<<<<<<<<<<<<<
@@ -2514,7 +2567,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_t_1 = ((__pyx_v_e < 14.0) != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":118
+    /* "khayyam/algorithms_c.pyx":123
  * 
  *     if e < 14:
  *         month = e - 1             # <<<<<<<<<<<<<<
@@ -2523,7 +2576,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
     __pyx_v_month = (__pyx_v_e - 1.0);
 
-    /* "khayyam/algorithms_c.pyx":117
+    /* "khayyam/algorithms_c.pyx":122
  *     day = b - d - floor(30.6001 * e) + remains
  * 
  *     if e < 14:             # <<<<<<<<<<<<<<
@@ -2533,7 +2586,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
     goto __pyx_L4;
   }
 
-  /* "khayyam/algorithms_c.pyx":119
+  /* "khayyam/algorithms_c.pyx":124
  *     if e < 14:
  *         month = e - 1
  *     elif e == 14 or e == 15:             # <<<<<<<<<<<<<<
@@ -2551,7 +2604,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":120
+    /* "khayyam/algorithms_c.pyx":125
  *         month = e - 1
  *     elif e == 14 or e == 15:
  *         month = e - 13             # <<<<<<<<<<<<<<
@@ -2560,7 +2613,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
     __pyx_v_month = (__pyx_v_e - 13.0);
 
-    /* "khayyam/algorithms_c.pyx":119
+    /* "khayyam/algorithms_c.pyx":124
  *     if e < 14:
  *         month = e - 1
  *     elif e == 14 or e == 15:             # <<<<<<<<<<<<<<
@@ -2570,7 +2623,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
     goto __pyx_L4;
   }
 
-  /* "khayyam/algorithms_c.pyx":122
+  /* "khayyam/algorithms_c.pyx":127
  *         month = e - 13
  *     else:
  *         raise ValueError('Cannot calculate month')             # <<<<<<<<<<<<<<
@@ -2578,15 +2631,15 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  * 
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 122, __pyx_L1_error)
+    __PYX_ERR(0, 127, __pyx_L1_error)
   }
   __pyx_L4:;
 
-  /* "khayyam/algorithms_c.pyx":125
+  /* "khayyam/algorithms_c.pyx":130
  * 
  * 
  *     if month > 2:             # <<<<<<<<<<<<<<
@@ -2596,7 +2649,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_t_1 = ((__pyx_v_month > 2.0) != 0);
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":126
+    /* "khayyam/algorithms_c.pyx":131
  * 
  *     if month > 2:
  *         year = c - 4716             # <<<<<<<<<<<<<<
@@ -2605,7 +2658,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
     __pyx_v_year = (__pyx_v_c - 4716.0);
 
-    /* "khayyam/algorithms_c.pyx":125
+    /* "khayyam/algorithms_c.pyx":130
  * 
  * 
  *     if month > 2:             # <<<<<<<<<<<<<<
@@ -2615,7 +2668,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
     goto __pyx_L7;
   }
 
-  /* "khayyam/algorithms_c.pyx":127
+  /* "khayyam/algorithms_c.pyx":132
  *     if month > 2:
  *         year = c - 4716
  *     elif month == 1 or month == 2:             # <<<<<<<<<<<<<<
@@ -2633,7 +2686,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_L8_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "khayyam/algorithms_c.pyx":128
+    /* "khayyam/algorithms_c.pyx":133
  *         year = c - 4716
  *     elif month == 1 or month == 2:
  *         year = c - 4715             # <<<<<<<<<<<<<<
@@ -2642,7 +2695,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  */
     __pyx_v_year = (__pyx_v_c - 4715.0);
 
-    /* "khayyam/algorithms_c.pyx":127
+    /* "khayyam/algorithms_c.pyx":132
  *     if month > 2:
  *         year = c - 4716
  *     elif month == 1 or month == 2:             # <<<<<<<<<<<<<<
@@ -2652,7 +2705,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
     goto __pyx_L7;
   }
 
-  /* "khayyam/algorithms_c.pyx":130
+  /* "khayyam/algorithms_c.pyx":135
  *         year = c - 4715
  *     else:
  *         raise ValueError('Invalid month: %s' % month)             # <<<<<<<<<<<<<<
@@ -2660,26 +2713,26 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  *     return <int>year, <int>month, <int>day
  */
   /*else*/ {
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_month); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_month); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Invalid_month_s, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Invalid_month_s, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 130, __pyx_L1_error)
+    __PYX_ERR(0, 135, __pyx_L1_error)
   }
   __pyx_L7:;
 
-  /* "khayyam/algorithms_c.pyx":132
+  /* "khayyam/algorithms_c.pyx":137
  *         raise ValueError('Invalid month: %s' % month)
  * 
  *     return <int>year, <int>month, <int>day             # <<<<<<<<<<<<<<
@@ -2687,13 +2740,13 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
  * cpdef tuple jalali_date_from_gregorian_date(int year, int month, int day):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyInt_From_int(((int)__pyx_v_year)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(((int)__pyx_v_year)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)__pyx_v_month)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)__pyx_v_month)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyInt_From_int(((int)__pyx_v_day)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(((int)__pyx_v_day)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
@@ -2708,7 +2761,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":98
+  /* "khayyam/algorithms_c.pyx":103
  * 
  * 
  * cpdef tuple gregorian_date_from_julian_day(double jd):             # <<<<<<<<<<<<<<
@@ -2738,7 +2791,7 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_13gregorian_date_from_julian_d
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gregorian_date_from_julian_day (wrapper)", 0);
   assert(__pyx_arg_jd); {
-    __pyx_v_jd = __pyx_PyFloat_AsDouble(__pyx_arg_jd); if (unlikely((__pyx_v_jd == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
+    __pyx_v_jd = __pyx_PyFloat_AsDouble(__pyx_arg_jd); if (unlikely((__pyx_v_jd == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2759,7 +2812,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_12gregorian_date_from_julian_d
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("gregorian_date_from_julian_day", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(__pyx_v_jd, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_gregorian_date_from_julian_day(__pyx_v_jd, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2776,7 +2829,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_12gregorian_date_from_julian_d
   return __pyx_r;
 }
 
-/* "khayyam/algorithms_c.pyx":134
+/* "khayyam/algorithms_c.pyx":139
  *     return <int>year, <int>month, <int>day
  * 
  * cpdef tuple jalali_date_from_gregorian_date(int year, int month, int day):             # <<<<<<<<<<<<<<
@@ -2787,22 +2840,24 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_15jalali_date_from_gregorian_d
 static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_gregorian_date(int __pyx_v_year, int __pyx_v_month, int __pyx_v_day, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  double __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("jalali_date_from_gregorian_date", 0);
 
-  /* "khayyam/algorithms_c.pyx":135
+  /* "khayyam/algorithms_c.pyx":140
  * 
  * cpdef tuple jalali_date_from_gregorian_date(int year, int month, int day):
  *     return jalali_date_from_julian_day(get_julian_day_from_gregorian(year, month, day))             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(__pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0), 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_get_julian_day_from_gregorian(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0); if (unlikely(__pyx_t_1 == -1.0)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_julian_day(__pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "khayyam/algorithms_c.pyx":134
+  /* "khayyam/algorithms_c.pyx":139
  *     return <int>year, <int>month, <int>day
  * 
  * cpdef tuple jalali_date_from_gregorian_date(int year, int month, int day):             # <<<<<<<<<<<<<<
@@ -2811,7 +2866,7 @@ static PyObject *__pyx_f_7khayyam_12algorithms_c_jalali_date_from_gregorian_date
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("khayyam.algorithms_c.jalali_date_from_gregorian_date", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -2850,16 +2905,16 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_15jalali_date_from_gregorian_d
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_month)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, 1); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, 1); __PYX_ERR(0, 139, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_day)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, 2); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, 2); __PYX_ERR(0, 139, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "jalali_date_from_gregorian_date") < 0)) __PYX_ERR(0, 134, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "jalali_date_from_gregorian_date") < 0)) __PYX_ERR(0, 139, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2868,13 +2923,13 @@ static PyObject *__pyx_pw_7khayyam_12algorithms_c_15jalali_date_from_gregorian_d
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
-    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
-    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
+    __pyx_v_year = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_year == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
+    __pyx_v_month = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_month == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
+    __pyx_v_day = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_day == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 134, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("jalali_date_from_gregorian_date", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 139, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("khayyam.algorithms_c.jalali_date_from_gregorian_date", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2893,7 +2948,7 @@ static PyObject *__pyx_pf_7khayyam_12algorithms_c_14jalali_date_from_gregorian_d
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("jalali_date_from_gregorian_date", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_gregorian_date(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7khayyam_12algorithms_c_jalali_date_from_gregorian_date(__pyx_v_year, __pyx_v_month, __pyx_v_day, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2943,7 +2998,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_calculate_month, __pyx_k_Cannot_calculate_month, sizeof(__pyx_k_Cannot_calculate_month), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_Date, __pyx_k_Invalid_Date, sizeof(__pyx_k_Invalid_Date), 0, 0, 1, 0},
-  {&__pyx_kp_s_Invalid_date, __pyx_k_Invalid_date, sizeof(__pyx_k_Invalid_date), 0, 0, 1, 0},
+  {&__pyx_kp_s_Invalid_day_s_it_must_be_s, __pyx_k_Invalid_day_s_it_must_be_s, sizeof(__pyx_k_Invalid_day_s_it_must_be_s), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_month_s, __pyx_k_Invalid_month_s, sizeof(__pyx_k_Invalid_month_s), 0, 0, 1, 0},
   {&__pyx_kp_s_Month_must_be_between_1_and_12, __pyx_k_Month_must_be_between_1_and_12, sizeof(__pyx_k_Month_must_be_between_1_and_12), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
@@ -2956,8 +3011,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_n_s_round); if (!__pyx_builtin_round) __PYX_ERR(0, 12, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_n_s_round); if (!__pyx_builtin_round) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 27, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2967,25 +3022,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "khayyam/algorithms_c.pyx":104
+  /* "khayyam/algorithms_c.pyx":109
  * 
  *     if jd <= 0:
  *         raise ValueError('Invalid Date')             # <<<<<<<<<<<<<<
  * 
  *     julian_day = jd + 0.5
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Invalid_Date); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Invalid_Date); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "khayyam/algorithms_c.pyx":122
+  /* "khayyam/algorithms_c.pyx":127
  *         month = e - 13
  *     else:
  *         raise ValueError('Cannot calculate month')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Cannot_calculate_month); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Cannot_calculate_month); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
@@ -3110,9 +3165,9 @@ PyMODINIT_FUNC PyInit_algorithms_c(void)
   #endif
 
   /* "khayyam/algorithms_c.pyx":1
- * from libc.math cimport floor, ceil             # <<<<<<<<<<<<<<
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * from libc.math cimport floor, ceil
  * from cpython cimport bool
- * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3216,494 +3271,6 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
     tstate->curexc_traceback = 0;
 }
 #endif
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
-
-/* RaiseArgTupleInvalid */
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
-}
-
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
-}
-
-/* PyIntBinop */
-#if CYTHON_COMPILING_IN_CPYTHON
-static PyObject* __Pyx_PyInt_RemainderObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED int inplace) {
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long x;
-        long a = PyInt_AS_LONG(op1);
-            x = a % b;
-            x += ((x != 0) & ((x ^ b) < 0)) * b;
-            return PyInt_FromLong(x);
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS && PY_MAJOR_VERSION >= 3
-    if (likely(PyLong_CheckExact(op1))) {
-        const long b = intval;
-        long a, x;
-        const PY_LONG_LONG llb = intval;
-        PY_LONG_LONG lla, llx;
-        const digit* digits = ((PyLongObject*)op1)->ob_digit;
-        const Py_ssize_t size = Py_SIZE(op1);
-        if (likely(__Pyx_sst_abs(size) <= 1)) {
-            a = likely(size) ? digits[0] : 0;
-            if (size == -1) a = -a;
-        } else {
-            switch (size) {
-                case -2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case -3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case -4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                default: return PyLong_Type.tp_as_number->nb_remainder(op1, op2);
-            }
-        }
-                x = a % b;
-                x += ((x != 0) & ((x ^ b) < 0)) * b;
-            return PyLong_FromLong(x);
-        long_long:
-                llx = lla % llb;
-                llx += ((llx != 0) & ((llx ^ llb) < 0)) * llb;
-            return PyLong_FromLongLong(llx);
-    }
-    #endif
-    return (inplace ? PyNumber_InPlaceRemainder : PyNumber_Remainder)(op1, op2);
-}
-#endif
-
-/* PyIntBinop */
-#if CYTHON_COMPILING_IN_CPYTHON
-static PyObject* __Pyx_PyInt_AddObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED int inplace) {
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long x;
-        long a = PyInt_AS_LONG(op1);
-            x = (long)((unsigned long)a + b);
-            if (likely((x^a) >= 0 || (x^b) >= 0))
-                return PyInt_FromLong(x);
-            return PyLong_Type.tp_as_number->nb_add(op1, op2);
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS && PY_MAJOR_VERSION >= 3
-    if (likely(PyLong_CheckExact(op1))) {
-        const long b = intval;
-        long a, x;
-        const PY_LONG_LONG llb = intval;
-        PY_LONG_LONG lla, llx;
-        const digit* digits = ((PyLongObject*)op1)->ob_digit;
-        const Py_ssize_t size = Py_SIZE(op1);
-        if (likely(__Pyx_sst_abs(size) <= 1)) {
-            a = likely(size) ? digits[0] : 0;
-            if (size == -1) a = -a;
-        } else {
-            switch (size) {
-                case -2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case -3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case -4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                case 4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-                    }
-                default: return PyLong_Type.tp_as_number->nb_add(op1, op2);
-            }
-        }
-                x = a + b;
-            return PyLong_FromLong(x);
-        long_long:
-                llx = lla + llb;
-            return PyLong_FromLongLong(llx);
-    }
-    #endif
-    if (PyFloat_CheckExact(op1)) {
-        const long b = intval;
-        double a = PyFloat_AS_DOUBLE(op1);
-            double result;
-            PyFPE_START_PROTECT("add", return NULL)
-            result = ((double)a) + (double)b;
-            PyFPE_END_PROTECT(result)
-            return PyFloat_FromDouble(result);
-    }
-    return (inplace ? PyNumber_InPlaceAdd : PyNumber_Add)(op1, op2);
-}
-#endif
-
-/* GetItemInt */
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
-    PyObject *r;
-    if (!j) return NULL;
-    r = PyObject_GetItem(o, j);
-    Py_DECREF(j);
-    return r;
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
-                                                              CYTHON_NCP_UNUSED int wraparound,
-                                                              CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (wraparound & unlikely(i < 0)) i += PyList_GET_SIZE(o);
-    if ((!boundscheck) || likely((0 <= i) & (i < PyList_GET_SIZE(o)))) {
-        PyObject *r = PyList_GET_ITEM(o, i);
-        Py_INCREF(r);
-        return r;
-    }
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-#else
-    return PySequence_GetItem(o, i);
-#endif
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
-                                                              CYTHON_NCP_UNUSED int wraparound,
-                                                              CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (wraparound & unlikely(i < 0)) i += PyTuple_GET_SIZE(o);
-    if ((!boundscheck) || likely((0 <= i) & (i < PyTuple_GET_SIZE(o)))) {
-        PyObject *r = PyTuple_GET_ITEM(o, i);
-        Py_INCREF(r);
-        return r;
-    }
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-#else
-    return PySequence_GetItem(o, i);
-#endif
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, int is_list,
-                                                     CYTHON_NCP_UNUSED int wraparound,
-                                                     CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (is_list || PyList_CheckExact(o)) {
-        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyList_GET_SIZE(o);
-        if ((!boundscheck) || (likely((n >= 0) & (n < PyList_GET_SIZE(o))))) {
-            PyObject *r = PyList_GET_ITEM(o, n);
-            Py_INCREF(r);
-            return r;
-        }
-    }
-    else if (PyTuple_CheckExact(o)) {
-        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyTuple_GET_SIZE(o);
-        if ((!boundscheck) || likely((n >= 0) & (n < PyTuple_GET_SIZE(o)))) {
-            PyObject *r = PyTuple_GET_ITEM(o, n);
-            Py_INCREF(r);
-            return r;
-        }
-    } else {
-        PySequenceMethods *m = Py_TYPE(o)->tp_as_sequence;
-        if (likely(m && m->sq_item)) {
-            if (wraparound && unlikely(i < 0) && likely(m->sq_length)) {
-                Py_ssize_t l = m->sq_length(o);
-                if (likely(l >= 0)) {
-                    i += l;
-                } else {
-                    if (!PyErr_ExceptionMatches(PyExc_OverflowError))
-                        return NULL;
-                    PyErr_Clear();
-                }
-            }
-            return m->sq_item(o, i);
-        }
-    }
-#else
-    if (is_list || PySequence_Check(o)) {
-        return PySequence_GetItem(o, i);
-    }
-#endif
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-}
-
-/* ExtTypeTest */
-static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
-    if (unlikely(!type)) {
-        PyErr_SetString(PyExc_SystemError, "Missing type object");
-        return 0;
-    }
-    if (likely(PyObject_TypeCheck(obj, type)))
-        return 1;
-    PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
-                 Py_TYPE(obj)->tp_name, type->tp_name);
-    return 0;
-}
-
-/* None */
-static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
-    long r = a % b;
-    r += ((r != 0) & ((r ^ b) < 0)) * b;
-    return r;
-}
-
-/* None */
-static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
-    long q = a / b;
-    long r = a - q*b;
-    q -= ((r != 0) & ((r ^ b) < 0));
-    return q;
-}
-
-/* None */
-static CYTHON_INLINE double __Pyx_mod_double(double a, double b) {
-    double r = fmod(a, b);
-    r += ((r != 0) & ((r < 0) ^ (b < 0))) * b;
-    return r;
-}
 
 /* RaiseException */
 #if PY_MAJOR_VERSION < 3
@@ -3867,6 +3434,494 @@ bad:
     return;
 }
 #endif
+
+/* RaiseArgTupleInvalid */
+  static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
+/* RaiseDoubleKeywords */
+  static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+  static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
+/* PyIntBinop */
+  #if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx_PyInt_RemainderObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED int inplace) {
+    #if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_CheckExact(op1))) {
+        const long b = intval;
+        long x;
+        long a = PyInt_AS_LONG(op1);
+            x = a % b;
+            x += ((x != 0) & ((x ^ b) < 0)) * b;
+            return PyInt_FromLong(x);
+    }
+    #endif
+    #if CYTHON_USE_PYLONG_INTERNALS && PY_MAJOR_VERSION >= 3
+    if (likely(PyLong_CheckExact(op1))) {
+        const long b = intval;
+        long a, x;
+        const PY_LONG_LONG llb = intval;
+        PY_LONG_LONG lla, llx;
+        const digit* digits = ((PyLongObject*)op1)->ob_digit;
+        const Py_ssize_t size = Py_SIZE(op1);
+        if (likely(__Pyx_sst_abs(size) <= 1)) {
+            a = likely(size) ? digits[0] : 0;
+            if (size == -1) a = -a;
+        } else {
+            switch (size) {
+                case -2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case -3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case -4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                default: return PyLong_Type.tp_as_number->nb_remainder(op1, op2);
+            }
+        }
+                x = a % b;
+                x += ((x != 0) & ((x ^ b) < 0)) * b;
+            return PyLong_FromLong(x);
+        long_long:
+                llx = lla % llb;
+                llx += ((llx != 0) & ((llx ^ llb) < 0)) * llb;
+            return PyLong_FromLongLong(llx);
+    }
+    #endif
+    return (inplace ? PyNumber_InPlaceRemainder : PyNumber_Remainder)(op1, op2);
+}
+#endif
+
+/* PyIntBinop */
+  #if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx_PyInt_AddObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED int inplace) {
+    #if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_CheckExact(op1))) {
+        const long b = intval;
+        long x;
+        long a = PyInt_AS_LONG(op1);
+            x = (long)((unsigned long)a + b);
+            if (likely((x^a) >= 0 || (x^b) >= 0))
+                return PyInt_FromLong(x);
+            return PyLong_Type.tp_as_number->nb_add(op1, op2);
+    }
+    #endif
+    #if CYTHON_USE_PYLONG_INTERNALS && PY_MAJOR_VERSION >= 3
+    if (likely(PyLong_CheckExact(op1))) {
+        const long b = intval;
+        long a, x;
+        const PY_LONG_LONG llb = intval;
+        PY_LONG_LONG lla, llx;
+        const digit* digits = ((PyLongObject*)op1)->ob_digit;
+        const Py_ssize_t size = Py_SIZE(op1);
+        if (likely(__Pyx_sst_abs(size) <= 1)) {
+            a = likely(size) ? digits[0] : 0;
+            if (size == -1) a = -a;
+        } else {
+            switch (size) {
+                case -2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case -3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case -4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                case 4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+                    }
+                default: return PyLong_Type.tp_as_number->nb_add(op1, op2);
+            }
+        }
+                x = a + b;
+            return PyLong_FromLong(x);
+        long_long:
+                llx = lla + llb;
+            return PyLong_FromLongLong(llx);
+    }
+    #endif
+    if (PyFloat_CheckExact(op1)) {
+        const long b = intval;
+        double a = PyFloat_AS_DOUBLE(op1);
+            double result;
+            PyFPE_START_PROTECT("add", return NULL)
+            result = ((double)a) + (double)b;
+            PyFPE_END_PROTECT(result)
+            return PyFloat_FromDouble(result);
+    }
+    return (inplace ? PyNumber_InPlaceAdd : PyNumber_Add)(op1, op2);
+}
+#endif
+
+/* GetItemInt */
+  static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
+    PyObject *r;
+    if (!j) return NULL;
+    r = PyObject_GetItem(o, j);
+    Py_DECREF(j);
+    return r;
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
+                                                              CYTHON_NCP_UNUSED int wraparound,
+                                                              CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (wraparound & unlikely(i < 0)) i += PyList_GET_SIZE(o);
+    if ((!boundscheck) || likely((0 <= i) & (i < PyList_GET_SIZE(o)))) {
+        PyObject *r = PyList_GET_ITEM(o, i);
+        Py_INCREF(r);
+        return r;
+    }
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+#else
+    return PySequence_GetItem(o, i);
+#endif
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
+                                                              CYTHON_NCP_UNUSED int wraparound,
+                                                              CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (wraparound & unlikely(i < 0)) i += PyTuple_GET_SIZE(o);
+    if ((!boundscheck) || likely((0 <= i) & (i < PyTuple_GET_SIZE(o)))) {
+        PyObject *r = PyTuple_GET_ITEM(o, i);
+        Py_INCREF(r);
+        return r;
+    }
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+#else
+    return PySequence_GetItem(o, i);
+#endif
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, int is_list,
+                                                     CYTHON_NCP_UNUSED int wraparound,
+                                                     CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (is_list || PyList_CheckExact(o)) {
+        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyList_GET_SIZE(o);
+        if ((!boundscheck) || (likely((n >= 0) & (n < PyList_GET_SIZE(o))))) {
+            PyObject *r = PyList_GET_ITEM(o, n);
+            Py_INCREF(r);
+            return r;
+        }
+    }
+    else if (PyTuple_CheckExact(o)) {
+        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyTuple_GET_SIZE(o);
+        if ((!boundscheck) || likely((n >= 0) & (n < PyTuple_GET_SIZE(o)))) {
+            PyObject *r = PyTuple_GET_ITEM(o, n);
+            Py_INCREF(r);
+            return r;
+        }
+    } else {
+        PySequenceMethods *m = Py_TYPE(o)->tp_as_sequence;
+        if (likely(m && m->sq_item)) {
+            if (wraparound && unlikely(i < 0) && likely(m->sq_length)) {
+                Py_ssize_t l = m->sq_length(o);
+                if (likely(l >= 0)) {
+                    i += l;
+                } else {
+                    if (!PyErr_ExceptionMatches(PyExc_OverflowError))
+                        return NULL;
+                    PyErr_Clear();
+                }
+            }
+            return m->sq_item(o, i);
+        }
+    }
+#else
+    if (is_list || PySequence_Check(o)) {
+        return PySequence_GetItem(o, i);
+    }
+#endif
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+}
+
+/* ExtTypeTest */
+  static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
+    }
+    if (likely(PyObject_TypeCheck(obj, type)))
+        return 1;
+    PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
+                 Py_TYPE(obj)->tp_name, type->tp_name);
+    return 0;
+}
+
+/* WriteUnraisableException */
+  static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
+                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
+                                  int full_traceback, CYTHON_UNUSED int nogil) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_PyThreadState_declare
+#ifdef WITH_THREAD
+    PyGILState_STATE state;
+    if (nogil)
+        state = PyGILState_Ensure();
+#ifdef _MSC_VER
+    else state = (PyGILState_STATE)-1;
+#endif
+#endif
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(1);
+    }
+    #if PY_MAJOR_VERSION < 3
+    ctx = PyString_FromString(name);
+    #else
+    ctx = PyUnicode_FromString(name);
+    #endif
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
+#ifdef WITH_THREAD
+    if (nogil)
+        PyGILState_Release(state);
+#endif
+}
+
+/* None */
+  static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
+    long r = a % b;
+    r += ((r != 0) & ((r ^ b) < 0)) * b;
+    return r;
+}
+
+/* None */
+  static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
+    long q = a / b;
+    long r = a - q*b;
+    q -= ((r != 0) & ((r ^ b) < 0));
+    return q;
+}
+
+/* None */
+  static CYTHON_INLINE double __Pyx_mod_double(double a, double b) {
+    double r = fmod(a, b);
+    r += ((r != 0) & ((r < 0) ^ (b < 0))) * b;
+    return r;
+}
 
 /* CodeObjectCache */
   static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {

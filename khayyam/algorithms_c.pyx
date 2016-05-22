@@ -2,6 +2,7 @@
 from libc.math cimport floor, ceil
 from cpython cimport bool
 
+
 cpdef double get_julian_day_from_gregorian(int year, int month, int day):
     cdef:
         double _year = year
@@ -9,18 +10,21 @@ cpdef double get_julian_day_from_gregorian(int year, int month, int day):
         double _day = day
         double _century = 0
         double result = 0
+        bool is_leap = False
 
     if year / 4.0 == round(year / 4.0):
         if year / 100.0 == round(year / 100.0):
             if year / 400.0 == round(year / 400.0):
                 # Leap year checking #
-                if month == 2:
-                    assert day <= 29, 'Invalid date'
+                is_leap = True
         else:
             # Leap year #
-            if month == 2:
-                assert day <= 29, 'Invalid date'
+            is_leap = True
 
+    if month == 2:
+        max_days = 29 if is_leap else 28
+        if day > max_days:
+            raise ValueError('Invalid day: %s, it must be <= %s' % (day, max_days))
 
     if _month <= 2:
         _year -= 1

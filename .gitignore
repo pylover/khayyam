@@ -46,4 +46,5 @@ sphinx/_inv-cache
 docs/doctest
 docs/doctrees
 docs/html
+htmlcov
 _site
