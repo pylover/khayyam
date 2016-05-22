@@ -123,6 +123,11 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 2.9.8
+    * Registering on travis-ci.org
+    * Registering on coveralls.io
+    * Registering on requires.io
+
 * 2.9.7
     * Fixing problem in setup.py in python3 #15
 
