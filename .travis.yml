@@ -17,9 +17,15 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true
   - pip install cython
+  - pip install coverage
+  - pip install coveralls
   - pip install rtl
 
 install:
   - pip install -e .
 
-script: nosetests
+script:
+  coverage run setup.py test
+
+after_success:
+  coveralls

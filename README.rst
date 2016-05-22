@@ -2,7 +2,7 @@ khayyam
 =======
 
 .. image:: http://img.shields.io/pypi/v/khayyam.svg
-   :target: https://pypi.python.org/pypi/khayyam
+     :target: https://pypi.python.org/pypi/khayyam
 
 .. image:: https://requires.io/github/pylover/khayyam/requirements.svg?branch=master
      :target: https://requires.io/github/pylover/khayyam/requirements/?branch=master
@@ -10,6 +10,9 @@ khayyam
 
 .. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
      :target: https://travis-ci.org/pylover/khayyam
+
+.. image:: http://img.shields.io/coveralls/pylover/khayyam.svg
+     :target: https://coveralls.io/r/pylover/khayyam?branch=master
 
 Jump To:
 ^^^^^^^^
