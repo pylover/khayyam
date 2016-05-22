@@ -11,8 +11,8 @@ khayyam
 .. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
      :target: https://travis-ci.org/pylover/khayyam
 
-.. image:: http://img.shields.io/coveralls/pylover/khayyam.svg
-     :target: https://coveralls.io/r/pylover/khayyam?branch=master
+.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=master
+     :target: https://coveralls.io/github/pylover/khayyam?branch=master
 
 Jump To:
 ^^^^^^^^
