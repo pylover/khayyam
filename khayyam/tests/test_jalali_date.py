@@ -59,7 +59,7 @@ class TestJalaliDate(unittest.TestCase):
         self.assertEqual(jdate.isoformat(), '%s-12-23' % self.leap_year)
         d1 = JalaliDate(1361, 6, 15)
         self.assertEqual(d1.strftime('%Y-%m-%d'), '1361-06-15')
-        self.assertEqual(d1.strftime(u'اول%Y-%m-%dآخر'), u'اول1361-06-15آخر')
+        self.assertEqual(d1.strftime('اول%Y-%m-%dآخر'), 'اول1361-06-15آخر')
 
 
     def test_add(self):
@@ -124,13 +124,13 @@ class TestJalaliDate(unittest.TestCase):
         """
         self.assertEqual(JalaliDate.strptime('1361', '%Y'), JalaliDate(1361))
         self.assertEqual(JalaliDate.strptime('1361%C', '%Y%C'), JalaliDate(1361))
-        self.assertEqual(JalaliDate.strptime(u'اریا1361گلگشت', u'اریا%Yگلگشت'), JalaliDate(1361))
+        self.assertEqual(JalaliDate.strptime('اریا1361گلگشت', 'اریا%Yگلگشت'), JalaliDate(1361))
 
         current_century = int(JalaliDate.today().year / 100) * 100
         self.assertEqual(JalaliDate.strptime('61', '%y'), JalaliDate(current_century + 61))
         self.assertEqual(JalaliDate.strptime('61%C', '%y%C'), JalaliDate(current_century + 61))
-        self.assertEqual(JalaliDate.strptime(u'اریا61گلگشت', u'اریا%yگلگشت'), JalaliDate(current_century+61))
-        self.assertEqual(JalaliDate.strptime(u'جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
+        self.assertEqual(JalaliDate.strptime('اریا61گلگشت', 'اریا%yگلگشت'), JalaliDate(current_century+61))
+        self.assertEqual(JalaliDate.strptime('جمعه 01 اردیبهشت 0001', '%A %d %B %Y'),
                          JalaliDate(month=2, day=1))
 
     def test_timetuple(self):

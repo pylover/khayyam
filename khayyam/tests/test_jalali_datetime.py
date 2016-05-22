@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDatetime, teh_tz, MAXYEAR
+from khayyam import JalaliDatetime, teh_tz
 from datetime import datetime, timedelta
 from khayyam.timezones import TehranTimezone
 from khayyam.jalali_date import JalaliDate
