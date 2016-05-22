@@ -267,7 +267,7 @@ class JalaliDatetime(khayyam.JalaliDate):
     def replace(self, year=None, month=None, day=None, hour=None,
                 minute=None, second=None, microsecond=None, tzinfo=None):
         """
-        Without adjusting the the and time based tzinfo
+        Without adjusting the date the and time based tzinfo
         """
         year, month, day = self._validate(
             year if year else self.year,
@@ -387,7 +387,6 @@ class JalaliDatetime(khayyam.JalaliDate):
             ', tzinfo=%s' % self.tzinfo.__unicode__() if self.tzinfo else '',
             self.weekdaynameascii()
         )
-
 
     __repr__ = force_encoded_string_output(__unicode__)
 

@@ -5,9 +5,9 @@ from khayyam.helpers import force_encoded_string_output
 __author__ = 'vahid'
 
 ZERO_DELTA = timedelta(0)
-STDOFFSET = timedelta(minutes=210)  # Minutes
-DSTOFFSET = timedelta(minutes=270)  # Minutes
-DSTDIFF = DSTOFFSET - STDOFFSET
+STD_OFFSET = timedelta(minutes=210)  # Minutes
+DST_OFFSET = timedelta(minutes=270)  # Minutes
+DST_DIFF = DST_OFFSET - STD_OFFSET
 
 
 class Timezone(tzinfo):
@@ -18,6 +18,7 @@ class Timezone(tzinfo):
         self._dst_offset = dst_offset
         self._dst_checker = dst_checker
         self._name = name
+        super(Timezone, self).__init__()
 
     def fromutc(self, dt):
         if dt.tzinfo != self:
@@ -86,8 +87,8 @@ class TehranTimezone(Timezone):
         super(TehranTimezone, self).__init__(
             timedelta(minutes=210),
             timedelta(minutes=60),
-            lambda dt: (self.dst_start[0] < dt.month < self.dst_end[0]) or \
-                       (self.dst_start[0] == dt.month and self.dst_start[1] <= dt.day) or \
+            lambda dt: (self.dst_start[0] < dt.month < self.dst_end[0]) or
+                       (self.dst_start[0] == dt.month and self.dst_start[1] <= dt.day) or
                        (self.dst_end[0] == dt.month and self.dst_end[1] > dt.day),
             'Iran/Tehran'
         )
