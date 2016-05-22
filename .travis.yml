@@ -16,7 +16,8 @@ python:
 before_install:
   - sudo apt-get update
   - sudo apt-get install gdb python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dbg || true
-  - sudo pip install cython rtl
+  - sudo pip install cython
+  - sudo pip install rtl
   - dpkg -l gdb || true
 
 install:
