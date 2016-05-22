@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '2.9.7'
+__version__ = '2.9.8a'
 
 #: Minimum year supported by the library.
 MINYEAR = 1

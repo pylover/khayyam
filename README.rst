@@ -8,6 +8,9 @@ khayyam
      :target: https://requires.io/github/pylover/khayyam/requirements/?branch=master
      :alt: Requirements Status
 
+.. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
+     :target: https://travis-ci.org/pylover/khayyam
+
 Jump To:
 ^^^^^^^^
 

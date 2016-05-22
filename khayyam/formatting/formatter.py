@@ -40,7 +40,7 @@ class JalaliDateFormatter(BaseFormatter):
         self._parser_regex = self._create_parser_regex()
 
     def _create_parser_regex(self):
-        regex = u'^'
+        regex = '^'
         index = 0
         for m in re.finditer(consts.FORMAT_DIRECTIVE_REGEX, self.format_string):
             directive_key = m.group()[1:]
