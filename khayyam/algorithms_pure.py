@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from math import floor, ceil
+
 __author__ = 'vahid'
 
 
@@ -25,11 +26,15 @@ def get_julian_day_from_gregorian(year, month, day):
         month += 12
 
     century = floor(year / 100)
-    return floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + day + (2 - century + floor(century / 4)) - 1524.5
+    return floor(365.25 * (year + 4716)) + \
+        floor(30.6001 * (month + 1)) + \
+        day + \
+        (2 - century + floor(century / 4)) - \
+        1524.5
 
 
 def is_leap_year(year):
-    return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682 
+    return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682
 
 
 def days_in_year(year):
@@ -43,7 +48,7 @@ def days_in_month(year, month):
         return 30
 
     assert month == 12, 'Month must be between 1 and 12'
-    
+
     # Esfand(اسفند)
     if is_leap_year(year):
         return 30
@@ -54,12 +59,13 @@ def days_in_month(year, month):
 def julian_day_from_jalali_date(year, month, day):
     base = year - ([473, 474][year >= 0])
     julian_year = 474 + (base % 2820)
-    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(((julian_year * 682) - 110) / 2816) + (julian_year - 1) * 365 + floor(base / 2820) * 1029983 + (1948320.5 - 1)
+    return day + ([((month - 1) * 30) + 6, (month - 1) * 31][month <= 7]) + floor(
+        ((julian_year * 682) - 110) / 2816) + (julian_year - 1) * 365 + floor(base / 2820) * 1029983 + (1948320.5 - 1)
 
 
 def jalali_date_from_julian_day(julian_day):
     julian_day = floor(julian_day) + 0.5
-    offset = julian_day - 2121445.5 # julian_day_from_jalali(475, 1, 1) replaced by its static value
+    offset = julian_day - 2121445.5  # julian_day_from_jalali(475, 1, 1) replaced by its static value
     cycle = floor(offset / 1029983)
     remaining = offset % 1029983
     if remaining == 1029982:

@@ -233,7 +233,10 @@ class JalaliDatetime(khayyam.JalaliDate):
     @classmethod
     def combine(cls, date, _time):
         """
-        Return a new jalali datetime object whose date members are equal to the given date object's, and whose _time and tzinfo members are equal to the given _time object's. For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time and tzinfo members are ignored.
+        Return a new jalali datetime object whose date members are equal to the given date object's, and whose _time
+        and tzinfo members are equal to the given _time object's.
+        For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time
+        and tzinfo members are ignored.
         """
         if isinstance(date, (JalaliDatetime, khayyam.JalaliDate)):
             date = date.todatetime()
@@ -302,7 +305,9 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def dst(self):
         """
-        If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one day.
+        If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter
+        doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one
+        day.
         """
         if self.tzinfo:
             return self.tzinfo.dst(self)
@@ -317,9 +322,11 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def isoformat(self, sep='T'):
         """
-        Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if microsecond is 0, YYYY-MM-DDTHH:MM:SS
+        Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if
+        microsecond is 0, YYYY-MM-DDTHH:MM:SS
 
-        If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM
+        If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours
+        and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM
         """
         return self.strftime('%Y-%m-%d' + sep + '%H:%M:%S.%f%z')
 

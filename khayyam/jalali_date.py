@@ -62,7 +62,7 @@ class JalaliDate(object):
     """
 
     #: Represent the minimum year which supported by this class.
-    min = (MINYEAR, 1, 1)   # To be converted to JalaliDate at the bottom of this module
+    min = (MINYEAR, 1, 1)  # To be converted to JalaliDate at the bottom of this module
 
     #: Represent the maximum year which supported by this class.
     max = (MAXYEAR, 12, 29)
@@ -147,10 +147,10 @@ class JalaliDate(object):
         :return: The date corresponding to the proleptic Shamsi ordinal.
         :rtype: :py:class:`khayyam.JalaiDate`
         """
-        return cls.min + datetime.timedelta(days=ordinal-1)
+        return cls.min + datetime.timedelta(days=ordinal - 1)
 
     @classmethod
-    def strptime(cls, date_string, format):
+    def strptime(cls, date_string, fmt):
         """
         This is opposite of the :py:meth:`khayyam.JalaliDate.strftime`,
         and used to parse date strings into date object.
@@ -161,12 +161,12 @@ class JalaliDate(object):
 
 
         :param date_string:
-        :param format:
+        :param fmt:
         :return: A :py:class:`khayyam.JalaliDate` corresponding to date_string, parsed according to format
         :rtype: :py:class:`khayyam.JalaiDate`
         """
-        result = cls.formatterfactory(format).parse(date_string)
-        result = {k:v for k, v in result.items() if k in ('year', 'month', 'day')}
+        result = cls.formatterfactory(fmt).parse(date_string)
+        result = {k: v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
 
     @staticmethod
@@ -393,6 +393,7 @@ class JalaliDate(object):
         .. doctest:: api-localdateformat
 
             >>> print(JalaliDate(1361, 6, 15).strftime('%A %D %B %N'))
+
             دوشنبه ۱۵ شهریور ۱۳۶۱
 
         For example:
@@ -400,6 +401,7 @@ class JalaliDate(object):
         .. doctest:: api-localdateformat
 
             >>> print(JalaliDate(1394, 5, 6).localdateformat())
+
             سه شنبه ۶ مرداد ۱۳۹۴
 
 
@@ -517,4 +519,3 @@ class JalaliDate(object):
 # Class attributes
 JalaliDate.min = JalaliDate(*JalaliDate.min)
 JalaliDate.max = JalaliDate(*JalaliDate.max)
-

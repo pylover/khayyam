@@ -5,15 +5,25 @@
       <w>ampmascii</w>
       <w>astimezone</w>
       <w>brightgreen</w>
+      <w>compat</w>
       <w>cythonic</w>
       <w>cythonize</w>
       <w>dayofyear</w>
+      <w>daysinmonth</w>
+      <w>ddthh</w>
       <w>dobisel</w>
+      <w>doesn</w>
+      <w>doshanbeh</w>
       <w>esfand</w>
       <w>extention</w>
+      <w>formatterfactory</w>
+      <w>fromordinal</w>
       <w>fromtimestamp</w>
       <w>fromutc</w>
+      <w>gettimeofday</w>
+      <w>gmtime</w>
       <w>isoformat</w>
+      <w>jalai</w>
       <w>jalali</w>
       <w>localdateformat</w>
       <w>localdatetimeformat</w>
@@ -23,9 +33,14 @@
       <w>localshortformat</w>
       <w>localshortformatascii</w>
       <w>localtimeformat</w>
+      <w>maxyear</w>
+      <w>meth</w>
+      <w>minyear</w>
+      <w>mmmmmm</w>
       <w>monthabbr</w>
       <w>monthnameascii</w>
       <w>panjshanbeh</w>
+      <w>persiancalendar</w>
       <w>persianday</w>
       <w>persiandayofyear</w>
       <w>persiandayofyearzeropadded</w>
@@ -43,16 +58,20 @@
       <w>persianutcoffset</w>
       <w>persianyear</w>
       <w>persianyearzeropadded</w>
+      <w>proleptic</w>
       <w>reshaper</w>
       <w>shortyear</w>
       <w>strftime</w>
       <w>strptime</w>
       <w>timetz</w>
+      <w>toordinal</w>
       <w>tzinfo</w>
       <w>tznameformat</w>
       <w>utcfromtimestamp</w>
       <w>utcnow</w>
       <w>utcoffsetformat</w>
+      <w>yekshanbeh</w>
+      <w>yyyy</w>
       <w>zeropadded</w>
     </words>
   </dictionary>

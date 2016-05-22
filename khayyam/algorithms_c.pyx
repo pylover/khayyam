@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from libc.math cimport floor, ceil
 from cpython cimport bool
 
@@ -51,7 +52,7 @@ cpdef int days_in_month(int year, int month):
 
     assert month == 12, 'Month must be between 1 and 12'
 
-    # Esfand(اسفند)
+    # Esfand
     if is_leap_year(year):
         return 30
     else:
