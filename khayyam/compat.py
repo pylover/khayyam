@@ -7,7 +7,7 @@ if _py3:
     # noinspection PyUnresolvedReferences
     # noinspection PyCompatibility
     from builtins import range as xrange_compat
-else:
+else:  # pragma: no cover
     # noinspection PyUnboundLocalVariable
     xrange_compat = xrange
 
@@ -19,6 +19,6 @@ xrange = xrange_compat
 def get_unicode(s):
     if _py3:
         return str(s)
-    else:
+    else:  # pragma: no cover
         # noinspection PyCompatibility
         return unicode(s)

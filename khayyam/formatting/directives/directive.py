@@ -14,13 +14,13 @@ class Directive(object):
         if post_parser:
             self.post_parser = post_parser
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return '%' + self.key
 
-    def post_parser(self, ctx, formatter):
+    def post_parser(self, ctx, formatter):  # pragma: no cover
         pass
 
-    def format(self, d):
+    def format(self, d):  # pragma: no cover
         return d
 
 

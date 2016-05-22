@@ -12,7 +12,7 @@ class BaseAmPmDirective(Directive):
     def format(self, d):
         return getattr(d, self.name)()
 
-    def is_am(self, ctx):
+    def is_am(self, ctx):  # pragma: no cover
         raise NotImplementedError()
 
     def post_parser(self, ctx, formatter):

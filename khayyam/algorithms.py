@@ -14,7 +14,7 @@ try:
         gregorian_date_from_julian_day, \
         jalali_date_from_gregorian_date
 
-except ImportError:
+except ImportError:  # pragma: no cover
     warnings.warn(
         "The Cython extension is not available. Switching to fallback python pure algorithms, "
         "so it's may be slower than C implementation of the algorithms.")
