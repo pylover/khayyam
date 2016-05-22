@@ -1,6 +1,13 @@
 khayyam
 =======
 
+.. image:: http://img.shields.io/pypi/v/khayyam.svg
+   :target: https://pypi.python.org/pypi/khayyam
+
+.. image:: https://requires.io/github/pylover/khayyam/requirements.svg?branch=master
+     :target: https://requires.io/github/pylover/khayyam/requirements/?branch=master
+     :alt: Requirements Status
+
 Jump To:
 ^^^^^^^^
 
