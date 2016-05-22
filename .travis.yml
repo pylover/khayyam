@@ -6,15 +6,20 @@ language: python
 #  - PYTHON=python3 PYSUF='3' PYVER=3.2 PIPVER='==7.1.2'
 
 python:
-  - "2.6"
   - "2.7"
   - "3.3"
   - "3.4"
   - "3.5"
+  - "3.5-dev"
   - "pypy"
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install gdb python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dbg || true
+  - sudo pip install cython rtl
+  - dpkg -l gdb || true
+
 install:
-  - pip install cython rtl
   - sudo pip install -e .
 
 script: nosetests
