@@ -10,6 +10,22 @@ A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with time
 (daylight-saving), full formatting & parsing support for python 2 & 3.
 
 
+.. image:: http://img.shields.io/pypi/v/khayyam.svg
+     :target: https://pypi.python.org/pypi/khayyam
+
+.. image:: https://requires.io/github/pylover/khayyam/requirements.svg?branch=master
+     :target: https://requires.io/github/pylover/khayyam/requirements/?branch=master
+     :alt: Requirements Status
+
+.. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
+     :target: https://travis-ci.org/pylover/khayyam
+
+.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=master
+     :target: https://coveralls.io/github/pylover/khayyam?branch=master
+
+.. image:: https://img.shields.io/badge/license-GPLv3-brightgreen.svg
+     :target: https://github.com/pylover/khayyam/blob/master/LICENSE
+
 
 The khayyam module supplies classes for manipulating persian dates and times in both
 simple and complex ways. While date and time arithmetic is supported, the focus of the

@@ -25,8 +25,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
-	@echo "  github.io.auto       to make amd deploy HTML files into the jekyll project, and watch for changes."
-	@echo "  github.io     to make amd deploy HTML files into the jekyll project."
+	@echo "  khayyam.io to make amd deploy HTML files into the jekyll project."
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
 	@echo "  pickle     to make pickle files"
@@ -54,7 +53,7 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-github.io:
+khayyam.io:
 	rm -rf $(GITHUB_OUT_DIR)/*;
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
 	mv $(GITHUB_OUT_DIR)/_static $(GITHUB_OUT_DIR)/static

@@ -59,11 +59,13 @@
       <w>persianyear</w>
       <w>persianyearzeropadded</w>
       <w>proleptic</w>
+      <w>quickstart</w>
       <w>reshaper</w>
       <w>shortyear</w>
       <w>strftime</w>
       <w>strptime</w>
       <w>timetz</w>
+      <w>toctree</w>
       <w>toordinal</w>
       <w>tzinfo</w>
       <w>tznameformat</w>

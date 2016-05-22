@@ -393,7 +393,6 @@ class JalaliDate(object):
         .. doctest:: api-localdateformat
 
             >>> print(JalaliDate(1361, 6, 15).strftime('%A %D %B %N'))
-
             دوشنبه ۱۵ شهریور ۱۳۶۱
 
         For example:
@@ -401,7 +400,6 @@ class JalaliDate(object):
         .. doctest:: api-localdateformat
 
             >>> print(JalaliDate(1394, 5, 6).localdateformat())
-
             سه شنبه ۶ مرداد ۱۳۹۴
 
 
