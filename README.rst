@@ -14,6 +14,10 @@ khayyam
 .. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=master
      :target: https://coveralls.io/github/pylover/khayyam?branch=master
 
+.. image:: https://img.shields.io/badge/license-GPLv3-green.svg
+     :target: https://github.com/pylover/khayyam/blob/master/LICENSE
+
+
 Jump To:
 ^^^^^^^^
 
