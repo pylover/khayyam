@@ -102,7 +102,7 @@ Clone/checkout the `gh-pages` branch from Github alongside the master branch wor
 
   $ cd path/to/khayyam
   $ cd ..
-  $ git clone -b gh-pages <Your fork url> kayyam.io
+  $ git clone -b gh-pages <Your fork url> khayyam.io
 
 Build in-project documents: `docs/html`
 
@@ -115,8 +115,8 @@ Build `khayyam.io` documents: `../khayyam.io`
 
 .. code-block:: console
 
-  $ cd path/to/khayyam.io
-  $ make github.io
+  $ cd path/to/khayyam/sphinx
+  $ make khayyam.io
 
 
 Or watch for changes:

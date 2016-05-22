@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Development &amp; Contribution &mdash; Khayyam 2.9.6 documentation</title>
+    <title>Development &amp; Contribution &mdash; Khayyam 2.9.8 documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.9.6',
+        VERSION:     '2.9.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,8 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.9.6 documentation" href="index.html" />
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+    <link rel="top" title="Khayyam 2.9.8 documentation" href="index.html" />
     <link rel="next" title="Persian(Jalali) Calendar" href="persiancalendar.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
   </head>
@@ -43,7 +44,7 @@
         <li class="right" >
           <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.6 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.8 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,9 +59,9 @@
 <p>Please provide the full black-box &amp; white-box test cases, and pass all tests in the <cite>khayyam/test</cite> directory
 for both versions of python before supplying any pull-request.</p>
 <p>Making development environment:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>workspace
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> workspace
 <span class="gp">$</span> git clone &lt;Your fork Url&gt;
-<span class="gp">$</span> <span class="nb">cd </span>khayyam
+<span class="gp">$</span> <span class="nb">cd</span> khayyam
 <span class="gp">$</span> pip install cython
 <span class="gp">$</span> python setup.py build_ext --inplace
 <span class="gp">$</span> pip install -e .
@@ -72,8 +73,8 @@ for both versions of python before supplying any pull-request.</p>
 <div class="section" id="testing-source-codes">
 <h3>Testing source codes:<a class="headerlink" href="#testing-source-codes" title="Permalink to this headline">¶</a></h3>
 <p>Install nose:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install nose
-<span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install nose
+<span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam
 <span class="gp">$</span> nosetests
 <span class="go">.............................</span>
 <span class="go">----------------------------------------------------------------------</span>
@@ -83,7 +84,7 @@ for both versions of python before supplying any pull-request.</p>
 </pre></div>
 </div>
 <p>Without nose:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam
 <span class="gp">$</span> python setup.py <span class="nb">test</span>
 <span class="go">running test</span>
 <span class="go">running egg_info</span>
@@ -135,29 +136,29 @@ for both versions of python before supplying any pull-request.</p>
 <div class="section" id="document-authoring">
 <h2>Document authoring<a class="headerlink" href="#document-authoring" title="Permalink to this headline">¶</a></h2>
 <p>Clone/checkout the <cite>gh-pages</cite> branch from Github alongside the master branch working copy directory :</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam
 <span class="gp">$</span> <span class="nb">cd</span> ..
-<span class="gp">$</span> git clone -b gh-pages &lt;Your fork url&gt; kayyam.io
+<span class="gp">$</span> git clone -b gh-pages &lt;Your fork url&gt; khayyam.io
 </pre></div>
 </div>
 <p>Build in-project documents: <cite>docs/html</cite></p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam/sphinx
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam/sphinx
 <span class="gp">$</span> make html
 </pre></div>
 </div>
 <p>Build <cite>khayyam.io</cite> documents: <cite>../khayyam.io</cite></p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam.io
-<span class="gp">$</span> make github.io
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam/sphinx
+<span class="gp">$</span> make khayyam.io
 </pre></div>
 </div>
 <p>Or watch for changes:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install inotify-tools
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install inotify-tools
 <span class="gp">$</span> ./watch
 </pre></div>
 </div>
 <p>Start the document http server locally:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gem install jekyll
-<span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam.io
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gem install jekyll
+<span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam.io
 <span class="gp">$</span> jekyll serve -w
 </pre></div>
 </div>
@@ -165,8 +166,8 @@ for both versions of python before supplying any pull-request.</p>
 <div class="section" id="testing-document-code-snippets">
 <h3>Testing document code snippets:<a class="headerlink" href="#testing-document-code-snippets" title="Permalink to this headline">¶</a></h3>
 <p>Install required packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pip install rtl
-<span class="gp">$</span> <span class="nb">cd </span>path/to/khayyam/sphinx
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install rtl
+<span class="gp">$</span> <span class="nb">cd</span> path/to/khayyam/sphinx
 <span class="gp">$</span> make doctest
 </pre></div>
 </div>
@@ -216,9 +217,6 @@ for both versions of python before supplying any pull-request.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -240,12 +238,12 @@ for both versions of python before supplying any pull-request.</p>
         <li class="right" >
           <a href="installation.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.6 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.8 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

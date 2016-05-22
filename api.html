@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &mdash; Khayyam 2.9.6 documentation</title>
+    <title>API Reference &mdash; Khayyam 2.9.8 documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.9.6',
+        VERSION:     '2.9.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,8 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Khayyam 2.9.6 documentation" href="index.html" />
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+    <link rel="top" title="Khayyam 2.9.8 documentation" href="index.html" />
     <link rel="prev" title="Persian(Jalali) Calendar" href="persiancalendar.html" /> 
   </head>
   <body role="document">
@@ -39,7 +40,7 @@
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.6 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.8 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,14 +56,14 @@
 <dl class="class">
 <dt id="khayyam.JalaliDate">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDate</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represent a day in <a class="reference internal" href="persiancalendar.html"><em>Persian(Jalali) Calendar</em></a>.</p>
+<dd><p>Represent a day in <a class="reference internal" href="persiancalendar.html"><span class="doc">Persian(Jalali) Calendar</span></a>.</p>
 <p>The first parameter can be an integer, <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
 <p>You may create this object by passing <cite>julian_day</cite> parameter.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="kn">import</span> <span class="n">JalaliDate</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="k">import</span> <span class="n">JalaliDate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">julian_day</span><span class="o">=</span><span class="mi">2445218</span><span class="p">)</span>
 <span class="go">khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">1982</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="go">khayyam.JalaliDate(1361, 6, 15, Doshanbeh)</span>
 
@@ -94,7 +95,7 @@
 <dt id="khayyam.JalaliDate.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">source_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 <span class="go">khayyam.JalaliDate(1394, 3, 24, Yekshanbeh)</span>
 </pre></div>
@@ -166,7 +167,7 @@ instance based on given format string.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; see: <a class="reference internal" href="directives.html"><em>Formatting and Parsing directives</em></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; see: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Formatter object, based on the given format string.</td>
 </tr>
@@ -256,7 +257,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 </tbody>
 </table>
 <p>For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;1361-12-04&#39;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;1361-12-04&#39;</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -281,12 +282,12 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <dt id="khayyam.JalaliDate.localdateformat">
 <code class="descname">localdateformat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.localdateformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.localdateformat" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%A %D %B %N&#39;</span><span class="p">))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%A %D %B %N&#39;</span><span class="p">))</span>
 <span class="go">دوشنبه ۱۵ شهریور ۱۳۶۱</span>
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">localdateformat</span><span class="p">())</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">localdateformat</span><span class="p">())</span>
 <span class="go">سه شنبه ۶ مرداد ۱۳۹۴</span>
 </pre></div>
 </div>
@@ -403,7 +404,7 @@ attributes given new values by which keyword arguments are specified.</p>
 <dt id="khayyam.JalaliDate.strftime">
 <code class="descname">strftime</code><span class="sig-paren">(</span><em>format_string</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.strftime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.strftime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format codes referring to hours, minutes or seconds will see 0 values.
-For a complete list of formatting directives, see <a class="reference internal" href="directives.html"><em>Formatting and Parsing directives</em></a>.</p>
+For a complete list of formatting directives, see <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -420,19 +421,19 @@ For a complete list of formatting directives, see <a class="reference internal" 
 
 <dl class="classmethod">
 <dt id="khayyam.JalaliDate.strptime">
-<em class="property">classmethod </em><code class="descname">strptime</code><span class="sig-paren">(</span><em>date_string</em>, <em>format</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.strptime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.strptime" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">strptime</code><span class="sig-paren">(</span><em>date_string</em>, <em>fmt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.strptime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.strptime" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is opposite of the <a class="reference internal" href="#khayyam.JalaliDate.strftime" title="khayyam.JalaliDate.strftime"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.strftime()</span></code></a>,
 and used to parse date strings into date object.</p>
 <p><cite>ValueError</cite> is raised if the date_string and format can’t be
 parsed by time.strptime() or if it returns a value which isn’t a time tuple. For a
-complete list of formatting directives, see <a class="reference internal" href="directives.html"><em>Formatting and Parsing directives</em></a>.</p>
+complete list of formatting directives, see <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>date_string</strong> &#8211; </li>
-<li><strong>format</strong> &#8211; </li>
+<li><strong>fmt</strong> &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -450,7 +451,7 @@ complete list of formatting directives, see <a class="reference internal" href="
 <dt id="khayyam.JalaliDate.timetuple">
 <code class="descname">timetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.timetuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.timetuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s equivalent to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span> <span class="n">dayofyear</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">0</span><span class="p">]))</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span> <span class="n">dayofyear</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">0</span><span class="p">]))</span> 
 <span class="go">time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)</span>
 </pre></div>
 </div>
@@ -620,13 +621,13 @@ from khayyam import JalaliDate</div></blockquote>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>first_day_of_week</strong> &#8211; One of the
-<a class="reference internal" href="#khayyam.SATURDAY" title="khayyam.SATURDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.SATURDAY</span></code></a>,
-<a class="reference internal" href="#khayyam.SUNDAY" title="khayyam.SUNDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.SUNDAY</span></code></a>,
-<a class="reference internal" href="#khayyam.MONDAY" title="khayyam.MONDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.MONDAY</span></code></a>,
-<a class="reference internal" href="#khayyam.TUESDAY" title="khayyam.TUESDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.TUESDAY</span></code></a>,
-<a class="reference internal" href="#khayyam.WEDNESDAY" title="khayyam.WEDNESDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.WEDNESDAY</span></code></a>,
-<a class="reference internal" href="#khayyam.THURSDAY" title="khayyam.THURSDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.THURSDAY</span></code></a> or
-<a class="reference internal" href="#khayyam.FRIDAY" title="khayyam.FRIDAY"><code class="xref py py-data docutils literal"><span class="pre">khayyam.FRIDAY</span></code></a></td>
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.SATURDAY</span></code>,
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.SUNDAY</span></code>,
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.MONDAY</span></code>,
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.TUESDAY</span></code>,
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.WEDNESDAY</span></code>,
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.THURSDAY</span></code> or
+<code class="xref py py-data docutils literal"><span class="pre">khayyam.FRIDAY</span></code></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The week number of the year.</td>
 </tr>
@@ -645,7 +646,7 @@ from khayyam import JalaliDate</div></blockquote>
 <dt id="khayyam.JalaliDatetime">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDatetime</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>hour=0</em>, <em>minute=0</em>, <em>second=0</em>, <em>microsecond=0</em>, <em>tzinfo=None</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inherited from <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
-<p>Represent a moment in <a class="reference internal" href="persiancalendar.html"><em>Persian(Jalali) Calendar</em></a>.</p>
+<p>Represent a moment in <a class="reference internal" href="persiancalendar.html"><span class="doc">Persian(Jalali) Calendar</span></a>.</p>
 <p>The first parameter can be an integer,
 <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>,
 <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>.</p>
@@ -678,13 +679,18 @@ from khayyam import JalaliDate</div></blockquote>
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.combine">
 <em class="property">classmethod </em><code class="descname">combine</code><span class="sig-paren">(</span><em>date</em>, <em>_time</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.combine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a new jalali datetime object whose date members are equal to the given date object&#8217;s, and whose _time and tzinfo members are equal to the given _time object&#8217;s. For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time and tzinfo members are ignored.</p>
+<dd><p>Return a new jalali datetime object whose date members are equal to the given date object&#8217;s, and whose _time
+and tzinfo members are equal to the given _time object&#8217;s.
+For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time
+and tzinfo members are ignored.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.dst">
 <code class="descname">dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.dst" title="Permalink to this definition">¶</a></dt>
-<dd><p>If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one day.</p>
+<dd><p>If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter
+doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one
+day.</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -744,8 +750,10 @@ such as is returned by <a class="reference external" href="https://docs.python.o
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.isoformat">
 <code class="descname">isoformat</code><span class="sig-paren">(</span><em>sep='T'</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.isoformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.isoformat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if microsecond is 0, YYYY-MM-DDTHH:MM:SS</p>
-<p>If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM</p>
+<dd><p>Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if
+microsecond is 0, YYYY-MM-DDTHH:MM:SS</p>
+<p>If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours
+and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -820,7 +828,7 @@ See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="k
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.replace">
 <code class="descname">replace</code><span class="sig-paren">(</span><em>year=None</em>, <em>month=None</em>, <em>day=None</em>, <em>hour=None</em>, <em>minute=None</em>, <em>second=None</em>, <em>microsecond=None</em>, <em>tzinfo=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.replace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Without adjusting the the and time based tzinfo</p>
+<dd><p>Without adjusting the date the and time based tzinfo</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1241,60 +1249,6 @@ UTC date and time, as a naive datetime object.</p>
 </div>
 <div class="section" id="module-khayyam">
 <span id="constants"></span><h2>Constants<a class="headerlink" href="#module-khayyam" title="Permalink to this headline">¶</a></h2>
-<dl class="data">
-<dt id="khayyam.MINYEAR">
-<code class="descclassname">khayyam.</code><code class="descname">MINYEAR</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.MINYEAR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Minimum year supported by the library.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.MAXYEAR">
-<code class="descclassname">khayyam.</code><code class="descname">MAXYEAR</code><em class="property"> = 3178</em><a class="headerlink" href="#khayyam.MAXYEAR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum year supported by the library.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.SATURDAY">
-<code class="descclassname">khayyam.</code><code class="descname">SATURDAY</code><em class="property"> = 0</em><a class="headerlink" href="#khayyam.SATURDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Saturday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.SUNDAY">
-<code class="descclassname">khayyam.</code><code class="descname">SUNDAY</code><em class="property"> = 1</em><a class="headerlink" href="#khayyam.SUNDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Sunday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.MONDAY">
-<code class="descclassname">khayyam.</code><code class="descname">MONDAY</code><em class="property"> = 2</em><a class="headerlink" href="#khayyam.MONDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Monday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.TUESDAY">
-<code class="descclassname">khayyam.</code><code class="descname">TUESDAY</code><em class="property"> = 3</em><a class="headerlink" href="#khayyam.TUESDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Tuesday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.WEDNESDAY">
-<code class="descclassname">khayyam.</code><code class="descname">WEDNESDAY</code><em class="property"> = 4</em><a class="headerlink" href="#khayyam.WEDNESDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Wednesday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.THURSDAY">
-<code class="descclassname">khayyam.</code><code class="descname">THURSDAY</code><em class="property"> = 5</em><a class="headerlink" href="#khayyam.THURSDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Thursday weekday.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="khayyam.FRIDAY">
-<code class="descclassname">khayyam.</code><code class="descname">FRIDAY</code><em class="property"> = 6</em><a class="headerlink" href="#khayyam.FRIDAY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Representing the Friday weekday.</p>
-</dd></dl>
-
 </div>
 </div>
 
@@ -1337,9 +1291,6 @@ UTC date and time, as a naive datetime object.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -1358,12 +1309,12 @@ UTC date and time, as a naive datetime object.</p>
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.6 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.9.8 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>
