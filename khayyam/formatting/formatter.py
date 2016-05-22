@@ -53,7 +53,7 @@ class JalaliDateFormatter(BaseFormatter):
             if directive.key == '%':
                 regex += '%'
                 continue
-            regex += u'(?P<%(group_name)s>%(regexp)s)' % dict(
+            regex += '(?P<%(group_name)s>%(regexp)s)' % dict(
                 group_name=directive.key,
                 regexp=directive.regex
             )
@@ -72,7 +72,7 @@ class JalaliDateFormatter(BaseFormatter):
                 yield m, self.directives_by_key[key]
 
     def format(self, jalali_date):
-        result = u''
+        result = ''
         index = 0
         for match, directive in self.iter_format_directives():
             if index < match.start():
@@ -91,7 +91,7 @@ class JalaliDateFormatter(BaseFormatter):
     def _parse(self, date_string):
         m = re.match(self.parser_regex, self.filter_persian_digit(date_string))
         if not m:
-            raise ValueError(u"time data '%s' does not match format '%s' with generated regex: '%s'" % (
+            raise ValueError("time data '%s' does not match format '%s' with generated regex: '%s'" % (
                 date_string, self.format_string, self.parser_regex))
         result = {}
         for directive_key, v in m.groupdict().items():
