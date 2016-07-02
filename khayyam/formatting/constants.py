@@ -163,10 +163,10 @@ PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱
 PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 
 PERSIAN_MINUTE_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])|([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 
 PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])|([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])|([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 
 PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
 PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
