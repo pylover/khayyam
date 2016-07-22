@@ -73,6 +73,10 @@ DATE_FORMAT_DIRECTIVES = [
               lambda d: d.weekdayabbrascii()),
     Directive('E', 'weekdaynameascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
               lambda d: d.weekdaynameascii()),
+    Directive('T', 'englishweekdayabbrascii', consts.ENGLISH_WEEKDAY_ABBRS_ASCII_REGEX, get_unicode,
+              lambda d: d.englishweekdayabbrascii()),
+    # Directive('@', 'englishweekdayascii', consts.ENGLISH_WEEKDAY_NAME_ASCII_REGEX, get_unicode,
+    #           lambda d: d.englishweekdayascii()),
 
     # COMPOSITE
     CompositeDateDirective('x', 'localdateformat', '%s %s %s %s' % (
@@ -156,6 +160,24 @@ TIME_FORMAT_DIRECTIVES = [
         consts.SECOND_REGEX,
         consts.AM_PM_ASCII_REGEX
     ), "%E %d %G %Y %I:%M:%S %t"),
+    CompositeDatetimeDirective('q', 'localenglishshortdatetimeformatascii', '%s %s %s %s %s:%s' % (
+        consts.ENGLISH_WEEKDAY_ABBRS_ASCII_REGEX,
+        consts.DAY_REGEX,
+        consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX,
+        consts.SHORT_YEAR_REGEX,
+        consts.HOUR24_REGEX,
+        consts.MINUTE_REGEX
+    ), "%T %d %g %y %H:%M"),
+    # CompositeDatetimeDirective('Q', 'localenglishdatetimeformatascii', '%s %s %s %s %s:%s:%s %s' % (
+    #     consts.ENGLISH_WEEKDAY_NAMES_ASCII_REGEX,
+    #     consts.DAY_REGEX,
+    #     consts.PERSIAN_MONTH_NAMES_ASCII_REGEX,
+    #     consts.YEAR_REGEX,
+    #     consts.HOUR12_REGEX,
+    #     consts.MINUTE_REGEX,
+    #     consts.SECOND_REGEX,
+    #     consts.AM_PM_ASCII_REGEX
+    # ), "%@ %d %G %Y %I:%M:%S %t"),
     CompositeDatetimeDirective('X', 'localtimeformat', '%s:%s:%s %s' % (
         consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
         consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
