@@ -24,8 +24,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             %A           Locale’s full weekday name.
             %e           ASCII Locale’s abbreviated weekday name.
             %E           ASCII Locale’s full weekday name.
-            %T           ASCII English abbreviated weekday name.
-            # %@          ASCII English full weekday name.
+            %T           ASCII English full weekday name.
             %w           Weekday as a decimal number [0(Saturday), 6(Friday)].
             %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.
             %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.
@@ -38,7 +37,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(d1.strftime('%e'), u'D')
         self.assertEqual(d1.strftime('%E'), u'Doshanbeh')
         self.assertEqual(d1.strftime('%T'), u'Mon')
-        # self.assertEqual(d1.strftime('%@'), u'Monday')
         self.assertEqual(d1.strftime('%w'), u'2')
         self.assertEqual(d1.strftime('%W'), u'24')
 
@@ -57,12 +55,8 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
                 JalaliDate.strptime('1345 10 10 %s' % c.PERSIAN_WEEKDAY_NAMES_ASCII[i], '%Y %m %d %E'),
                 JalaliDate(year=1345, month=10, day=10))
             self.assertEqual(
-                JalaliDate.strptime('1345 10 10 %s' % c.ENGLISH_WEEKDAY_ABBRS_ASCII[i], '%Y %m %d %T'),
+                JalaliDate.strptime('1345 10 10 %s' % c.ENGLISH_WEEKDAY_NAMES_ASCII[i], '%Y %m %d %T'),
                 JalaliDate(year=1345, month=10, day=10))
-            # self.assertEqual(
-            #     JalaliDate.strptime('1345 10 10 %s' % c.ENGLISH_WEEKDAY_NAMES_ASCII[i], '%Y %m %d %@'),
-            #     JalaliDate(year=1345, month=10, day=10))
-
 
     def test_year(self):
         """
