@@ -24,6 +24,7 @@ Directive    Example                    Meaning
 %e           Sh, Y, D, Se, Ch, P, J     Weekday name in persian abbreviated ASCII style.
 %A           شنبه, یکشنبه, ...          Weekday name in persian.
 %E           Shanbeh, Yekshanbeh, ..    Weekday name in persian ASCII style.
+%T           Saturday, Sunday, ..       Weekday name in english ASCII style.
 %w           0(Saturday), 6(Friday)     Weekday as a decimal number.
 %W           00 - 53                    Week number of the year (SATURDAY as the first day of the week) as a decimal number . All days in a new year preceding the first Monday are considered to be in week 0.
 %U           00 - 53                    Week number of the year (Sunday as the first day of the week) as a decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.
