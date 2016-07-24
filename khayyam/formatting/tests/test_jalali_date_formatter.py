@@ -36,7 +36,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(d1.strftime('%A'), u'دوشنبه')
         self.assertEqual(d1.strftime('%e'), u'D')
         self.assertEqual(d1.strftime('%E'), u'Doshanbeh')
-        self.assertEqual(d1.strftime('%T'), u'Mon')
+        self.assertEqual(d1.strftime('%T'), u'Monday')
         self.assertEqual(d1.strftime('%w'), u'2')
         self.assertEqual(d1.strftime('%W'), u'24')
 
