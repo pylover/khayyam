@@ -73,8 +73,8 @@ DATE_FORMAT_DIRECTIVES = [
               lambda d: d.weekdayabbrascii()),
     Directive('E', 'weekdaynameascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
               lambda d: d.weekdaynameascii()),
-    Directive('T', 'englishweekdayabbrascii', consts.ENGLISH_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.englishweekdayabbrascii()),
+    Directive('T', 'englishweekdaynameascii', consts.ENGLISH_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
+              lambda d: d.englishweekdaynameascii()),
 
     # COMPOSITE
     CompositeDateDirective('x', 'localdateformat', '%s %s %s %s' % (
