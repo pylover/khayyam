@@ -49,12 +49,12 @@
             
   <h1>Source code for khayyam.jalali_datetime</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">khayyam.algorithms_pure</span> <span class="kn">import</span> <span class="n">gregorian_date_from_julian_day</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">khayyam.algorithms_pure</span> <span class="k">import</span> <span class="n">gregorian_date_from_julian_day</span>
 <span class="kn">import</span> <span class="nn">khayyam</span>
-<span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="kn">import</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="n">AM_PM</span><span class="p">,</span> <span class="n">AM_PM_ASCII</span>
-<span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="kn">import</span> <span class="n">force_encoded_string_output</span>
+<span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="k">import</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="n">AM_PM</span><span class="p">,</span> <span class="n">AM_PM_ASCII</span>
+<span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="k">import</span> <span class="n">force_encoded_string_output</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;vahid&#39;</span>
 
 
@@ -106,7 +106,7 @@
     <span class="n">resolution</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                 <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">):</span>
             <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">microsecond</span> <span class="o">=</span> \
@@ -132,7 +132,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">hour</span>
 
-    <span class="nd">@hour.setter</span>
+    <span class="nd">@hour</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">hour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="n">val</span>
 
@@ -145,7 +145,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">minute</span>
 
-    <span class="nd">@minute.setter</span>
+    <span class="nd">@minute</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">minute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">minute</span> <span class="o">=</span> <span class="n">val</span>
 
@@ -158,7 +158,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">second</span>
 
-    <span class="nd">@second.setter</span>
+    <span class="nd">@second</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">second</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">val</span>
 
@@ -171,7 +171,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">microsecond</span>
 
-    <span class="nd">@microsecond.setter</span>
+    <span class="nd">@microsecond</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">microsecond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">=</span> <span class="n">val</span>
 
@@ -184,7 +184,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">tzinfo</span>
 
-    <span class="nd">@tzinfo.setter</span>
+    <span class="nd">@tzinfo</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">tzinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">tzinfo</span> <span class="o">=</span> <span class="n">val</span>
 
@@ -201,7 +201,7 @@
     <span class="c1">#################</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="JalaliDatetime.now"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.now">[docs]</a>    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.now"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.now">[docs]</a>    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If optional argument tz is None or not specified, this is like today(), but,</span>
 <span class="sd">        if possible, supplies more precision than can be gotten from going through a</span>
@@ -230,7 +230,7 @@
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="JalaliDatetime.fromtimestamp"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.fromtimestamp">[docs]</a>    <span class="k">def</span> <span class="nf">fromtimestamp</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.fromtimestamp"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.fromtimestamp">[docs]</a>    <span class="k">def</span> <span class="nf">fromtimestamp</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If optional argument tz is None or not specified, the timestamp is converted to</span>
 <span class="sd">        the platform&#39;s local date and time, and the returned datetime object is naive.</span>
@@ -317,8 +317,8 @@
     <span class="k">def</span> <span class="nf">timetz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
 
-<div class="viewcode-block" id="JalaliDatetime.replace"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                <span class="n">minute</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.replace"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">minute</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Without adjusting the date the and time based tzinfo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -331,11 +331,11 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="n">year</span><span class="p">,</span>
                                 <span class="n">month</span><span class="p">,</span>
                                 <span class="n">day</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="k">if</span> <span class="n">hour</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">hour</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="k">if</span> <span class="n">minute</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">minute</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="k">if</span> <span class="n">second</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">second</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="k">if</span> <span class="n">microsecond</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">microsecond</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">if</span> <span class="n">tzinfo</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">tzinfo</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="k">if</span> <span class="n">hour</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">hour</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="k">if</span> <span class="n">minute</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">minute</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="k">if</span> <span class="n">second</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">second</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="k">if</span> <span class="n">microsecond</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">microsecond</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">if</span> <span class="n">tzinfo</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">tzinfo</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
     <span class="k">def</span> <span class="nf">astimezone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tz</span><span class="p">):</span>
@@ -351,7 +351,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="JalaliDatetime.dst"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.dst">[docs]</a>    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -362,13 +362,13 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span></div>
+            <span class="k">return</span> <span class="kc">None</span></div>
 
     <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="JalaliDatetime.isoformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.isoformat">[docs]</a>    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -484,7 +484,7 @@
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">):</span>
@@ -514,8 +514,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -540,7 +540,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

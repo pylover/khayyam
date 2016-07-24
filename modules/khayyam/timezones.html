@@ -49,9 +49,9 @@
             
   <h1>Source code for khayyam.timezones</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="kn">import</span> <span class="n">force_encoded_string_output</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="k">import</span> <span class="n">force_encoded_string_output</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;vahid&#39;</span>
 
 <span class="n">ZERO_DELTA</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -62,7 +62,7 @@
 
 <div class="viewcode-block" id="Timezone"><a class="viewcode-back" href="../../api.html#khayyam.Timezone">[docs]</a><span class="k">class</span> <span class="nc">Timezone</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">dst_offset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dst_checker</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">dst_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dst_checker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">assert</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span> <span class="o">=</span> <span class="n">dst_offset</span>
@@ -76,15 +76,15 @@
 
         <span class="n">utc_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
         <span class="n">dst_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">utc_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">utc_offset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The object: </span><span class="si">%s</span><span class="s1"> is naive.&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid DST timedelta: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dst_offset</span><span class="p">)</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="n">utc_offset</span> <span class="o">-</span> <span class="n">dst_offset</span>  <span class="c1"># this is self&#39;s standard offset</span>
         <span class="k">if</span> <span class="n">delta</span><span class="p">:</span>
             <span class="n">dt</span> <span class="o">+=</span> <span class="n">delta</span>  <span class="c1"># convert to standard local time</span>
             <span class="n">dst_offset</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dst_offset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid DST timedelta: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dst_offset</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dst_offset</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">dst_offset</span>
@@ -123,7 +123,7 @@
     <span class="k">def</span> <span class="nf">_is_dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_checker</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dst_checker</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_offset</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dst_offset</span><span class="p">)</span></div>
@@ -152,8 +152,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -178,7 +178,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

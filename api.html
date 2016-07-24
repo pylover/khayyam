@@ -57,7 +57,7 @@
 <dt id="khayyam.JalaliDate">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">JalaliDate</code><span class="sig-paren">(</span><em>year=1</em>, <em>month=1</em>, <em>day=1</em>, <em>julian_day=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represent a day in <a class="reference internal" href="persiancalendar.html"><span class="doc">Persian(Jalali) Calendar</span></a>.</p>
-<p>The first parameter can be an integer, <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
+<p>The first parameter can be an integer, <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
 <p>You may create this object by passing <cite>julian_day</cite> parameter.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="k">import</span> <span class="n">JalaliDate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">julian_day</span><span class="o">=</span><span class="mi">2445218</span><span class="p">)</span>
@@ -76,10 +76,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
-<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; month 1-12</li>
-<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; day of month</li>
-<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; julian day</li>
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
+<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; month 1-12</li>
+<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; day of month</li>
+<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; julian day</li>
 </ul>
 </td>
 </tr>
@@ -121,7 +121,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Day of year az integer: 1-35[5,6]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -136,6 +136,22 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="khayyam.JalaliDate.englishweekdaynameascii">
+<code class="descname">englishweekdaynameascii</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.englishweekdaynameascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.englishweekdaynameascii" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding english weekday name in ASCII:
+[Saturday - Friday]</td>
 </tr>
 </tbody>
 </table>
@@ -167,7 +183,7 @@ instance based on given format string.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; see: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; see: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Formatter object, based on the given format string.</td>
 </tr>
@@ -197,7 +213,7 @@ instance based on given format string.</p>
 <dl class="classmethod">
 <dt id="khayyam.JalaliDate.fromtimestamp">
 <em class="property">classmethod </em><code class="descname">fromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_date.html#JalaliDate.fromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.fromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Such as is returned by <a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>. This may raise <code class="xref py py-class docutils literal"><span class="pre">ValueError</span></code>,
+<dd><p>Such as is returned by <a class="reference external" href="https://docs.python.org/2/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>. This may raise <code class="xref py py-class docutils literal"><span class="pre">ValueError</span></code>,
 if the timestamp is out of the range of values supported by the platform C localtime()
 function. It’s common for this to be restricted to years from 1970 through 2038.
 Note that on non-POSIX systems that include leap seconds in their notion of a
@@ -235,7 +251,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Return a 3-tuple, (year, week number, isoweekday).</td>
 </tr>
@@ -250,7 +266,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.</td>
 </tr>
@@ -270,7 +286,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The day of the week as an integer, where Saturday is 1 and Friday is 7.</td>
 </tr>
@@ -297,7 +313,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Appropriate localized string representing a persian day</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 </tbody>
 </table>
@@ -322,7 +338,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month abbreviation:
 [فر, ار, خر, تی, مر, شه, مه, آب, آذ, دی, به, اس]</td>
@@ -338,7 +354,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month abbreviation in ASCII: [F, O , Kh ... E].</td>
 </tr>
@@ -353,7 +369,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month name: [فروردین - اسفند]</td>
 </tr>
@@ -368,7 +384,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month name in ASCII:
 [Farvardin - Esfand]</td>
@@ -413,7 +429,7 @@ For a complete list of formatting directives, see <a class="reference internal" 
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string representing the date, controlled by an explicit format string</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 </tbody>
 </table>
@@ -462,9 +478,9 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference external" href="https://docs.python.org/library/time.html#time.struct_time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">time.struct_time</span></code></a> such as returned by time.localtime().</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference external" href="https://docs.python.org/2/library/time.html#time.struct_time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">time.struct_time</span></code></a> such as returned by time.localtime().</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/time.html#time.struct_time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">time.struct_time</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/time.html#time.struct_time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">time.struct_time</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -480,7 +496,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Corresponding date in gregorian calendar.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -510,7 +526,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Julian day representing the current instance.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -530,7 +546,7 @@ from khayyam import JalaliDate</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The corresponding proleptic Shamsi ordinal days.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -543,7 +559,7 @@ from khayyam import JalaliDate</div></blockquote>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The day of the week as an integer, where Saturday is 0 and Friday is 6.</td>
 </tr>
@@ -560,7 +576,7 @@ from khayyam import JalaliDate</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian weekday abbreviation: [ش ی د س چ پ ج]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 </tbody>
 </table>
@@ -576,7 +592,7 @@ from khayyam import JalaliDate</div></blockquote>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian weekday abbreviation in ASCII:
 [Sh, Y, D, Se, Ch, P, J]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 </tbody>
 </table>
@@ -591,7 +607,7 @@ from khayyam import JalaliDate</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian weekday name: [شنبه - جمعه]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 </tbody>
 </table>
@@ -604,7 +620,7 @@ from khayyam import JalaliDate</div></blockquote>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian weekday name in ASCII:
 [Shanbeh - Jomeh]</td>
@@ -631,7 +647,7 @@ from khayyam import JalaliDate</div></blockquote>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The week number of the year.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -648,23 +664,23 @@ from khayyam import JalaliDate</div></blockquote>
 <dd><p>Inherited from <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>.</p>
 <p>Represent a moment in <a class="reference internal" href="persiancalendar.html"><span class="doc">Persian(Jalali) Calendar</span></a>.</p>
 <p>The first parameter can be an integer,
-<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>,
-<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>,
+<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or <a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a>.</p>
 <p>You may create this object by passing <cite>julian_day</cite> parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
-<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-12</li>
-<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-31</li>
-<li><strong>hour</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-23</li>
-<li><strong>minute</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
-<li><strong>second</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
-<li><strong>microsecond</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-999999</li>
-<li><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a>) &#8211; Timezone info</li>
-<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; </li>
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
+<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-12</li>
+<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-31</li>
+<li><strong>hour</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-23</li>
+<li><strong>minute</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
+<li><strong>second</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
+<li><strong>microsecond</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-999999</li>
+<li><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a>) &#8211; Timezone info</li>
+<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -707,7 +723,7 @@ and microsecond of the result are all 0, and tzinfo is None.</p>
 <em class="property">classmethod </em><code class="descname">fromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.fromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>If optional argument tz is None or not specified, the timestamp is converted to
 the platform&#8217;s local date and time, and the returned datetime object is naive.</p>
-<p>Else tz must be an instance of a class <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
+<p>Else tz must be an instance of a class <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
 and the timestamp is converted to tz&#8217;s time zone. In this case the result is
 equivalent to <cite>tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))</cite>.</p>
 <p>This method may raise <cite>ValueError</cite>, if the timestamp is out of the range of values
@@ -722,7 +738,7 @@ identical datetime objects. See also <a class="reference internal" href="#khayya
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The local date and time corresponding to the POSIX timestamp,
-such as is returned by <a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>.</td>
+such as is returned by <a class="reference external" href="https://docs.python.org/2/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
 </tr>
@@ -749,7 +765,7 @@ such as is returned by <a class="reference external" href="https://docs.python.o
 
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.isoformat">
-<code class="descname">isoformat</code><span class="sig-paren">(</span><em>sep='T'</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.isoformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.isoformat" title="Permalink to this definition">¶</a></dt>
+<code class="descname">isoformat</code><span class="sig-paren">(</span><em>sep=u'T'</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.isoformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.isoformat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if
 microsecond is 0, YYYY-MM-DDTHH:MM:SS</p>
 <p>If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours
@@ -807,9 +823,9 @@ and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DD
 <em class="property">classmethod </em><code class="descname">now</code><span class="sig-paren">(</span><em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.now" title="Permalink to this definition">¶</a></dt>
 <dd><p>If optional argument tz is None or not specified, this is like today(), but,
 if possible, supplies more precision than can be gotten from going through a
-<a class="reference external" href="https://docs.python.org/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a> timestamp (for example,
+<a class="reference external" href="https://docs.python.org/2/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a> timestamp (for example,
 this may be possible on platforms supplying the C gettimeofday() function).</p>
-<p>Else tz must be an instance of a <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
+<p>Else tz must be an instance of a <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
 and the current date and time are converted to tz&#8217;s time zone.
 In this case the result is equivalent to <cite>tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))</cite>.
 See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="khayyam.JalaliDate.today"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.today()</span></code></a> and <a class="reference internal" href="#khayyam.JalaliDatetime.utcnow" title="khayyam.JalaliDatetime.utcnow"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.utcnow()</span></code></a>.</p>
@@ -859,7 +875,7 @@ See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="k
 </tr>
 <tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets(change) the timezone info</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -910,7 +926,7 @@ UTC date and time, as a naive datetime object.</p>
 <dl class="class">
 <dt id="khayyam.formatting.BaseFormatter">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.</code><code class="descname">BaseFormatter</code><a class="reference internal" href="modules/khayyam/formatting/formatter.html#BaseFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.BaseFormatter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -930,7 +946,7 @@ UTC date and time, as a naive datetime object.</p>
 <dl class="class">
 <dt id="khayyam.formatting.directives.Directive">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.directives.</code><code class="descname">Directive</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em>, <em>type_</em>, <em>formatter=None</em>, <em>post_parser=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.Directive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
 <dt id="khayyam.formatting.directives.Directive.format">
 <code class="descname">format</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/formatting/directives/directive.html#Directive.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.Directive.format" title="Permalink to this definition">¶</a></dt>
@@ -1207,7 +1223,7 @@ UTC date and time, as a naive datetime object.</p>
 <dl class="class">
 <dt id="khayyam.Timezone">
 <em class="property">class </em><code class="descclassname">khayyam.</code><code class="descname">Timezone</code><span class="sig-paren">(</span><em>offset</em>, <em>dst_offset=None</em>, <em>dst_checker=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></p>
 <dl class="method">
 <dt id="khayyam.Timezone.dst">
 <code class="descname">dst</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/timezones.html#Timezone.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.Timezone.dst" title="Permalink to this definition">¶</a></dt>
@@ -1286,8 +1302,8 @@ UTC date and time, as a naive datetime object.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -1314,7 +1330,7 @@ UTC date and time, as a naive datetime object.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

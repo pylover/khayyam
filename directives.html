@@ -138,47 +138,51 @@
 <td>Shanbeh, Yekshanbeh, ..</td>
 <td>Weekday name in persian ASCII style.</td>
 </tr>
-<tr class="row-odd"><td>%w</td>
+<tr class="row-odd"><td>%T</td>
+<td>Saturday, Sunday, ..</td>
+<td>Weekday name in english ASCII style.</td>
+</tr>
+<tr class="row-even"><td>%w</td>
 <td>0(Saturday), 6(Friday)</td>
 <td>Weekday as a decimal number.</td>
 </tr>
-<tr class="row-even"><td>%W</td>
+<tr class="row-odd"><td>%W</td>
 <td>00 - 53</td>
 <td>Week number of the year (SATURDAY as the first day of the week) as a decimal number . All days in a new year preceding the first Monday are considered to be in week 0.</td>
 </tr>
-<tr class="row-odd"><td>%U</td>
+<tr class="row-even"><td>%U</td>
 <td>00 - 53</td>
 <td>Week number of the year (Sunday as the first day of the week) as a decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
 </tr>
-<tr class="row-even"><td>%d</td>
+<tr class="row-odd"><td>%d</td>
 <td>01 - 31</td>
 <td>Day of the month as a zero padded decimal number in ASCII form.</td>
 </tr>
-<tr class="row-odd"><td>%K</td>
+<tr class="row-even"><td>%K</td>
 <td>۰۱ - ۳۱</td>
 <td>Day of the month as a zero padded decimal number in persian form.</td>
 </tr>
-<tr class="row-even"><td>%D</td>
+<tr class="row-odd"><td>%D</td>
 <td>۱ - ۳۱</td>
 <td>Day of the month as a decimal number in persian form.</td>
 </tr>
-<tr class="row-odd"><td>%j</td>
+<tr class="row-even"><td>%j</td>
 <td>001 - 366</td>
 <td>Day of the year as a zero padded decimal number in ASCII form.</td>
 </tr>
-<tr class="row-even"><td>%V</td>
+<tr class="row-odd"><td>%V</td>
 <td>..۱ - ۳۶۶</td>
 <td>Day of the year as a zero padded decimal number in persian form.</td>
 </tr>
-<tr class="row-odd"><td>%J</td>
+<tr class="row-even"><td>%J</td>
 <td>۱ - ۳۶۶</td>
 <td>Day of the year as a decimal number in persian form.</td>
 </tr>
-<tr class="row-even"><td>%x</td>
+<tr class="row-odd"><td>%x</td>
 <td>دوشنبه ۱۵ شهریور ۱۳۶۱</td>
 <td>Persian appropriate date representation.</td>
 </tr>
-<tr class="row-odd"><td>%%</td>
+<tr class="row-even"><td>%%</td>
 <td>%</td>
 <td>A literal &#8216;%&#8217; character.</td>
 </tr>
@@ -332,8 +336,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -363,7 +367,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>
