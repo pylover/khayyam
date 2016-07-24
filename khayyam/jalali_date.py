@@ -19,7 +19,8 @@ from khayyam.formatting import \
     PERSIAN_MONTH_ABBRS_ASCII, \
     PERSIAN_MONTH_NAMES_ASCII, \
     PERSIAN_WEEKDAY_ABBRS_ASCII, \
-    PERSIAN_WEEKDAY_NAMES_ASCII
+    PERSIAN_WEEKDAY_NAMES_ASCII, \
+    ENGLISH_WEEKDAY_NAMES_ASCII
 
 __author__ = 'vahid'
 
@@ -350,6 +351,14 @@ class JalaliDate(object):
         :rtype: unicode
         """
         return PERSIAN_WEEKDAY_ABBRS_ASCII[self.weekday()]
+
+    def englishweekdaynameascii(self):
+        """
+        :rtype: unicode
+        :return: The corresponding english weekday name in ASCII:
+                [Saturday - Friday]
+        """
+        return ENGLISH_WEEKDAY_NAMES_ASCII[self.weekday()]
 
     def monthname(self):
         """

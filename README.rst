@@ -123,6 +123,9 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 2.10.0
+    * Add english weekday format directive
+
 * 2.9.8
     * Registering on travis-ci.org
     * Registering on coveralls.io
