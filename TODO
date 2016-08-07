@@ -2,11 +2,5 @@
 
 ### To Do
   * Doc: Review JalaliDatetime documents
-  * Error messages
-  * Create TehranDatetime object
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
-
-### Future plans
-
-  * Doc: Parsing, post processors priority
