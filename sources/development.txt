@@ -15,7 +15,6 @@ Making development environment:
   $ cd workspace
   $ git clone <Your fork Url>
   $ cd khayyam
-  $ pip install cython
   $ python setup.py build_ext --inplace
   $ pip install -e .
 

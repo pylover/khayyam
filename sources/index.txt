@@ -6,8 +6,8 @@
 Khayyam
 =======
 
-A cythonic and fast Persian Date & Time library (aka: Jalali Calendar) with timezone, DST
-(daylight-saving), full formatting & parsing support for python 2 & 3.
+A Persian Date & Time (aka: Jalali Calendar) library with timezone, DST (daylight-saving),
+full formatting & parsing support for python 2.x & 3.x.
 
 
 .. image:: http://img.shields.io/pypi/v/khayyam.svg

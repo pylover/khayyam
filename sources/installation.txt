@@ -4,14 +4,6 @@ Installation
 Prerequisites
 -------------
 
-At first, you have to install cython, it's mandatory for build the c extension:
-
-.. code-block:: console
-
-  $ pip install cython
-
-Of course, if cython was not available, any preferred C compiler is enough to
-build the included C source codes, for example: GCC, Visual C++, Cygwin & etc ... ::
 
 Debian
 
@@ -31,12 +23,12 @@ Or, python 3 headers:
 
   $ apt-get install python3-dev
 
-For windows , you have to install Microsoft Visual Studio, see:
+For windows , you have to install Microsoft Visual Studio or C++ build tools, see:
 
-`here <http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express/>`_,
-`here <https://www.microsoft.com/en-us/download/details.aspx?id=44266>`_
-and
-`here <http://www.falatic.com/index.php/120/a-guide-to-building-python-2-x-and-3-x-extensions-for-windows>`_.
+ * `Python Windows Compilers <https://wiki.python.org/moin/WindowsCompilers>`_
+ * `Building Python 3 on Windows with Visual Studio Express <http://www.clemens-sielaff.com/building-python-3-on-windows-with-visual-studio-express>`_,
+ * `Microsoft Visual C++ Compiler for Python 2.7 <https://www.microsoft.com/en-us/download/details.aspx?id=44266>`_
+ * `A Guide to Building Python 2.x and 3.x Extensions for Windows <http://www.falatic.com/index.php/120/a-guide-to-building-python-2-x-and-3-x-extensions-for-windows>`_.
 
 
 From PyPI
@@ -46,7 +38,6 @@ pip:
 
 .. code-block:: console
 
-  $ pip install cython # Optional
   $ pip install khayyam
 
 Specific version:
@@ -101,5 +92,4 @@ Latest development code:
 
 .. code-block:: console
 
-  $ pip install cython
   $ pip install git+https://github.com/pylover/khayyam.git
