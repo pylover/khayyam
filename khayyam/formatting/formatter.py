@@ -96,13 +96,7 @@ class JalaliDateFormatter(BaseFormatter):
                 date_string, self.format_string, self.parser_regex))
         result = {}
         for directive_key, v in m.groupdict().items():
-            if directive_key == 'percent':
-                continue
-            if directive_key not in self.directives_by_key:
-                raise ValueError(u'directive key: %%%s was not exists.' % directive_key)
             directive = self.directives_by_key[directive_key]
-            if not directive.type_:
-                continue
             result[directive.name] = directive.type_(v)
         return result
 
