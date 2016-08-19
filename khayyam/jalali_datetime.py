@@ -61,12 +61,13 @@ class JalaliDatetime(khayyam.JalaliDate):
         if isinstance(year, JalaliDatetime):
             year, month, day, hour, minute, second, microsecond = \
                 year.year, year.month, year.day, year.hour, year.minute, year.second, year.microsecond
+
         elif isinstance(year, datetime):
             hour, minute, second, microsecond = year.hour, year.minute, year.second, year.microsecond
             if not tzinfo:
                 tzinfo = year.tzinfo
 
-        khayyam.JalaliDate.__init__(self, year, month, day, julian_day)
+        khayyam.JalaliDate.__init__(self, year=year, month=month, day=day, julian_day=julian_day)
         self._time = time(hour, minute, second, microsecond, tzinfo)
 
     ##############
@@ -77,78 +78,45 @@ class JalaliDatetime(khayyam.JalaliDate):
     def hour(self):
         """
         :getter: Returns the hour
-        :setter: Sets the hour
         :type: int
         """
         return self._time.hour
-
-    @hour.setter
-    def hour(self, val):
-        self._time.hour = val
 
     @property
     def minute(self):
         """
         :getter: Returns the minute
-        :setter: Sets the minute
         :type: int
         """
         return self._time.minute
-
-    @minute.setter
-    def minute(self, val):
-        self._time.minute = val
 
     @property
     def second(self):
         """
         :getter: Returns the second
-        :setter: Sets the second
         :type: int
         """
         return self._time.second
-
-    @second.setter
-    def second(self, val):
-        self._time.second = val
 
     @property
     def microsecond(self):
         """
         :getter: Returns the microsecond
-        :setter: Sets the microsecond
         :type: int
         """
         return self._time.microsecond
-
-    @microsecond.setter
-    def microsecond(self, val):
-        self._time.microsecond = val
 
     @property
     def tzinfo(self):
         """
         :getter: Returns the timezone info
-        :setter: Sets(change) the timezone info
         :type: :py:class:`datetime.tzinfo`
         """
         return self._time.tzinfo
 
-    @tzinfo.setter
-    def tzinfo(self, val):
-        self._time.tzinfo = val
-
-    ##################
-    # Static Methods #
-    ##################
-
     @staticmethod
     def formatterfactory(fmt):
         return JalaliDatetimeFormatter(fmt)
-
-    #################
-    # Class Methods #
-    #################
 
     @classmethod
     def now(cls, tz=None):
@@ -223,12 +191,12 @@ class JalaliDatetime(khayyam.JalaliDate):
     @classmethod
     def fromordinal(cls, ordinal):
         """
-        Return the jalali datetime corresponding to the proleptic Gregorian ordinal,
-        where January 1 of year 1 has ordinal 1. ValueError is
-        raised unless 1 <= ordinal <= datetime.max.toordinal(). The hour, minute, second
+        Return the jalali datetime corresponding to the proleptic jalali ordinal,
+        where Farvardin 1 of year 1 has ordinal 1. ValueError is
+        raised unless 1 <= ordinal <= JalaliDatetime.max.toordinal(). The hour, minute, second
         and microsecond of the result are all 0, and tzinfo is None.
         """
-        return cls(datetime.fromordinal(ordinal))
+        return cls.min + timedelta(days=ordinal - 1)
 
     @classmethod
     def combine(cls, date, _time):
@@ -239,7 +207,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         and tzinfo members are ignored.
         """
         if isinstance(date, (JalaliDatetime, khayyam.JalaliDate)):
-            date = date.todatetime()
+            date = date.todate()
         return cls(datetime.combine(date, _time))
 
     @classmethod
@@ -248,10 +216,6 @@ class JalaliDatetime(khayyam.JalaliDate):
         result = {k: v for k, v in result.items() if k in (
             'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
         return cls(**result)
-
-    ####################
-    # Instance Methods #
-    ####################
 
     def todatetime(self):
         arr = get_gregorian_date_from_julian_day(self.tojulianday())
@@ -278,14 +242,16 @@ class JalaliDatetime(khayyam.JalaliDate):
             day if day else self.day
         )
 
-        result = JalaliDatetime(year,
-                                month,
-                                day,
-                                self.hour if hour is None else hour,
-                                self.minute if minute is None else minute,
-                                self.second if second is None else second,
-                                self.microsecond if microsecond is None else microsecond,
-                                self.tzinfo if tzinfo is None else tzinfo)
+        result = JalaliDatetime(
+            year,
+            month,
+            day,
+            self.hour if hour is None else hour,
+            self.minute if minute is None else minute,
+            self.second if second is None else second,
+            self.microsecond if microsecond is None else microsecond,
+            tzinfo if tzinfo != self.tzinfo else self.tzinfo
+        )
         return result
 
     def astimezone(self, tz):
@@ -369,7 +335,7 @@ class JalaliDatetime(khayyam.JalaliDate):
             _minutes = td.seconds / 60
             hours = _minutes / 60
             minutes = _minutes % 60
-            return '%s%s' % (minutes, hours)
+            return '%d%d' % (minutes, hours)
         return ''
 
     def tznameformat(self):
@@ -377,10 +343,6 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def dayofyear(self):
         return (self.date() - khayyam.JalaliDate(self.year, 1, 1)).days + 1
-
-    ###################
-    # Special Members #
-    ###################
 
     def __unicode__(self):
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
@@ -404,7 +366,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         if isinstance(x, timedelta):
             return JalaliDatetime(x + self.todatetime())
 
-        raise ValueError('JalaliDatetime object can added by timedelta or JalaliDate object')
+        raise TypeError('JalaliDatetime object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, timedelta):
@@ -414,14 +376,14 @@ class JalaliDatetime(khayyam.JalaliDate):
         elif isinstance(x, khayyam.JalaliDate):
             return self.todatetime() - JalaliDatetime(x).todatetime()
 
-        raise ValueError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')
+        raise TypeError('JalaliDatetime object can added by timedelta, JalaliDatetime or JalaliDate object')
 
     def __lt__(self, x):
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_datetime(x)
         return self.todatetime() < x.todatetime()
 
     def __le__(self, x):
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
+        self._ensure_jalali_datetime(x)
         return self.todatetime() <= x.todatetime()
 
     def __hash__(self):
@@ -440,15 +402,37 @@ class JalaliDatetime(khayyam.JalaliDate):
         elif isinstance(x, JalaliDatetime):
             return hash(self) == hash(x)
         else:
-            raise ValueError('Comparison only allowed with JalaliDatetime and datetime.datetime objects.')
+            raise TypeError('Comparison only allowed with JalaliDatetime and datetime.datetime objects.')
 
     def __gt__(self, x):
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDatetime'
+        self._ensure_jalali_datetime(x)
         return self.todatetime() > x.todatetime()
 
     def __ge__(self, x):
-        assert isinstance(x, JalaliDatetime), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_datetime(x)
         return self.todatetime() >= x.todatetime()
+
+    @staticmethod
+    def _ensure_jalali_datetime(x):
+        if not isinstance(x, JalaliDatetime):
+            raise TypeError('Comparison just allow with JalaliDatetime')
+
+    def copy(self):
+        """
+        It's equivalent to:
+
+            >>> source_date = JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999)
+            >>> JalaliDatetime(source_date.year, source_date.month, source_date.day, source_date.hour, source_date.minute, source_date.second, source_date.microsecond)
+            khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)
+
+        :return: A Copy of the current instance.
+        :rtype: :py:class:`khayyam.JalaiDatetime`
+        """
+        return JalaliDatetime(
+            self.year, self.month, self.day,
+            self.hour, self.minute, self.second, self.microsecond,
+            tzinfo=self.tzinfo
+        )
 
 
 # # Class attributes

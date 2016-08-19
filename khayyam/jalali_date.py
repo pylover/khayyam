@@ -76,6 +76,7 @@ class JalaliDate(object):
             year = jd.year
             month = jd.month
             day = jd.day
+
         elif isinstance(year, datetime.date):
             julian_day = get_julian_day_from_gregorian_date(year.year, year.month, year.day)
 
@@ -166,6 +167,7 @@ class JalaliDate(object):
         :return: A :py:class:`khayyam.JalaliDate` corresponding to date_string, parsed according to format
         :rtype: :py:class:`khayyam.JalaiDate`
         """
+        # noinspection PyUnresolvedReferences
         result = cls.formatterfactory(fmt).parse(date_string)
         result = {k: v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
@@ -478,7 +480,7 @@ class JalaliDate(object):
             days = self.tojulianday() + x.days
             return JalaliDate(julian_day=days)
 
-        raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
+        raise TypeError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __sub__(self, x):
         if isinstance(x, datetime.timedelta):
@@ -488,14 +490,14 @@ class JalaliDate(object):
             days = self.tojulianday() - x.tojulianday()
             return datetime.timedelta(days=days)
 
-        raise ValueError('JalaliDate object can added by timedelta or JalaliDate object')
+        raise TypeError('JalaliDate object can added by timedelta or JalaliDate object')
 
     def __lt__(self, x):
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_date(x)
         return self.tojulianday() < x.tojulianday()
 
     def __le__(self, x):
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_date(x)
         return self.tojulianday() <= x.tojulianday()
 
     def __hash__(self):
@@ -509,19 +511,23 @@ class JalaliDate(object):
         elif isinstance(x, JalaliDate):
             return hash(self) == hash(x)
         else:
-            raise ValueError('Comparison only allowed with JalaliDate and datetime.date objects.')
+            raise TypeError('JalaliDate object only can be compared by timedelta or JalaliDate object.')
 
     def __ne__(self, x):
         return not self.__eq__(x)
 
     def __gt__(self, x):
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_date(x)
         return self.tojulianday() > x.tojulianday()
 
     def __ge__(self, x):
-        assert isinstance(x, JalaliDate), 'Comparison just allow with JalaliDate'
+        self._ensure_jalali_date(x)
         return self.tojulianday() >= x.tojulianday()
 
+    @staticmethod
+    def _ensure_jalali_date(x):
+        if not isinstance(x, JalaliDate):
+            raise TypeError('Comparison just allow with JalaliDate')
 
 # Class attributes
 JalaliDate.min = JalaliDate(*JalaliDate.min)
