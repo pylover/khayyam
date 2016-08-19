@@ -4,3 +4,18 @@
   * Doc: Review JalaliDatetime documents
   * Add two methods: d.next(SATURDAY) & d.previous(WEDNESDAY)
   * Use compiled regex if matters in performance
+
+win-py2-x86
+win-py2-x64
+cygwin-py2-x64
+win-py3-x86
+win-py3-x64
+cygwin-py3-x86
+osx-py2
+osx-py3
+linux-py2-x86
+linux-py2-x64
+linux-py3-x86
+linux-py3-x64
+armv7-py2
+armv7-py3

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
 from .persian import PersianNumberDirective
-from khayyam.algorithms_pure import days_in_year
+from khayyam.algorithms_pure import get_days_in_jalali_year
 from datetime import timedelta
 __author__ = 'vahid'
 
@@ -31,7 +31,7 @@ class DayOfYearDirective(Directive):
         if 'day' in ctx:
             del ctx['day']
 
-        max_days = days_in_year(ctx['year'])
+        max_days = get_days_in_jalali_year(ctx['year'])
         if _dayofyear > max_days:
             raise ValueError(
                 'Invalid dayofyear: %.3d for year %.4d. Valid values are: 1-%s' % (

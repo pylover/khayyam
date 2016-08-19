@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from datetime import timedelta, time, datetime
-from khayyam.algorithms_pure import gregorian_date_from_julian_day
+from khayyam.algorithms_pure import get_gregorian_date_from_julian_day
 import khayyam
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 from khayyam.helpers import force_encoded_string_output
@@ -254,7 +254,7 @@ class JalaliDatetime(khayyam.JalaliDate):
     ####################
 
     def todatetime(self):
-        arr = gregorian_date_from_julian_day(self.tojulianday())
+        arr = get_gregorian_date_from_julian_day(self.tojulianday())
         return datetime(int(arr[0]), int(arr[1]), int(arr[2]), self.hour, self.minute, self.second, self.microsecond,
                         self.tzinfo)
 

@@ -4,7 +4,7 @@ from .jalali_date import JalaliDate
 from .jalali_datetime import JalaliDatetime
 from .timezones import TehranTimezone, Timezone
 
-__version__ = '2.10.0'
+__version__ = '2.10.0-dev0'
 
 
 teh_tz = TehranTimezone()

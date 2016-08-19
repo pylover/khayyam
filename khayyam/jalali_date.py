@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 import datetime
 import time
 from khayyam.helpers import force_encoded_string_output
-from khayyam.algorithms_pure import days_in_month, \
-    is_leap_year, \
-    get_julian_day_from_gregorian, \
-    jalali_date_from_julian_day, \
-    julian_day_from_jalali_date, \
-    gregorian_date_from_julian_day
+from khayyam.algorithms_pure import get_days_in_jalali_month, \
+    is_jalali_leap_year, \
+    get_julian_day_from_gregorian_date, \
+    get_jalali_date_from_julian_day, \
+    get_julian_day_from_jalali_date, \
+    get_gregorian_date_from_julian_day
 from khayyam import MAXYEAR, MINYEAR, SATURDAY
 from khayyam.formatting import \
     JalaliDateFormatter, \
@@ -77,10 +77,10 @@ class JalaliDate(object):
             month = jd.month
             day = jd.day
         elif isinstance(year, datetime.date):
-            julian_day = get_julian_day_from_gregorian(year.year, year.month, year.day)
+            julian_day = get_julian_day_from_gregorian_date(year.year, year.month, year.day)
 
         if julian_day is not None:
-            year, month, day = jalali_date_from_julian_day(julian_day)
+            year, month, day = get_jalali_date_from_julian_day(julian_day)
 
         self.year, self.month, self.day = self._validate(year, month, day)
 
@@ -91,7 +91,7 @@ class JalaliDate(object):
 
         :type: bool
         """
-        return is_leap_year(self.year)
+        return is_jalali_leap_year(self.year)
 
     @property
     def daysinmonth(self):
@@ -100,7 +100,7 @@ class JalaliDate(object):
 
         :type: int
         """
-        return days_in_month(self.year, self.month)
+        return get_days_in_jalali_month(self.year, self.month)
 
     @staticmethod
     def formatterfactory(fmt):
@@ -180,7 +180,7 @@ class JalaliDate(object):
             raise ValueError('Year must be between %s and %s, but it is: %s' % (MINYEAR, MAXYEAR, year))
         if month < 1 or month > 12:
             raise ValueError('Month must be between 1 and 12, but it is: %s' % month)
-        _days_in_month = days_in_month(year, month)
+        _days_in_month = get_days_in_jalali_month(year, month)
         if day < 1 or day > _days_in_month:
             raise ValueError('Day must be between 1 and %s, but it is: %s' % (_days_in_month, day))
         return year, month, day
@@ -190,7 +190,7 @@ class JalaliDate(object):
         :return: Julian day representing the current instance.
         :rtype: int
         """
-        return julian_day_from_jalali_date(self.year, self.month, self.day)
+        return get_julian_day_from_jalali_date(self.year, self.month, self.day)
 
     def copy(self):
         """
@@ -229,7 +229,7 @@ class JalaliDate(object):
         :return: Corresponding date in gregorian calendar.
         :rtype: :py:class:`datetime.date`
         """
-        arr = gregorian_date_from_julian_day(self.tojulianday())
+        arr = get_gregorian_date_from_julian_day(self.tojulianday())
         return datetime.date(int(arr[0]), int(arr[1]), int(arr[2]))
 
     def toordinal(self):
