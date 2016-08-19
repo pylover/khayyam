@@ -3,7 +3,6 @@ import os
 import re
 import sys
 import warnings
-import platform
 from setuptools import setup, find_packages, Extension
 import traceback
 
@@ -53,7 +52,8 @@ setup_args = dict(
         "Intended Audience :: Developers",
         "Natural Language :: Persian",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Software Development :: Localization"],
+        "Topic :: Software Development :: Localization"
+    ],
 )
 
 

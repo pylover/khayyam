@@ -16,8 +16,11 @@ try:
 
 except ImportError:  # pragma: no cover
     warnings.warn(
-        "The Cython extension is not available. Switching to fallback python pure algorithms, "
-        "so it's may be slower than C implementation of the algorithms.")
+        "################################################################################\n"
+        "The C extension is not available. Switching to fallback python pure algorithms, \n"
+        "so it's about 1000X slower than C implementation of the algorithms.             \n"
+        "################################################################################\n"
+    )
     from .algorithms_pure import \
         is_jalali_leap_year, \
         get_julian_day_from_gregorian_date, \
