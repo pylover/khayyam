@@ -4,22 +4,16 @@ from datetime import timedelta
 import unittest
 __author__ = 'vahid'
 
+
 class JalaliDatetimeFormatterTestCase(unittest.TestCase):
 
     def setUp(self):
         self.leap_year = 1375
 
-    def assert_parse_and_format(self, jdate ,fmt, print_=False):
+    def assert_parse_and_format(self, jdate, fmt):
         jalali_date_str = jdate.strftime(fmt)
         parsed_dt = JalaliDatetime.strptime(jalali_date_str, fmt)
-        if print_:
-            print(jalali_date_str)
-        if jdate != parsed_dt:
-            print(repr(jdate))
-            print(jalali_date_str)
-            print(repr(parsed_dt))
         self.assertEqual(jdate, parsed_dt)
-
 
     def test_hour(self):
         """
@@ -105,8 +99,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%N-%R-%D %t %i:%r:%s')
             self.assert_parse_and_format(d_test, '%N-%R-%D %p %l:%v:%L')
 
-
-
     def test_minute(self):
         """
         Testing:
@@ -123,7 +115,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S')
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%s')
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%v:%L')
-
 
     def test_second(self):
         """
@@ -143,7 +134,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%s')
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%L')
 
-
     def test_timezone(self):
         """
         Testing:
@@ -153,32 +143,31 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
         """
         # Test Timezone
         tz_dt = JalaliDatetime(tzinfo=Timezone(timedelta(minutes=10)))
+        naive_dt = tz_dt.replace(tzinfo=None)
         self.assertEqual(JalaliDatetime.strptime('00:10', '%z'), tz_dt)
+        self.assertEqual(JalaliDatetime.strptime('', '%z'), naive_dt)
         self.assertEqual(tz_dt.strftime('%z'), '+00:10')
         tz_dt = JalaliDatetime(tzinfo=Timezone(timedelta(minutes=-30)))
         self.assertEqual(tz_dt.strftime('%z'), '-00:30')
         self.assertEqual(tz_dt.strftime('%o'), u'-۰۰:۳۰')
         self.assertEqual(JalaliDatetime.strptime('', '%o'), JalaliDatetime())
         self.assertEqual(JalaliDatetime.strptime('00:00', '%z'), JalaliDatetime())
-        self.assertEqual(JalaliDatetime.strptime('00:01', '%z'),
-                         JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
+        self.assertEqual(JalaliDatetime.strptime('00:01', '%z'), JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
         self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'), JalaliDatetime.strptime('04:31', '%z'))
         self.assertEqual(JalaliDatetime.strptime('04:30', '%z'), JalaliDatetime.strptime('04:30', '%z'))
-        self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'),
-                         JalaliDatetime(tzinfo=teh_tz))
+        self.assertNotEqual(JalaliDatetime.strptime('04:30', '%z'), JalaliDatetime(tzinfo=teh_tz))
         self.assertEqual(JalaliDatetime.strptime('+04:30', '%z').utcoffset(), timedelta(hours=4.50))
+        self.assertEqual(tz_dt.strftime('%z'), tz_dt.strftime('%Z'))
+        self.assertEqual(naive_dt.strftime('%z'), '')
+        self.assertEqual(naive_dt.strftime('%Z'), '')
 
         self.assertEqual(JalaliDatetime.strptime(u'۰۰:۰۰', '%o'), JalaliDatetime())
-        self.assertEqual(JalaliDatetime.strptime(u'۰۰:۰۱', '%o'),
-                         JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
+        self.assertEqual(JalaliDatetime.strptime(u'۰۰:۰۱', '%o'), JalaliDatetime(tzinfo=Timezone(timedelta(minutes=1))))
         self.assertNotEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'), JalaliDatetime.strptime('04:31', '%z'))
         self.assertEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'), JalaliDatetime.strptime('04:30', '%z'))
-        self.assertNotEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'),
-                         JalaliDatetime(tzinfo=teh_tz))
+        self.assertNotEqual(JalaliDatetime.strptime(u'۰۴:۳۰', '%o'), JalaliDatetime(tzinfo=teh_tz))
         self.assertEqual(JalaliDatetime.strptime(u'+۰۴:۳۰', '%o').utcoffset(), timedelta(hours=4.50))
-
-
-        self.assertEqual(tz_dt.strftime('%z'), tz_dt.strftime('%Z'))
+        self.assertEqual(naive_dt.strftime('%o'), '')
 
         self.assertEqual(
             JalaliDatetime(1394, 4, 28, 18, 14, 35, 962659, Timezone(timedelta(.3))).strftime('%Y-%m-%d %H:%M:%S.%f %z'),
@@ -212,7 +201,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
             self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
 
-
     def test_am_pm(self):
         """
         Testing:
@@ -232,7 +220,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%N-%R-%D %p %i:%r:%s')
             self.assert_parse_and_format(d_test, '%Y-%m-%d %t %I:%M:%S')
             self.assert_parse_and_format(d_test, '%N-%R-%D %t %i:%r:%s')
-
 
     def test_locale_date_time(self):
         """
@@ -258,6 +245,7 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%Q')
             self.assert_parse_and_format(d_test, '%Y-%m-%d %X')
 
-if __name__ == '__main__':
+
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
 

@@ -9,13 +9,11 @@ __author__ = 'vahid'
 
 class JalaliDateFormatterTestCase(unittest.TestCase):
 
-    def assert_parse_and_format(self, jdate ,fmt, print_=False):
+    def assert_parse_and_format(self, jdate, fmt):
         jdate_str = jdate.strftime(fmt)
-        if print_:
-            print(jdate_str)
+
         d2 = JalaliDate.strptime(jdate_str, fmt)
         self.assertEqual(jdate, d2)
-
 
     def test_week(self):
         """
@@ -26,8 +24,10 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             %E           ASCII Locale’s full weekday name.
             %T           ASCII English full weekday name.
             %w           Weekday as a decimal number [0(Saturday), 6(Friday)].
-            %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Monday are considered to be in week 0.
-            %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53]. All days in a new year preceding the first Sunday are considered to be in week 0.
+            %W           Week number of the year (SATURDAY as the first day of the week) as a decimal number [00, 53].
+                All days in a new year preceding the first Monday are considered to be in week 0.
+            %U           Week number of the year (Sunday as the first day of the week) as a decimal number [00, 53].
+                All days in a new year preceding the first Sunday are considered to be in week 0.
 
         """
 
@@ -92,7 +92,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime(u'۰۴', '%O'), JalaliDate(4, 1, 1))
         self.assertEqual(JalaliDate.strptime(u'۴', '%O'), JalaliDate(4, 1, 1))
 
-
         this_century = JalaliDate(int(JalaliDate.today().year/100) * 100)
         for i in range(99):
             self.assert_parse_and_format(this_century.replace(year=this_century.year+i), '%y')
@@ -103,7 +102,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(JalaliDate(i), '%Y')
             self.assert_parse_and_format(JalaliDate(i), '%N')
             self.assert_parse_and_format(JalaliDate(i), '%O')
-
 
     def test_month(self):
         """
@@ -134,7 +132,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime(u'۰۷', '%P'), JalaliDate(1, 7, 1))
         self.assertRaises(ValueError, JalaliDate.strptime, u'۷', '%P')
 
-
         # Test months
         for i in range(1, 13):
             self.assertEqual(JalaliDate.strptime(str(i), '%m'), JalaliDate(month=i))
@@ -151,8 +148,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             self.assertEqual(JalaliDate.strptime('1345 %s' % rtl('%.2d' % i, digits=True), '%Y %P'),
                              JalaliDate(year=1345, month=i, day=1))
 
-
-
         self.assertRaises(ValueError, JalaliDate.strptime, '13', '%m')
         self.assertRaises(ValueError, JalaliDate.strptime, '0', '%m')
         self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %b')
@@ -160,17 +155,15 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDate.strptime, u'1345 مت', '%Y %g')
         self.assertRaises(ValueError, JalaliDate.strptime, u'1345 شتران', '%Y %G')
 
-
         start_date = JalaliDate()
         for i in range(1, 501):
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %m %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %b %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %B %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %g %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %G %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %R %d')
-            self.assert_parse_and_format(start_date + timedelta(days=i) , '%Y %P %d')
-
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %m %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %b %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %B %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %g %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %G %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %R %d')
+            self.assert_parse_and_format(start_date + timedelta(days=i), '%Y %P %d')
 
     def test_day(self):
         """
@@ -236,7 +229,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDate.strptime, u'۷', '%V')
         self.assertRaises(ValueError, JalaliDate.strptime, u'۴۷', '%V')
 
-
         for i in range(1, 400):
             self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%m-%d")
             self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%m-%D")
@@ -244,7 +236,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%j")
             self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%J")
             self.assert_parse_and_format(JalaliDate.fromordinal(i), "%Y-%V")
-
 
     def test_locale_date(self):
         """
@@ -259,7 +250,6 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime(u'جمعه ۳۱ فروردین ۱۳۷۵%', '%x%%'),
                          JalaliDate(1375, 1, 31))
 
-
     def test_percent(self):
         """
         Testing:
@@ -267,7 +257,9 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         """
         self.assert_parse_and_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %%")
         self.assert_parse_and_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
+        self.assertEqual(JalaliDate(1375, 1, 31).strftime("%Y %%"), "1375 %")
+        self.assertEqual(JalaliDate.strptime("1375 %", "%Y %%"), JalaliDate(1375, 1, 1))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
