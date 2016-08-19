@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
-from khayyam import JalaliDatetime, teh_tz
-from datetime import datetime, timedelta
+
+from khayyam import JalaliDatetime, teh_tz, Timezone
+from datetime import datetime, timedelta, time, tzinfo
 from khayyam.timezones import TehranTimezone
 from khayyam.jalali_date import JalaliDate
 __author__ = 'vahid'
@@ -47,6 +48,7 @@ class TestJalaliDateTime(unittest.TestCase):
         jalali_utcnow = JalaliDatetime.utcnow()
         datetime_utcnow = jalali_utcnow.todatetime()
         self.assertEqual(jalali_utcnow.time(), datetime_utcnow.time())
+        self.assertEqual(jalali_utcnow.timetz(), datetime_utcnow.timetz())
     
     def test_strftime_strptime(self):
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
@@ -114,5 +116,111 @@ class TestJalaliDateTime(unittest.TestCase):
         d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
         self.assertEqual(repr(d1), 'khayyam.JalaliDatetime(1375, 12, 23, 12, 3, 45, 34567, Panjshanbeh)')
 
-if __name__ == '__main__':
+    def test_properties(self):
+        d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
+        self.assertEqual(d1.year, self.leap_year)
+        self.assertEqual(d1.month, 12)
+        self.assertEqual(d1.day, 23)
+        self.assertEqual(d1.hour, 12)
+        self.assertEqual(d1.minute, 3)
+        self.assertEqual(d1.second, 45)
+        self.assertEqual(d1.microsecond, 34567)
+        self.assertEqual(d1.ampm(), u'ب.ظ')
+
+        d1.year = 1361
+        d1.month = 6
+        d1.day = 15
+        self.assertRaises(AttributeError, setattr, d1, 'hour', 16)
+        self.assertRaises(AttributeError, setattr, d1, 'minute', 16)
+        self.assertRaises(AttributeError, setattr, d1, 'second', 16)
+        self.assertRaises(AttributeError, setattr, d1, 'microsecond', 16)
+        self.assertRaises(AttributeError, setattr, d1, 'tzinfo', teh_tz)
+
+    def test_fromtimestamp(self):
+        self.assertEqual(
+            JalaliDatetime.fromtimestamp(1471628912.749938),
+            JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938)
+        )
+
+        self.assertEqual(
+            JalaliDatetime.utcfromtimestamp(1471628912.749938),
+            JalaliDatetime(1395, 5, 29, 17, 48, 32, 749938)
+        )
+
+    def test_ordinal(self):
+        self.assertEqual(JalaliDatetime.min.toordinal(), 1)
+        self.assertEqual(JalaliDatetime.max.toordinal(), 1160739)
+
+        min_ = JalaliDatetime.fromordinal(JalaliDatetime.min.toordinal())
+        max_ = JalaliDatetime.fromordinal(JalaliDatetime.max.toordinal())
+        self.assertEqual(min_.year, 1)
+        self.assertEqual(min_.month, 1)
+        self.assertEqual(min_.day, 1)
+        self.assertEqual(min_, JalaliDatetime.min)
+        self.assertEqual(max_, JalaliDatetime.max.replace(hour=0, minute=0, second=0, microsecond=0))
+
+    def test_combine(self):
+        dt = JalaliDate(1361, 11, 6)
+        t = time(10, 11, 12)
+        self.assertEqual(JalaliDatetime.combine(dt, t), JalaliDatetime(1361, 11, 6, 10, 11, 12))
+
+    def test_astimezone(self):
+        d1 = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938, tzinfo=teh_tz)
+        tz_fake = Timezone(timedelta(hours=2))
+        self.assertEqual(d1.astimezone(teh_tz), d1)
+        self.assertEqual(d1.astimezone(tz_fake), JalaliDatetime(1395, 5, 29, 19, 48, 32, 749938, tzinfo=tz_fake))
+
+    def test_utcoffset(self):
+        d1 = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938, tzinfo=teh_tz)
+        naive = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938)
+        self.assertEqual(d1.utcoffset(), timedelta(minutes=270))
+        self.assertIsNone(naive.utcoffset())
+
+    def test_tzname(self):
+        d1 = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938, tzinfo=teh_tz)
+        naive = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938)
+        self.assertEqual(d1.tzname(), u'Iran/Tehran')
+        self.assertIsNone(naive.tzname())
+
+    def test_formats(self):
+        d1 = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938, tzinfo=teh_tz)
+        naive = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938)
+        self.assertEqual(d1.localshortformat(), u'ج 29 مر 95 22:18')
+        self.assertEqual(d1.localshortformatascii(), u'J 29 Mo 95 22:18')
+        self.assertEqual(d1.localdatetimeformat(), u'جمعه 29 مرداد 1395 10:18:32 ب.ظ')
+        self.assertEqual(d1.localdatetimeformatascii(), u'Jomeh 29 Mordad 1395 10:18:32 PM')
+        self.assertEqual(d1.localtimeformat(), u'10:18:32 \u0628.\u0638')
+        self.assertEqual(d1.utcoffsetformat(), u'304')
+        self.assertEqual(naive.utcoffsetformat(), u'')
+        self.assertEqual(d1.tznameformat(), u'Iran/Tehran')
+        self.assertEqual(naive.tznameformat(), u'')
+
+    def test_day_of_year(self):
+        d1 = JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938, tzinfo=teh_tz)
+        self.assertEqual(d1.dayofyear(), 153)
+
+    def test_str(self):
+        d1 = JalaliDatetime(1361, 6, 15)
+        self.assertEqual(
+            d1.__str__(),
+            d1.isoformat(sep=' ')
+        )
+
+    def test_operators(self):
+        invalid_object = dict(a=2)
+        d1 = JalaliDatetime(1361, 6, 15, 10, 1)
+        d2 = JalaliDatetime(1361, 6, 15, 10, 2)
+        self.assertRaises(TypeError, d1.__add__, invalid_object)
+        self.assertRaises(TypeError, d1.__sub__, invalid_object)
+        self.assertRaises(TypeError, d1.__lt__, invalid_object)
+        self.assertRaises(TypeError, d1.__gt__, invalid_object)
+        self.assertRaises(TypeError, d1.__eq__, invalid_object)
+        self.assertFalse(d1 == 0)
+        self.assertTrue(d1 == d1.todatetime())
+        self.assertTrue(d1 < d2)
+        self.assertTrue(d1 <= d1.copy())
+        self.assertFalse(d1 > d2)
+        self.assertTrue(d1 >= d1.copy())
+
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

@@ -124,6 +124,10 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 3.0.0
+    * Raising TypeError instead of ValueError on overloaded operators, if the given type is mismatch.
+
+
 * 2.11.0
     * Using pure C instead of cython. Now the C extension is as fast as possible.
     * Including OSX in travis.yaml for python 2 & 3

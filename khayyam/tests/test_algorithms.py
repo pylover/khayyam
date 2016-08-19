@@ -103,5 +103,5 @@ class TestCAlgorithms(unittest.TestCase):
         self.assertTrue(hasattr(algorithms, 'get_gregorian_date_from_julian_day'))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

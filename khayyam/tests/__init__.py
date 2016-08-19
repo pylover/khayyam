@@ -1,2 +1,1 @@
-# -*- coding: utf-8 -*-
-__author__ = 'vahid'
+# pragma: no cover

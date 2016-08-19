@@ -89,13 +89,13 @@ class TestJalaliDate(unittest.TestCase):
         self.assertTrue(jdate2 == jdate3)
     
     def test_ordinal(self):
-        min = JalaliDate.fromordinal(1)
-        max = JalaliDate.fromordinal(JalaliDate.max.toordinal())
-        self.assertEqual(min.year, 1)
-        self.assertEqual(min.month, 1)
-        self.assertEqual(min.day, 1)
-        self.assertEqual(min, JalaliDate.min)
-        self.assertEqual(max, JalaliDate.max)
+        min_ = JalaliDate.fromordinal(1)
+        max_ = JalaliDate.fromordinal(JalaliDate.max.toordinal())
+        self.assertEqual(min_.year, 1)
+        self.assertEqual(min_.month, 1)
+        self.assertEqual(min_.day, 1)
+        self.assertEqual(min_, JalaliDate.min)
+        self.assertEqual(max_, JalaliDate.max)
 
     def test_algorithm(self):
         min = date(623, 1, 1)
@@ -138,6 +138,46 @@ class TestJalaliDate(unittest.TestCase):
             JalaliDate(1361, 6, 15).timetuple(),
             time.struct_time((1361, 6, 15, 0, 0, 0, 2, 170, -1)))
 
-if __name__ == '__main__':
+    def test_fromtimestamp(self):
+        self.assertEqual(JalaliDate.fromtimestamp(1471628912.749938), JalaliDate(1395, 5, 29))
+
+    def test_copy(self):
+        d1 = JalaliDate(1361, 6, 15)
+        d2 = d1.copy()
+        self.assertFalse(d1 is d2)
+        self.assertEqual(d1, d2)
+
+    def test_local_format(self):
+        d1 = JalaliDate(1361, 6, 15)
+        self.assertEqual(
+            d1.strftime('%A %D %B %N'),
+            d1.localdateformat()
+        )
+
+    def test_str(self):
+        d1 = JalaliDate(1361, 6, 15)
+        self.assertEqual(
+            d1.__str__(),
+            d1.isoformat()
+        )
+
+    def test_operators(self):
+        invalid_object = dict(a=2)
+        d1 = JalaliDate(1361, 6, 15)
+        d2 = JalaliDate(1361, 6, 16)
+        self.assertRaises(TypeError, d1.__add__, invalid_object)
+        self.assertRaises(TypeError, d1.__sub__, invalid_object)
+        self.assertRaises(TypeError, d1.__lt__, invalid_object)
+        self.assertRaises(TypeError, d1.__gt__, invalid_object)
+        self.assertRaises(TypeError, d1.__eq__, invalid_object)
+        self.assertFalse(d1 == 0)
+        self.assertTrue(d1 == d1.todate())
+        self.assertTrue(d1 < d2)
+        self.assertTrue(d1 <= d1.copy())
+        self.assertFalse(d1 > d2)
+        self.assertTrue(d1 >= d1.copy())
+
+
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
 

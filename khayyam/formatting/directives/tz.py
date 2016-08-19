@@ -2,8 +2,6 @@
 import re
 from .directive import Directive
 from .persian import PersianNumberDirective, persian_to_eng
-from khayyam.formatting import constants as consts
-from khayyam.compat import get_unicode
 from datetime import timedelta
 from khayyam.timezones import Timezone
 __author__ = 'vahid'
@@ -37,7 +35,6 @@ class UTCOffsetDirective(Directive):
             hours = posneg(hours),
             minutes = posneg(minutes)
         ))))
-
 
 
 class PersianUTCOffsetDirective(PersianNumberDirective):
