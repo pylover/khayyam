@@ -24,6 +24,7 @@ Jump To:
  * `Documentation <http://khayyam.dobisel.com>`_
  * `Python package index <https://pypi.python.org/pypi/khayyam>`_
  * `Source on github <https://github.com/pylover/khayyam>`_
+ * `Downloads <https://pypi.python.org/pypi/Khayyam#downloads>`_
 
 
 Basic Usage
@@ -122,6 +123,11 @@ Comparison
 
 Change Log
 ^^^^^^^^^^
+
+* 2.11.0
+    * Using pure C instead of cython. Now the C extension is as fast as possible.
+    * Including OSX in travis.yaml for python 2 & 3
+    * Including pypy 2 & 3 tests in travis.yaml
 
 * 2.10.0
     * Add english weekday format directive
@@ -228,3 +234,9 @@ Change Log
 
 * 1.1.0 (2015-07-17)
     * JalaliDate: New Formatter/Parser & full unittests.
+
+
+Downloads
+^^^^^^^^^
+
+ * `pypi <https://pypi.python.org/pypi/Khayyam#downloads>`_
