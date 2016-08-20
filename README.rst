@@ -126,7 +126,10 @@ Change Log
 
 * 3.0.0-dev0
     * Raising TypeError instead of ValueError on overloaded operators, if the given type is mismatch.
-
+    * Fixing tests to pass on systems that configured as UTC.
+    * 100% Code coverage
+    * Moving all tests to khayyam/tests
+    * Removing some uncovered, obsolete code lines
 
 * 2.11.0
     * Using pure C instead of cython. Now the C extension is as fast as possible.
