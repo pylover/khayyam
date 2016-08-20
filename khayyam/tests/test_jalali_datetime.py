@@ -137,14 +137,16 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertRaises(AttributeError, setattr, d1, 'tzinfo', teh_tz)
 
     def test_fromtimestamp(self):
+        ts = 1471628912.749938
+
         self.assertEqual(
-            JalaliDatetime.fromtimestamp(1471628912.749938),
-            JalaliDatetime(1395, 5, 29, 22, 18, 32, 749938)
+            JalaliDatetime.fromtimestamp(ts),
+            JalaliDatetime.combine(JalaliDatetime(1395, 5, 29), datetime.fromtimestamp(ts).time())
         )
 
         self.assertEqual(
-            JalaliDatetime.utcfromtimestamp(1471628912.749938),
-            JalaliDatetime(1395, 5, 29, 17, 48, 32, 749938)
+            JalaliDatetime.utcfromtimestamp(ts),
+            JalaliDatetime.combine(JalaliDatetime(1395, 5, 29), datetime.utcfromtimestamp(ts).time())
         )
 
     def test_ordinal(self):
