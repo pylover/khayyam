@@ -39,18 +39,13 @@ matrix:
     - os: linux
       python: nightly
 
-#    - os: linux
-#      python: pypy
-#
-#    - os: linux
-#      python: pypy3
-
     - os: osx
       language: objective-c
       python: 2.7
       env:
         - PY=2
         - PY_SUFFIX=
+        - PYPI_WHEEL=yes
 
     - os: osx
       language: objective-c
@@ -58,6 +53,7 @@ matrix:
       env:
         - PY=3
         - PY_SUFFIX=3
+        - PYPI_WHEEL=yes
 
 before_install:
   - cat /etc/hosts
