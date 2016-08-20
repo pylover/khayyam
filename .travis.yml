@@ -88,8 +88,10 @@ deploy:
     secure: rUaRNz/b96Z/tttVoaorakbi8n5gzXdc5kTMxX7xhNoHcYDdbCcJseckW2zwmanJsoFSzVDkvmsR2bgrHQnLSeRi+a+RJRPorxnzeVKWoyDUPdwKT2b106kphqXV3MAlSonVmzdknkPdVMPJ95kN1Tr0UAxEy50/Q97zhU6ID44=
   on:
     tags: true
+    all_branches: true
     distributions: sdist bdist_wheel
     repo: pylover/khayyam
+    condition: "$TRAVIS_TAG =~ ^v[0-9][.][0-9]*[.][0-9]*"
 
 #before_deploy:
 #  - "echo 'ready?'"
