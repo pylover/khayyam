@@ -2,3 +2,4 @@ rtl
 sphinx
 coverage
 coveralls
+nose
