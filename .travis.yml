@@ -26,8 +26,9 @@ matrix:
     - os: linux
       python: 3.5
       env:
-        - DEPLOY_DOC="yes"
-        - RUN_COVERAGE="yes"
+        - DEPLOY_DOC=yes
+        - RUN_COVERAGE=yes
+        - PYPI_SDIST=yes
 
     - os: linux
       python: nightly
@@ -73,13 +74,13 @@ install:
   - pip install -ve .
 
 script:
-  - if [[ "RUN_COVERAGE" == "yes" ]];
+  - if [[ "$RUN_COVERAGE" == "yes" ]];
       then coverage run --source khayyam $(which nosetests);
       else nosetests;
     fi
 
 after_success:
-  - if [[ "RUN_COVERAGE" == "yes" ]]; then coveralls ; fi
+  - if [[ "$RUN_COVERAGE" == "yes" ]]; then coveralls ; fi
 
 deploy:
   provider: pypi
@@ -92,7 +93,7 @@ deploy:
   on:
     tags: true
     all_branches: true
-    distributions: sdist bdist_wheel
+    distributions: bdist_wheel
     repo: pylover/khayyam
     condition: "$TRAVIS_TAG =~ ^v[0-9][.][0-9]*[.][0-9]*$"
 
@@ -101,4 +102,5 @@ deploy:
 #  - "echo 'ready?'"
 
 after_deploy:
-  - if [[ "DEPLOY_DOC" == "yes" ]]; then ./travis-gh-pages.sh ; fi
+  - if [[ "$PYPI_SDIST" == "yes" ]]; then python3 setup.py sdist upload; fi
+  - if [[ "$DEPLOY_DOC" == "yes" ]]; then ./travis-gh-pages.sh ; fi

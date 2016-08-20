@@ -15,3 +15,4 @@ make khayyam.io
 cd ../../khayyam.io/
 git commit -am "From travis #$TRAVIS_JOB_ID"
 git push origin gh-pages
+
