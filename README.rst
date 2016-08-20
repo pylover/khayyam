@@ -124,7 +124,7 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
-* 3.0.0-dev0
+* 3.0.0
     * Raising TypeError instead of ValueError on overloaded operators, if the given type is mismatch.
     * Fixing tests to pass on systems that configured as UTC.
     * 100% Code coverage
