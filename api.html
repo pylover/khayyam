@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &mdash; Khayyam 2.11.0 documentation</title>
+    <title>API Reference &mdash; Khayyam 3.0.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.11.0',
+        VERSION:     '3.0.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
-    <link rel="top" title="Khayyam 2.11.0 documentation" href="index.html" />
+    <link rel="top" title="Khayyam 3.0.0-dev0 documentation" href="index.html" />
     <link rel="prev" title="Persian(Jalali) Calendar" href="persiancalendar.html" /> 
   </head>
   <body role="document">
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.11.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.0-dev0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -702,6 +702,27 @@ and tzinfo members are ignored.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="khayyam.JalaliDatetime.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>It&#8217;s equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">999999</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="n">source_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+<span class="go">khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A Copy of the current instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaiDatetime</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="khayyam.JalaliDatetime.dst">
 <code class="descname">dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.dst" title="Permalink to this definition">¶</a></dt>
 <dd><p>If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter
@@ -712,9 +733,9 @@ day.</p>
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.fromordinal">
 <em class="property">classmethod </em><code class="descname">fromordinal</code><span class="sig-paren">(</span><em>ordinal</em><span class="sig-paren">)</span><a class="reference internal" href="modules/khayyam/jalali_datetime.html#JalaliDatetime.fromordinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromordinal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the jalali datetime corresponding to the proleptic Gregorian ordinal,
-where January 1 of year 1 has ordinal 1. ValueError is
-raised unless 1 &lt;= ordinal &lt;= datetime.max.toordinal(). The hour, minute, second
+<dd><p>Return the jalali datetime corresponding to the proleptic jalali ordinal,
+where Farvardin 1 of year 1 has ordinal 1. ValueError is
+raised unless 1 &lt;= ordinal &lt;= JalaliDatetime.max.toordinal(). The hour, minute, second
 and microsecond of the result are all 0, and tzinfo is None.</p>
 </dd></dl>
 
@@ -755,9 +776,7 @@ such as is returned by <a class="reference external" href="https://docs.python.o
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the hour</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the hour</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -787,9 +806,7 @@ and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DD
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the microsecond</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the microsecond</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -810,9 +827,7 @@ and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DD
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the minute</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the minute</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -856,9 +871,7 @@ See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="k
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the second</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the second</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -873,9 +886,7 @@ See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="k
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Returns the timezone info</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets(change) the timezone info</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1325,7 +1336,7 @@ UTC date and time, as a naive datetime object.</p>
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 2.11.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.0-dev0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

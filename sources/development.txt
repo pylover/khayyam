@@ -110,7 +110,7 @@ Build in-project documents: `docs/html`
   $ cd path/to/khayyam/sphinx
   $ make html
 
-Build `khayyam.io` documents: `../khayyam.io`
+Build `khayyam.io` documents: `../../khayyam.io`
 
 .. code-block:: console
 
