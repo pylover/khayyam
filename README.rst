@@ -11,7 +11,7 @@ khayyam
 .. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
      :target: https://travis-ci.org/pylover/khayyam
 
-.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=v3
+.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=master
      :target: https://coveralls.io/github/pylover/khayyam?branch=master
 
 .. image:: https://img.shields.io/badge/license-GPLv3-brightgreen.svg
