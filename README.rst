@@ -242,8 +242,3 @@ Change Log
 * 1.1.0 (2015-07-17)
     * JalaliDate: New Formatter/Parser & full unittests.
 
-
-Downloads
-^^^^^^^^^
-
- * `pypi <https://pypi.python.org/pypi/Khayyam#downloads>`_
