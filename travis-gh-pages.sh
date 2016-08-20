@@ -36,4 +36,4 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 
 git commit -am "Deploy to GitHub Pages: ${SHA}"
-git --work-tree=./../../khayyam.io --git-dir=./../../khayyam.io/.git push origin gh-pages
+git push origin gh-pages
