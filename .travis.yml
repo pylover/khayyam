@@ -1,4 +1,10 @@
 
+env:
+  global:
+  - ENCRYPTION_LABEL: "d39830e202a7"
+  - COMMIT_AUTHOR_EMAIL: "vahid@dobisel.com"
+
+
 language: python
 python: 3.5
 sudo: required
@@ -90,10 +96,10 @@ deploy:
 
   skip_cleanup: true
   overwrite: true
+  distributions: bdist_wheel
   on:
     tags: true
     all_branches: true
-    distributions: bdist_wheel
     repo: pylover/khayyam
     condition: "$TRAVIS_TAG =~ ^v[0-9][.][0-9]*[.][0-9]*$"
 
