@@ -67,5 +67,4 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: pylover/khayyam
-    branch: master
 
