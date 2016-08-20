@@ -16,10 +16,8 @@ try:
 
 except ImportError:  # pragma: no cover
     warnings.warn(
-        "################################################################################\n"
-        "The C extension is not available. Switching to fallback python pure algorithms, \n"
-        "so it's about 1000X slower than C implementation of the algorithms.             \n"
-        "################################################################################\n"
+        "The C extension is not available. Switching to fallback python pure algorithms,"
+        "so it's about 1000X slower than C implementation of the algorithms."
     )
     from .algorithms_pure import \
         is_jalali_leap_year, \
@@ -30,6 +28,3 @@ except ImportError:  # pragma: no cover
         get_jalali_date_from_julian_day, \
         get_gregorian_date_from_julian_day, \
         get_jalali_date_from_gregorian_date
-
-
-

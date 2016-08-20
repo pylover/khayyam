@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import datetime
 import time
 from khayyam.helpers import force_encoded_string_output
-from khayyam.algorithms_pure import get_days_in_jalali_month, \
+from khayyam.algorithms import get_days_in_jalali_month, \
     is_jalali_leap_year, \
     get_julian_day_from_gregorian_date, \
     get_jalali_date_from_julian_day, \

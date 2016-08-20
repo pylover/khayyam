@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from datetime import timedelta, time, datetime
-from khayyam.algorithms_pure import get_gregorian_date_from_julian_day
+from khayyam.algorithms import get_gregorian_date_from_julian_day
 import khayyam
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 from khayyam.helpers import force_encoded_string_output

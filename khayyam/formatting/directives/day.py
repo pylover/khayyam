@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .directive import Directive
 from .persian import PersianNumberDirective
-from khayyam.algorithms_pure import get_days_in_jalali_year
+from khayyam.algorithms import get_days_in_jalali_year
 from datetime import timedelta
 __author__ = 'vahid'
 
