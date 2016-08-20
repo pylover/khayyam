@@ -1,87 +1,71 @@
-
-
 language: python
-
-# Default Python version is usually 2.7
 python: 3.5
 sudo: required
 dist: trusty
-#services: docker
-
 os:
-  - linux
-  - osx
-
-
+- linux
+- osx
 matrix:
   exclude:
-      # Exclude the default Python 3.5 build
-      - python: 3.5
-
+  - python: 3.5
   include:
-
-    - os: linux
-      python: 2.7
-
-    - os: linux
-      python: 3.3
-
-    - os: linux
-      python: 3.4
-
-    - os: linux
-      python: 3.5
-
-    - os: linux
-      python: nightly
-
-    - os: linux
-      python: pypy
-
-    - os: linux
-      python: pypy3
-
-    - os: osx
-      language: objective-c
-      python: 2.7
-      env:
-        - PY=2
-        - PY_SUFFIX=
-
-    - os: osx
-      language: objective-c
-      python: 3.5
-      env:
-        - PY=3
-        - PY_SUFFIX=3
-
-
+  - os: linux
+    python: 2.7
+  - os: linux
+    python: 3.3
+  - os: linux
+    python: 3.4
+  - os: linux
+    python: 3.5
+  - os: linux
+    python: nightly
+  - os: linux
+    python: pypy
+  - os: linux
+    python: pypy3
+  - os: osx
+    language: objective-c
+    python: 2.7
+    env:
+    - PY=2
+    - PY_SUFFIX=
+  - os: osx
+    language: objective-c
+    python: 3.5
+    env:
+    - PY=3
+    - PY_SUFFIX=3
 before_install:
-  # HOSTNAME
-  - cat /etc/hosts # optionally check the content *before*
-  - sudo hostname "$(hostname | cut -c1-63)"
-  - sed -e "s/^\\(127\\.0\\.0\\.1.*\\)/\\1 $(hostname | cut -c1-63)/" /etc/hosts > /tmp/hosts
-  - sudo mv /tmp/hosts /etc/hosts
-  - cat /etc/hosts # optionally check the content *after*
-
-  # OSX
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" && "$PY" == "3" ]]; then brew install python$PY_SUFFIX; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv -p python$PY_SUFFIX; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
-
-  # LINUX
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true    ; fi
-  - pip install -U pip setuptools wheel
-  - pip install -r requirement.txt
-
-
+- cat /etc/hosts
+- sudo hostname "$(hostname | cut -c1-63)"
+- sed -e "s/^\\(127\\.0\\.0\\.1.*\\)/\\1 $(hostname | cut -c1-63)/" /etc/hosts > /tmp/hosts
+- sudo mv /tmp/hosts /etc/hosts
+- cat /etc/hosts
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" && "$PY" == "3" ]]; then brew install python$PY_SUFFIX;
+  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv -p python$PY_SUFFIX; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python$( python
+  -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true    ; fi
+- pip install -U pip setuptools wheel
+- pip install -r requirement.txt
 install:
-  - pip install -ve .
-
+- pip install -ve .
 script:
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then coverage run --source khayyam $(which nosetests) ; fi
-
+- if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then coverage run --source khayyam $(which
+  nosetests) ; fi
 after_success:
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then coveralls ; fi
+- if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then coveralls ; fi
+deploy:
+  provider: pypi
+  user: Vahid.Mardani
+  password:
+    secure: rUaRNz/b96Z/tttVoaorakbi8n5gzXdc5kTMxX7xhNoHcYDdbCcJseckW2zwmanJsoFSzVDkvmsR2bgrHQnLSeRi+a+RJRPorxnzeVKWoyDUPdwKT2b106kphqXV3MAlSonVmzdknkPdVMPJ95kN1Tr0UAxEy50/Q97zhU6ID44=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: pylover/khayyam
+    branch: master
+
