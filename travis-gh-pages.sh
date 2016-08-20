@@ -35,12 +35,5 @@ git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 
-# If there are no changes to the compiled out (e.g. this is a README update) then just bail.
-if [ -z `git diff --exit-code` ]; then
-    echo "No changes to the output on this push; exiting."
-    exit 0
-fi
-
-git add .
-git commit -m "Deploy to GitHub Pages: ${SHA}"
-git push origin gh-pages
+git commit -am "Deploy to GitHub Pages: ${SHA}"
+git --work-tree=./../../khayyam.io --git-dir=./../../khayyam.io/.git push origin gh-pages
