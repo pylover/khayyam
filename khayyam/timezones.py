@@ -21,21 +21,20 @@ class Timezone(tzinfo):
         super(Timezone, self).__init__()
 
     def fromutc(self, dt):
+        if dt.tzinfo is None:
+            raise ValueError('The object: %s is naive.' % dt)
+
         if dt.tzinfo != self:
             raise ValueError('Datetime timezone mismatch: %s != %s' % (dt.tzinfo, self))
 
         utc_offset = dt.utcoffset()
         dst_offset = dt.dst()
-        if utc_offset is None:
-            raise ValueError('The object: %s is naive.' % dt)
-        if dst_offset is None:
-            raise ValueError('Invalid DST timedelta: %s' % dst_offset)
         delta = utc_offset - dst_offset  # this is self's standard offset
+
         if delta:
             dt += delta  # convert to standard local time
             dst_offset = dt.dst()
-            if dst_offset is None:
-                raise ValueError('Invalid DST timedelta: %s' % dst_offset)
+
         if dst_offset:
             return dt + dst_offset
         else:
