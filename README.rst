@@ -11,7 +11,7 @@ khayyam
 .. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
      :target: https://travis-ci.org/pylover/khayyam
 
-.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/pylover/khayyam/badge.svg?branch=v3
      :target: https://coveralls.io/github/pylover/khayyam?branch=master
 
 .. image:: https://img.shields.io/badge/license-GPLv3-brightgreen.svg
@@ -124,7 +124,7 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
-* 3.0.0
+* 3.0.0-dev0
     * Raising TypeError instead of ValueError on overloaded operators, if the given type is mismatch.
 
 
