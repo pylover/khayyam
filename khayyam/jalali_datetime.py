@@ -242,8 +242,8 @@ class JalaliDatetime(khayyam.JalaliDate):
     def todatetime(self):
         """
         Converts the current instance to the python builtins :py:class:`datetime.datetime` instance.
-        :return: the new :py:class:`datetime.datetime` instance representing the current date and time in gregorian
-        calendar.
+
+        :return: the new :py:class:`datetime.datetime` instance representing the current date and time in gregorian calendar.
         :rtype: :py:class:`datetime.datetime`
         """
         arr = get_gregorian_date_from_julian_day(self.tojulianday())
@@ -251,9 +251,17 @@ class JalaliDatetime(khayyam.JalaliDate):
                         self.tzinfo)
 
     def date(self):
+        """
+        :return: the date object with same year, month and day.
+        :rtype: :py:class:`khayyam.JalaliDate`
+        """
         return khayyam.JalaliDate(self.year, self.month, self.day)
 
     def time(self):
+        """
+        :return: the time object with same hour, minute, second and microseconds.
+        :rtype: :py:class:`khayyam.JalaliDate`
+        """
         return time(self.hour, self.minute, self.second, self.microsecond)
 
     def timetz(self):
