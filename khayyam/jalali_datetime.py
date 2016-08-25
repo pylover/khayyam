@@ -118,9 +118,10 @@ class JalaliDatetime(khayyam.JalaliDate):
     def formatterfactory(cls, fmt):
         """
         Creates the appropriate formatter for this type.
-        :param fmt: The format string
+
+        :param str fmt: The format string
         :return: The new formatter instance.
-        :rtype: :py:class:`khayyam.JalaliDatetimeFormatter`
+        :rtype: :py:class:`khayyam.formatting.JalaliDatetimeFormatter`
         """
         return JalaliDatetimeFormatter(fmt)
 
@@ -219,10 +220,10 @@ class JalaliDatetime(khayyam.JalaliDate):
     @classmethod
     def strptime(cls, date_string, fmt):
         """
-        Return a :py:class:`khayyam.JalaliDatetime` corresponding to date_string, parsed according to format.
+        Return a :py:class:`khayyam.JalaliDatetime` corresponding to *date_string*, parsed according to format.
 
-        ValueError is raised if the date_string and format can’t be parsed with
-        :py:class:`khayyam.JalaliDatetimeFormatter` instance returned by
+        ValueError is raised if the *date_string* and format can’t be parsed with
+        :py:class:`khayyam.formatting.JalaliDatetimeFormatter` instance returned by
         :py:meth:`khayyam.JalaliDatetime.formatterfactory` method.
 
         :param str date_string: The representing date & time in specified format.
@@ -231,11 +232,20 @@ class JalaliDatetime(khayyam.JalaliDate):
         :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         result = cls.formatterfactory(fmt).parse(date_string)
-        result = {k: v for k, v in result.items() if k in (
-            'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
+        result = {
+            k: v for k, v in result.items() if k in (
+                'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo'
+            )
+        }
         return cls(**result)
 
     def todatetime(self):
+        """
+        Converts the current instance to the python builtins :py:class:`datetime.datetime` instance.
+        :return: the new :py:class:`datetime.datetime` instance representing the current date and time in gregorian
+        calendar.
+        :rtype: :py:class:`datetime.datetime`
+        """
         arr = get_gregorian_date_from_julian_day(self.tojulianday())
         return datetime(int(arr[0]), int(arr[1]), int(arr[2]), self.hour, self.minute, self.second, self.microsecond,
                         self.tzinfo)
