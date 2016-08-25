@@ -114,8 +114,14 @@ class JalaliDatetime(khayyam.JalaliDate):
         """
         return self._time.tzinfo
 
-    @staticmethod
-    def formatterfactory(fmt):
+    @classmethod
+    def formatterfactory(cls, fmt):
+        """
+        Creates the appropriate formatter for this type.
+        :param fmt: The format string
+        :return: The new formatter instance.
+        :rtype: :py:class:`JalaliDatetimeFormatter`
+        """
         return JalaliDatetimeFormatter(fmt)
 
     @classmethod
