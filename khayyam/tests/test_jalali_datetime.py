@@ -192,7 +192,7 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(d1.localdatetimeformat(), u'جمعه 29 مرداد 1395 10:18:32 ب.ظ')
         self.assertEqual(d1.localdatetimeformatascii(), u'Jomeh 29 Mordad 1395 10:18:32 PM')
         self.assertEqual(d1.localtimeformat(), u'10:18:32 \u0628.\u0638')
-        self.assertEqual(d1.utcoffsetformat(), u'304')
+        self.assertEqual(d1.utcoffsetformat(), u'04:30')
         self.assertEqual(naive.utcoffsetformat(), u'')
         self.assertEqual(d1.tznameformat(), u'Iran/Tehran')
         self.assertEqual(naive.tznameformat(), u'')
