@@ -50,6 +50,7 @@ setup_args = dict(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         "Intended Audience :: Developers",
+        "Natural Language :: English",
         "Natural Language :: Persian",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Software Development :: Localization"
