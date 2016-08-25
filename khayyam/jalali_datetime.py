@@ -120,7 +120,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         Creates the appropriate formatter for this type.
         :param fmt: The format string
         :return: The new formatter instance.
-        :rtype: :py:class:`JalaliDatetimeFormatter`
+        :rtype: :py:class:`khayyam.JalaliDatetimeFormatter`
         """
         return JalaliDatetimeFormatter(fmt)
 
@@ -131,7 +131,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         if possible, supplies more precision than can be gotten from going through a
         :py:func:`time.time()` timestamp (for example,
         this may be possible on platforms supplying the C gettimeofday() function).
-        
+
         Else tz must be an instance of a :py:class:`datetime.tzinfo` subclass,
         and the current date and time are converted to tz's time zone.
         In this case the result is equivalent to `tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))`.
@@ -158,11 +158,11 @@ class JalaliDatetime(khayyam.JalaliDate):
         """
         If optional argument tz is None or not specified, the timestamp is converted to
         the platform's local date and time, and the returned datetime object is naive.
-        
+
         Else tz must be an instance of a class :py:class:`datetime.tzinfo` subclass,
         and the timestamp is converted to tz's time zone. In this case the result is
         equivalent to `tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))`.
-        
+
         This method may raise `ValueError`, if the timestamp is out of the range of values
         supported by the platform C localtime() or gmtime() functions.
         It's common for this to be restricted to years in 1970 through 2038.
@@ -218,6 +218,18 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     @classmethod
     def strptime(cls, date_string, fmt):
+        """
+        Return a :py:class:`khayyam.JalaliDatetime` corresponding to date_string, parsed according to format.
+
+        ValueError is raised if the date_string and format can’t be parsed with
+        :py:class:`khayyam.JalaliDatetimeFormatter` instance returned by
+        :py:meth:`khayyam.JalaliDatetime.formatterfactory` method.
+
+        :param str date_string: The representing date & time in specified format.
+        :param str fmt: The format string.
+        :return: Jalali datetime object.
+        :rtype: :py:class:`khayyam.JalaliDatetime`
+        """
         result = cls.formatterfactory(fmt).parse(date_string)
         result = {k: v for k, v in result.items() if k in (
             'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo')}
@@ -425,7 +437,14 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def copy(self):
         """
+
         It's equivalent to:
+
+        .. testsetup:: api-copy
+
+            from khayyam import JalaliDatetime
+
+        .. doctest:: api-copy
 
             >>> source_date = JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999)
             >>> JalaliDatetime(source_date.year, source_date.month, source_date.day, source_date.hour, source_date.minute, source_date.second, source_date.microsecond)

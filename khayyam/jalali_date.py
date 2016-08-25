@@ -303,13 +303,19 @@ class JalaliDate(object):
 
     def isoformat(self):
         """
-        :rtype: str
-        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.
-        For example:
+        Returns ISO formatted jalali date.:
+
+        .. testsetup:: api-isoformat
+
+            from khayyam import JalaliDate
+
+        .. doctest:: api-isoformat
 
             >>> JalaliDate(1361, 12, 4).isoformat() == '1361-12-04'
             True
 
+        :rtype: str
+        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.
         """
         return self.strftime('%Y-%m-%d')
 
