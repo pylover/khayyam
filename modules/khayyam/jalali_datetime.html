@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.jalali_datetime &#8212; Khayyam 3.0.9 documentation</title>
+    <title>khayyam.jalali_datetime &#8212; Khayyam 3.0.10 documentation</title>
     
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '3.0.9',
+        VERSION:     '3.0.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Khayyam 3.0.10 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -55,6 +55,8 @@
 <span class="kn">import</span> <span class="nn">khayyam</span>
 <span class="kn">from</span> <span class="nn">khayyam.formatting</span> <span class="k">import</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">,</span> <span class="n">AM_PM</span><span class="p">,</span> <span class="n">AM_PM_ASCII</span>
 <span class="kn">from</span> <span class="nn">khayyam.helpers</span> <span class="k">import</span> <span class="n">force_encoded_string_output</span>
+<span class="kn">from</span> <span class="nn">sphinx.util</span> <span class="k">import</span> <span class="n">inspect</span>
+
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;vahid&#39;</span>
 
 
@@ -88,7 +90,7 @@
 <span class="sd">    :type minute: int</span>
 <span class="sd">    :type second: int</span>
 <span class="sd">    :type microsecond: int</span>
-<span class="sd">    :type tzinfo: :py:class:`datetime.tzinfo`</span>
+<span class="sd">    :type tzinfo: :py:class:`datetime.tzinfo` | callable</span>
 <span class="sd">    :type julian_day: int</span>
 
 
@@ -107,6 +109,9 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                  <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">julian_day</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
+            <span class="n">tzinfo</span> <span class="o">=</span> <span class="n">tzinfo</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">):</span>
             <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">microsecond</span> <span class="o">=</span> \
@@ -164,23 +169,31 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">tzinfo</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="JalaliDatetime.formatterfactory"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.formatterfactory">[docs]</a>    <span class="k">def</span> <span class="nf">formatterfactory</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the appropriate formatter for this type.</span>
+
+<span class="sd">        :param fmt: str The format string</span>
+<span class="sd">        :return: The new formatter instance.</span>
+<span class="sd">        :rtype: :py:class:`khayyam.formatting.JalaliDatetimeFormatter`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDatetime.now"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.now">[docs]</a>    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        If optional argument tz is None or not specified, this is like today(), but,</span>
+<span class="sd">        If optional argument tz is :py:obj:`None` or not specified, this is like today(), but,</span>
 <span class="sd">        if possible, supplies more precision than can be gotten from going through a</span>
 <span class="sd">        :py:func:`time.time()` timestamp (for example,</span>
 <span class="sd">        this may be possible on platforms supplying the C gettimeofday() function).</span>
-<span class="sd">        </span>
+
 <span class="sd">        Else tz must be an instance of a :py:class:`datetime.tzinfo` subclass,</span>
 <span class="sd">        and the current date and time are converted to tz&#39;s time zone.</span>
 <span class="sd">        In this case the result is equivalent to `tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))`.</span>
 <span class="sd">        See also :py:meth:`khayyam.JalaliDate.today` and :py:meth:`khayyam.JalaliDatetime.utcnow`.</span>
 
+<span class="sd">        :param tz: :py:class:`datetime.tzinfo` The optional timezone to get current local date &amp; time.</span>
 <span class="sd">        :return: the current local date and time</span>
 <span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -200,13 +213,15 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="JalaliDatetime.fromtimestamp"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.fromtimestamp">[docs]</a>    <span class="k">def</span> <span class="nf">fromtimestamp</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        If optional argument tz is None or not specified, the timestamp is converted to</span>
+<span class="sd">        Creates a new :py:class:`khayyam.JalaliDatetime` instance from the given posix timestamp.</span>
+
+<span class="sd">        If optional argument tz is :py:obj:`None` or not specified, the timestamp is converted to</span>
 <span class="sd">        the platform&#39;s local date and time, and the returned datetime object is naive.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Else tz must be an instance of a class :py:class:`datetime.tzinfo` subclass,</span>
 <span class="sd">        and the timestamp is converted to tz&#39;s time zone. In this case the result is</span>
 <span class="sd">        equivalent to `tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))`.</span>
-<span class="sd">        </span>
+
 <span class="sd">        This method may raise `ValueError`, if the timestamp is out of the range of values</span>
 <span class="sd">        supported by the platform C localtime() or gmtime() functions.</span>
 <span class="sd">        It&#39;s common for this to be restricted to years in 1970 through 2038.</span>
@@ -216,9 +231,19 @@
 <span class="sd">        it&#39;s possible to have two timestamps differing by a second that yield</span>
 <span class="sd">        identical datetime objects. See also :py:class:`khayyam.JalaliDatetime.utcfromtimestamp`.</span>
 
-<span class="sd">        :return: The local date and time corresponding to the POSIX timestamp,</span>
-<span class="sd">                such as is returned by :py:func:`time.time()`.</span>
+<span class="sd">        .. testsetup:: api-datetime-fromtimestamp</span>
 
+<span class="sd">            import khayyam</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-fromtimestamp</span>
+
+<span class="sd">            &gt;&gt;&gt; JalaliDatetime.fromtimestamp(1313132131.21232)</span>
+<span class="sd">            khayyam.JalaliDatetime(1390, 5, 21, 11, 25, 31, 212320, Jomeh)</span>
+
+<span class="sd">        :param timestamp: float the posix timestamp, i.e 1014324234.23423423.</span>
+<span class="sd">        :param tz: :py:class:`datetime.tzinfo` The optional timezone to get local date &amp; time from the given timestamp.</span>
+<span class="sd">        :return: The local date and time corresponding to the POSIX timestamp, such as is returned by :py:func:`time.time()`.</span>
 <span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">))</span></div>
@@ -255,36 +280,92 @@
 <span class="sd">        and tzinfo members are equal to the given _time object&#39;s.</span>
 <span class="sd">        For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time</span>
 <span class="sd">        and tzinfo members are ignored.</span>
+
+<span class="sd">        :param date: :py:class:`khayyam.JalaliDate` the date object to combine.</span>
+<span class="sd">        :param _time: :py:class:`datetime.time` the time object to combine.</span>
+<span class="sd">        :return: the combined jalali date &amp; time object.</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="p">(</span><span class="n">JalaliDatetime</span><span class="p">,</span> <span class="n">khayyam</span><span class="o">.</span><span class="n">JalaliDate</span><span class="p">)):</span>
             <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">todate</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">_time</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">strptime</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">date_string</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;microsecond&#39;</span><span class="p">,</span> <span class="s1">&#39;tzinfo&#39;</span><span class="p">)}</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span>
+<div class="viewcode-block" id="JalaliDatetime.strptime"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.strptime">[docs]</a>    <span class="k">def</span> <span class="nf">strptime</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">date_string</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a :py:class:`khayyam.JalaliDatetime` corresponding to *date_string*, parsed according to format.</span>
 
-    <span class="k">def</span> <span class="nf">todatetime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">        ValueError is raised if the *date_string* and format can’t be parsed with</span>
+<span class="sd">        :py:class:`khayyam.formatting.JalaliDatetimeFormatter` instance returned by</span>
+<span class="sd">        :py:meth:`khayyam.JalaliDatetime.formatterfactory` method.</span>
+
+<span class="sd">        :param date_string: str The representing date &amp; time in specified format.</span>
+<span class="sd">        :param fmt: str The format string.</span>
+<span class="sd">        :return: Jalali datetime object.</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">formatterfactory</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">date_string</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;microsecond&#39;</span><span class="p">,</span> <span class="s1">&#39;tzinfo&#39;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.todatetime"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.todatetime">[docs]</a>    <span class="k">def</span> <span class="nf">todatetime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the current instance to the python builtins :py:class:`datetime.datetime` instance.</span>
+
+<span class="sd">        :return: the new :py:class:`datetime.datetime` instance representing the current date and time in gregorian calendar.</span>
+<span class="sd">        :rtype: :py:class:`datetime.datetime`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">get_gregorian_date_from_julian_day</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tojulianday</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">khayyam</span><span class="o">.</span><span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+<div class="viewcode-block" id="JalaliDatetime.date"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.date">[docs]</a>    <span class="k">def</span> <span class="nf">date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return date object with same year, month and day.</span>
 
-    <span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDate`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">khayyam</span><span class="o">.</span><span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">timetz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
+<div class="viewcode-block" id="JalaliDatetime.time"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.time">[docs]</a>    <span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return time object with same hour, minute, second and microseconds. tzinfo is :py:obj:`None`. See also</span>
+<span class="sd">        method :py:meth:`khayyam.JalaliDatetime.timetz()`.</span>
+
+<span class="sd">        :rtype: :py:class:`datetime.time`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.timetz"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.timetz">[docs]</a>    <span class="k">def</span> <span class="nf">timetz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return time object with same hour, minute, second, microsecond, and tzinfo attributes. See also</span>
+<span class="sd">        method :py:meth:`khayyam.JalaliDatetime.time()`.</span>
+
+<span class="sd">        :rtype: :py:class:`datetime.time`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="JalaliDatetime.replace"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">minute</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Without adjusting the date the and time based tzinfo</span>
+<span class="sd">        Return a :py:class:`khayyam.JalaliDatetime` instance with the same attributes, except for those attributes</span>
+<span class="sd">        given new values by whichever keyword arguments are specified. Note that tzinfo=None can be specified to create</span>
+<span class="sd">        a naive datetime from an aware datetime with no conversion of date and time data, without adjusting the date</span>
+<span class="sd">        the and time based tzinfo.</span>
+
+<span class="sd">        :param year: int</span>
+<span class="sd">        :param month: int</span>
+<span class="sd">        :param day: int</span>
+<span class="sd">        :param hour: int</span>
+<span class="sd">        :param minute: int</span>
+<span class="sd">        :param second: int</span>
+<span class="sd">        :param microsecond: int</span>
+<span class="sd">        :param tzinfo: :py:class:`datetime.tzinfo`</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span>
             <span class="n">year</span> <span class="k">if</span> <span class="n">year</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
@@ -304,97 +385,328 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
-    <span class="k">def</span> <span class="nf">astimezone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tz</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.astimezone"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.astimezone">[docs]</a>    <span class="k">def</span> <span class="nf">astimezone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tz</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a :py:class:`khayyam.JalaliDatetime` object with new :py:meth:`khayyam.JalaliDatetime.tzinfo` attribute</span>
+<span class="sd">        tz, adjusting the date and time data so the result is the same UTC time as self, but in *tz*‘s local time.</span>
+
+<span class="sd">        *tz* must be an instance of a :py:class:`datetime.tzinfo` subclass, and</span>
+<span class="sd">        its :py:meth:`datetime.tzinfo.utcoffset()` and :py:meth:`datetime.tzinfo.dst()` methods must not</span>
+<span class="sd">        return :py:obj:`None`. *self* must be aware (`self.tzinfo` must not be `None`, and `self.utcoffset()` must</span>
+<span class="sd">        not return `None`).</span>
+
+<span class="sd">        If `self.tzinfo` is `tz`, `self.astimezone(tz)` is equal to `self`: no adjustment of date or time data is</span>
+<span class="sd">        performed. Else the result is local time in time zone `tz`, representing the same UTC time as `self`:</span>
+<span class="sd">        after `astz = dt.astimezone(tz), astz - astz.utcoffset()` will usually have the same date and time data as</span>
+<span class="sd">        `dt - dt.utcoffset()`. The discussion of class :py:class:`datetime.tzinfo` explains the cases at Daylight</span>
+<span class="sd">        Saving Time transition boundaries where this cannot be achieved (an issue only if `tz` models both</span>
+<span class="sd">        standard and daylight time).</span>
+
+<span class="sd">        If you merely want to attach a time zone object `tz` to a datetime dt without adjustment of date and time data,</span>
+<span class="sd">        use `dt.replace(tzinfo=tz)`. If you merely want to remove the time zone object from an aware datetime dt</span>
+<span class="sd">        without conversion of date and time data, use `dt.replace(tzinfo=None)`.</span>
+
+<span class="sd">        Note that the default :py:meth:`datetime.tzinfo.fromutc()` method can be overridden in a</span>
+<span class="sd">        :py:class:`datetime.tzinfo` subclass to affect the result returned</span>
+<span class="sd">        by :py:meth:`khayyam.JalaliDatetime.astimezone()`. Ignoring error</span>
+<span class="sd">        cases, :py:meth:`khayyam.JalaliDatetime.astimezone()` acts like:</span>
+
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">           :emphasize-lines: 3,5</span>
+
+<span class="sd">           def astimezone(self, tz):  # doctest: +SKIP</span>
+
+<span class="sd">               if self.tzinfo is tz:</span>
+<span class="sd">                   return self</span>
+<span class="sd">               if self.tzinfo:</span>
+<span class="sd">                   utc = self - self.utcoffset()</span>
+<span class="sd">               else:</span>
+<span class="sd">                   utc = self</span>
+<span class="sd">               return tz.fromutc(utc.replace(tzinfo=tz))</span>
+
+
+<span class="sd">        :param tz: :py:class:`datetime.tzinfo`</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaliDatetime`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="n">tz</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="n">utc</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">utc</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="k">return</span> <span class="n">tz</span><span class="o">.</span><span class="n">fromutc</span><span class="p">(</span><span class="n">utc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">tz</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">tz</span><span class="o">.</span><span class="n">fromutc</span><span class="p">(</span><span class="n">utc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">tz</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.utcoffset"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.utcoffset">[docs]</a>    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If :py:meth:`khayyam.JalaliDatetime.tzinfo` is :py:obj:`None`, returns :py:obj:`None`, else</span>
+<span class="sd">        returns `self.tzinfo.utcoffset(self)`, and raises an exception if the latter doesn’t return :py:obj:`None`,</span>
+<span class="sd">        or a :py:class:`datetime.timedelta` object representing a whole number of minutes with magnitude less than one</span>
+<span class="sd">        day.</span>
+
+<span class="sd">        :rtype: :py:class:`datetime.timedelta`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="JalaliDatetime.dst"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.dst">[docs]</a>    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        If tzinfo is None, returns None, else returns self.tzinfo.dst(self), and raises an exception if the latter</span>
-<span class="sd">        doesn’t return None, or a timedelta object representing a whole number of minutes with magnitude less than one</span>
-<span class="sd">        day.</span>
+<span class="sd">        If :py:meth:`khayyam.JalaliDatetime.tzinfo` is :py:obj:`None`, returns :py:obj:`None`, else returns</span>
+<span class="sd">        `self.tzinfo.dst(self)`, and raises an exception if the latter doesn’t return :py:obj:`None`, or</span>
+<span class="sd">        a :py:class:`datetime.timedelta` object representing a whole number of minutes with magnitude less than one day.</span>
+
+<span class="sd">        :rtype: :py:class:`datetime.timedelta`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.tzname"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.tzname">[docs]</a>    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If :py:meth:`khayyam.JalaliDatetime.tzinfo` is :py:obj:`None`, returns :py:obj:`None`, else returns</span>
+<span class="sd">        `self.tzinfo.tzname(self)`, raises an exception if the latter doesn’t return:py:obj:`None`or a string object.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_ensure_jalali_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Comparison just allow with JalaliDatetime&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JalaliDatetime.copy"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        It&#39;s equivalent to:</span>
+
+<span class="sd">        .. testsetup:: api-datetime-copy</span>
+
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-copy</span>
+
+<span class="sd">            &gt;&gt;&gt; source_date = JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999)</span>
+<span class="sd">            &gt;&gt;&gt; JalaliDatetime(source_date.year, source_date.month, source_date.day, source_date.hour, source_date.minute, source_date.second, source_date.microsecond)</span>
+<span class="sd">            khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)</span>
+
+<span class="sd">        :return: A Copy of the current instance.</span>
+<span class="sd">        :rtype: :py:class:`khayyam.JalaiDatetime`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">JalaliDatetime</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
+            <span class="n">tzinfo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="JalaliDatetime.isoformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.isoformat">[docs]</a>    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if</span>
 <span class="sd">        microsecond is 0, YYYY-MM-DDTHH:MM:SS</span>
 
-<span class="sd">        If utcoffset() does not return None, a 6-character string is appended, giving the UTC offset in (signed) hours</span>
+<span class="sd">        If utcoffset() does not return :py:obj:`None`, a 6-character string is appended, giving the UTC offset in (signed) hours</span>
 <span class="sd">        and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DDTHH:MM:SS+HH:MM</span>
+
+<span class="sd">        :param sep: str The separator between date &amp; time.</span>
+<span class="sd">        :return: The ISO formatted date &amp; time.</span>
+<span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;%H:%M:%S.</span><span class="si">%f</span><span class="s1">%z&#39;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">localshortformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%a </span><span class="si">%d</span><span class="s1"> %b %y %H:%M&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="JalaliDatetime.localshortformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.localshortformat">[docs]</a>    <span class="k">def</span> <span class="nf">localshortformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string representing the date and time in preserved format: `%a %d %b %y %H:%M`.</span>
 
-    <span class="k">def</span> <span class="nf">localshortformatascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%e</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%g</span><span class="s1"> %y %H:%M&#39;</span><span class="p">)</span>
+<span class="sd">        .. testsetup:: api-datetime-localshortformat</span>
 
-    <span class="k">def</span> <span class="nf">localdatetimeformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%A </span><span class="si">%d</span><span class="s1"> %B %Y %I:%M:%S %p&#39;</span><span class="p">)</span>
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
 
-    <span class="k">def</span> <span class="nf">localdatetimeformatascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%E</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%G</span><span class="s1"> %Y %I:%M:%S %t&#39;</span><span class="p">)</span>
+<span class="sd">        .. doctest:: api-datetime-localshortformat</span>
 
-    <span class="k">def</span> <span class="nf">localtimeformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%I:%M:%S %p&#39;</span><span class="p">)</span>
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999).localshortformat())</span>
+<span class="sd">            ی 24 خر 94 10:02</span>
 
-    <span class="k">def</span> <span class="nf">hour12</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">        :return: The local short formatted date &amp; time string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%a </span><span class="si">%d</span><span class="s1"> %b %y %H:%M&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.localshortformatascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.localshortformatascii">[docs]</a>    <span class="k">def</span> <span class="nf">localshortformatascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string representing the date and time in preserved format: `%e %d %g %y %H:%M`.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-localshortformatascii</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-localshortformatascii</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999).localshortformatascii())</span>
+<span class="sd">            Y 24 Kh 94 10:02</span>
+
+<span class="sd">        :return: The local short ascii formatted date &amp; time string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%e</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%g</span><span class="s1"> %y %H:%M&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.localdatetimeformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.localdatetimeformat">[docs]</a>    <span class="k">def</span> <span class="nf">localdatetimeformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string representing the date and time in preserved format: `%A %d %B %Y %I:%M:%S %p`.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-localdatetimeformat</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-localdatetimeformat</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999).localdatetimeformat())</span>
+<span class="sd">            یکشنبه 24 خرداد 1394 10:02:03 ق.ظ</span>
+
+<span class="sd">        :return: The local formatted date &amp; time string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%A </span><span class="si">%d</span><span class="s1"> %B %Y %I:%M:%S %p&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.localdatetimeformatascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.localdatetimeformatascii">[docs]</a>    <span class="k">def</span> <span class="nf">localdatetimeformatascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string representing the date and time in preserved format: `%E %d %G %Y %I:%M:%S %t`.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-localdatetimeformatascii</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-localdatetimeformatascii</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999).localdatetimeformatascii())</span>
+<span class="sd">            Yekshanbeh 24 Khordad 1394 10:02:03 AM</span>
+
+<span class="sd">        :return: The local ascii formatted date &amp; time string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%E</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%G</span><span class="s1"> %Y %I:%M:%S %t&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.localtimeformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.localtimeformat">[docs]</a>    <span class="k">def</span> <span class="nf">localtimeformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string representing the date and time in preserved format: `%I:%M:%S %p`.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-localtimeformat</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime</span>
+
+<span class="sd">        .. doctest:: api-datetime-localtimeformat</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999).localtimeformat())</span>
+<span class="sd">            10:02:03 ق.ظ</span>
+
+<span class="sd">        :return: The local formatted time string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%I:%M:%S %p&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.hour12"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.hour12">[docs]</a>    <span class="k">def</span> <span class="nf">hour12</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return The hour value between `1-12`. use :py:meth:`khayyam.JalaliDatetime.ampm()` or</span>
+<span class="sd">        :py:meth:`khayyam.JalaliDatetime.ampmascii()` to determine `ante meridiem` and or `post meridiem`</span>
+
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span>
         <span class="k">if</span> <span class="n">res</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">-=</span> <span class="mi">12</span>
         <span class="k">elif</span> <span class="n">res</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="mi">12</span>
-        <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">res</span></div>
 
-    <span class="k">def</span> <span class="nf">ampm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.ampm"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.ampm">[docs]</a>    <span class="k">def</span> <span class="nf">ampm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return The &#39;ق.ظ&#39; or &#39;ب.ظ&#39; to determine `ante meridiem` and or `post meridiem`</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AM_PM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">AM_PM</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">AM_PM</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="nf">ampmascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.ampmascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.ampmascii">[docs]</a>    <span class="k">def</span> <span class="nf">ampmascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return The &#39;AM&#39; or &#39;PM&#39; to determine `ante meridiem` and or `post meridiem`</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AM_PM_ASCII</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">AM_PM_ASCII</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">AM_PM_ASCII</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="nf">utcoffsetformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.utcoffsetformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.utcoffsetformat">[docs]</a>    <span class="k">def</span> <span class="nf">utcoffsetformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the formatted(*HH:MM*) time representing offset from UTC.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-utcoffsetformat</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime, TehranTimezone</span>
+
+<span class="sd">        .. doctest:: api-datetime-utcoffsetformat</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).utcoffsetformat())</span>
+<span class="sd">            04:30</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
             <span class="n">td</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
             <span class="n">_minutes</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span>
             <span class="n">hours</span> <span class="o">=</span> <span class="n">_minutes</span> <span class="o">/</span> <span class="mi">60</span>
             <span class="n">minutes</span> <span class="o">=</span> <span class="n">_minutes</span> <span class="o">%</span> <span class="mi">60</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%02d</span><span class="s1">:</span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
 
-    <span class="k">def</span> <span class="nf">tznameformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzname</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span>
+<div class="viewcode-block" id="JalaliDatetime.tznameformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.tznameformat">[docs]</a>    <span class="k">def</span> <span class="nf">tznameformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If :py:meth:`khayyam.JalaliDatetime.tzinfo` is :py:obj:`None`, returns empty string, else returns</span>
+<span class="sd">        `self.tzinfo.tzname(self)`, raises an exception if the latter doesn’t return:py:obj:`None`or a string object.</span>
 
-    <span class="k">def</span> <span class="nf">dayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">-</span> <span class="n">khayyam</span><span class="o">.</span><span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzname</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span></div>
 
-    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JalaliDatetime.dayofyear"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.dayofyear">[docs]</a>    <span class="k">def</span> <span class="nf">dayofyear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the day of year (1-[365, 366]).</span>
+
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">-</span> <span class="n">khayyam</span><span class="o">.</span><span class="n">JalaliDate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="JalaliDatetime.__unicode__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.__unicode__">[docs]</a>    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the default :py:class:`khayyam.JalaliDatetime` representation.</span>
+
+<span class="sd">        .. testsetup:: api-datetime-__unicode__</span>
+
+<span class="sd">            from __future__ import print_function</span>
+<span class="sd">            from khayyam import JalaliDatetime, TehranTimezone</span>
+
+<span class="sd">        .. doctest:: api-datetime-__unicode__</span>
+
+<span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).__unicode__())</span>
+<span class="sd">            khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=+03:30 dst:60, Yekshanbeh)</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;khayyam.JalaliDatetime(</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
@@ -405,12 +717,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
             <span class="s1">&#39;, tzinfo=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weekdaynameascii</span><span class="p">()</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
 
     <span class="n">__repr__</span> <span class="o">=</span> <span class="n">force_encoded_string_output</span><span class="p">(</span><span class="n">__unicode__</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="JalaliDatetime.__str__"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The same as :py:meth:`khayyam.JalaliDatetime.isoformat(sep=&#39; &#39;)`.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">):</span>
@@ -460,29 +777,7 @@
 
     <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_jalali_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_ensure_jalali_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Comparison just allow with JalaliDatetime&#39;</span><span class="p">)</span>
-
-<div class="viewcode-block" id="JalaliDatetime.copy"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        It&#39;s equivalent to:</span>
-
-<span class="sd">            &gt;&gt;&gt; source_date = JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999)</span>
-<span class="sd">            &gt;&gt;&gt; JalaliDatetime(source_date.year, source_date.month, source_date.day, source_date.hour, source_date.minute, source_date.second, source_date.microsecond)</span>
-<span class="sd">            khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)</span>
-
-<span class="sd">        :return: A Copy of the current instance.</span>
-<span class="sd">        :rtype: :py:class:`khayyam.JalaiDatetime`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">JalaliDatetime</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
-            <span class="n">tzinfo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span>
-        <span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">todatetime</span><span class="p">()</span></div>
 
 
 <span class="c1"># # Class attributes</span>
@@ -518,7 +813,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.jalali_date &#8212; Khayyam 3.0.9 documentation</title>
+    <title>khayyam.jalali_date &#8212; Khayyam 3.0.10 documentation</title>
     
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '3.0.9',
+        VERSION:     '3.0.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Khayyam 3.0.10 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -287,15 +287,17 @@
 <div class="viewcode-block" id="JalaliDate.toordinal"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.toordinal">[docs]</a>    <span class="k">def</span> <span class="nf">toordinal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It&#39;s equivalent to:</span>
-<span class="sd">        .. testsetup:: api-toordinal</span>
+
+<span class="sd">        .. testsetup:: api-date-toordinal</span>
 
 <span class="sd">            import khayyam</span>
 <span class="sd">            from khayyam import JalaliDate</span>
 
-<span class="sd">        .. doctestLL api-toordinal</span>
+<span class="sd">        .. doctest:: api-date-toordinal</span>
 
 <span class="sd">            &gt;&gt;&gt; d = JalaliDate(1361, 6, 15)</span>
 <span class="sd">            &gt;&gt;&gt; (d - JalaliDate(khayyam.MINYEAR)).days + 1</span>
+<span class="sd">            496899</span>
 
 <span class="sd">        :return: The corresponding proleptic Shamsi ordinal days.</span>
 <span class="sd">        :rtype: int</span>
@@ -353,13 +355,19 @@
 
 <div class="viewcode-block" id="JalaliDate.isoformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDate.isoformat">[docs]</a>    <span class="k">def</span> <span class="nf">isoformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :rtype: str</span>
-<span class="sd">        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.</span>
-<span class="sd">        For example:</span>
+<span class="sd">        Returns ISO formatted jalali date.:</span>
+
+<span class="sd">        .. testsetup:: api-date-isoformat</span>
+
+<span class="sd">            from khayyam import JalaliDate</span>
+
+<span class="sd">        .. doctest:: api-date-isoformat</span>
 
 <span class="sd">            &gt;&gt;&gt; JalaliDate(1361, 12, 4).isoformat() == &#39;1361-12-04&#39;</span>
 <span class="sd">            True</span>
 
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: A string representing the date in ISO 8601 format, ‘YYYY-MM-DD’.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
@@ -446,19 +454,19 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It&#39;s equivalent to:</span>
 
-<span class="sd">        .. testsetup:: api-localdateformat</span>
+<span class="sd">        .. testsetup:: api-date-localdateformat</span>
 
 <span class="sd">            from __future__ import print_function</span>
 <span class="sd">            from khayyam import JalaliDate</span>
 
-<span class="sd">        .. doctest:: api-localdateformat</span>
+<span class="sd">        .. doctest:: api-date-localdateformat</span>
 
 <span class="sd">            &gt;&gt;&gt; print(JalaliDate(1361, 6, 15).strftime(&#39;%A %D %B %N&#39;))</span>
 <span class="sd">            دوشنبه ۱۵ شهریور ۱۳۶۱</span>
 
 <span class="sd">        For example:</span>
 
-<span class="sd">        .. doctest:: api-localdateformat</span>
+<span class="sd">        .. doctest:: api-date-localdateformat</span>
 
 <span class="sd">            &gt;&gt;&gt; print(JalaliDate(1394, 5, 6).localdateformat())</span>
 <span class="sd">            سه شنبه ۶ مرداد ۱۳۹۴</span>
@@ -612,7 +620,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
