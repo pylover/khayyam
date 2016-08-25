@@ -6,6 +6,7 @@ Date objects
 
 .. autoclass:: khayyam.JalaliDate
     :members:
+    :special-members:
 
 .. Commented
     :private-members:
@@ -19,7 +20,7 @@ Date & Time objects
 
 .. autoclass:: khayyam.JalaliDatetime
     :members:
-
+    :special-members:
 
 Formatting & Parsing
 --------------------

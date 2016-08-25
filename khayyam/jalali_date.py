@@ -237,15 +237,17 @@ class JalaliDate(object):
     def toordinal(self):
         """
         It's equivalent to:
-        .. testsetup:: api-toordinal
+
+        .. testsetup:: api-date-toordinal
 
             import khayyam
             from khayyam import JalaliDate
 
-        .. doctestLL api-toordinal
+        .. doctest:: api-date-toordinal
 
             >>> d = JalaliDate(1361, 6, 15)
             >>> (d - JalaliDate(khayyam.MINYEAR)).days + 1
+            496899
 
         :return: The corresponding proleptic Shamsi ordinal days.
         :rtype: int
@@ -305,11 +307,11 @@ class JalaliDate(object):
         """
         Returns ISO formatted jalali date.:
 
-        .. testsetup:: api-isoformat
+        .. testsetup:: api-date-isoformat
 
             from khayyam import JalaliDate
 
-        .. doctest:: api-isoformat
+        .. doctest:: api-date-isoformat
 
             >>> JalaliDate(1361, 12, 4).isoformat() == '1361-12-04'
             True
@@ -402,19 +404,19 @@ class JalaliDate(object):
         """
         It's equivalent to:
 
-        .. testsetup:: api-localdateformat
+        .. testsetup:: api-date-localdateformat
 
             from __future__ import print_function
             from khayyam import JalaliDate
 
-        .. doctest:: api-localdateformat
+        .. doctest:: api-date-localdateformat
 
             >>> print(JalaliDate(1361, 6, 15).strftime('%A %D %B %N'))
             دوشنبه ۱۵ شهریور ۱۳۶۱
 
         For example:
 
-        .. doctest:: api-localdateformat
+        .. doctest:: api-date-localdateformat
 
             >>> print(JalaliDate(1394, 5, 6).localdateformat())
             سه شنبه ۶ مرداد ۱۳۹۴

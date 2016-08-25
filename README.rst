@@ -127,6 +127,7 @@ Change Log
 * 3.0.10
 
     * Imoprting JalaliDateFormatter & JalaliDatetimeFormatter in __init__.py
+    * Accept also callable in JalaliDatetime.__init__(tzinfo=...) for tzinfo argument.
 
 * 3.0.9
     * Removing pypy from travis, due the travis bug: buffer overflow !
