@@ -124,6 +124,10 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 3.0.9
+    * Removing pypy from travis, due the travis bug: buffer overflow !
+     
+
 * 3.0.0
     * Raising TypeError instead of ValueError on overloaded operators, if the given type is mismatch.
     * Fixing tests to pass on systems that configured as UTC.
