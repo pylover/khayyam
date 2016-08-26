@@ -42,7 +42,6 @@ Directives
 
 .. automodule:: khayyam.formatting.directives
     :members:
-    :undoc-members:
     :show-inheritance:
 
 
@@ -51,12 +50,10 @@ Timezone objects
 
 .. autoclass:: khayyam.Timezone
     :members:
-    :undoc-members:
     :show-inheritance:
 
 .. autoclass:: khayyam.TehranTimezone
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Constants

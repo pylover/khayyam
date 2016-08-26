@@ -24,6 +24,10 @@ class TestJalaliDateTime(unittest.TestCase):
         self.assertEqual(JalaliDatetime(jalali_time), jalali_time)
         self.assertEqual(JalaliDatetime(jalali_time.date()).date(), jalali_time.date())
         self.assertEqual(JalaliDatetime(julian_day=2450674), JalaliDatetime(1376, 5, 23))
+        self.assertEqual(
+            JalaliDatetime(1361, 6, 15, tzinfo=TehranTimezone),
+            JalaliDatetime(1361, 6, 15, tzinfo=TehranTimezone())
+        )
 
     def test_to_from_datetime(self):
         # Naive

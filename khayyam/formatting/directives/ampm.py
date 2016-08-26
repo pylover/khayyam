@@ -6,6 +6,11 @@ __author__ = 'vahid'
 
 
 class BaseAmPmDirective(Directive):
+    """
+    Responsible for parse and formatting of 'AM' and 'PM'.
+
+    """
+
     def __init__(self, key, name, regex):
         super(BaseAmPmDirective, self).__init__(key, name, regex, get_unicode)
 
