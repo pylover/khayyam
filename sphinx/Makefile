@@ -57,9 +57,11 @@ khayyam.io:
 	rm -rf $(GITHUB_OUT_DIR)/*;
 	$(SPHINXBUILD) -Eb html $(ALLSPHINXOPTS) $(GITHUB_OUT_DIR)
 	echo "khayyam.dobisel.com" > $(GITHUB_OUT_DIR)/CNAME
-	git --work-tree=$(GITHUB_OUT_DIR) --git-dir=$(GITHUB_OUT_DIR)/.git add --all
 	touch $(GITHUB_OUT_DIR)/.nojekyll
 	touch $(GITHUB_OUT_DIR)/_config.yml
+	git --work-tree=$(GITHUB_OUT_DIR) --git-dir=$(GITHUB_OUT_DIR)/.git add --all
+	git --work-tree=$(GITHUB_OUT_DIR) --git-dir=$(GITHUB_OUT_DIR)/.git add -f $(GITHUB_OUT_DIR)/.nojekyll
+	git --work-tree=$(GITHUB_OUT_DIR) --git-dir=$(GITHUB_OUT_DIR)/.git add -f $(GITHUB_OUT_DIR)/_config.yml
 	echo "include: ['_static']" >> $(GITHUB_OUT_DIR)/_config.yml
 	@echo
 	@echo "Build finished. The HTML pages are in $(GITHUB_OUT_DIR)."
