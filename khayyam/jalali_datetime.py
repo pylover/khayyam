@@ -446,7 +446,7 @@ class JalaliDatetime(khayyam.JalaliDate):
             khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)
 
         :return: A Copy of the current instance.
-        :rtype: :py:class:`khayyam.JalaiDatetime`
+        :rtype: :py:class:`khayyam.JalaliDatetime`
         """
         return JalaliDatetime(
             self.year, self.month, self.day,
@@ -604,7 +604,7 @@ class JalaliDatetime(khayyam.JalaliDate):
 
         .. testsetup:: api-datetime-utcoffsetformat
 
-            from __future__ import print_function
+            from __future__ import def copy
             from khayyam import JalaliDatetime, TehranTimezone
 
         .. doctest:: api-datetime-utcoffsetformat
