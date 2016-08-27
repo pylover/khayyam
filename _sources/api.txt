@@ -95,8 +95,8 @@ Timezone objects
 Constants
 ---------
 
-.. automodule:: khayyam
-    :members: MINYEAR, MAXYEAR, SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
+.. automodule:: khayyam.constants
+    :members:
     :undoc-members:
     :show-inheritance:
 
