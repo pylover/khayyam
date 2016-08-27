@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.formatting.formatters &#8212; Khayyam 3.0.10 documentation</title>
+    <title>khayyam.formatting.formatters &#8212; Khayyam 3.0.11 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '3.0.10',
+        VERSION:     '3.0.11',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.10 documentation" href="../../../index.html" />
+    <link rel="top" title="Khayyam 3.0.11 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 3.0.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -60,6 +60,10 @@
 
 
 <div class="viewcode-block" id="JalaliDateFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDateFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDateFormatter</span><span class="p">(</span><span class="n">BaseFormatter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Responsible to parse and formatting of a :py:class:`khayyam.JalaliDate` instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;persianday&#39;</span><span class="p">,</span>
@@ -166,6 +170,11 @@
 
 
 <div class="viewcode-block" id="JalaliDatetimeFormatter"><a class="viewcode-back" href="../../../api.html#khayyam.formatting.JalaliDatetimeFormatter">[docs]</a><span class="k">class</span> <span class="nc">JalaliDatetimeFormatter</span><span class="p">(</span><span class="n">JalaliDateFormatter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Responsible to parse and formatting of a :py:class:`khayyam.JalaliDatetime` instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">_post_parsers</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;persianday&#39;</span><span class="p">,</span>
         <span class="s1">&#39;persiandayzeropadded&#39;</span><span class="p">,</span>
@@ -239,7 +248,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Khayyam 3.0.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

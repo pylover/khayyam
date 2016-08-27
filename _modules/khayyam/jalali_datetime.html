@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>khayyam.jalali_datetime &#8212; Khayyam 3.0.10 documentation</title>
+    <title>khayyam.jalali_datetime &#8212; Khayyam 3.0.11 documentation</title>
     
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '3.0.10',
+        VERSION:     '3.0.11',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.10 documentation" href="../../index.html" />
+    <link rel="top" title="Khayyam 3.0.11 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -631,9 +631,9 @@
 
 <div class="viewcode-block" id="JalaliDatetime.ampm"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.ampm">[docs]</a>    <span class="k">def</span> <span class="nf">ampm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return The &#39;ق.ظ&#39; or &#39;ب.ظ&#39; to determine `ante meridiem` and or `post meridiem`</span>
 
 <span class="sd">        :rtype: str</span>
+<span class="sd">        :return: The &#39;ق.ظ&#39; or &#39;ب.ظ&#39; to determine `ante meridiem` and or `post meridiem`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AM_PM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -641,10 +641,9 @@
 
 <div class="viewcode-block" id="JalaliDatetime.ampmascii"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.ampmascii">[docs]</a>    <span class="k">def</span> <span class="nf">ampmascii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return The &#39;AM&#39; or &#39;PM&#39; to determine `ante meridiem` and or `post meridiem`</span>
 
 <span class="sd">        :rtype: str</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :return: The &#39;AM&#39; or &#39;PM&#39; to determine `ante meridiem` and or `post meridiem`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AM_PM_ASCII</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -652,7 +651,6 @@
 
 <div class="viewcode-block" id="JalaliDatetime.utcoffsetformat"><a class="viewcode-back" href="../../api.html#khayyam.JalaliDatetime.utcoffsetformat">[docs]</a>    <span class="k">def</span> <span class="nf">utcoffsetformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the formatted(*HH:MM*) time representing offset from UTC.</span>
 
 <span class="sd">        .. testsetup:: api-datetime-utcoffsetformat</span>
 
@@ -664,6 +662,7 @@
 <span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).utcoffsetformat())</span>
 <span class="sd">            04:30</span>
 
+<span class="sd">        :return: The formatted(*HH:MM*) time representing offset from UTC.</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">:</span>
@@ -705,7 +704,6 @@
 <span class="sd">            &gt;&gt;&gt; print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).__unicode__())</span>
 <span class="sd">            khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=+03:30 dst:60, Yekshanbeh)</span>
 
-<span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;khayyam.JalaliDatetime(</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
@@ -813,7 +811,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Khayyam 3.0.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
