@@ -124,6 +124,9 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 3.0.11
+    * Allmost the all API's are documented.
+
 * 3.0.10
     * Imoprting JalaliDateFormatter & JalaliDatetimeFormatter in __init__.py
     * Accept also callable in JalaliDatetime.__init__(tzinfo=...) for tzinfo argument.

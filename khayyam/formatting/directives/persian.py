@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .directive import Directive
+from .base import Directive
 from khayyam.compat import get_unicode
 from khayyam.formatting.constants import PERSIAN_DIGIT_MAPPING
 
@@ -14,6 +14,9 @@ persian_to_eng = lambda s: ''.join([persian_to_eng_dict[c] if c in persian_to_en
 
 
 class PersianNumberDirective(Directive):
+    """
+    Representing a number in persian form.
+    """
     def __init__(self, key, name, regex, zero_padding=False, zero_padding_length=2):
         self.zero_padding = zero_padding
         self.zero_padding_length = zero_padding_length

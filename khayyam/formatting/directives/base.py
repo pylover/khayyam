@@ -4,6 +4,11 @@ __author__ = 'vahid'
 
 
 class Directive(object):
+    """
+    Base class for all formatting directives.
+
+    """
+
     def __init__(self, key, name, regex, type_, formatter=None, post_parser=None):
         self.key = key
         self.name = name
@@ -18,13 +23,31 @@ class Directive(object):
         return '%' + self.key
 
     def post_parser(self, ctx, formatter):  # pragma: no cover
+        """
+        In overridden method, It should parse the formatted value from the given string.
+        :param ctx:
+        :param formatter:
+        :return:
+        """
         pass
 
     def format(self, d):  # pragma: no cover
+        """
+        In overridden method, It Should return string representation of the given argument.
+
+        :param d: a value to format
+        :return: Formatted value.
+        :rtype: str
+        """
         return d
 
 
 class CompositeDateDirective(Directive):
+    """
+    A chain of directives, Representing a date.
+
+    """
+
     format_string = None
 
     def __init__(self, key, name, regex, format_string=None, **kw):
@@ -39,6 +62,11 @@ class CompositeDateDirective(Directive):
 
     @property
     def sub_formatter(self):
+        """
+
+        :return: The underlying formatter.
+        :rtype: :py:class:`khayyam.JalaliDateFormatter`
+        """
         if not self._sub_formatter:
             self._sub_formatter = self._create_formatter()
         return self._sub_formatter
@@ -51,6 +79,10 @@ class CompositeDateDirective(Directive):
 
 
 class CompositeDatetimeDirective(CompositeDateDirective):
+    """
+    A chain of directives, Representing a datetime.
+
+    """
     format_string = None
 
     def _create_formatter(self):

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-make github.io
+make khayyam.io
 
 while true
 do
   inotifywait -r -e modify -e move -e create -e delete . ../khayyam | while read line
     do
-     make github.io
+     make khayyam.io
     done
 done
 

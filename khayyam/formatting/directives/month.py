@@ -4,6 +4,9 @@ __author__ = 'vahid'
 
 
 class PersianMonthDirective(PersianNumberDirective):
+    """
+    Representing a month in persian.
+    """
 
     def format(self, d):
         return super(PersianMonthDirective, self).format(d.month)

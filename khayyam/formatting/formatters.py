@@ -10,6 +10,10 @@ class BaseFormatter(object):
 
 
 class JalaliDateFormatter(BaseFormatter):
+    """
+    Responsible to parse and formatting of a :py:class:`khayyam.JalaliDate` instance.
+
+    """
 
     _post_parsers = [
         'persianday',
@@ -116,6 +120,11 @@ class JalaliDateFormatter(BaseFormatter):
 
 
 class JalaliDatetimeFormatter(JalaliDateFormatter):
+    """
+    Responsible to parse and formatting of a :py:class:`khayyam.JalaliDatetime` instance.
+
+    """
+
     _post_parsers = [
         'persianday',
         'persiandayzeropadded',

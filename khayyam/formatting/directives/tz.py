@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from .directive import Directive
+from .base import Directive
 from .persian import PersianNumberDirective, persian_to_eng
 from datetime import timedelta
 from khayyam.timezones import Timezone
@@ -8,6 +8,10 @@ __author__ = 'vahid'
 
 
 class UTCOffsetDirective(Directive):
+    """
+    Representing offset from UTC. only for timezone-aware instances.
+
+    """
 
     def format(self, d):
         if not d.tzinfo:
@@ -38,6 +42,10 @@ class UTCOffsetDirective(Directive):
 
 
 class PersianUTCOffsetDirective(PersianNumberDirective):
+    """
+    Representing offset from UTC in persian form. only for timezone-aware instances.
+
+    """
 
     def format(self, d):
         if not d.tzinfo:
@@ -56,7 +64,10 @@ class PersianUTCOffsetDirective(PersianNumberDirective):
 
 
 class TimezoneNameDirective(Directive):
+    """
+    Representing the timezone name. only for timezone-aware instances.
 
+    """
     def format(self, d):
         if d.tzinfo:
             return d.tzname()

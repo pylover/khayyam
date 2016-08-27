@@ -79,6 +79,9 @@ class Timezone(tzinfo):
 
 
 class TehranTimezone(Timezone):
+    """
+    Tehran timezone with DST.
+    """
     dst_start = (1, 1)
     dst_end = (7, 1)
 

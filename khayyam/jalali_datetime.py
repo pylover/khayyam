@@ -581,9 +581,9 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def ampm(self):
         """
-        Return The 'ق.ظ' or 'ب.ظ' to determine `ante meridiem` and or `post meridiem`
 
         :rtype: str
+        :return: The 'ق.ظ' or 'ب.ظ' to determine `ante meridiem` and or `post meridiem`
         """
         if self.hour < 12:
             return AM_PM[0]
@@ -591,10 +591,9 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def ampmascii(self):
         """
-        Return The 'AM' or 'PM' to determine `ante meridiem` and or `post meridiem`
 
         :rtype: str
-        :return:
+        :return: The 'AM' or 'PM' to determine `ante meridiem` and or `post meridiem`
         """
         if self.hour < 12:
             return AM_PM_ASCII[0]
@@ -602,7 +601,6 @@ class JalaliDatetime(khayyam.JalaliDate):
 
     def utcoffsetformat(self):
         """
-        Return the formatted(*HH:MM*) time representing offset from UTC.
 
         .. testsetup:: api-datetime-utcoffsetformat
 
@@ -614,6 +612,7 @@ class JalaliDatetime(khayyam.JalaliDate):
             >>> print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).utcoffsetformat())
             04:30
 
+        :return: The formatted(*HH:MM*) time representing offset from UTC.
         :rtype: str
         """
         if self.tzinfo:
@@ -655,7 +654,6 @@ class JalaliDatetime(khayyam.JalaliDate):
             >>> print(JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=TehranTimezone).__unicode__())
             khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, tzinfo=+03:30 dst:60, Yekshanbeh)
 
-        :return:
         """
         return 'khayyam.JalaliDatetime(%s, %s, %s, %s, %s, %s, %s%s, %s)' % (
             self.year,

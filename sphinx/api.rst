@@ -40,9 +40,45 @@ Formatting & Parsing
 Directives
 ^^^^^^^^^^
 
-.. automodule:: khayyam.formatting.directives
+.. automodule:: khayyam.formatting.directives.base
     :members:
     :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.ampm
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.day
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.month
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.persian
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.time
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.tz
+    :members:
+    :show-inheritance:
+    :special-members:
+
+.. automodule:: khayyam.formatting.directives.year
+    :members:
+    :show-inheritance:
+    :special-members:
 
 
 Timezone objects

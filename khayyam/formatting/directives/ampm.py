@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .directive import Directive
+from .base import Directive
 from khayyam.formatting import constants as consts
 from khayyam.compat import get_unicode
 __author__ = 'vahid'
@@ -7,7 +7,7 @@ __author__ = 'vahid'
 
 class BaseAmPmDirective(Directive):
     """
-    Responsible for parse and formatting of 'AM' and 'PM'.
+    Base class for parse and formatting of 'AM' and 'PM'.
 
     """
 
@@ -32,12 +32,20 @@ class BaseAmPmDirective(Directive):
 
 
 class AmPmDirective(BaseAmPmDirective):
+    """
+    Responsible class for parse and formatting of 'AM' and 'PM' in persian format.
+
+    """
 
     def is_am(self, ctx):
         return ctx['ampm'] == consts.AM_PM[0]
 
 
 class AmPmASCIIDirective(BaseAmPmDirective):
+    """
+    Responsible class for parse and formatting of 'AM' and 'PM' in ASCII format.
+
+    """
 
     def is_am(self, ctx):
         return ctx[self.name] == consts.AM_PM_ASCII[0]

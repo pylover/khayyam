@@ -4,6 +4,9 @@ __author__ = 'vahid'
 
 
 class PersianHour24Directive(PersianNumberDirective):
+    """
+    Representing Hour24 format in persian form.
+    """
 
     def format(self, d):
         return super(PersianHour24Directive, self).format(d.hour)
@@ -15,6 +18,9 @@ class PersianHour24Directive(PersianNumberDirective):
 
 
 class PersianHour12Directive(PersianNumberDirective):
+    """
+    Representing Hour12 format in persian form.
+    """
 
     def format(self, d):
         return super(PersianHour12Directive, self).format(d.hour12())
@@ -26,6 +32,9 @@ class PersianHour12Directive(PersianNumberDirective):
 
 
 class PersianMinuteDirective(PersianNumberDirective):
+    """
+    Representing minute in persian form.
+    """
 
     def format(self, d):
         return super(PersianMinuteDirective, self).format(d.minute)
@@ -37,6 +46,9 @@ class PersianMinuteDirective(PersianNumberDirective):
 
 
 class PersianSecondDirective(PersianNumberDirective):
+    """
+    Representing second in persian form.
+    """
 
     def format(self, d):
         return super(PersianSecondDirective, self).format(d.second)
@@ -48,6 +60,9 @@ class PersianSecondDirective(PersianNumberDirective):
 
 
 class PersianMicrosecondDirective(PersianNumberDirective):
+    """
+    Representing Microsecond in persian form.
+    """
 
     def format(self, d):
         return super(PersianMicrosecondDirective, self).format('%.6d' % d.microsecond)

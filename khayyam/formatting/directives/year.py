@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-from .directive import Directive
+from .base import Directive
 from .persian import PersianNumberDirective
 __author__ = 'vahid'
 
 
 class ShortYearDirective(Directive):
+    """
+    Representing 2 digits year format.
 
+    """
     def format(self, d):
         return '%.2d' % (d.year % 100)
 
@@ -15,6 +18,10 @@ class ShortYearDirective(Directive):
 
 
 class PersianYearDirective(PersianNumberDirective):
+    """
+    Representing year in persian form.
+
+    """
 
     def format(self, d):
         return super(PersianYearDirective, self).format(d.year)
@@ -26,6 +33,10 @@ class PersianYearDirective(PersianNumberDirective):
 
 
 class PersianShortYearDirective(PersianNumberDirective):
+    """
+    Representing 2 digits year in persian form.
+
+    """
 
     def format(self, d):
         return super(PersianShortYearDirective, self).format(d.year % 100)
