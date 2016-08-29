@@ -3,7 +3,8 @@ from .constants import *
 from .jalali_date import JalaliDate
 from .jalali_datetime import JalaliDatetime
 from .timezones import TehranTimezone, Timezone
-from .formatting import JalaliDateFormatter, JalaliDatetimeFormatter
+from .formatting import JalaliDateFormatter, JalaliDatetimeFormatter, JalaliTimedeltaFormatter
+from .jalali_timedelta import JalaliTimedelta
 
 __version__ = '3.0.14'
 
@@ -23,9 +24,11 @@ __all__ = [
     'FRIDAY',
     'JalaliDate',
     'JalaliDatetime',
+    'JalaliTimedelta',
     'TehranTimezone',
     'Timezone',
     'teh_tz',
     'JalaliDateFormatter',
-    'JalaliDatetimeFormatter'
+    'JalaliDatetimeFormatter',
+    'JalaliTimedeltaFormatter'
 ]

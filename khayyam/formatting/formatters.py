@@ -168,3 +168,22 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
             from .directives import DATETIME_FORMAT_DIRECTIVES
             directive_db = DATETIME_FORMAT_DIRECTIVES
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
+
+
+class JalaliTimedeltaFormatter(JalaliDateFormatter):
+    """
+    Responsible to parse and formatting of a :py:class:`khayyam.JalaliTimedelta` instance.
+
+    """
+    # Total hours
+    # Total minutes
+    # Total seconds
+
+    _post_parsers = [
+    ]
+
+    def __init__(self, format_string, directive_db=None):
+        if not directive_db:
+            from .directives import DATETIME_FORMAT_DIRECTIVES
+            directive_db = DATETIME_FORMAT_DIRECTIVES
+        super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
