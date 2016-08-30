@@ -9,8 +9,13 @@ __author__ = 'vahid'
 eng_to_persian_dict = {e: p[0] for p, e in PERSIAN_DIGIT_MAPPING}
 persian_to_eng_dict = {p[0]: e for p, e in PERSIAN_DIGIT_MAPPING}
 
-eng_to_persian = lambda s: ''.join([eng_to_persian_dict[c] if c in eng_to_persian_dict else c for c in s])
-persian_to_eng = lambda s: ''.join([persian_to_eng_dict[c] if c in persian_to_eng_dict else c for c in s])
+
+def eng_to_persian(s):
+    return ''.join([eng_to_persian_dict[c] if c in eng_to_persian_dict else c for c in s])
+
+
+def persian_to_eng(s):
+    return ''.join([persian_to_eng_dict[c] if c in persian_to_eng_dict else c for c in s])
 
 
 class PersianNumberDirective(Directive):

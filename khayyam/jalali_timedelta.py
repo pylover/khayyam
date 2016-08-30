@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import timedelta
 
 from khayyam.formatting import JalaliTimedeltaFormatter
@@ -25,7 +26,7 @@ class JalaliTimedelta(timedelta):
         """
         Return a :py:class:`khayyam.JalaliTimedelta` corresponding to *date_string*, parsed according to format.
 
-        ValueError is raised if the *date_string* and format can’t be parsed with
+        :py:class:`ValueError` is raised if the *date_string* and format can't be parsed with
         :py:class:`khayyam.formatting.JalaliTimedeltaFormatter` instance returned by
         :py:meth:`khayyam.JalaliTimedelta.formatterfactory` method.
 
