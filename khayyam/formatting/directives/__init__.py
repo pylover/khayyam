@@ -20,8 +20,9 @@ from .year import \
     PersianYearDirective, \
     PersianShortYearDirective
 from .tz import UTCOffsetDirective, TimezoneNameDirective, PersianUTCOffsetDirective
+from .timedelta import TotalHoursDirective, TotalMinutesDirective, PersianTotalHoursDirective, \
+    PersianHoursDirective
 
-__author__ = 'vahid'
 
 DATE_FORMAT_DIRECTIVES = [
 
@@ -168,6 +169,13 @@ TIME_FORMAT_DIRECTIVES = [
 
 
 TIMEDELTA_FORMAT_DIRECTIVES = [
+    TotalHoursDirective('H', 'totalhours'),
+    PersianTotalHoursDirective('k', 'persiantotalhours'),
+    Directive('I', 'hours', consts.HOUR24_REGEX, int, lambda t: '%.2d' % t.hours),
+    PersianHoursDirective('h', 'persianhours'),
+
+    TotalMinutesDirective('M', 'totalminutes', consts.UNLIMITED_INT_REGEX, int, lambda t: '%d' % t.total_minutes),
+    Directive('m', 'minutes', consts.MINUTE_REGEX, int, lambda t: '%.2d' % t.minutes),
 
 ]
 
@@ -196,6 +204,11 @@ __all__ = [
     'DATE_FORMAT_DIRECTIVES',
     'TIME_FORMAT_DIRECTIVES',
     'DATETIME_FORMAT_DIRECTIVES',
+    'TIMEDELTA_FORMAT_DIRECTIVES',
+    'TotalHoursDirective',
+    'PersianTotalHoursDirective',
+    'PersianHoursDirective',
+    'TotalMinutesDirective'
 ]
 
 """

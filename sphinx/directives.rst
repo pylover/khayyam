@@ -71,3 +71,40 @@ Directive    Example                                    Meaning
 %Q           Doshanbeh 15 Shahrivar 1361 07:34:02 PM    ASCII Locale’s appropriate date and time representation.
 %X           ۰۷:۳۴:۰۲ ب.ظ                               Persian appropriate time representation.
 =========    =======================================    ==============
+
+
+
+JalaliTimedelta directives
+--------------------------
+
+
+=========    =======================================    ==============
+Directive    Example                                    Meaning
+=========    =======================================    ==============
+%H           0 - 65675                                  Total hours in timedelta.
+%k           0 - ۶۷۵۵۶                                  Total hours in timedelta in persian form.
+%h           ۰۰ - ۲۳                                    Hours (24-hour clock) as a zero padded decimal number in persian form.
+%I           01 - 12                                    Hours (12-hour clock) as a zero padded ASCII decimal number.
+%M           00 - 59                                    Minutes as a zero padded ASCII decimal number.
+%r           ۰۰ - ۵۹                                    Minutes as a zero padded decimal number in persian form.
+
+%i           ۰۱ - ۱۲                                    Hour (12-hour clock) as a zero padded decimal number in persian form.
+%l           ۱ - ۱۲                                     Hour (12-hour clock) as a decimal number in persian form.
+%v           ۰ - ۵۹                                     Minute as a decimal number in persian form.
+%S           00 - 59                                    Second as a zero padded ASCII decimal number.
+%s           ۰۰ - ۵۹                                    Second as a zero padded decimal number in persian form.
+%L           ۰ - ۵۹                                     Second as a decimal number in persian form.
+%f           0 - 999999                                 Microsecond as a zero padded ASCII decimal number.
+%F           ۰۰۰۰۰۰ - ۹۹۹۹۹۹                            Microsecond as a zero padded decimal number in persian from.
+%p           ق.ظ, ب.ظ                                   AM or PM in persian format.
+%t           AM, PM                                     AM or PM in ASCII format.
+%z           +04:30                                     UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).
+%o           +۰۳:۳۰                                     UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive) in persian format.
+%Z           Tehran                                     Time zone name (empty string if the object is naive).
+%c           د ۱۵ شه ۶۱ ۰:۰                             Persian appropriate short date and time representation.
+%C           دوشنبه ۱۵ شهریور ۱۳۶۱ ۰۷:۳۴:۰۲ ب.ظ         Persian appropriate date and time representation.
+%q           D 15 Sh 61 19:34                           ASCII appropriate short date and time representation.
+%Q           Doshanbeh 15 Shahrivar 1361 07:34:02 PM    ASCII Locale’s appropriate date and time representation.
+%X           ۰۷:۳۴:۰۲ ب.ظ                               Persian appropriate time representation.
+=========    =======================================    ==============
+
