@@ -124,6 +124,9 @@ Comparison
 Change Log
 ^^^^^^^^^^
 
+* 3.0.15:
+    * BUGFIX: Removing `from sphinx.util import inspect` from jalali_datetime.py.
+
 * 3.0.11
     * Allmost the all API's are documented.
 

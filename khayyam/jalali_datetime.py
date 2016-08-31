@@ -5,7 +5,7 @@ from khayyam.algorithms import get_gregorian_date_from_julian_day
 import khayyam
 from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 from khayyam.helpers import force_encoded_string_output
-from sphinx.util import inspect
+
 
 __author__ = 'vahid'
 
