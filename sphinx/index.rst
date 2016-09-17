@@ -84,7 +84,7 @@ Links:
 * Python package index: `https://pypi.python.org/pypi/Khayyam <https://pypi.python.org/pypi/Khayyam>`_
 * Source code on Github: `https://github.com/pylover/khayyam <https://github.com/pylover/khayyam>`_
 * Main Page: `http://khayyam.dobisel.com/ <http://khayyam.dobisel.com/>`_
-* Requires.io: `https://requires.io/github/pylover/khayyam/requirements/ <https://requires.io/github/pylover/khayyam/requirements>`_
+* Requires.io: `https://requires.io/github/pylover/khayyam/requirements/?branch=master <https://requires.io/github/pylover/khayyam/requirements/?branch=master>`_
 * Travis-CI: `https://travis-ci.org/pylover/khayyam <https://travis-ci.org/pylover/khayyam>`_
 * Coveralls.io: `https://coveralls.io/github/pylover/khayyam <https://coveralls.io/github/pylover/khayyam>`_
 
