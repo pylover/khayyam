@@ -134,6 +134,24 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%s')
             self.assert_parse_and_format(d_test, '%N-%R-%D %H:%r:%L')
 
+    def test_microseconds(self):
+        """
+        Testing:
+            %f            Microsecond as a decimal number [0, 999999], zero-padded on the left
+            %F            Microsecond as a decimal number in persian from[۰۰۰۰۰۰, ۹۹۹۹۹۹], zero-padded on the left
+        """
+        d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
+        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%f')
+        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%F')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
+        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
+
+        d2 = JalaliDatetime(self.leap_year, 12, 23)
+        for i in range(0, 100000000, 100000):
+            d_test = d2 + timedelta(microseconds=i)
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
+            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
+
     def test_timezone(self):
         """
         Testing:
@@ -182,24 +200,6 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             JalaliDatetime.strptime(u'1394-تیر-29 دوشنبه 00:05:14.113389 +04:30', '%Y-%B-%d %A %H:%M:%S.%f %z'),
             JalaliDatetime(1394, 4, 29, 0, 5, 14, 113389, Timezone(timedelta(hours=4, minutes=30)))
         )
-
-    def test_microseconds(self):
-        """
-        Testing:
-            %f            Microsecond as a decimal number [0, 999999], zero-padded on the left
-            %F            Microsecond as a decimal number in persian from[۰۰۰۰۰۰, ۹۹۹۹۹۹], zero-padded on the left
-        """
-        d1 = JalaliDatetime(self.leap_year, 12, 23, 12, 3, 45, 34567)
-        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%f')
-        self.assert_parse_and_format(d1, '%Y-%m-%d %H:%M:%S.%F')
-        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%f')
-        self.assert_parse_and_format(JalaliDatetime(1375, 12, 23, 12, 0, 0, 0), '%Y-%m-%d %p %I:%M:%S.%F')
-
-        d2 = JalaliDatetime(self.leap_year, 12, 23)
-        for i in range(0, 100000000, 100000):
-            d_test = d2 + timedelta(microseconds=i)
-            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%f')
-            self.assert_parse_and_format(d_test, '%Y-%m-%d %H:%M:%S.%F')
 
     def test_am_pm(self):
         """

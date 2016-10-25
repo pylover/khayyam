@@ -7,9 +7,11 @@ if _py3:  # pragma: no cover
     # noinspection PyUnresolvedReferences
     # noinspection PyCompatibility
     from builtins import range as xrange_compat
+    basestring_ = str
 else:  # pragma: no cover
     # noinspection PyUnboundLocalVariable
     xrange_compat = xrange
+    basestring_ = basestring
 
 
 # noinspection PyShadowingBuiltins

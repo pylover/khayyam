@@ -252,7 +252,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         :return: Jalali datetime object.
         :rtype: :py:class:`khayyam.JalaliDatetime`
         """
-        result = cls.formatterfactory(fmt).parse(date_string)
+        result = cls.formatterfactory().parse(fmt, date_string)
         result = {
             k: v for k, v in result.items() if k in (
                 'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond', 'tzinfo'
@@ -563,7 +563,7 @@ class JalaliDatetime(khayyam.JalaliDate):
         """
         return self.strftime('%I:%M:%S %p')
 
-    def hour12(self):
+    def hour12(self):  # FIXME: why this is not a property just like the `hour`?
         """
         Return The hour value between `1-12`. use :py:meth:`khayyam.JalaliDatetime.ampm()` or
         :py:meth:`khayyam.JalaliDatetime.ampmascii()` to determine `ante meridiem` and or `post meridiem`

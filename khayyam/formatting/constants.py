@@ -16,7 +16,7 @@ PERSIAN_DIGIT_MAPPING = [
 ]
 
 LATIN_TO_PERSIAN = {e: p[0] for p, e in PERSIAN_DIGIT_MAPPING}
-
+PERSIAN_TO_LATIN = {p[0]: e for p, e in PERSIAN_DIGIT_MAPPING}
 
 PERSIAN_WEEKDAY_NAMES = {
     0: 'شنبه',
@@ -149,18 +149,18 @@ AM_PM_ASCII = {
 
 
 FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
-#
-# AM_PM_REGEX = '(%s)' % '|'.join(AM_PM.values())
-# AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
-#
+
+AM_PM_REGEX = '(%s)' % '|'.join(AM_PM.values())
+AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
+
 # UNLIMITED_INT_REGEX = '\d+'  # FIXME: rename it to LATINE_
 # PERSIAN_UNLIMITED_INT_REGEX = '[۰۱۲۳۴۵۶۷۸۹]+'  # FIXME: rename it to LATINE_
-#
-# UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'  # FIXME: rename it to LATINE_UTC_OFFSET_FORMAT_REGEX
-# PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
-#
-# TZ_NAME_FORMAT_REGEX='.+'
-#
+
+UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'  # FIXME: rename it to LATINE_UTC_OFFSET_FORMAT_REGEX
+PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
+
+TZ_NAME_FORMAT_REGEX = '.+'
+
 YEAR_REGEX = '\d{1,4}'  # FIXME: rename it to LATINE_
 PERSIAN_YEAR_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
 PERSIAN_YEAR_ZERO_PADDED_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
@@ -181,24 +181,24 @@ DAY_OF_YEAR_REGEX = '([0]{0,2}[1-9]|[0]?[1-9]\d|[12]\d{2}|3[0-5]\d|36[0-6])' # 1
 PERSIAN_DAY_OF_YEAR_REGEX = '([۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]{2}|۳[۰۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹]|۳۶[۰۱۲۳۴۵۶])' # ۱-۳۶۶
 PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX = '(۰۰[۱۲۳۴۵۶۷۸۹]|۰[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]{2}|۳[۰۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹]|۳۶[۰۱۲۳۴۵۶])' # ۰۰۱-۳۶۶
 
-# HOUR12_REGEX = '(0[1-9]|1[0-2])'  # FIXME: rename it to LATINE_
-# PERSIAN_HOUR12_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
-# PERSIAN_HOUR12_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
+HOUR12_REGEX = '(0[1-9]|1[0-2])'  # FIXME: rename it to LATINE_
+PERSIAN_HOUR12_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
+PERSIAN_HOUR12_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
 
-# HOUR24_REGEX = '([01]\d|2[0-3])'  # FIXME: rename it to LATINE_
-# PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
-# PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
+HOUR24_REGEX = '([01]\d|2[0-3])'  # FIXME: rename it to LATINE_
+PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
+PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 
-# MINUTE_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
-# PERSIAN_MINUTE_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-# PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+MINUTE_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
+PERSIAN_MINUTE_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 
-# SECOND_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
-# PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-# PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+SECOND_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
+PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 
-# MICROSECOND_REGEX = '\d{1,6}'  # FIXME: rename it to LATINE_
-# PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
+MICROSECOND_REGEX = '\d{1,6}'  # FIXME: rename it to LATINE_
+PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
 
 PERSIAN_MONTH_NAMES_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_NAMES.values())
 PERSIAN_MONTH_NAMES_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_NAMES_ASCII.values())

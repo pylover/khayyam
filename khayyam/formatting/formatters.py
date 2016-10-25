@@ -5,8 +5,10 @@ import khayyam
 from khayyam.compat import get_unicode
 from khayyam.constants import SATURDAY, MONDAY
 from khayyam.formatting import constants as consts
-from khayyam.formatting.directives import Directive, DayOfYearDirective, persian, PersianDayOfYearDirective, \
-    CompositeDirective
+from khayyam.formatting.directives import Directive, DayOfYearDirective, persian, latin_digit, \
+    PersianDayOfYearDirective, CompositeDirective, Hour12Directive, UTCOffsetDirective, PersianUTCOffsetDirective, \
+    TimezoneNameDirective
+
 
 __author__ = 'vahid'
 
@@ -86,7 +88,9 @@ class BaseFormatter(object):
         result = {}
         for directive_key, v in m.groupdict().items():
             directive = self._directives_by_key[directive_key]
-            result[directive.target_name] = directive.coerce_type(v)
+            if hasattr(directive, 'pre_parser'):
+                v = directive.pre_parser(v)
+            directive.parse(result, v)
         return result
 
     def _parse_post_processor(self, parse_result):
@@ -141,16 +145,16 @@ class JalaliDateFormatter(BaseFormatter):
         Directive(
             'N',
             consts.PERSIAN_YEAR_REGEX,
+            name='year',
             type_=int,
             formatter=lambda d: persian('%d' % d.year),
-            post_parser=lambda ctx, f: ctx.update(year=int(ctx['N']))
         ),
         Directive(
             'O',
             consts.PERSIAN_YEAR_ZERO_PADDED_REGEX,
+            name='year',
             type_=int,
             formatter=lambda d: persian('%.4d' % d.year),
-            post_parser=lambda ctx, f: ctx.update(year=int(ctx['O']))
         ),
 
         # MONTH
@@ -164,16 +168,16 @@ class JalaliDateFormatter(BaseFormatter):
         Directive(
             'R',
             consts.PERSIAN_MONTH_REGEX,
+            name='month',
             type_=int,
             formatter=lambda d: persian(d.month),
-            post_parser=lambda ctx, f: ctx.update(month=int(ctx['R']))
         ),
         Directive(
             'P',
             consts.PERSIAN_MONTH_ZERO_PADDED_REGEX,
+            name='month',
             type_=int,
             formatter=lambda d: persian('%.2d' % d.month),
-            post_parser=lambda ctx, f: ctx.update(month=int(ctx['P']))
         ),
         Directive(
             'b',
@@ -273,16 +277,16 @@ class JalaliDateFormatter(BaseFormatter):
         Directive(
             'D',
             consts.PERSIAN_DAY_REGEX,
+            name='day',
             type_=int,
             formatter=lambda d: persian(d.day),
-            post_parser=lambda ctx, f: ctx.update(day=int(ctx['D']))
         ),
         Directive(
             'K',
             consts.PERSIAN_DAY_ZERO_PADDED_REGEX,
+            name='day',
             type_=int,
             formatter=lambda d: persian('%.2d' % d.day),
-            post_parser=lambda ctx, f: ctx.update(day=int(ctx['K']))
         ),
         DayOfYearDirective('j'),
         PersianDayOfYearDirective('J'),
@@ -300,41 +304,191 @@ class JalaliDateFormatter(BaseFormatter):
         ),
     ]
 
-    """
-
-
-
-    PersianDayOfYearDirective('V', 'persiandayofyearzeropadded', consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX,
-                              zero_padding=True, zero_padding_length=3),
-    """
-
-    # _post_parsers = [
-    #     'persianday',
-    #     'persiandayzeropadded',
-    #     'persiandayofyear',
-    #     'persiandayofyearzeropadded',
-    #     'persianmonth',
-    #     'persianmonthzeropadded',
-    #     'persianyear',
-    #     'persianyearzeropadded',
-    #     'persianshortyear',
-    #     'persianshortyearzeropadded',
-    #     'localdateformat',
-    #     'monthabbr',
-    #     'monthabbr_ascii',
-    #     'monthname',
-    #     'monthnameascii',
-    #     'shortyear',
-    #     'dayofyear',
-    # ]
-
 
 class JalaliDatetimeFormatter(JalaliDateFormatter):
     """
     Responsible to parse and formatting of a :py:class:`khayyam.JalaliDatetime` instance.
 
     """
-    _directives = []
+    _directives = JalaliDateFormatter._directives + [
+
+        # AM/PM
+        Directive(
+            't',
+            consts.AM_PM_ASCII_REGEX,
+            formatter=lambda d: d.ampmascii(),
+        ),
+        Directive(
+            'p',
+            consts.AM_PM_REGEX,
+            formatter=lambda d: d.ampm(),
+        ),
+
+        # HOUR
+        Directive(
+            'H',
+            consts.HOUR24_REGEX,
+            name='hour',
+            type_=int,
+            formatter=lambda d: '%.2d' % d.hour
+        ),
+        Directive(
+            'k',
+            consts.PERSIAN_HOUR24_REGEX,
+            name='hour',
+            type_=int,
+            formatter=lambda d: persian(d.hour),
+        ),
+        Directive(
+            'h',
+            consts.PERSIAN_HOUR24_ZERO_PADDED_REGEX,
+            name='hour',
+            type_=int,
+            formatter=lambda d: persian('%.2d' % d.hour),
+        ),
+        Hour12Directive('I'),
+        Hour12Directive(
+            'l',
+            consts.PERSIAN_HOUR12_REGEX,
+            formatter=lambda d: persian(d.hour12()),
+        ),
+        Hour12Directive(
+            'i',
+            consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
+            formatter=lambda d: persian('%.2d' % d.hour12()),
+        ),
+
+        # MINUTE
+        Directive(
+            'M',
+            consts.MINUTE_REGEX,
+            name='minute',
+            type_=int,
+            formatter=lambda d: '%.2d' % d.minute
+        ),
+        Directive(
+            'v',
+            consts.PERSIAN_MINUTE_REGEX,
+            name='minute',
+            type_=int,
+            formatter=lambda d: persian(d.minute)
+        ),
+        Directive(
+            'r',
+            consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
+            name='minute',
+            type_=int,
+            formatter=lambda d: persian('%.2d' % d.minute)
+        ),
+
+        # SECOND
+        Directive(
+            'S',
+            consts.SECOND_REGEX,
+            name='second',
+            type_=int,
+            formatter=lambda d: '%.2d' % d.second
+        ),
+        Directive(
+            'L',
+            consts.PERSIAN_SECOND_REGEX,
+            name='second',
+            type_=int,
+            formatter=lambda d: persian(d.second)
+        ),
+        Directive(
+            's',
+            consts.PERSIAN_SECOND_ZERO_PADDED_REGEX,
+            name='second',
+            type_=int,
+            formatter=lambda d: persian('%.2d' % d.second)
+        ),
+
+        # MICROSECOND
+        Directive(
+            'f',
+            consts.MICROSECOND_REGEX,
+            name='microsecond',
+            type_=int,
+            formatter=lambda d: '%.6d' % d.microsecond
+        ),
+        Directive(
+            'F',
+            consts.PERSIAN_MICROSECOND_REGEX,
+            name='microsecond',
+            type_=int,
+            formatter=lambda d: persian('%.6d' % d.microsecond),
+            pre_parser=latin_digit,
+        ),
+
+        # TIMEZONE
+        UTCOffsetDirective('z'),
+        PersianUTCOffsetDirective('o'),
+        TimezoneNameDirective('Z'),
+
+        # COMPOSITE
+        CompositeDirective(
+            'c',
+            ' '.join((
+                consts.PERSIAN_WEEKDAY_ABBRS_REGEX,
+                consts.PERSIAN_DAY_REGEX,
+                consts.PERSIAN_MONTH_ABBRS_REGEX,
+                consts.PERSIAN_SHORT_YEAR_REGEX,
+                consts.PERSIAN_HOUR24_REGEX,
+                consts.PERSIAN_MINUTE_REGEX)),
+            "%a %D %b %n %k:%v"
+        ),
+        CompositeDirective(
+            'C',
+            '%s %s %s %s %s:%s:%s %s' % (
+                consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+                consts.PERSIAN_DAY_REGEX,
+                consts.PERSIAN_MONTH_NAMES_REGEX,
+                consts.PERSIAN_YEAR_REGEX,
+                consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
+                consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
+                consts.PERSIAN_SECOND_ZERO_PADDED_REGEX,
+                consts.AM_PM_REGEX),
+            "%A %D %B %N %i:%r:%s %p"
+        ),
+        CompositeDirective(
+            'q',
+            '%s %s %s %s %s:%s' % (
+                consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX,
+                consts.DAY_REGEX,
+                consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX,
+                consts.SHORT_YEAR_REGEX,
+                consts.HOUR24_REGEX,
+                consts.MINUTE_REGEX),
+            "%e %d %g %y %H:%M"
+        ),
+        CompositeDirective(
+            'Q',
+            '%s %s %s %s %s:%s:%s %s' % (
+                consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX,
+                consts.DAY_REGEX,
+                consts.PERSIAN_MONTH_NAMES_ASCII_REGEX,
+                consts.YEAR_REGEX,
+                consts.HOUR12_REGEX,
+                consts.MINUTE_REGEX,
+                consts.SECOND_REGEX,
+                consts.AM_PM_ASCII_REGEX),
+            "%E %d %G %Y %I:%M:%S %t"
+        ),
+        CompositeDirective(
+            'X',
+            '%s:%s:%s %s' % (
+                consts.PERSIAN_HOUR12_ZERO_PADDED_REGEX,
+                consts.PERSIAN_MINUTE_ZERO_PADDED_REGEX,
+                consts.PERSIAN_SECOND_ZERO_PADDED_REGEX,
+                consts.AM_PM_REGEX),
+            "%i:%r:%s %p"
+        ),
+    ]
+
+    """
+
+    """
 
     # _post_parsers = [
     #     'persianday',
