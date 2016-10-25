@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from khayyam.formatting import constants as consts
-from .directives import DATE_FORMAT_DIRECTIVES
+from .directives import DATE_FORMAT_DIRECTIVES, DATETIME_FORMAT_DIRECTIVES, TIMEDELTA_FORMAT_DIRECTIVES
 __author__ = 'vahid'
 
 
@@ -110,7 +110,7 @@ class JalaliDateFormatter(BaseFormatter):
 
     def _parse_post_processor(self, parse_result):
         for directive_name in self.post_parsers:
-            if directive_name in parse_result:
+            if directive_name in parse_result.keys():
                 self.directives_by_name[directive_name].post_parser(parse_result, self)
 
     def parse(self, date_string):
@@ -165,6 +165,26 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
 
     def __init__(self, format_string, directive_db=None):
         if not directive_db:
-            from .directives import DATETIME_FORMAT_DIRECTIVES
             directive_db = DATETIME_FORMAT_DIRECTIVES
         super(JalaliDatetimeFormatter, self).__init__(format_string, directive_db=directive_db)
+
+
+class JalaliTimedeltaFormatter(JalaliDateFormatter):
+    """
+    Responsible to parse and formatting of a :py:class:`khayyam.JalaliTimedelta` instance.
+
+    """
+
+    _post_parsers = [
+
+        'totalhours',
+        'persiantotalhours',
+        'totalminutes',
+
+    ]
+
+    def __init__(self, format_string, directive_db=None):
+        if not directive_db:
+            directive_db = TIMEDELTA_FORMAT_DIRECTIVES
+        super(JalaliTimedeltaFormatter, self).__init__(format_string, directive_db=directive_db)
+

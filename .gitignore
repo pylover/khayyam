@@ -43,8 +43,8 @@ nosetests.xml
 
 sphinx/_build
 sphinx/_inv-cache
+sphinx/_site
 docs/doctest
 docs/doctrees
 docs/html
 htmlcov
-_site

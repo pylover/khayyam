@@ -7,7 +7,7 @@ from khayyam.formatting import JalaliDatetimeFormatter, AM_PM, AM_PM_ASCII
 from khayyam.helpers import force_encoded_string_output
 
 
-__author__ = 'vahid'
+__author__ = 'vahid' ## TODO: remove it
 
 
 class JalaliDatetime(khayyam.JalaliDate):
