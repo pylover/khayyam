@@ -16,7 +16,7 @@ else:  # pragma: no cover
 xrange = xrange_compat
 
 
-def get_unicode(s):
+def get_unicode(s):  # FIXME: rename it to `unicode`
     if _py3:  # pragma: no cover
         return str(s)
     else:  # pragma: no cover

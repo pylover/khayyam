@@ -21,15 +21,15 @@ class Directive(object):
 
     def __repr__(self):  # pragma: no cover
         return '%' + self.key
-
-    def post_parser(self, ctx, formatter):  # pragma: no cover
-        """
-        In overridden method, It should parse the formatted value from the given string.
-        :param ctx:
-        :param formatter:
-        :return:
-        """
-        pass
+    #
+    # def post_parser(self, ctx, formatter):  # pragma: no cover
+    #     """
+    #     In overridden method, It should parse the formatted value from the given string.
+    #     :param ctx:
+    #     :param formatter:
+    #     :return:
+    #     """
+    #     pass
 
     def format(self, d):  # pragma: no cover
         """
@@ -50,10 +50,9 @@ class CompositeDateDirective(Directive):
 
     format_string = None
 
-    def __init__(self, key, name, regex, format_string=None, **kw):
-        if format_string:
-            self.format_string = format_string
-            self._sub_formatter = None
+    def __init__(self, key, name, regex, format_string, **kw):
+        self.format_string = format_string
+        self._sub_formatter = None
         super(CompositeDateDirective, self).__init__(key, name, regex, get_unicode, **kw)
 
     def _create_formatter(self):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+
 PERSIAN_DIGIT_MAPPING = [
     (('\u06f0', '\u0660'), '0'),
     (('\u06f1', '\u0661'), '1'),
@@ -14,6 +15,8 @@ PERSIAN_DIGIT_MAPPING = [
     (('\u06f9', '\u0669'), '9'),
 ]
 
+LATIN_TO_PERSIAN = {e: p[0] for p, e in PERSIAN_DIGIT_MAPPING}
+
 
 PERSIAN_WEEKDAY_NAMES = {
     0: 'شنبه',
@@ -25,6 +28,7 @@ PERSIAN_WEEKDAY_NAMES = {
     6: 'جمعه'
 }
 
+
 PERSIAN_WEEKDAY_ABBRS = {
     0: 'ش',
     1: 'ی',
@@ -34,6 +38,7 @@ PERSIAN_WEEKDAY_ABBRS = {
     5: 'پ',
     6: 'ج'
 }
+
 
 PERSIAN_MONTH_NAMES = {
     1: 'فروردین',
@@ -47,7 +52,9 @@ PERSIAN_MONTH_NAMES = {
     9: 'آذر',
     10: 'دی',
     11: 'بهمن',
-    12: 'اسفند'}
+    12: 'اسفند'
+}
+
 
 PERSIAN_MONTH_ABBRS = {
     1: 'فر',
@@ -61,7 +68,9 @@ PERSIAN_MONTH_ABBRS = {
     9: 'آذ',
     10: 'دی',
     11: 'به',
-    12: 'اس'}
+    12: 'اس'
+}
+
 
 PERSIAN_WEEKDAY_NAMES_ASCII = {
     0: 'Shanbeh',
@@ -73,6 +82,7 @@ PERSIAN_WEEKDAY_NAMES_ASCII = {
     6: 'Jomeh',
 }
 
+
 PERSIAN_WEEKDAY_ABBRS_ASCII = {
     0: 'Sh',
     1: 'Y',
@@ -83,6 +93,7 @@ PERSIAN_WEEKDAY_ABBRS_ASCII = {
     6: 'J'
 }
 
+
 ENGLISH_WEEKDAY_NAMES_ASCII = {
     0: 'Saturday',
     1: 'Sunday',
@@ -92,6 +103,7 @@ ENGLISH_WEEKDAY_NAMES_ASCII = {
     5: 'Thursday',
     6: 'Friday',
 }
+
 
 PERSIAN_MONTH_NAMES_ASCII = {
     1: 'Farvardin',
@@ -108,6 +120,7 @@ PERSIAN_MONTH_NAMES_ASCII = {
     12: 'Esfand'
 }
 
+
 PERSIAN_MONTH_ABBRS_ASCII = {
     1: 'F',
     2: 'O',
@@ -123,11 +136,11 @@ PERSIAN_MONTH_ABBRS_ASCII = {
     12: 'E'}
 
 
-
 AM_PM = {
     0: 'ق.ظ',
     1: 'ب.ظ'
 }
+
 
 AM_PM_ASCII = {
     0: 'AM',
@@ -135,56 +148,72 @@ AM_PM_ASCII = {
 }
 
 
-
 FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
-YEAR_REGEX = '\d{1,4}'
-SHORT_YEAR_REGEX = '\d{2}'
-MONTH_REGEX = '([0]?[1-9]|1[0-2])'
-DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])' # 1-31
-DAY_OF_YEAR_REGEX = '([0]{0,2}[1-9]|[0]?[1-9]\d|[12]\d{2}|3[0-5]\d|36[0-6])' # 1-366
-WEEK_OF_YEAR_REGEX = '([0]?\d|[1-4]\d|5[0-3])'  # 0-53
-WEEKDAY_REGEX = '[0-6]'
-AM_PM_REGEX = '(%s)' % '|'.join(AM_PM.values())
-AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
-HOUR12_REGEX = '(0[1-9]|1[0-2])'
-HOUR24_REGEX = '([01]\d|2[0-3])'
-UNLIMITED_INT_REGEX = '\d+'
-PERSIAN_UNLIMITED_INT_REGEX = '[۰۱۲۳۴۵۶۷۸۹]+'
-MINUTE_REGEX = '([0]?\d|[1-5]\d)'
-SECOND_REGEX = '([0]?\d|[1-5]\d)'
-MICROSECOND_REGEX = '\d{1,6}'
-UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'
-TZ_NAME_FORMAT_REGEX='.+'
-
+#
+# AM_PM_REGEX = '(%s)' % '|'.join(AM_PM.values())
+# AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
+#
+# UNLIMITED_INT_REGEX = '\d+'  # FIXME: rename it to LATINE_
+# PERSIAN_UNLIMITED_INT_REGEX = '[۰۱۲۳۴۵۶۷۸۹]+'  # FIXME: rename it to LATINE_
+#
+# UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'  # FIXME: rename it to LATINE_UTC_OFFSET_FORMAT_REGEX
+# PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
+#
+# TZ_NAME_FORMAT_REGEX='.+'
+#
+YEAR_REGEX = '\d{1,4}'  # FIXME: rename it to LATINE_
 PERSIAN_YEAR_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
 PERSIAN_YEAR_ZERO_PADDED_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,4}'
+
+SHORT_YEAR_REGEX = '\d{2}'  # FIXME: rename it to LATINE_
 PERSIAN_SHORT_YEAR_REGEX = '(۰|[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]?)'
 PERSIAN_SHORT_YEAR_ZERO_PADDED_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,2}'
+
+MONTH_REGEX = '([0]?[1-9]|1[0-2])'  # FIXME: rename it to LATINE_
 PERSIAN_MONTH_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
 PERSIAN_MONTH_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
-PERSIAN_DAY_REGEX = '([۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]|۳[۰۱])' # ۱-۳۱
-PERSIAN_DAY_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]|۳[۰۱])' # ۰۱-۳۱
+
+DAY_REGEX = '([0]?[1-9]|[12]\d|3[01])'  # 1-31   # FIXME: rename it to LATINE_
+PERSIAN_DAY_REGEX = '([۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]|۳[۰۱])'  # ۱-۳۱
+PERSIAN_DAY_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]|۳[۰۱])'  # ۰۱-۳۱
+
+DAY_OF_YEAR_REGEX = '([0]{0,2}[1-9]|[0]?[1-9]\d|[12]\d{2}|3[0-5]\d|36[0-6])' # 1-366  # FIXME: rename it to LATINE_
 PERSIAN_DAY_OF_YEAR_REGEX = '([۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]{2}|۳[۰۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹]|۳۶[۰۱۲۳۴۵۶])' # ۱-۳۶۶
 PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX = '(۰۰[۱۲۳۴۵۶۷۸۹]|۰[۱۲۳۴۵۶۷۸۹][۰۱۲۳۴۵۶۷۸۹]|[۱۲][۰۱۲۳۴۵۶۷۸۹]{2}|۳[۰۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹]|۳۶[۰۱۲۳۴۵۶])' # ۰۰۱-۳۶۶
-PERSIAN_HOUR12_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
-PERSIAN_HOUR12_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
-PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
-PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 
-PERSIAN_MINUTE_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+# HOUR12_REGEX = '(0[1-9]|1[0-2])'  # FIXME: rename it to LATINE_
+# PERSIAN_HOUR12_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
+# PERSIAN_HOUR12_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
 
-PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
-PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+# HOUR24_REGEX = '([01]\d|2[0-3])'  # FIXME: rename it to LATINE_
+# PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
+# PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 
-PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
-PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
-PERSIAN_WEEKDAY_NAMES_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES.values())
-PERSIAN_WEEKDAY_ABBRS_REGEX = '[%s]' % ''.join(PERSIAN_WEEKDAY_ABBRS.values())
+# MINUTE_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
+# PERSIAN_MINUTE_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+# PERSIAN_MINUTE_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+
+# SECOND_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
+# PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+# PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
+
+# MICROSECOND_REGEX = '\d{1,6}'  # FIXME: rename it to LATINE_
+# PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
+
 PERSIAN_MONTH_NAMES_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_NAMES.values())
-PERSIAN_MONTH_ABBRS_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_ABBRS.values())
-PERSIAN_WEEKDAY_NAMES_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES_ASCII.values())
-PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_ABBRS_ASCII.values())
-ENGLISH_WEEKDAY_NAMES_ASCII_REGEX = '(%s)' % '|'.join(ENGLISH_WEEKDAY_NAMES_ASCII.values())
 PERSIAN_MONTH_NAMES_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_NAMES_ASCII.values())
+
+PERSIAN_MONTH_ABBRS_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_ABBRS.values())
 PERSIAN_MONTH_ABBRS_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_MONTH_ABBRS_ASCII.values())
+
+WEEKDAY_REGEX = '[0-6]'  # FIXME: rename it to LATINE_
+
+WEEK_OF_YEAR_REGEX = '([0]?\d|[1-4]\d|5[0-3])'  # 0-53  # FIXME: rename it to LATINE_
+
+PERSIAN_WEEKDAY_NAMES_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES.values())
+PERSIAN_WEEKDAY_NAMES_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_NAMES_ASCII.values())
+
+PERSIAN_WEEKDAY_ABBRS_REGEX = '[%s]' % ''.join(PERSIAN_WEEKDAY_ABBRS.values())
+PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX = '(%s)' % '|'.join(PERSIAN_WEEKDAY_ABBRS_ASCII.values())
+
+ENGLISH_WEEKDAY_NAMES_ASCII_REGEX = '(%s)' % '|'.join(ENGLISH_WEEKDAY_NAMES_ASCII.values())

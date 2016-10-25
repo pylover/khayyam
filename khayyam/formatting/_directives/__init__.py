@@ -27,55 +27,55 @@ from .timedelta import TotalHoursDirective, TotalMinutesDirective, PersianTotalH
 DATE_FORMAT_DIRECTIVES = [
 
     # YEAR
-    Directive('Y', 'year', consts.YEAR_REGEX, int, lambda d: '%.4d' % d.year),
-    ShortYearDirective('y', 'shortyear', consts.SHORT_YEAR_REGEX, int),
-    PersianYearDirective('N', 'persianyear', consts.PERSIAN_YEAR_REGEX),
-    PersianYearDirective('O', 'persianyearzeropadded', consts.PERSIAN_YEAR_ZERO_PADDED_REGEX,
-                         zero_padding=True, zero_padding_length=4),
-    PersianShortYearDirective('n', 'persianshortyear', consts.PERSIAN_SHORT_YEAR_REGEX, ),
-    PersianShortYearDirective('u', 'persianshortyearzeropadded', consts.PERSIAN_SHORT_YEAR_ZERO_PADDED_REGEX,
-                              zero_padding=True),
+    # Directive('Y', 'year', consts.YEAR_REGEX, int, lambda d: '%.4d' % d.year),
+    # ShortYearDirective('y', 'shortyear', consts.SHORT_YEAR_REGEX, int),
+    # PersianYearDirective('N', 'persianyear', consts.PERSIAN_YEAR_REGEX),
+    # PersianYearDirective('O', 'persianyearzeropadded', consts.PERSIAN_YEAR_ZERO_PADDED_REGEX,
+    #                      zero_padding=True, zero_padding_length=4),
+    # PersianShortYearDirective('n', 'persianshortyear', consts.PERSIAN_SHORT_YEAR_REGEX, ),
+    # PersianShortYearDirective('u', 'persianshortyearzeropadded', consts.PERSIAN_SHORT_YEAR_ZERO_PADDED_REGEX,
+    #                           zero_padding=True),
 
     # MONTH
-    PersianMonthDirective('R', 'persianmonth', consts.PERSIAN_MONTH_REGEX),
-    PersianMonthDirective('P', 'persianmonthzeropadded', consts.PERSIAN_MONTH_ZERO_PADDED_REGEX, zero_padding=True),
-    Directive('m', 'month', consts.MONTH_REGEX, int, lambda d: '%.2d' % d.month),
-    Directive('b', 'monthabbr', consts.PERSIAN_MONTH_ABBRS_REGEX, get_unicode, lambda d: d.monthabbr(),
-              lambda ctx, f: ctx.update(
-                  {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS.items() if v == ctx['monthabbr']][0][0]})),
-    Directive('B', 'monthname', consts.PERSIAN_MONTH_NAMES_REGEX, get_unicode, lambda d: d.monthname(),
-              lambda ctx, f: ctx.update(
-                  {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES.items() if v == ctx['monthname']][0][0]})),
-    Directive('g', 'monthabbr_ascii', consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX, get_unicode,
-              lambda d: d.monthabbr_ascii(),
-              lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if
-                                                   v == ctx['monthabbr_ascii']][0][0]})),
-    Directive('G', 'monthnameascii', consts.PERSIAN_MONTH_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.monthnameascii(),
-              lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if
-                                                   v == ctx['monthnameascii']][0][0]})),
+    # PersianMonthDirective('R', 'persianmonth', consts.PERSIAN_MONTH_REGEX),
+    # PersianMonthDirective('P', 'persianmonthzeropadded', consts.PERSIAN_MONTH_ZERO_PADDED_REGEX, zero_padding=True),
+    # Directive('m', 'month', consts.MONTH_REGEX, int, lambda d: '%.2d' % d.month),
+    # Directive('b', 'monthabbr', consts.PERSIAN_MONTH_ABBRS_REGEX, get_unicode, lambda d: d.monthabbr(),
+    #           lambda ctx, f: ctx.update(
+    #               {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS.items() if v == ctx['monthabbr']][0][0]})),
+    # Directive('B', 'monthname', consts.PERSIAN_MONTH_NAMES_REGEX, get_unicode, lambda d: d.monthname(),
+    #           lambda ctx, f: ctx.update(
+    #               {'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES.items() if v == ctx['monthname']][0][0]})),
+    # Directive('g', 'monthabbr_ascii', consts.PERSIAN_MONTH_ABBRS_ASCII_REGEX, get_unicode,
+    #           lambda d: d.monthabbr_ascii(),
+    #           lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_ABBRS_ASCII.items() if
+    #                                                v == ctx['monthabbr_ascii']][0][0]})),
+    # Directive('G', 'monthnameascii', consts.PERSIAN_MONTH_NAMES_ASCII_REGEX, get_unicode,
+    #           lambda d: d.monthnameascii(),
+    #           lambda ctx, f: ctx.update({'month': [(k, v) for k, v in consts.PERSIAN_MONTH_NAMES_ASCII.items() if
+    #                                                v == ctx['monthnameascii']][0][0]})),
 
     # DAY
-    Directive('d', 'day', consts.DAY_REGEX, int, lambda d: '%.2d' % d.day),
-    PersianDayDirective('D', 'persianday', consts.PERSIAN_DAY_REGEX),
-    PersianDayDirective('K', 'persiandayzeropadded', consts.PERSIAN_DAY_ZERO_PADDED_REGEX, zero_padding=True),
-    DayOfYearDirective('j', 'dayofyear', consts.DAY_OF_YEAR_REGEX, int),
-    PersianDayOfYearDirective('J', 'persiandayofyear', consts.PERSIAN_DAY_OF_YEAR_REGEX),
-    PersianDayOfYearDirective('V', 'persiandayofyearzeropadded', consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX,
-                              zero_padding=True, zero_padding_length=3),
+    # Directive('d', 'day', consts.DAY_REGEX, int, lambda d: '%.2d' % d.day),
+    # PersianDayDirective('D', 'persianday', consts.PERSIAN_DAY_REGEX),
+    # PersianDayDirective('K', 'persiandayzeropadded', consts.PERSIAN_DAY_ZERO_PADDED_REGEX, zero_padding=True),
+    # DayOfYearDirective('j', 'dayofyear', consts.DAY_OF_YEAR_REGEX, int),
+    # PersianDayOfYearDirective('J', 'persiandayofyear', consts.PERSIAN_DAY_OF_YEAR_REGEX),
+    # PersianDayOfYearDirective('V', 'persiandayofyearzeropadded', consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX,
+    #                           zero_padding=True, zero_padding_length=3),
 
     # WEEK
-    Directive('w', 'weekday', consts.WEEKDAY_REGEX, int, lambda d: '%d' % d.weekday()),
-    Directive('W', 'weekofyear', consts.WEEK_OF_YEAR_REGEX, int, lambda d: '%.2d' % d.weekofyear(SATURDAY)),
-    Directive('U', 'weekofyear', consts.WEEK_OF_YEAR_REGEX, int, lambda d: '%.2d' % d.weekofyear(MONDAY)),
-    Directive('a', 'weekdayabbr', consts.PERSIAN_WEEKDAY_ABBRS_REGEX, get_unicode, lambda d: d.weekdayabbr()),
-    Directive('A', 'weekdayname', consts.PERSIAN_WEEKDAY_NAMES_REGEX, get_unicode, lambda d: d.weekdayname()),
-    Directive('e', 'weekdayabbrascii', consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX, get_unicode,
-              lambda d: d.weekdayabbrascii()),
-    Directive('E', 'weekdaynameascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.weekdaynameascii()),
-    Directive('T', 'englishweekdaynameascii', consts.ENGLISH_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
-              lambda d: d.englishweekdaynameascii()),
+    # Directive('w', 'weekday', consts.WEEKDAY_REGEX, int, lambda d: '%d' % d.weekday()),
+    # Directive('W', 'weekofyear', consts.WEEK_OF_YEAR_REGEX, int, lambda d: '%.2d' % d.weekofyear(SATURDAY)),
+    # Directive('U', 'weekofyear', consts.WEEK_OF_YEAR_REGEX, int, lambda d: '%.2d' % d.weekofyear(MONDAY)),
+    # Directive('a', 'weekdayabbr', consts.PERSIAN_WEEKDAY_ABBRS_REGEX, get_unicode, lambda d: d.weekdayabbr()),
+    # Directive('A', 'weekdayname', consts.PERSIAN_WEEKDAY_NAMES_REGEX, get_unicode, lambda d: d.weekdayname()),
+    # Directive('e', 'weekdayabbrascii', consts.PERSIAN_WEEKDAY_ABBRS_ASCII_REGEX, get_unicode,
+    #           lambda d: d.weekdayabbrascii()),
+    # Directive('E', 'weekdaynameascii', consts.PERSIAN_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
+    #           lambda d: d.weekdaynameascii()),
+    # Directive('T', 'englishweekdaynameascii', consts.ENGLISH_WEEKDAY_NAMES_ASCII_REGEX, get_unicode,
+    #           lambda d: d.englishweekdaynameascii()),
 
     # COMPOSITE
     CompositeDateDirective('x', 'localdateformat', '%s %s %s %s' % (

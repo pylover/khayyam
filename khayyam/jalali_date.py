@@ -20,12 +20,14 @@ from khayyam.formatting import \
     PERSIAN_MONTH_NAMES_ASCII, \
     PERSIAN_WEEKDAY_ABBRS_ASCII, \
     PERSIAN_WEEKDAY_NAMES_ASCII, \
-    ENGLISH_WEEKDAY_NAMES_ASCII
+    ENGLISH_WEEKDAY_NAMES_ASCII, \
+    Formattable
+
 
 __author__ = 'vahid'
 
 
-class JalaliDate(object):
+class JalaliDate(Formattable):
     """
     Represent a day in :doc:`/persiancalendar`.
 
@@ -104,17 +106,14 @@ class JalaliDate(object):
         return get_days_in_jalali_month(self.year, self.month)
 
     @staticmethod
-    def formatterfactory(fmt):
+    def formatterfactory():  # FIXME: Cache formatter globally.
         """
         By default it will be return a :py:class:`khayyam.formatting.JalaliDateFormatter`
         instance based on given format string.
 
-        :param fmt: see: :doc:`/directives`
-        :type fmt: str
-        :return: Formatter object, based on the given format string.
-        :rtype: khayyam.formatting.BaseFormatter
+        :return: :class:`.JalaliDateFormatter` object.
         """
-        return JalaliDateFormatter(fmt)
+        return JalaliDateFormatter()
 
     @classmethod
     def today(cls):
@@ -168,7 +167,7 @@ class JalaliDate(object):
         :rtype: :py:class:`khayyam.JalaiDate`
         """
         # noinspection PyUnresolvedReferences
-        result = cls.formatterfactory(fmt).parse(date_string)
+        result = cls.formatterfactory().parse(fmt, date_string)
         result = {k: v for k, v in result.items() if k in ('year', 'month', 'day')}
         return cls(**result)
 
@@ -330,7 +329,7 @@ class JalaliDate(object):
         :return: A string representing the date, controlled by an explicit format string
         :rtype: unicode
         """
-        return self.formatterfactory(format_string).format(self)
+        return self.formatterfactory().format(format_string, self)
 
     def weekdayname(self):
         """

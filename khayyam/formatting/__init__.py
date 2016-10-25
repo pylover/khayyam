@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 from .constants import *
-from .formatters import BaseFormatter, JalaliDateFormatter, JalaliDatetimeFormatter, JalaliTimedeltaFormatter
+from .formatters import Formattable, BaseFormatter, JalaliDateFormatter, JalaliDatetimeFormatter, \
+    JalaliTimedeltaFormatter

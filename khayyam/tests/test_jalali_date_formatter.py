@@ -9,9 +9,10 @@ __author__ = 'vahid'
 
 class JalaliDateFormatterTestCase(unittest.TestCase):
 
-    def assert_parse_and_format(self, jdate, fmt):
+    def assert_parse_and_format(self, jdate, fmt, value=None):
         jdate_str = jdate.strftime(fmt)
-
+        if value is not None:
+            self.assertEqual(jdate_str, value)
         d2 = JalaliDate.strptime(jdate_str, fmt)
         self.assertEqual(jdate, d2)
 
@@ -39,6 +40,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(d1.strftime('%T'), u'Monday')
         self.assertEqual(d1.strftime('%w'), u'2')
         self.assertEqual(d1.strftime('%W'), u'24')
+        self.assertEqual(d1.strftime('%U'), u'25')
 
         for i in range(7):
             self.assert_parse_and_format(JalaliDate.min + timedelta(i), '%d %w %W %U')
@@ -69,9 +71,14 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
             %O           Year with century as a zero padded decimal number in persian form [۰۰۰۱-۳۱۷۸].
         """
 
-        self.assertEqual(JalaliDate(1361, 6, 15).strftime('%y'), u'61')
-        self.assertEqual(JalaliDate(1361, 6, 15).strftime('%Y'), u'1361')
-        self.assertEqual(JalaliDate(61, 11, 5).strftime('%N'), u'۶۱')
+        self.assert_parse_and_format(JalaliDate(1361), '%y', u'61')
+        self.assert_parse_and_format(JalaliDate(1361), '%Y', u'1361')
+        self.assert_parse_and_format(JalaliDate(1301), '%N', u'۱۳۰۱')
+        self.assert_parse_and_format(JalaliDate(561), '%N', u'۵۶۱')
+        self.assert_parse_and_format(JalaliDate(61), '%O', u'۰۰۶۱')
+        self.assert_parse_and_format(JalaliDate(1361), '%n', u'۶۱')
+        self.assert_parse_and_format(JalaliDate(1305), '%u', u'۰۵')
+
         self.assertEqual(JalaliDate(61, 11, 5).strftime('%O'), u'۰۰۶۱')
 
         self.assertEqual(JalaliDate.strptime('94', '%y'), JalaliDate(1394))
@@ -131,8 +138,8 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertRaises(ValueError, JalaliDate.strptime, u'۰۷', '%R')
         self.assertEqual(JalaliDate.strptime(u'۰۷', '%P'), JalaliDate(1, 7, 1))
         self.assertRaises(ValueError, JalaliDate.strptime, u'۷', '%P')
-
-        # Test months
+        #
+        # # Test months
         for i in range(1, 13):
             self.assertEqual(JalaliDate.strptime(str(i), '%m'), JalaliDate(month=i))
             self.assertEqual(JalaliDate.strptime('1345 %s' % c.PERSIAN_MONTH_ABBRS[i], '%Y %b'),
