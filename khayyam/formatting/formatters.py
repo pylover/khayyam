@@ -5,7 +5,8 @@ import khayyam
 from khayyam.compat import get_unicode
 from khayyam.constants import SATURDAY, MONDAY
 from khayyam.formatting import constants as consts
-from khayyam.formatting.directives import Directive, DayOfYearDirective, persian, PersianDayOfYearDirective
+from khayyam.formatting.directives import Directive, DayOfYearDirective, persian, PersianDayOfYearDirective, \
+    CompositeDirective
 
 __author__ = 'vahid'
 
@@ -15,7 +16,9 @@ class Formattable(object):
 
 
 class BaseFormatter(object):
-    _directives = []
+    _directives = [
+        Directive('%', '%', formatter=lambda d: '%'),
+    ]
 
     def __init__(self):
         self._directives_by_key = {}
@@ -103,7 +106,7 @@ class JalaliDateFormatter(BaseFormatter):
 
     """
 
-    _directives = [
+    _directives = BaseFormatter._directives + [
 
         # YEAR
 
@@ -283,7 +286,18 @@ class JalaliDateFormatter(BaseFormatter):
         ),
         DayOfYearDirective('j'),
         PersianDayOfYearDirective('J'),
-        PersianDayOfYearDirective('V', regex=consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX, zero_padded=True)
+        PersianDayOfYearDirective('V', regex=consts.PERSIAN_DAY_OF_YEAR_ZERO_PADDED_REGEX, zero_padded=True),
+
+        # COMPOSITE
+        CompositeDirective(
+            'x',
+            ' '.join((
+                consts.PERSIAN_WEEKDAY_NAMES_REGEX,
+                consts.PERSIAN_DAY_REGEX,
+                consts.PERSIAN_MONTH_NAMES_REGEX,
+                consts.PERSIAN_YEAR_REGEX)),
+            "%A %D %B %N"
+        ),
     ]
 
     """

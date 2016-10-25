@@ -252,10 +252,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDate(1361, 6, 15).strftime('%x'), u'دوشنبه ۱۵ شهریور ۱۳۶۱')
         self.assertEqual(JalaliDate().strftime('%x'), u'جمعه ۱ فروردین ۱')
         self.assertEqual(JalaliDate.strptime(u'جمعه ۱ فروردین ۱', '%x'), JalaliDate.min)
-
         self.assertEqual(JalaliDate(1375, 1, 31).strftime('%x'), u'جمعه ۳۱ فروردین ۱۳۷۵')
-        self.assertEqual(JalaliDate.strptime(u'جمعه ۳۱ فروردین ۱۳۷۵%', '%x%%'),
-                         JalaliDate(1375, 1, 31))
 
     def test_percent(self):
         """
@@ -266,7 +263,8 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assert_parse_and_format(JalaliDate(1375, 1, 31), "%Y-%m-%d %% %% %%")
         self.assertEqual(JalaliDate(1375, 1, 31).strftime("%Y %%"), "1375 %")
         self.assertEqual(JalaliDate.strptime("1375 %", "%Y %%"), JalaliDate(1375, 1, 1))
-
+        self.assertEqual(JalaliDate.strptime(u'جمعه ۳۱ فروردین ۱۳۷۵%', '%x%%'),
+                         JalaliDate(1375, 1, 31))
 
 if __name__ == '__main__':  # pragma: no cover
     unittest.main()

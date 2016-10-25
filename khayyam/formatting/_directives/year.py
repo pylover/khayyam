@@ -32,16 +32,16 @@ __author__ = 'vahid'
 #             ctx['year'] = ctx[self.name]
 
 
-class PersianShortYearDirective(PersianNumberDirective):
-    """
-    Representing 2 digits year in persian form.
-
-    """
-
-    def format(self, d):
-        return super(PersianShortYearDirective, self).format(d.year % 100)
-
-    def post_parser(self, ctx, formatter):
-        super(PersianShortYearDirective, self).post_parser(ctx, formatter)
-        if self.name in ctx and ctx[self.name] is not None:
-            ctx['shortyear'] = ctx[self.name]
+# class PersianShortYearDirective(PersianNumberDirective):
+#     """
+#     Representing 2 digits year in persian form.
+#
+#     """
+#
+#     def format(self, d):
+#         return super(PersianShortYearDirective, self).format(d.year % 100)
+#
+#     def post_parser(self, ctx, formatter):
+#         super(PersianShortYearDirective, self).post_parser(ctx, formatter)
+#         if self.name in ctx and ctx[self.name] is not None:
+#             ctx['shortyear'] = ctx[self.name]

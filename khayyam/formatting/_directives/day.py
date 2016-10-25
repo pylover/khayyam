@@ -6,18 +6,18 @@ from datetime import timedelta
 __author__ = 'vahid'
 
 
-class PersianDayDirective(PersianNumberDirective):
-    """
-    Representing a day in persian calendar.
-    """
-
-    def format(self, d):
-        return super(PersianDayDirective, self).format(d.day)
-
-    def post_parser(self, ctx, formatter):
-        super(PersianDayDirective, self).post_parser(ctx, formatter)
-        if self.name in ctx and ctx[self.name]:
-            ctx['day'] = ctx[self.name]
+# class PersianDayDirective(PersianNumberDirective):
+#     """
+#     Representing a day in persian calendar.
+#     """
+#
+#     def format(self, d):
+#         return super(PersianDayDirective, self).format(d.day)
+#
+#     def post_parser(self, ctx, formatter):
+#         super(PersianDayDirective, self).post_parser(ctx, formatter)
+#         if self.name in ctx and ctx[self.name]:
+#             ctx['day'] = ctx[self.name]
 
 
 # class DayOfYearDirective(Directive):

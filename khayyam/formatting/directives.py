@@ -100,3 +100,20 @@ class PersianDayOfYearDirective(DayOfYearDirective):
 
     def format(self, d):
         return persian(super(PersianDayOfYearDirective, self).format(d))
+
+
+class CompositeDirective(Directive):
+    """
+    A chain of directives.
+
+    """
+
+    def __init__(self, key, regex, format_string, **kw):
+        self.format_string = format_string
+        super(CompositeDirective, self).__init__(key, regex, type_=get_unicode, **kw)
+
+    def format(self, d):
+        return d.strftime(self.format_string)
+
+    def post_parser(self, ctx, formatter):
+        ctx.update(formatter.parse(self.format_string, ctx[self.key]))
