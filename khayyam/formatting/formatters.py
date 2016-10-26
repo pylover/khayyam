@@ -551,6 +551,7 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
             type_=int,
             formatter=lambda d: persian('%d' % d.total_hours),
             pre_parser=latin_digit,
+            post_parser=lambda ctx, f: ctx.update(hours=ctx['k'])
         ),
 
         # Hours
