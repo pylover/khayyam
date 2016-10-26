@@ -547,7 +547,6 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
         Directive(
             'k',
             consts.PERSIAN_UNLIMITED_INT_REGEX,
-            name='hours',
             type_=int,
             formatter=lambda d: persian('%d' % d.total_hours),
             pre_parser=latin_digit,
