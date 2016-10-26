@@ -429,13 +429,13 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
         # COMPOSITE
         CompositeDirective(
             'c',
-            ' '.join((
+            '%s %s %s %s %s:%s' % (
                 consts.PERSIAN_WEEKDAY_ABBRS_REGEX,
                 consts.PERSIAN_DAY_REGEX,
                 consts.PERSIAN_MONTH_ABBRS_REGEX,
                 consts.PERSIAN_SHORT_YEAR_REGEX,
                 consts.PERSIAN_HOUR24_REGEX,
-                consts.PERSIAN_MINUTE_REGEX)),
+                consts.PERSIAN_MINUTE_REGEX),
             "%a %D %b %n %k:%v"
         ),
         CompositeDirective(
@@ -534,7 +534,59 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
     Responsible to parse and formatting of a :py:class:`khayyam.JalaliTimedelta` instance.
 
     """
-    _directives = []
+    _directives = [
+
+        # Total hours
+        Directive(
+            'H',
+            consts.UNLIMITED_INT_REGEX,
+            name='hours',
+            type_=int,
+            formatter=lambda d: '%d' % d.total_hours,
+        ),
+        Directive(
+            'k',
+            consts.PERSIAN_UNLIMITED_INT_REGEX,
+            name='hours',
+            type_=int,
+            formatter=lambda d: persian('%d' % d.total_hours),
+            pre_parser=latin_digit,
+        ),
+
+        # Hours
+        Directive(
+            'I',
+            consts.HOUR24_REGEX,
+            name='hours',
+            type_=int,
+            formatter=lambda d: '%.2d' % d.hours,
+        ),
+        Directive(
+            'h',
+            consts.PERSIAN_HOUR24_ZERO_PADDED_REGEX,
+            name='hours',
+            type_=int,
+            formatter=lambda d: persian('%.2d' % d.hours),
+            pre_parser=latin_digit,
+        ),
+
+        # Minutes
+        Directive(
+            'M',
+            consts.UNLIMITED_INT_REGEX,
+            type_=int,
+            formatter=lambda t: '%d' % t.total_minutes,
+            post_parser=lambda ctx, f: ctx.update(minutes=ctx['M'])
+        ),
+        Directive(
+            'm',
+            consts.MINUTE_REGEX,
+            name='minutes',
+            type_=int,
+            formatter=lambda t: '%.2d' % t.minutes
+        ),
+
+    ]
 
     # _post_parsers = [
     #

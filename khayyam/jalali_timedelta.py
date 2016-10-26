@@ -2,15 +2,15 @@
 from __future__ import division
 from datetime import timedelta
 
-from khayyam.formatting import JalaliTimedeltaFormatter
+from khayyam.formatting import JalaliTimedeltaFormatter, Formattable
 
 
-class JalaliTimedelta(timedelta):
+class JalaliTimedelta(timedelta, Formattable):
     _parts = None
 
     @classmethod
-    def formatterfactory(cls, fmt):
-        return JalaliTimedeltaFormatter(fmt)
+    def formatterfactory(cls):
+        return JalaliTimedeltaFormatter()
 
     def strftime(self, format_string):
         """
@@ -21,7 +21,7 @@ class JalaliTimedelta(timedelta):
         :return: A string representing the date, controlled by an explicit format string
         :rtype: unicode
         """
-        return self.formatterfactory(format_string).format(self)
+        return self.formatterfactory().format(format_string, self)
 
     @classmethod
     def strptime(cls, date_string, fmt):
@@ -38,7 +38,7 @@ class JalaliTimedelta(timedelta):
         :rtype: :py:class:`khayyam.JalaliTimedelta`
         """
 
-        result = cls.formatterfactory(fmt).parse(date_string)
+        result = cls.formatterfactory().parse(fmt, date_string)
         #
         # def assert_a_xor_b(a, b):
         #     if a in result:

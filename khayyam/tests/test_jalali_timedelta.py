@@ -28,6 +28,7 @@ class TestJalaliTimedelta(unittest.TestCase):
         self.assertEqual(JalaliTimedelta.strptime('34343 08', '%M %m').total_minutes, 34343)
         self.assertEqual(JalaliTimedelta.strptime('34343 08', '%M %m').minutes, 23)
 
+############################################
         # self.assertEqual(
         #     d1.strptime('Panjshanbeh 23 Esfand 1375 12:03:45 PM', '%Q'),
         #     d1 - timedelta(microseconds=34567))

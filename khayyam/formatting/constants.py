@@ -153,8 +153,8 @@ FORMAT_DIRECTIVE_REGEX = '%[a-zA-Z%]'
 AM_PM_REGEX = '(%s)' % '|'.join(AM_PM.values())
 AM_PM_ASCII_REGEX = '([aA][mM]|[pP][mM])'
 
-# UNLIMITED_INT_REGEX = '\d+'  # FIXME: rename it to LATINE_
-# PERSIAN_UNLIMITED_INT_REGEX = '[۰۱۲۳۴۵۶۷۸۹]+'  # FIXME: rename it to LATINE_
+UNLIMITED_INT_REGEX = '\d+'  # FIXME: rename it to LATINE_
+PERSIAN_UNLIMITED_INT_REGEX = '[۰۱۲۳۴۵۶۷۸۹]+'
 
 UTC_OFFSET_FORMAT_REGEX = '([-+]?\d{2}:\d{2}|)'  # FIXME: rename it to LATINE_UTC_OFFSET_FORMAT_REGEX
 PERSIAN_UTC_OFFSET_FORMAT_REGEX = '([-+]?[۰۱۲۳۴۵۶۷۸۹]{2}:[۰۱۲۳۴۵۶۷۸۹]{2}|)'
@@ -185,7 +185,7 @@ HOUR12_REGEX = '(0[1-9]|1[0-2])'  # FIXME: rename it to LATINE_
 PERSIAN_HOUR12_REGEX = '([۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
 PERSIAN_HOUR12_ZERO_PADDED_REGEX = '(۰[۱۲۳۴۵۶۷۸۹]|۱[۰۱۲])'
 
-HOUR24_REGEX = '([01]\d|2[0-3])'  # FIXME: rename it to LATINE_
+HOUR24_REGEX = '([01]\d|2[0-3])'  # FIXME: rename it to LATINE_ ZERO_PADDED
 PERSIAN_HOUR24_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 PERSIAN_HOUR24_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|۱[۰۱۲۳۴۵۶۷۸۹]|۲[۰۱۲۳])'
 
