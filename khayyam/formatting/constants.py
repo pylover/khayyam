@@ -197,6 +197,8 @@ SECOND_REGEX = '([0]?\d|[1-5]\d)'  # FIXME: rename it to LATINE_
 PERSIAN_SECOND_REGEX = '([۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 PERSIAN_SECOND_ZERO_PADDED_REGEX = '(۰[۰۱۲۳۴۵۶۷۸۹]|[۱۲۳۴۵][۰۱۲۳۴۵۶۷۸۹])'
 
+MILLISECOND_REGEX = '\d{1,3}'  # FIXME: rename it to LATINE_
+
 MICROSECOND_REGEX = '\d{1,6}'  # FIXME: rename it to LATINE_
 PERSIAN_MICROSECOND_REGEX = '[۰۱۲۳۴۵۶۷۸۹]{1,6}'
 

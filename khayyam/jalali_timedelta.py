@@ -58,7 +58,7 @@ class JalaliTimedelta(timedelta, Formattable):
 
     def _calculate_parts(self):
         # days, seconds, microseconds
-        remaining_seconds = self.seconds
+        remaining_seconds = super(JalaliTimedelta, self).seconds
         hours = remaining_seconds // 3600  # 1-23
         remaining_seconds %= 3600
         total_hours = self.days * 24 + hours + remaining_seconds / 3600
@@ -97,3 +97,11 @@ class JalaliTimedelta(timedelta, Formattable):
     @property
     def total_minutes(self):
         return self.parts['total_minutes']
+
+    @property
+    def seconds(self):
+        return self.parts['seconds']
+
+    @property
+    def milliseconds(self):
+        return int(self.microseconds / 1000)

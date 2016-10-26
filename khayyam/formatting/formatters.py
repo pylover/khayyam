@@ -486,48 +486,6 @@ class JalaliDatetimeFormatter(JalaliDateFormatter):
         ),
     ]
 
-    """
-
-    """
-
-    # _post_parsers = [
-    #     'persianday',
-    #     'persiandayzeropadded',
-    #     'persiandayofyear',
-    #     'persiandayofyearzeropadded',
-    #     'persianmonth',
-    #     'persianmonthzeropadded',
-    #     'persianyear',
-    #     'persianyearzeropadded',
-    #     'persianshortyear',
-    #     'persianshortyearzeropadded',
-    #     'persianmicrosecond',
-    #     'persianhour12',
-    #     'persianhour12zeropadded',
-    #     'persianhour24',
-    #     'persianhour24zeropadded',
-    #     'persianminute',
-    #     'persianminutezeropadded',
-    #     'persiansecond',
-    #     'persiansecondzeropadded',
-    #     'persianutcoffset',
-    #     'localdateformat',
-    #     'localshortdatetimeformat',
-    #     'localshortdatetimeformatascii',
-    #     'localdatetimeformat',
-    #     'localdatetimeformatascii',
-    #     'localtimeformat',
-    #     'monthabbr',
-    #     'monthabbr_ascii',
-    #     'monthname',
-    #     'monthnameascii',
-    #     'ampm',
-    #     'ampmascii',
-    #     'shortyear',
-    #     'dayofyear',
-    #     'utcoffset'
-    # ]
-
 
 class JalaliTimedeltaFormatter(JalaliDateFormatter):
     """
@@ -572,26 +530,54 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
 
         # Minutes
         Directive(
-            'M',
+            'M',  # Total minutes
             consts.UNLIMITED_INT_REGEX,
             type_=int,
             formatter=lambda t: '%d' % t.total_minutes,
             post_parser=lambda ctx, f: ctx.update(minutes=ctx['M'])
         ),
         Directive(
-            'm',
+            'm',  # Minutes zero padded
             consts.MINUTE_REGEX,
             name='minutes',
             type_=int,
             formatter=lambda t: '%.2d' % t.minutes
         ),
 
+        # Seconds
+        Directive(
+            'S',  # Total seconds
+            consts.UNLIMITED_INT_REGEX,
+            type_=int,
+            formatter=lambda t: '%d' % t.total_seconds(),
+            post_parser=lambda ctx, f: ctx.update(seconds=ctx['S'])
+        ),
+
+        Directive(
+            's',  # Seconds
+            consts.SECOND_REGEX,
+            name='seconds',
+            type_=int,
+            formatter=lambda t: '%.2d' % t.seconds,
+        ),
+
+        # Milliseconds
+        Directive(
+            't',  # Milliseconds
+            consts.MILLISECOND_REGEX,
+            name='milliseconds',
+            type_=int,
+            formatter=lambda t: '%.3d' % (t.microseconds / 1000),
+        ),
+
+        # Microseconds
+        Directive(
+            'f',  # Microseconds
+            consts.MICROSECOND_REGEX,
+            name='microseconds',
+            type_=int,
+            formatter=lambda t: '%.6d' % t.microseconds,
+        ),
+
     ]
 
-    # _post_parsers = [
-    #
-    #     'totalhours',
-    #     'persiantotalhours',
-    #     'totalminutes',
-    #
-    # ]
