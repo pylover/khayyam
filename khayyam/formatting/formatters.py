@@ -540,9 +540,9 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
         Directive(
             'H',
             consts.UNLIMITED_INT_REGEX,
-            name='hours',
             type_=int,
             formatter=lambda d: '%d' % d.total_hours,
+            post_parser=lambda ctx, f: ctx.update(hours=ctx['H'])
         ),
         Directive(
             'k',
