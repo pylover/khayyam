@@ -20,7 +20,7 @@ class TestJalaliTimedelta(unittest.TestCase):
         self.assertEqual(d1.total_hours, 34855.75638888889)
         self.assertEqual(d1.strftime('%H'), '34855')
         self.assertEqual(d1.strftime('%I'), '07')
-        self.assertEqual(d1.strftime('%k'), u'۳۴۸۵۵')
+        self.assertEqual(d1.strftime('%K'), u'۳۴۸۵۵')
         self.assertEqual(d1.strftime('%h'), u'۰۷')
         self.assertEqual(d1.strftime('%M'), u'2091345')
         self.assertEqual(d1.strftime('%m'), u'45')
@@ -30,7 +30,7 @@ class TestJalaliTimedelta(unittest.TestCase):
         self.assertEqual(d1.strftime('%t'), u'003')
 
         self.assertEqual(JalaliTimedelta.strptime('34855', '%H').total_seconds(), 125478000)
-        self.assertEqual(JalaliTimedelta.strptime(u'۳۴۸۵۵', '%k').total_seconds(), 125478000)
+        self.assertEqual(JalaliTimedelta.strptime(u'۳۴۸۵۵', '%K').total_seconds(), 125478000)
 
         self.assertEqual(JalaliTimedelta.strptime('07', '%I').total_seconds(), 25200)
         self.assertEqual(JalaliTimedelta.strptime('34343 08', '%H %I').total_hours, 34343)

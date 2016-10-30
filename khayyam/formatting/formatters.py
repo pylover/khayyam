@@ -7,7 +7,7 @@ from khayyam.constants import SATURDAY, MONDAY
 from khayyam.formatting import constants as consts
 from khayyam.formatting.directives import Directive, DayOfYearDirective, persian, latin_digit, \
     PersianDayOfYearDirective, CompositeDirective, Hour12Directive, UTCOffsetDirective, PersianUTCOffsetDirective, \
-    TimezoneNameDirective
+    TimezoneNameDirective, LateSetDirective
 
 
 __author__ = 'vahid'
@@ -89,7 +89,7 @@ class BaseFormatter(object):
         for directive_key, v in m.groupdict().items():
             directive = self._directives_by_key[directive_key]
             if hasattr(directive, 'pre_parser'):
-                v = directive.pre_parser(v)
+                v = directive.pre_parser(result, v)
             directive.parse(result, v)
         return result
 
@@ -503,12 +503,12 @@ class JalaliTimedeltaFormatter(JalaliDateFormatter):
             post_parser=lambda ctx, f: ctx.update(hours=ctx['H'])
         ),
         Directive(
-            'k',
+            'K',
             consts.PERSIAN_UNLIMITED_INT_REGEX,
             type_=int,
             formatter=lambda d: persian('%d' % d.total_hours),
             pre_parser=latin_digit,
-            post_parser=lambda ctx, f: ctx.update(hours=ctx['k'])
+            post_parser=lambda ctx, f: ctx.update(hours=ctx['K'])
         ),
 
         # Hours

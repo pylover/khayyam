@@ -33,12 +33,9 @@ class Directive(object):
         self.regex = regex
         self.name = name
         self.type_ = type_
-        if formatter:
-            self.format = formatter
-        if post_parser:
-            self.post_parser = post_parser
-        if pre_parser:
-            self.pre_parser = pre_parser
+        self._post_parser = post_parser
+        self._formatter = formatter
+        self._pre_parser = pre_parser
 
     def coerce_type(self, v):
         return v if self.type_ is None else self.type_(v)
@@ -54,8 +51,14 @@ class Directive(object):
     def __repr__(self):
         return '%' + self.key
 
+    def pre_parser(self, ctx, formatter):
+        pass
+
     def parse(self, ctx, v):
         ctx[self.target_name] = self.coerce_type(v)
+
+    def post_parser(self, ctx, formatter):
+        ctx[self.name] = ctx[self.key]
 
     def format(self, d):  # pragma: no cover
         """
@@ -65,7 +68,27 @@ class Directive(object):
         :return: Formatted value.
         :rtype: str
         """
-        raise NotImplementedError
+        if self._formatter:
+            return self._formatter(self, d)
+
+
+class LateSetDirective(Directive):
+    """
+    The only difference between this class and it's parent is: the parsed value will be set on `post_parse` phase
+    instead of `parse` value.
+
+    """
+
+    def __init__(self, *args, **kw):
+        if 'post_parser' in kw:
+            raise TypeError('post_parser keyword argument is denied on %s' % self.__class__.__name__)
+        super(LateSetDirective, self).__init__(*args, **kw)
+
+    def parse(self, ctx, v):
+        ctx[self.key] = self.coerce_type(v)
+
+    def post_parser(self, ctx, formatter):
+        ctx[self.name] = ctx[self.key]
 
 
 class DayOfYearDirective(Directive):
