@@ -702,12 +702,16 @@ class JalaliDatetime(khayyam.JalaliDate):
         return self.todatetime() <= x.todatetime()
 
     def __hash__(self):
-        return super(JalaliDatetime, self).__hash__() ^ \
-            hash(self.hour) ^ \
-            hash(self.minute) ^ \
-            hash(self.second) ^ \
-            hash(self.microsecond) ^ \
-            hash(self.tzinfo)
+        return hash((
+            self.year,
+            self.month,
+            self.day,
+            self.hour,
+            self.minute,
+            self.second,
+            self.microsecond,
+            self.tzinfo
+        ))
 
     def __eq__(self, x):
         if not x:

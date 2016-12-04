@@ -210,7 +210,7 @@ class JalaliDateFormatterTestCase(unittest.TestCase):
         self.assertEqual(JalaliDate.strptime('1302 3 4', '%Y %m %d'),
                          JalaliDate(year=1302, month=3, day=4))
 
-        self.assertEqual(JalaliDate.strptime(u'۲', '%D'), JalaliDate(2))
+        self.assertEqual(JalaliDate.strptime(u'۲', '%D'), JalaliDate(day=2))
         self.assertRaises(ValueError, JalaliDate.strptime, u'۰۲', '%D')
 
         self.assertEqual(JalaliDate.strptime(u'۰۲', '%K'), JalaliDate(1, 1, 2))

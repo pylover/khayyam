@@ -177,6 +177,9 @@ class TestJalaliDate(unittest.TestCase):
         self.assertFalse(d1 > d2)
         self.assertTrue(d1 >= d1.copy())
 
+    def test_hash(self):
+        self.assertNotEqual(JalaliDate(1389, 2, 18), JalaliDate(1391, 12, 30))
+
 
 if __name__ == '__main__':  # pragma: no cover
     unittest.main()

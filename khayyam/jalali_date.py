@@ -509,7 +509,7 @@ class JalaliDate(object):
         return self.tojulianday() <= x.tojulianday()
 
     def __hash__(self):
-        return hash(self.year) ^ hash(self.month) ^ hash(self.day)
+            return hash((self.year, self.month, self.day))
 
     def __eq__(self, x):
         if not x:
