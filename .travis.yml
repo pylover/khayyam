@@ -7,6 +7,7 @@ env:
 
 
 language: python
+python: 3.5
 sudo: required
 dist: trusty
 
