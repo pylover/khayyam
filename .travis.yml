@@ -7,7 +7,6 @@ env:
 
 
 language: python
-python: 3.5
 sudo: required
 dist: trusty
 
@@ -38,6 +37,9 @@ matrix:
         - PYPI_SDIST=yes
 
     - os: linux
+      python: 3.6
+
+    - os: linux
       python: nightly
 
     - os: osx
@@ -56,19 +58,31 @@ matrix:
         - PY_SUFFIX=3
         - PYPI_WHEEL=yes
 
-before_install:
-  - cat /etc/hosts
-  - sudo hostname "$(hostname | cut -c1-63)"
-  - sed -e "s/^\\(127\\.0\\.0\\.1.*\\)/\\1 $(hostname | cut -c1-63)/" /etc/hosts > /tmp/hosts
-  - sudo mv /tmp/hosts /etc/hosts
-  - cat /etc/hosts
+    - os: osx
+      language: objective-c
+      python: 3.6
+      env:
+        - PY=3
+        - PY_SUFFIX=3
+        - PYPI_WHEEL=yes
 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+before_install:
+#  - cat /etc/hosts
+#  - sudo hostname "$(hostname | cut -c1-63)"
+#  - sed -e "s/^\\(127\\.0\\.0\\.1.*\\)/\\1 $(hostname | cut -c1-63)/" /etc/hosts > /tmp/hosts
+#  - sudo mv /tmp/hosts /etc/hosts
+#  - cat /etc/hosts
+
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" && "$PY" == "3" ]]; then brew install python$PY_SUFFIX; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv -p python$PY_SUFFIX; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true    ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        virtualenv venv -p python$PY_SUFFIX;
+        source venv/bin/activate;
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        sudo apt-get update;
+        sudo apt-get install python$( python -c 'import sys; print("%d.%d" % sys.version_info[:2])' )-dev || true;
+    fi
 
   - pip install -U pip setuptools wheel
   - pip install -r requirement.txt
@@ -76,8 +90,8 @@ before_install:
 install:
   - pip install -ve .
 
-script: if [[ "$RUN_COVERAGE" == "yes" ]];
-          then coverage run --source khayyam $(which nosetests);
+script: if [[ "$RUN_COVERAGE" == "yes" ]]; then
+          coverage run --source khayyam $(which nosetests);
           else nosetests;
         fi
 
