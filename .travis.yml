@@ -1,8 +1,9 @@
 
 env:
   global:
-  - ENCRYPTION_LABEL: "d39830e202a7"
-  - COMMIT_AUTHOR_EMAIL: "vahid@dobisel.com"
+    - ENCRYPTION_LABEL: "d39830e202a7"
+    - COMMIT_AUTHOR_EMAIL: "vahid@dobisel.com"
+    - COVERALLS_REPO_TOKEN: BqZgXuuUyZETG73TMZwGwbqqh3HXK7HBC
 
 
 language: python
@@ -75,14 +76,12 @@ before_install:
 install:
   - pip install -ve .
 
-script:
-  - if [[ "$RUN_COVERAGE" == "yes" ]];
-      then coverage run --source khayyam $(which nosetests);
-      else nosetests;
-    fi
+script: if [[ "$RUN_COVERAGE" == "yes" ]];
+          then coverage run --source khayyam $(which nosetests);
+          else nosetests;
+        fi
 
-after_success:
-  - if [[ "$RUN_COVERAGE" == "yes" ]]; then coveralls ; fi
+after_success: if [[ "$RUN_COVERAGE" == "yes" ]]; then travis_retry coveralls ; fi
 
 deploy:
   provider: pypi
@@ -99,9 +98,6 @@ deploy:
     repo: pylover/khayyam
     condition: "$TRAVIS_TAG =~ ^v[0-9][.][0-9]*[.][0-9]*$"
 
-
-#before_deploy:
-#  - "echo 'ready?'"
 
 after_deploy:
   - if [[ "$PYPI_SDIST" == "yes" ]]; then python3 setup.py sdist upload; fi
