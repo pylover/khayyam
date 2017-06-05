@@ -2,7 +2,7 @@
 env:
   global:
     - ENCRYPTION_LABEL: "d39830e202a7"
-    - COMMIT_AUTHOR_EMAIL: "vahid@dobisel.com"
+    - COMMIT_AUTHOR_EMAIL: "vahid.mardani@gmail.com"
     - COVERALLS_REPO_TOKEN: BqZgXuuUyZETG73TMZwGwbqqh3HXK7HBC
 
 
