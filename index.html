@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Khayyam &#8212; Khayyam 3.0.15 documentation</title>
+    <title>Khayyam &#8212; Khayyam 3.0.16 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,20 +14,22 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '3.0.15',
+        VERSION:     '3.0.16',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.15 documentation" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction" href="intro.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -40,7 +42,7 @@
         <li class="right" >
           <a href="intro.html" title="Introduction"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -64,7 +66,7 @@ full formatting &amp; parsing support for python 2.x &amp; 3.x.</p>
 simple and complex ways. While date and time arithmetic is supported, the focus of the
 implementation is on efficient attribute extraction for output formatting and manipulation.</p>
 <p>Currently both versions of python(2.x &amp; 3.x) are supported.</p>
-<p>As of the python&#8217;s official documentation: There are two kinds of date and time objects:
+<p>As of the python’s official documentation: There are two kinds of date and time objects:
 “naive” and “aware”.</p>
 <p>An aware object has sufficient knowledge of applicable algorithmic and political time
 adjustments, such as time zone and daylight saving time information, to locate itself
@@ -79,8 +81,8 @@ to understand and to work with, at the cost of ignoring some aspects of reality.
 <p>For applications requiring aware objects, <a class="reference internal" href="api.html#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a> and
 <a class="reference internal" href="api.html#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> objects have an optional time zone information
 attribute, tzinfo, that can be set to an instance of a subclass of the abstract <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> class, such as <a class="reference internal" href="api.html#khayyam.Timezone" title="khayyam.Timezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.Timezone</span></code></a> and or <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="khayyam.TehranTimezone"><code class="xref py py-class docutils literal"><span class="pre">khayyam.TehranTimezone</span></code></a>.</p>
-<p>The package&#8217;s API is considered to be exactly the same as the <a class="reference external" href="https://docs.python.org/2/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a> module,
-so if you are familiar with the <a class="reference external" href="https://docs.python.org/2/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, you can read the <a class="reference internal" href="migration.html#migration"><span class="std std-ref">Migration from python&#8217;s builtin datetime</span></a>.</p>
+<p>The package’s API is considered to be exactly the same as the <a class="reference external" href="https://docs.python.org/2/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a> module,
+so if you are familiar with the <a class="reference external" href="https://docs.python.org/2/library/datetime.html#module-datetime" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">datetime</span></code></a>, you can read the <a class="reference internal" href="migration.html#migration"><span class="std std-ref">Migration from python’s builtin datetime</span></a>.</p>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -98,7 +100,7 @@ so if you are familiar with the <a class="reference external" href="https://docs
 <li class="toctree-l2"><a class="reference internal" href="directives.html#jalalidatetime-directives">JalaliDatetime directives</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration from python&#8217;s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration from python’s builtin <code class="docutils literal"><span class="pre">datetime</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#from-pypi">From PyPI</a></li>
@@ -129,7 +131,7 @@ so if you are familiar with the <a class="reference external" href="https://docs
 <li>Python package index: <a class="reference external" href="https://pypi.python.org/pypi/Khayyam">https://pypi.python.org/pypi/Khayyam</a></li>
 <li>Source code on Github: <a class="reference external" href="https://github.com/pylover/khayyam">https://github.com/pylover/khayyam</a></li>
 <li>Main Page: <a class="reference external" href="http://khayyam.dobisel.com/">http://khayyam.dobisel.com/</a></li>
-<li>Requires.io: <a class="reference external" href="https://requires.io/github/pylover/khayyam/requirements">https://requires.io/github/pylover/khayyam/requirements/</a></li>
+<li>Requires.io: <a class="reference external" href="https://requires.io/github/pylover/khayyam/requirements/?branch=master">https://requires.io/github/pylover/khayyam/requirements/?branch=master</a></li>
 <li>Travis-CI: <a class="reference external" href="https://travis-ci.org/pylover/khayyam">https://travis-ci.org/pylover/khayyam</a></li>
 <li>Coveralls.io: <a class="reference external" href="https://coveralls.io/github/pylover/khayyam">https://coveralls.io/github/pylover/khayyam</a></li>
 </ul>
@@ -166,7 +168,7 @@ so if you are familiar with the <a class="reference external" href="https://docs
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/index.txt"
+      <li><a href="_sources/index.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -196,12 +198,12 @@ so if you are familiar with the <a class="reference external" href="https://docs
         <li class="right" >
           <a href="intro.html" title="Introduction"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
     </div>
   </body>
 </html>

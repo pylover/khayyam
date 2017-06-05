@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &#8212; Khayyam 3.0.15 documentation</title>
+    <title>Introduction &#8212; Khayyam 3.0.16 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,21 +14,23 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '3.0.15',
+        VERSION:     '3.0.16',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.15 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Formatting and Parsing directives" href="directives.html" />
     <link rel="prev" title="Khayyam" href="index.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -44,7 +46,7 @@
         <li class="right" >
           <a href="index.html" title="Khayyam"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -191,7 +193,7 @@ the <a class="reference internal" href="api.html#khayyam.TehranTimezone" title="
 <h2>Formatting &amp; Parsing<a class="headerlink" href="#formatting-parsing" title="Permalink to this headline">¶</a></h2>
 <p>All Supported format directives are listed here: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a>.</p>
 <p>All formatting behaviours are driven from <a class="reference external" href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior" title="(in Python v2.7)"><span>strftime() and strptime() Behavior</span></a>.</p>
-<p>To format locale&#8217;s date &amp; time:</p>
+<p>To format locale’s date &amp; time:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="k">import</span> <span class="n">JalaliDatetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_string</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%C&#39;</span><span class="p">)</span>
@@ -238,7 +240,7 @@ directive alongside time and date directives in your pattern. for example:</p>
 </div>
 <div class="section" id="converting">
 <h2>Converting<a class="headerlink" href="#converting" title="Permalink to this headline">¶</a></h2>
-<p>Converting to gregorian calendar, python&#8217;s native
+<p>Converting to gregorian calendar, python’s native
 <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> and <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">khayyam</span> <span class="k">import</span> <span class="n">JalaliDate</span><span class="p">,</span> <span class="n">JalaliDatetime</span><span class="p">,</span> <span class="n">TehranTimezone</span>
@@ -361,7 +363,7 @@ directive alongside time and date directives in your pattern. for example:</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/intro.txt"
+      <li><a href="_sources/intro.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -394,12 +396,12 @@ directive alongside time and date directives in your pattern. for example:</p>
         <li class="right" >
           <a href="index.html" title="Khayyam"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
     </div>
   </body>
 </html>

@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &#8212; Khayyam 3.0.15 documentation</title>
+    <title>API Reference &#8212; Khayyam 3.0.16 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,20 +14,22 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '3.0.15',
+        VERSION:     '3.0.16',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Khayyam 3.0.15 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Persian(Jalali) Calendar" href="persiancalendar.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -40,7 +42,7 @@
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -76,10 +78,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
-<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; month 1-12</li>
-<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; day of month</li>
-<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; julian day</li>
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) – jalali year</li>
+<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – month 1-12</li>
+<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – day of month</li>
+<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – julian day</li>
 </ul>
 </td>
 </tr>
@@ -100,7 +102,7 @@ For a complete list of formatting directives, see <a class="reference internal" 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>format_string</strong> &#8211; The format string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>format_string</strong> – The format string.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string representing the date, controlled by an explicit format string</td>
 </tr>
@@ -119,7 +121,7 @@ For a complete list of formatting directives, see <a class="reference internal" 
 <dl class="method">
 <dt id="khayyam.JalaliDate.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_date.html#JalaliDate.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
+<dd><p>It’s equivalent to:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDate</span><span class="p">(</span><span class="n">source_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 <span class="go">khayyam.JalaliDate(1394, 3, 24, Yekshanbeh)</span>
@@ -185,8 +187,8 @@ For a complete list of formatting directives, see <a class="reference internal" 
 <dl class="method">
 <dt id="khayyam.JalaliDate.firstdayofyear">
 <code class="descname">firstdayofyear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_date.html#JalaliDate.firstdayofyear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.firstdayofyear" title="Permalink to this definition">¶</a></dt>
-<dd><p>As it&#8217;s name says: it&#8217;s referring to a <code class="xref py py-class docutils literal"><span class="pre">JalaliDate</span></code>
-representing the first day of current instance&#8217;s year.</p>
+<dd><p>As it’s name says: it’s referring to a <code class="xref py py-class docutils literal"><span class="pre">JalaliDate</span></code>
+representing the first day of current instance’s year.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -208,7 +210,7 @@ instance based on given format string.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; see: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – see: <a class="reference internal" href="directives.html"><span class="doc">Formatting and Parsing directives</span></a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Formatter object, based on the given format string.</td>
 </tr>
@@ -322,7 +324,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <dl class="method">
 <dt id="khayyam.JalaliDate.localdateformat">
 <code class="descname">localdateformat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_date.html#JalaliDate.localdateformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.localdateformat" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
+<dd><p>It’s equivalent to:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%A %D %B %N&#39;</span><span class="p">))</span>
 <span class="go">دوشنبه ۱۵ شهریور ۱۳۶۱</span>
 </pre></div>
@@ -381,7 +383,7 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#unicode" title="(in Python v2.7)">unicode</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month abbreviation in ASCII: [F, O , Kh ... E].</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding persian month abbreviation in ASCII: [F, O , Kh … E].</td>
 </tr>
 </tbody>
 </table>
@@ -427,9 +429,9 @@ timestamp, leap seconds are ignored by fromtimestamp().</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> &#8211; </li>
-<li><strong>month</strong> &#8211; </li>
-<li><strong>day</strong> &#8211; </li>
+<li><strong>year</strong> – </li>
+<li><strong>month</strong> – </li>
+<li><strong>day</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -450,7 +452,7 @@ For a complete list of formatting directives, see <a class="reference internal" 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>format_string</strong> &#8211; The format string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>format_string</strong> – The format string.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string representing the date, controlled by an explicit format string</td>
 </tr>
@@ -473,8 +475,8 @@ complete list of formatting directives, see <a class="reference internal" href="
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>date_string</strong> &#8211; </li>
-<li><strong>fmt</strong> &#8211; </li>
+<li><strong>date_string</strong> – </li>
+<li><strong>fmt</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -491,7 +493,7 @@ complete list of formatting directives, see <a class="reference internal" href="
 <dl class="method">
 <dt id="khayyam.JalaliDate.timetuple">
 <code class="descname">timetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_date.html#JalaliDate.timetuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.timetuple" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
+<dd><p>It’s equivalent to:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">(),</span> <span class="n">dayofyear</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">0</span><span class="p">]))</span> 
 <span class="go">time.struct_time(tm_year=2015, tm_mon=7, tm_mday=28, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=209, tm_isdst=-1)</span>
 </pre></div>
@@ -560,7 +562,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <dl class="method">
 <dt id="khayyam.JalaliDate.toordinal">
 <code class="descname">toordinal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_date.html#JalaliDate.toordinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDate.toordinal" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
+<dd><p>It’s equivalent to:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="mi">1361</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">JalaliDate</span><span class="p">(</span><span class="n">khayyam</span><span class="o">.</span><span class="n">MINYEAR</span><span class="p">))</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="go">496899</span>
@@ -662,7 +664,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>first_day_of_week</strong> &#8211; One of the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>first_day_of_week</strong> – One of the
 <code class="xref py py-data docutils literal"><span class="pre">khayyam.SATURDAY</span></code>,
 <code class="xref py py-data docutils literal"><span class="pre">khayyam.SUNDAY</span></code>,
 <code class="xref py py-data docutils literal"><span class="pre">khayyam.MONDAY</span></code>,
@@ -698,15 +700,15 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) &#8211; jalali year</li>
-<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-12</li>
-<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 1-31</li>
-<li><strong>hour</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-23</li>
-<li><strong>minute</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
-<li><strong>second</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-59</li>
-<li><strong>microsecond</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; 0-999999</li>
-<li><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> | callable) &#8211; Timezone info</li>
-<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; </li>
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.date" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a> | <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a>) – jalali year</li>
+<li><strong>month</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 1-12</li>
+<li><strong>day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 1-31</li>
+<li><strong>hour</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 0-23</li>
+<li><strong>minute</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 0-59</li>
+<li><strong>second</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 0-59</li>
+<li><strong>microsecond</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – 0-999999</li>
+<li><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> | callable) – Timezone info</li>
+<li><strong>julian_day</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – </li>
 </ul>
 </td>
 </tr>
@@ -761,7 +763,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The &#8216;ق.ظ&#8217; or &#8216;ب.ظ&#8217; to determine <cite>ante meridiem</cite> and or <cite>post meridiem</cite></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The ‘ق.ظ’ or ‘ب.ظ’ to determine <cite>ante meridiem</cite> and or <cite>post meridiem</cite></td>
 </tr>
 </tbody>
 </table>
@@ -776,7 +778,7 @@ returns a non-zero value, tm_isdst is set to 1; else tm_isdst is set to 0.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The &#8216;AM&#8217; or &#8216;PM&#8217; to determine <cite>ante meridiem</cite> and or <cite>post meridiem</cite></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The ‘AM’ or ‘PM’ to determine <cite>ante meridiem</cite> and or <cite>post meridiem</cite></td>
 </tr>
 </tbody>
 </table>
@@ -819,7 +821,7 @@ cases, <a class="reference internal" href="#khayyam.JalaliDatetime.astimezone" t
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tz</strong> &#8211; <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tz</strong> – <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a></td>
 </tr>
@@ -830,8 +832,8 @@ cases, <a class="reference internal" href="#khayyam.JalaliDatetime.astimezone" t
 <dl class="classmethod">
 <dt id="khayyam.JalaliDatetime.combine">
 <em class="property">classmethod </em><code class="descname">combine</code><span class="sig-paren">(</span><em>date</em>, <em>_time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.combine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a new jalali datetime object whose date members are equal to the given date object&#8217;s, and whose _time
-and tzinfo members are equal to the given _time object&#8217;s.
+<dd><p>Return a new jalali datetime object whose date members are equal to the given date object’s, and whose _time
+and tzinfo members are equal to the given _time object’s.
 For any datetime object d, d == datetime.combine(d.date(), d.timetz()). If date is a datetime object, its _time
 and tzinfo members are ignored.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -839,8 +841,8 @@ and tzinfo members are ignored.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>date</strong> &#8211; <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a> the date object to combine.</li>
-<li><strong>_time</strong> &#8211; <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.time</span></code></a> the time object to combine.</li>
+<li><strong>date</strong> – <a class="reference internal" href="#khayyam.JalaliDate" title="khayyam.JalaliDate"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDate</span></code></a> the date object to combine.</li>
+<li><strong>_time</strong> – <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.time" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.time</span></code></a> the time object to combine.</li>
 </ul>
 </td>
 </tr>
@@ -857,7 +859,7 @@ and tzinfo members are ignored.</p>
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s equivalent to:</p>
+<dd><p>It’s equivalent to:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_date</span> <span class="o">=</span> <span class="n">JalaliDatetime</span><span class="p">(</span><span class="mi">1394</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">999999</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="p">(</span><span class="n">source_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">source_date</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
 <span class="go">khayyam.JalaliDatetime(1394, 3, 24, 10, 2, 3, 999999, Yekshanbeh)</span>
@@ -927,7 +929,7 @@ a <a class="reference external" href="https://docs.python.org/2/library/datetime
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> &#8211; str The format string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> – str The format string</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The new formatter instance.</td>
 </tr>
@@ -951,16 +953,16 @@ and microsecond of the result are all 0, and tzinfo is None.</p>
 <em class="property">classmethod </em><code class="descname">fromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.fromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#khayyam.JalaliDatetime" title="khayyam.JalaliDatetime"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime</span></code></a> instance from the given posix timestamp.</p>
 <p>If optional argument tz is <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">None</span></code></a> or not specified, the timestamp is converted to
-the platform&#8217;s local date and time, and the returned datetime object is naive.</p>
+the platform’s local date and time, and the returned datetime object is naive.</p>
 <p>Else tz must be an instance of a class <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
-and the timestamp is converted to tz&#8217;s time zone. In this case the result is
+and the timestamp is converted to tz’s time zone. In this case the result is
 equivalent to <cite>tz.fromutc(JalaliDatetime.utcfromtimestamp(timestamp).replace(tzinfo=tz))</cite>.</p>
 <p>This method may raise <cite>ValueError</cite>, if the timestamp is out of the range of values
 supported by the platform C localtime() or gmtime() functions.
-It&#8217;s common for this to be restricted to years in 1970 through 2038.</p>
+It’s common for this to be restricted to years in 1970 through 2038.</p>
 <p>Note that on non-POSIX systems that include leap seconds in their
 notion of a timestamp, leap seconds are ignored by fromtimestamp(), and then
-it&#8217;s possible to have two timestamps differing by a second that yield
+it’s possible to have two timestamps differing by a second that yield
 identical datetime objects. See also <a class="reference internal" href="#khayyam.JalaliDatetime.utcfromtimestamp" title="khayyam.JalaliDatetime.utcfromtimestamp"><code class="xref py py-class docutils literal"><span class="pre">khayyam.JalaliDatetime.utcfromtimestamp</span></code></a>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">JalaliDatetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mf">1313132131.21232</span><span class="p">)</span>
 <span class="go">khayyam.JalaliDatetime(1390, 5, 21, 11, 25, 31, 212320, Jomeh)</span>
@@ -971,8 +973,8 @@ identical datetime objects. See also <a class="reference internal" href="#khayya
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>timestamp</strong> &#8211; float the posix timestamp, i.e 1014324234.23423423.</li>
-<li><strong>tz</strong> &#8211; <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> The optional timezone to get local date &amp; time from the given timestamp.</li>
+<li><strong>timestamp</strong> – float the posix timestamp, i.e 1014324234.23423423.</li>
+<li><strong>tz</strong> – <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> The optional timezone to get local date &amp; time from the given timestamp.</li>
 </ul>
 </td>
 </tr>
@@ -1018,7 +1020,7 @@ identical datetime objects. See also <a class="reference internal" href="#khayya
 
 <dl class="method">
 <dt id="khayyam.JalaliDatetime.isoformat">
-<code class="descname">isoformat</code><span class="sig-paren">(</span><em>sep='T'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.isoformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.isoformat" title="Permalink to this definition">¶</a></dt>
+<code class="descname">isoformat</code><span class="sig-paren">(</span><em>sep=’T’</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.isoformat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.isoformat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string representing the date and time in ISO 8601 format, YYYY-MM-DDTHH:MM:SS.mmmmmm or, if
 microsecond is 0, YYYY-MM-DDTHH:MM:SS</p>
 <p>If utcoffset() does not return <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">None</span></code></a>, a 6-character string is appended, giving the UTC offset in (signed) hours
@@ -1027,7 +1029,7 @@ and minutes: YYYY-MM-DDTHH:MM:SS.mmmmmm+HH:MM or, if microsecond is 0 YYYY-MM-DD
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sep</strong> &#8211; str The separator between date &amp; time.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sep</strong> – str The separator between date &amp; time.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The ISO formatted date &amp; time.</td>
 </tr>
@@ -1187,14 +1189,14 @@ if possible, supplies more precision than can be gotten from going through a
 <a class="reference external" href="https://docs.python.org/2/library/time.html#time.time" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">time.time()</span></code></a> timestamp (for example,
 this may be possible on platforms supplying the C gettimeofday() function).</p>
 <p>Else tz must be an instance of a <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> subclass,
-and the current date and time are converted to tz&#8217;s time zone.
+and the current date and time are converted to tz’s time zone.
 In this case the result is equivalent to <cite>tz.fromutc(JalaliDatetime.utcnow().replace(tzinfo=tz))</cite>.
 See also <a class="reference internal" href="#khayyam.JalaliDate.today" title="khayyam.JalaliDate.today"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDate.today()</span></code></a> and <a class="reference internal" href="#khayyam.JalaliDatetime.utcnow" title="khayyam.JalaliDatetime.utcnow"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.utcnow()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tz</strong> &#8211; <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> The optional timezone to get current local date &amp; time.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tz</strong> – <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a> The optional timezone to get current local date &amp; time.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the current local date and time</td>
 </tr>
@@ -1216,14 +1218,14 @@ the and time based tzinfo.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>year</strong> &#8211; int</li>
-<li><strong>month</strong> &#8211; int</li>
-<li><strong>day</strong> &#8211; int</li>
-<li><strong>hour</strong> &#8211; int</li>
-<li><strong>minute</strong> &#8211; int</li>
-<li><strong>second</strong> &#8211; int</li>
-<li><strong>microsecond</strong> &#8211; int</li>
-<li><strong>tzinfo</strong> &#8211; <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></li>
+<li><strong>year</strong> – int</li>
+<li><strong>month</strong> – int</li>
+<li><strong>day</strong> – int</li>
+<li><strong>hour</strong> – int</li>
+<li><strong>minute</strong> – int</li>
+<li><strong>second</strong> – int</li>
+<li><strong>microsecond</strong> – int</li>
+<li><strong>tzinfo</strong> – <a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1261,8 +1263,8 @@ the and time based tzinfo.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>date_string</strong> &#8211; str The representing date &amp; time in specified format.</li>
-<li><strong>fmt</strong> &#8211; str The format string.</li>
+<li><strong>date_string</strong> – str The representing date &amp; time in specified format.</li>
+<li><strong>fmt</strong> – str The format string.</li>
 </ul>
 </td>
 </tr>
@@ -1372,7 +1374,7 @@ method <a class="reference internal" href="#khayyam.JalaliDatetime.time" title="
 <em class="property">classmethod </em><code class="descname">utcfromtimestamp</code><span class="sig-paren">(</span><em>timestamp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/jalali_datetime.html#JalaliDatetime.utcfromtimestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.JalaliDatetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>This may raise ValueError, if the timestamp is
 out of the range of values supported by the platform C gmtime()
-function. It&#8217;s common for this to be restricted to years in 1970
+function. It’s common for this to be restricted to years in 1970
 through 2038. See also <a class="reference internal" href="#khayyam.JalaliDatetime.fromtimestamp" title="khayyam.JalaliDatetime.fromtimestamp"><code class="xref py py-meth docutils literal"><span class="pre">khayyam.JalaliDatetime.fromtimestamp()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1515,7 +1517,7 @@ day.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> &#8211; a value to format</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> – a value to format</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Formatted value.</td>
 </tr>
@@ -1540,21 +1542,21 @@ day.</p>
 <dt id="khayyam.formatting.directives.ampm.AmPmASCIIDirective">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.directives.ampm.</code><code class="descname">AmPmASCIIDirective</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/formatting/directives/ampm.html#AmPmASCIIDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ampm.AmPmASCIIDirective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.ampm.BaseAmPmDirective" title="khayyam.formatting.directives.ampm.BaseAmPmDirective"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.ampm.BaseAmPmDirective</span></code></a></p>
-<p>Responsible class for parse and formatting of &#8216;AM&#8217; and &#8216;PM&#8217; in ASCII format.</p>
+<p>Responsible class for parse and formatting of ‘AM’ and ‘PM’ in ASCII format.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="khayyam.formatting.directives.ampm.AmPmDirective">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.directives.ampm.</code><code class="descname">AmPmDirective</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/formatting/directives/ampm.html#AmPmDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ampm.AmPmDirective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.ampm.BaseAmPmDirective" title="khayyam.formatting.directives.ampm.BaseAmPmDirective"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.ampm.BaseAmPmDirective</span></code></a></p>
-<p>Responsible class for parse and formatting of &#8216;AM&#8217; and &#8216;PM&#8217; in persian format.</p>
+<p>Responsible class for parse and formatting of ‘AM’ and ‘PM’ in persian format.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="khayyam.formatting.directives.ampm.BaseAmPmDirective">
 <em class="property">class </em><code class="descclassname">khayyam.formatting.directives.ampm.</code><code class="descname">BaseAmPmDirective</code><span class="sig-paren">(</span><em>key</em>, <em>name</em>, <em>regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/khayyam/formatting/directives/ampm.html#BaseAmPmDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#khayyam.formatting.directives.ampm.BaseAmPmDirective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#khayyam.formatting.directives.base.Directive" title="khayyam.formatting.directives.base.Directive"><code class="xref py py-class docutils literal"><span class="pre">khayyam.formatting.directives.base.Directive</span></code></a></p>
-<p>Base class for parse and formatting of &#8216;AM&#8217; and &#8216;PM&#8217;.</p>
+<p>Base class for parse and formatting of ‘AM’ and ‘PM’.</p>
 </dd></dl>
 
 <span class="target" id="module-khayyam.formatting.directives.day"></span><dl class="class">
@@ -1773,7 +1775,7 @@ day.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/api.txt"
+      <li><a href="_sources/api.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -1803,12 +1805,12 @@ day.</p>
         <li class="right" >
           <a href="persiancalendar.html" title="Persian(Jalali) Calendar"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.15 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Khayyam 3.0.16 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015, Vahid Mardani.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
     </div>
   </body>
 </html>
