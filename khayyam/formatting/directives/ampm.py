@@ -21,7 +21,12 @@ class BaseAmPmDirective(Directive):
         raise NotImplementedError()
 
     def post_parser(self, ctx, formatter):
-        hour12 = ctx['hour12']
+        try:
+            hour12 = ctx['hour12']
+        except KeyError:
+            raise ValueError(
+                '%p and %t directives should be used with %i, %I or %l'
+            )
 
         if self.is_am(ctx): # AM
             hour = 0 if hour12 == 12 else hour12

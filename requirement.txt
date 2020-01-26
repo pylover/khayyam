@@ -3,3 +3,5 @@ sphinx
 coverage
 coveralls
 nose
+pudb
+

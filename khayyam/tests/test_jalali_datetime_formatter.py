@@ -221,6 +221,9 @@ class JalaliDatetimeFormatterTestCase(unittest.TestCase):
             self.assert_parse_and_format(d_test, '%Y-%m-%d %t %I:%M:%S')
             self.assert_parse_and_format(d_test, '%N-%R-%D %t %i:%r:%s')
 
+        with self.assertRaises(ValueError):
+            JalaliDatetime.strptime('۹:۲۴ ق.ظ', '%k:%r %p')
+
     def test_locale_date_time(self):
         """
         Testing:
