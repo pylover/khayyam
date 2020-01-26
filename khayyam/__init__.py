@@ -5,7 +5,7 @@ from .jalali_datetime import JalaliDatetime
 from .timezones import TehranTimezone, Timezone
 from .formatting import JalaliDateFormatter, JalaliDatetimeFormatter
 
-__version__ = '3.0.17'
+__version__ = '3.0.18'
 
 
 teh_tz = TehranTimezone()
