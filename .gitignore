@@ -49,3 +49,5 @@ docs/html
 htmlcov
 _site
 .ropeproject
+.*.sw[po]
+
