@@ -48,3 +48,4 @@ docs/doctrees
 docs/html
 htmlcov
 _site
+.ropeproject
