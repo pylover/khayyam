@@ -663,7 +663,7 @@ class JalaliDatetime(khayyam.JalaliDate):
             self.minute,
             self.second,
             self.microsecond,
-            ', tzinfo=%s' % self.tzinfo.__unicode__() if self.tzinfo else '',
+            ', tzinfo=%s' % self.tzinfo.__unicode__() if hasattr(self.tzinfo, '__unicode__') else self.tzinfo.__str__() if hasattr(self.tzinfo, '__str__') else '',
             self.weekdaynameascii()
         )
 
