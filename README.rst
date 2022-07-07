@@ -4,10 +4,6 @@ khayyam
 .. image:: http://img.shields.io/pypi/v/khayyam.svg
      :target: https://pypi.python.org/pypi/khayyam
 
-.. image:: https://requires.io/github/pylover/khayyam/requirements.svg?branch=master
-     :target: https://requires.io/github/pylover/khayyam/requirements/?branch=master
-     :alt: Requirements Status
-
 .. image:: https://travis-ci.org/pylover/khayyam.svg?branch=master
      :target: https://travis-ci.org/pylover/khayyam
 
@@ -17,6 +13,14 @@ khayyam
 .. image:: https://img.shields.io/badge/license-GPLv3-brightgreen.svg
      :target: https://github.com/pylover/khayyam/blob/master/LICENSE
 
+.. image:: https://pepy.tech/badge/khayyam
+     :target: https://pepy.tech/project/khayyam
+
+.. image:: https://pepy.tech/badge/khayyam/month
+     :target: https://pepy.tech/project/khayyam
+
+.. image:: https://pepy.tech/badge/khayyam/week
+     :target: https://pepy.tech/project/khayyam
 
 Jump To:
 ^^^^^^^^
