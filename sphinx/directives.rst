@@ -58,7 +58,7 @@ Directive    Example                                    Meaning
 %S           00 - 59                                    Second as a zero padded ASCII decimal number.
 %s           ۰۰ - ۵۹                                    Second as a zero padded decimal number in persian form.
 %L           ۰ - ۵۹                                     Second as a decimal number in persian form.
-%f           0 - 999999                                 Microsecond as a zero padded ASCII decimal number.
+%f           000000 - 999999                            Microsecond as a zero padded ASCII decimal number.
 %F           ۰۰۰۰۰۰ - ۹۹۹۹۹۹                            Microsecond as a zero padded decimal number in persian from.
 %p           ق.ظ, ب.ظ                                   AM or PM in persian format.
 %t           AM, PM                                     AM or PM in ASCII format.
