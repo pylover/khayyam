@@ -5,18 +5,14 @@ from khayyam.helpers import force_encoded_string_output
 __author__ = 'vahid'
 
 ZERO_DELTA = timedelta(0)
-STD_OFFSET = timedelta(minutes=210)  # Minutes
-DST_OFFSET = timedelta(minutes=270)  # Minutes
-DST_DIFF = DST_OFFSET - STD_OFFSET
+TEHRAN_OFFSET = timedelta(minutes=210)  # Minutes
 
 
 class Timezone(tzinfo):
 
-    def __init__(self, offset, dst_offset=None, dst_checker=None, name=None):
+    def __init__(self, offset, name=None):
         assert (isinstance(offset, timedelta))
         self._offset = offset
-        self._dst_offset = dst_offset
-        self._dst_checker = dst_checker
         self._name = name
         super(Timezone, self).__init__()
 
@@ -28,37 +24,25 @@ class Timezone(tzinfo):
             raise ValueError('Datetime timezone mismatch: %s != %s' % (dt.tzinfo, self))
 
         utc_offset = dt.utcoffset()
-        dst_offset = dt.dst()
-        delta = utc_offset - dst_offset  # this is self's standard offset
+        delta = utc_offset
 
         if delta:
             dt += delta  # convert to standard local time
-            dst_offset = dt.dst()
 
-        if dst_offset:
-            return dt + dst_offset
-        else:
-            return dt
+        return dt
 
     def utcoffset(self, dt):
-        if self._is_dst(dt):
-            return self._offset + self._dst_offset
-        else:
-            return self._offset
+        return self._offset
 
     def dst(self, dt):
-        if self._dst_offset and self._is_dst(dt):
-            return self._dst_offset
-        else:
-            return ZERO_DELTA
+        return ZERO_DELTA
 
     def __unicode__(self):
         off = self._offset
-        return '%s%.2d:%.2d%s' % (
+        return '%s%.2d:%.2d' % (
             '+' if off.total_seconds() >= 0 else '-',
             int(off.total_seconds() / 3600),
             int((off.total_seconds() % 3600) / 60),
-            (' dst:%d' % (self._dst_offset.total_seconds() / 60)) if self._dst_offset else ''
         )
 
     __repr__ = force_encoded_string_output(__unicode__)
@@ -69,28 +53,18 @@ class Timezone(tzinfo):
         else:
             return repr(self)
 
-    def _is_dst(self, dt):
-        if self._dst_checker:
-            return self._dst_checker(dt)
-        return False
-
     def __hash__(self):
-        return hash(self._offset) ^ hash(self._dst_offset)
+        return hash(self._offset)
 
 
 class TehranTimezone(Timezone):
     """
-    Tehran timezone with DST.
+    Tehran timezone with a fixed +3:30 GMT offset.
     """
-    dst_start = (1, 1)
-    dst_end = (7, 1)
 
     def __init__(self):
         super(TehranTimezone, self).__init__(
             timedelta(minutes=210),
-            timedelta(minutes=60),
-            lambda dt: (self.dst_start[0] < dt.month < self.dst_end[0]) or
-                       (self.dst_start[0] == dt.month and self.dst_start[1] <= dt.day) or
-                       (self.dst_end[0] == dt.month and self.dst_end[1] > dt.day),
             'Iran/Tehran'
         )
+
