@@ -36,7 +36,7 @@ def get_julian_day_from_gregorian_date(year, month, day):
 
 
 def is_jalali_leap_year(year):
-    return ((((((year - [473, 474][year > 0]) % 2820) + 474) + 38) * 682) % 2816) < 682
+    return year % 33 in (1, 5, 9, 13, 17, 22, 26, 30)
 
 
 def get_days_in_jalali_year(year):
