@@ -96,8 +96,10 @@ static Error getJulianDayFromGregorianDate(int year, int month, int day, double 
 
 
 static Boolean isJalaliLeapYear(int year){
-    int a = mod(year - (year > 0 ? 474 : 473), 2820) + 474 + 38;
-    return mod(a * 682, 2816) < 682;
+    int a = mod(year, 33);
+    if (a == 1 || a == 5 || a == 9 || a == 13 || a == 17 || a == 22 || a == 26 || a == 30)
+      return true;
+    return false;
 }
 
 
